@@ -1,0 +1,38 @@
+; Asset allocation:
+; https://github.com/redstreet/fava_investor/tree/main/fava_investor/modules/assetalloc_class#readme
+
+1970-01-01 commodity GBP
+  price: "USD:yahoo/GBPUSD=X"
+  asset_class: "currency"
+
+1970-01-01 commodity USD
+  price: "GBP:yahoo/USDGBP=X"
+  asset_class: "currency"
+
+1970-01-01 commodity EUR
+  price: "USD:yahoo/EURUSD=X"
+  asset_class: "currency"
+
+1970-01-01 commodity GOLD
+  price: "USD:yahoo/GC=F"
+  asset_class: "currency"
+
+1970-01-01 commodity SPX
+  price: "USD:yahoo/SPX"
+  asset_class: "stock"
+  asset_allocation_stocks: 100
+
+1970-01-01 commodity VANGUARD-LS-80
+  price: "GBP:yahoo/0P0000TKZM.L"
+  asset_class: "fund"
+  ; https://www.vanguardinvestor.co.uk/investments/vanguard-lifestrategy-80-equity-fund-accumulation-shares/portfolio-data
+  asset_allocation_bonds_corporate: 1.7
+  asset_allocation_bonds_government: 18.3
+  asset_allocation_equity_emerging: 7.5
+  asset_allocation_equity_global: 72.5
+  
+1970-01-01 commodity ETH
+  price: "GBP:yahoo/ETH-GBP"
+  asset_class: "crypto"
+  asset_allocation_crypto: 100
+
