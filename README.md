@@ -4,7 +4,12 @@ This repository contains bootstrapping structure for your own Beancount reposito
 
 NOTE: this may be significantly simplified / packaged / streamlined, I'm just not sure what's the best way to do it yet
 
-First, install conda
+First, clone this repository into your desired location
+
+    git clone https://github.com/Evernight/lazy-beancount
+    cd lazy-beancount
+
+Install conda
 
     brew install miniconda
 
@@ -15,10 +20,11 @@ Then create and activate the environment
 
 Install required packages in the environment
 
+    pip3 install beancount
     pip3 install fava
     pip3 install git+https://github.com/andreasgerstmayr/fava-dashboards.git
     pip3 install git+https://github.com/andreasgerstmayr/fava-portfolio-returns.git
-    
+
     git clone https://github.com/tarioch/beancounttools
     git clone https://github.com/Akuukis/beancount_interpolate
 
