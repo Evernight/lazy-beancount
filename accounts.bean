@@ -38,6 +38,10 @@
 1970-01-01 open Expenses:MyFavouriteBankUnclassified
 1970-01-01 open Expenses:MyLessFavouriteBankUnclassified
 
+; Income
+1970-01-01 open Income:Salary:MyEmployer
+1970-01-01 open Income:SideHustle
+
 ; Classified expenses with the level of detalisation that you want
 1970-01-01 open Expenses:EatingOut
 1970-01-01 open Expenses:EatingOut:Coffee

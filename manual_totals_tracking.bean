@@ -29,7 +29,7 @@
 2024-01-03 pad Liabilities:Shared:MyPartner Expenses:SpendingUnknown
 2024-01-03 pad Assets:MyAutomaticBroker:Total Income:MyAutomaticBroker:PnL
 
-2024-01-04 balance Assets:MyFavouriteBank:Cash 900 GBP
+2024-01-04 balance Assets:MyFavouriteBank:Cash 1200 GBP
 2024-01-04 balance Assets:MyLessFavouriteBank:Cash  200 GBP
 2024-01-04 balance Assets:MyStockBroker:Cash   200 USD
 2024-01-04 balance Assets:MyAutomaticBroker:Total   7635 USD
@@ -45,7 +45,7 @@
 2024-02-03 pad Liabilities:Shared:MyPartner Expenses:SpendingUnknown
 2024-02-03 pad Assets:MyAutomaticBroker:Total Income:MyAutomaticBroker:PnL
 
-2024-02-04 balance Assets:MyFavouriteBank:Cash 700 GBP
+2024-02-04 balance Assets:MyFavouriteBank:Cash 1500 GBP
 2024-02-04 balance Assets:MyLessFavouriteBank:Cash  180 GBP
 2024-02-04 balance Assets:MyStockBroker:Cash   200 USD
 2024-02-04 balance Assets:MyAutomaticBroker:Total   7522 USD
@@ -57,11 +57,11 @@
 
 ; 2024-03-03 pad Assets:MyLessFavouriteBank:Cash Expenses:MyLessFavouriteBankUnclassified
 2024-03-03 pad Assets:MyFavouriteBank:Cash Expenses:MyFavouriteBankUnclassified
-; 2024-03-03 pad Assets:CashOnHands Expenses:SpendingUnknown
+2024-03-03 pad Assets:CashOnHands Expenses:SpendingUnknown
 2024-03-03 pad Liabilities:Shared:MyPartner Expenses:SpendingUnknown
 2024-03-03 pad Assets:MyAutomaticBroker:Total Income:MyAutomaticBroker:PnL
 
-2024-03-04 balance Assets:MyFavouriteBank:Cash 853 GBP
+2024-03-04 balance Assets:MyFavouriteBank:Cash 1350 GBP
 2024-03-04 balance Assets:MyLessFavouriteBank:Cash  180 GBP
 2024-03-04 balance Assets:MyStockBroker:Cash   200 USD
 2024-03-04 balance Assets:MyAutomaticBroker:Total   7419 USD
