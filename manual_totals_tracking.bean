@@ -3,13 +3,13 @@
 2023-11-01 pad Assets:MyLessFavouriteBank:Cash Equity:OpeningBalances:MyLessFavouriteBank:Cash
 2023-11-01 pad Assets:MyStockBroker:Cash Equity:OpeningBalances:MyStockBroker:Cash
 2023-11-01 pad Assets:CashOnHands Equity:OpeningBalances:CashOnHands
-2023-11-01 pad Liabilities:Shared:MyPartner Equity:OpeningBalances:Shared:MyPartner
+; 2023-11-01 pad Liabilities:Shared:MyPartner Equity:OpeningBalances:Shared:MyPartner
 2023-11-01 pad Assets:MyAutomaticBroker:Total Equity:OpeningBalances:MyAutomaticBroker:Total
 
 ; Starting balances
 2023-12-01 balance Assets:MyFavouriteBank:Cash 1000 GBP
 2023-12-01 balance Assets:MyLessFavouriteBank:Cash  200 GBP
-2023-12-01 balance Assets:MyStockBroker:Cash   500 USD
+2023-12-01 balance Assets:MyStockBroker:Cash   200 USD
 2023-12-01 balance Assets:MyAutomaticBroker:Total   7581 USD
 
 2023-12-01 balance Assets:CashOnHands 50 GBP
@@ -23,7 +23,7 @@
 
 ; The monthly tracking data to follow
 
-2024-01-03 pad Assets:MyLessFavouriteBank:Cash Expenses:MyLessFavouriteBankUnclassified
+; 2024-01-03 pad Assets:MyLessFavouriteBank:Cash Expenses:MyLessFavouriteBankUnclassified
 2024-01-03 pad Assets:MyFavouriteBank:Cash Expenses:MyFavouriteBankUnclassified
 2024-01-03 pad Assets:CashOnHands Expenses:SpendingUnknown
 2024-01-03 pad Liabilities:Shared:MyPartner Expenses:SpendingUnknown
@@ -41,7 +41,7 @@
 
 2024-02-03 pad Assets:MyLessFavouriteBank:Cash Expenses:MyLessFavouriteBankUnclassified
 2024-02-03 pad Assets:MyFavouriteBank:Cash Expenses:MyFavouriteBankUnclassified
-2024-02-03 pad Assets:CashOnHands Expenses:SpendingUnknown
+; 2024-02-03 pad Assets:CashOnHands Expenses:SpendingUnknown
 2024-02-03 pad Liabilities:Shared:MyPartner Expenses:SpendingUnknown
 2024-02-03 pad Assets:MyAutomaticBroker:Total Income:MyAutomaticBroker:PnL
 
@@ -55,9 +55,9 @@
 2024-02-04 balance Liabilities:Shared:MyPartner -20 GBP
 
 
-2024-03-03 pad Assets:MyLessFavouriteBank:Cash Expenses:MyLessFavouriteBankUnclassified
+; 2024-03-03 pad Assets:MyLessFavouriteBank:Cash Expenses:MyLessFavouriteBankUnclassified
 2024-03-03 pad Assets:MyFavouriteBank:Cash Expenses:MyFavouriteBankUnclassified
-2024-03-03 pad Assets:CashOnHands Expenses:SpendingUnknown
+; 2024-03-03 pad Assets:CashOnHands Expenses:SpendingUnknown
 2024-03-03 pad Liabilities:Shared:MyPartner Expenses:SpendingUnknown
 2024-03-03 pad Assets:MyAutomaticBroker:Total Income:MyAutomaticBroker:PnL
 

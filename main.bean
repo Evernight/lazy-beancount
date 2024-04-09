@@ -16,7 +16,7 @@ plugin "beancounttools.src.tariochbctools.plugins.generate_base_ccy_prices" "EUR
 ; 2021-01-01 custom "fava-option" "language" "en"
 
 ; Redefine default starting page when you go to the Fava host (localhost by default)
-2021-01-01 custom "fava-option" "default-page" "extension/FavaDashboards/?dashboard=0&time=2022+to+day"
+; 2021-01-01 custom "fava-option" "default-page" "extension/FavaDashboards/?dashboard=0&time=2022+to+day"
 
 ; Define folder where the documents are stored
 ; Note: I haven't found documents-related features particularly useful
@@ -57,7 +57,7 @@ include "commodities.bean"
 include "prices.bean"
 
 ; Include all files from archive/<year>/<source>.bean
-include "archive/*/*.bean"
+; include "archive/*/*.bean"
 ; File to track total values in accounts
 include "manual_totals_tracking.bean"
 
@@ -65,12 +65,12 @@ include "manual_totals_tracking.bean"
 include "manual_transactions.bean"
 
 ; Import files generated using beancount-import
-include "beancount_import_beans/*.bean"
-include "beancount_import_beans/*/*.bean"
+; include "beancount_import_beans/*.bean"
+; include "beancount_import_beans/*/*.bean"
 
 ; Some other useful plugins
-plugin "beancount_interpolate.recur"
-plugin "beancount_interpolate.split"
+plugin "beancount_interpolate.beancount_interpolate.recur"
+plugin "beancount_interpolate.beancount_interpolate.split"
 
 ; Some hacky fix for dashboards to work properly
 include "regular_postings_fix.bean"
