@@ -1,0 +1,6 @@
+beancount==2.3.6
+fava==1.27.3
+fava-dashboards @ git+https://github.com/andreasgerstmayr/fava-dashboards.git@df40f4e2ccc6b4ec479e5146d8e62c327e44e6f9
+fava-portfolio-returns @ git+https://github.com/andreasgerstmayr/fava-portfolio-returns.git@de68b54f3ac517adfde3a4ccb41fdb09a0da41d1
+tariochbctools @ git+https://github.com/tarioch/beancounttools.git@42c31e0c0c34f008fb3e4395982a24de1123b2e6
+beancount_interpolate @ git+https://github.com/Akuukis/beancount_interpolate.git@e9c1241d5980781d270a7cc5c17cf2ca99c10faa
