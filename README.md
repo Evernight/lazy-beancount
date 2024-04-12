@@ -1,6 +1,6 @@
 This repository contains bootstrapping structure for your own Beancount repository.
 
-# Setup - local env
+# Setup (local env via conda)
 
 NOTE: this may be significantly simplified / packaged / streamlined, I'm just not sure what's the best way to do it yet
 
@@ -20,7 +20,15 @@ Then create and activate the environment
 
 Install required packages in the environment
 
-    pip3 install -r reqirements.txt
+    pip3 install beancount
+    pip3 install fava
+    pip3 install git+https://github.com/andreasgerstmayr/fava-dashboards.git
+    pip3 install git+https://github.com/andreasgerstmayr/fava-portfolio-returns.git
+
+Download these ones directly to avoid pulling unnecessary dependencies
+
+    git clone https://github.com/tarioch/beancounttools
+    git clone https://github.com/Akuukis/beancount_interpolate
 
 Run fava on your ledger from the repository folder
 
@@ -28,7 +36,7 @@ Run fava on your ledger from the repository folder
 
 Go to http://127.0.0.1:5000 and explore
 
-# Setup - docker
+# Setup (docker): WIP
 
 Assuming you have docker installed, 
 

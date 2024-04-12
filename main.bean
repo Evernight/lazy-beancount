@@ -6,9 +6,9 @@ option "operating_currency" "EUR"
 
 ; https://github.com/tarioch/beancounttools/
 ; Generate indirect prices for the current main currency
-plugin "tariochbctools.plugins.generate_base_ccy_prices" "GBP"
-plugin "tariochbctools.plugins.generate_base_ccy_prices" "USD"
-plugin "tariochbctools.plugins.generate_base_ccy_prices" "EUR"
+plugin "beancounttools.src.tariochbctools.plugins.generate_base_ccy_prices" "GBP"
+plugin "beancounttools.src.tariochbctools.plugins.generate_base_ccy_prices" "USD"
+plugin "beancounttools.src.tariochbctools.plugins.generate_base_ccy_prices" "EUR"
 ; For fun you can enable GOLD or even LUMBER as operating currency, if you wish
 ; plugin "tariochbctools.plugins.generate_base_ccy_prices" "GOLD"
 
@@ -20,7 +20,7 @@ plugin "tariochbctools.plugins.generate_base_ccy_prices" "EUR"
 
 ; Define folder where the documents are stored
 ; Note: I haven't found documents-related features particularly useful
-option "documents" "documents"
+; option "documents" "documents"
 
 ; Define precision options
 option "inferred_tolerance_default" "*:0.00001"
@@ -69,8 +69,8 @@ include "manual_transactions.bean"
 ; include "beancount_import_beans/*/*.bean"
 
 ; Some other useful plugins
-plugin "beancount_interpolate.recur"
-plugin "beancount_interpolate.split"
+plugin "beancount_interpolate.beancount_interpolate.recur"
+plugin "beancount_interpolate.beancount_interpolate.split"
 
 ; Some hacky fix for dashboards to work properly
-include "regular_postings_fix.bean"
+; include "regular_postings_fix.bean"

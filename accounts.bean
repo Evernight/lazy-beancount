@@ -1,27 +1,16 @@
-; Accounts for transactions not classified (yet?)
-1970-01-01 open Assets:InvestmentsUnknown:Cash
-1970-01-01 open Expenses:SpendingUnknown
-1970-01-01 open Income:SourceUnknown
-
-; Holding specific assets
-1970-01-01 open Assets:MyCryptoBroker:ETH
-1970-01-01 open Assets:Vanguard:VANGUARD-LS-80
-1970-01-01 open Assets:MyStockBroker:SPX
-1970-01-01 open Assets:MyStockBroker:SPY
+; Stage I
 
 ; Accounts at banks and other institutions
 1970-01-01 open Assets:MyFavouriteBank:Cash
 1970-01-01 open Assets:MyLessFavouriteBank:Cash
 1970-01-01 open Assets:MyStockBroker:Cash
+1970-01-01 open Assets:MyFavouriteBank:Savings:GBP
+
+; Cash that is literally cash
+1970-01-01 open Assets:CashOnHands
 
 ; Accounts that only track total value
 1970-01-01 open Assets:MyAutomaticBroker:Total
-
-; PnL to be filled automatically
-1970-01-01 open Income:MyStockBroker:PnL
-1970-01-01 open Income:Vanguard:PnL
-1970-01-01 open Income:MyCryptoBroker:PnL
-1970-01-01 open Income:MyAutomaticBroker:PnL
 
 ; I use Equity accounts only for "technical purposes. 
 ; Otherwise they are pretty meaningless to me.
@@ -30,17 +19,34 @@
 1970-01-01 open Equity:OpeningBalances:MyLessFavouriteBank:Cash
 1970-01-01 open Equity:OpeningBalances:MyAutomaticBroker:Total
 1970-01-01 open Equity:OpeningBalances:CashOnHands
-1970-01-01 open Equity:OpeningBalances:Shared:MyPartner
+1970-01-01 open Equity:OpeningBalances:Shared:MyFlatmate
 1970-01-01 open Equity:OpeningBalances:Others
-1970-01-01 open Equity:IDontKnowWhatIMDoing
 
 ; Unclassified expenses groupped by automatically parsed source
 1970-01-01 open Expenses:MyFavouriteBankUnclassified
 1970-01-01 open Expenses:MyLessFavouriteBankUnclassified
 
-; Income
-1970-01-01 open Income:Salary:MyEmployer
-1970-01-01 open Income:SideHustle
+; PnL to be filled via pad directives
+1970-01-01 open Income:MyStockBroker:PnL
+1970-01-01 open Income:Vanguard:PnL
+1970-01-01 open Income:MyCryptoBroker:PnL
+1970-01-01 open Income:MyAutomaticBroker:PnL
+
+; Accounts for transactions not classified (yet?)
+1970-01-01 open Assets:InvestmentsUnknown:Cash
+1970-01-01 open Expenses:CashOnHandsUnclassified
+1970-01-01 open Expenses:SpendingUnknown
+1970-01-01 open Income:SourceUnknown
+
+; Liabilities owed to or by specific people
+1970-01-01 open Liabilities:Shared:MyFlatmate
+1970-01-01 open Liabilities:Shared:Unspecified
+
+; Any long-term loans
+1970-01-01 open Liabilities:Loans
+
+
+; Stage II
 
 ; Classified expenses with the level of detalisation that you want
 1970-01-01 open Expenses:EatingOut
@@ -69,22 +75,28 @@
 1970-01-01 open Expenses:Work
 1970-01-01 open Expenses:Documents
 
+; Same as for unclassified expenses, just for income
+1970-01-01 open Income:MyFavouriteBankUnclassified
+
+; Income
+1970-01-01 open Income:Salary:MyEmployer
+1970-01-01 open Income:SideHustle
+
+
+; Stage III
+
+; Holding specific assets
+1970-01-01 open Assets:MyCryptoBroker:ETH
+1970-01-01 open Assets:Vanguard:VANGUARD-LS-80
+1970-01-01 open Assets:MyStockBroker:SPX
+1970-01-01 open Assets:MyStockBroker:SPY
+
 ; Commissions
 1970-01-01 open Expenses:MyStockBroker:Commissions
 1970-01-01 open Expenses:MyCryptoBroker:Commissions
 
-; Cash that is literally cash
-1970-01-01 open Assets:CashOnHands
-; Any long-term loans
-1970-01-01 open Liabilities:Loans
-; Liabilities owed to or by specific people
-1970-01-01 open Liabilities:Shared:MyPartner
-1970-01-01 open Liabilities:Shared:Unspecified
 
-1970-01-01 open Assets:MyFavouriteBank:Savings:GBP
-
-; Same as for unclassified expenses, just for income
-1970-01-01 open Income:MyFavouriteBankUnclassified
+; Stage IV
 
 ; Used for transactions or transaction parts that will be refunded or otheriwse returned soon
 1970-01-01 open Assets:TemporaryHold
