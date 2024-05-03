@@ -41,7 +41,11 @@ Go to http://127.0.0.1:5000 and explore
 Assuming you have docker installed, 
 
 Build the image:
+
     docker build . -t lazy-beancount
 
 Run with local path and port attached to image:
+
     docker run -it -v $PWD:/workspace -p 8080:8080 lazy-beancount
+
+Currently this will take longer to install, also won't support all the features. Hovewer, in future docker setup should make everything actually much simpler.
