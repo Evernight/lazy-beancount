@@ -69,8 +69,8 @@ include "manual_transactions.bean"
 ; include "beancount_import_beans/*/*.bean"
 
 ; Some other useful plugins
-plugin "beancount_interpolate.beancount_interpolate.recur"
-plugin "beancount_interpolate.beancount_interpolate.split"
+; plugin "beancount_interpolate.recur"
+; plugin "beancount_interpolate.split"
 
 ; Some hacky fix for dashboards to work properly
 ; include "regular_postings_fix.bean"
