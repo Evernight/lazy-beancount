@@ -29,6 +29,7 @@ Download these ones directly to avoid pulling unnecessary dependencies
 
     git clone https://github.com/tarioch/beancounttools
     git clone https://github.com/Akuukis/beancount_interpolate
+    git clone https://github.com/Evernight/beancount-importers.git
 
 Run fava on your ledger from the repository folder
 
