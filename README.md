@@ -2,7 +2,7 @@ This repository contains bootstrapping structure for your own Beancount reposito
 
 # Setup (local env via conda)
 
-NOTE: this may be significantly simplified / packaged / streamlined, I'm just not sure what's the best way to do it yet
+NOTE: parts of this may be significantly simplified / packaged / streamlined, if you have specific suggestions, feel free to open a ticket. The Docker migration is an ongoing work, see below.
 
 First, clone this repository into your desired location
 
@@ -50,3 +50,6 @@ Run with local path and port attached to image:
     docker run -it -v $PWD:/workspace -p 8080:8080 lazy-beancount
 
 Currently this will take longer to install, also won't support all the features. Hovewer, in future docker setup should make everything actually much simpler.
+
+# Usage
+Read the guide at https://lazy-beancount.xyz/.
