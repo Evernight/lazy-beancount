@@ -1,0 +1,43 @@
+# Use the date when you want to start tracking values of the accounts
+opening_balances_date: "2023-01-02"
+
+# Accounts holding cash values
+cash:
+  - Physical:
+      - Cash:
+          currencies: [USD, GBP, EUR]
+  - MyFavouriteBank:
+      - Cash:
+          currencies: [USD, GBP]
+      - Savings:
+          leaf_currencies: [USD, GBP]
+  - MyLessFavouriteBank:
+      - Cash:
+          currencies: [GBP]
+      - Savings:
+          currencies: [GBP]
+  - MyStockBroker:
+      - Cash:
+          currencies: [USD, GBP]
+
+# Funds where you can only track total value converted to currency and not 
+# specific stocks
+opaque_funds:
+  - SuperRoboBroker:
+      - Total:
+          currencies: [USD]
+
+# Accounts holding investments (stocks, crypto, funds, etc)
+investments:
+  - MyStockBroker:
+      leaf_currencies: [SPX]
+  - MyCryptoBroker:
+      leaf_currencies: [ETH]
+
+# Liabilities accounts
+liabilities:
+  - Shared:
+      - Unspecified:
+          currencies: [USD]
+      - SomeDude:
+          currencies: [USD]

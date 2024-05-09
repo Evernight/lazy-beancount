@@ -1,0 +1,151 @@
+#!/usr/bin/env python3
+
+import datetime
+
+from dataclasses import dataclass, field
+from collections import namedtuple
+from datetime import datetime, timedelta
+
+import click
+import yaml
+
+ACCOUNTS_OPENING_DATE = "1970-01-01"
+ACCOUNTS_GEN_BY_TYPE = {
+    'cash': [
+        'Assets:@',
+        'Equity:OpeningBalances:@',
+        'Income:Unattributed:@',
+        'Income:Uncategorized:@',
+        'Expenses:Unattributed:@',
+        'Expenses:Uncategorized:@'
+    ],
+    'opaque_funds': [
+        'Assets:@',
+        'Equity:OpeningBalances:@',
+        'Income:@:PnL'
+    ],
+    'investments': [
+        'Assets:@',
+        'Equity:OpeningBalances:@',
+    ],
+    'liabilities': [
+        'Liabilities:@',
+        'Equity:OpeningBalances:@',
+        'Expenses:Unattributed:@'
+    ]
+}
+
+ACCOUNT_TYPES = ACCOUNTS_GEN_BY_TYPE.keys()
+
+LeafConfig = namedtuple('LeafConfig', ['type', 'name', 'currencies'])
+
+@dataclass
+class ParsedConfig:
+    account_configs: list = field()
+    opening_balances_date: datetime = field()
+
+def generate_accounts_recursive(account_type, node, cur_name):
+    # print(f'Gen {account_type}  {cur_name}')
+    if isinstance(node, list):
+        result = []
+        for item in node:
+            result.extend(generate_accounts_recursive(account_type, item, cur_name))
+        return result
+    elif isinstance(node, dict):
+        for key in node.keys():
+            if key == 'currencies':
+                return [LeafConfig(account_type, cur_name, node['currencies'])]
+            elif key == 'leaf_currencies':
+                result = []
+                for currency in node['leaf_currencies']:
+                    result.append(
+                        LeafConfig(account_type, f"{cur_name}:{currency}" if cur_name else currency, [currency])
+                    )
+                return result
+            else:  
+                return generate_accounts_recursive(account_type, node[key], f"{cur_name}:{key}" if cur_name else key)
+    else:
+        return []
+
+@click.group()
+@click.option("--config_file", type=click.Path(), default="accounts_config.yml")
+@click.pass_context
+def cli(ctx, config_file):
+    with open(config_file, 'r') as config:
+        parsed_config = yaml.safe_load(config)
+        # print(json.dumps(parsed_config, indent=4))
+        configs = []
+        for account_type in ACCOUNT_TYPES:
+            if account_type in parsed_config:
+                configs.extend(generate_accounts_recursive(account_type, parsed_config.get(account_type), ''))
+        opening_balances_date = datetime.strptime(parsed_config['opening_balances_date'], '%Y-%m-%d')
+        ctx.obj['config'] = ParsedConfig(
+            account_configs=configs,
+            opening_balances_date=opening_balances_date
+        )
+
+@cli.command()
+@click.pass_context
+def accounts(ctx):
+    config = ctx.obj['config']
+    for account_type, name, _ in config.account_configs:
+        account_names = [
+            account.replace('@', name)
+            for account in ACCOUNTS_GEN_BY_TYPE[account_type]
+        ]
+        for account in account_names:
+            print(f"{ACCOUNTS_OPENING_DATE} open {account}")
+        print()
+
+@cli.command()
+@click.pass_context
+def totals_init(ctx):
+    config = ctx.obj['config']
+    pad_date = (config.opening_balances_date - timedelta(days=1)).strftime('%Y-%m-%d')
+    balance_date = config.opening_balances_date.strftime('%Y-%m-%d')
+
+    for account_type, name, currencies in config.account_configs:
+        for currency in currencies:
+            if account_type in ['cash', 'opaque_funds', 'liabilities']:
+                pad_statement_left = (f"{pad_date} pad Liabilities:{name}" if account_type == 'liabilities' else 
+                    f"{pad_date} pad Assets:{name}")
+                print(f"{pad_statement_left:60}" + f"Equity:OpeningBalances:{name}")
+
+    print()
+    for account_type, name, currencies in config.account_configs:
+        for currency in currencies:
+            if account_type in ['cash', 'opaque_funds', 'liabilities']:
+                balance_statement = (f"{balance_date} balance Liabilities:{name}" if account_type == 'liabilities' else 
+                    f"{balance_date} balance Assets:{name}")
+                print(f"{balance_statement:60}" + f"0 {currency}")
+
+@cli.command()
+@click.argument("date")
+@click.pass_context
+def totals_update(ctx, date):
+    config = ctx.obj['config']
+    parsed_date = datetime.strptime(date, '%Y-%m-%d')
+
+    pad_date = (parsed_date - timedelta(days=1)).strftime('%Y-%m-%d')
+    balance_date = parsed_date.strftime('%Y-%m-%d')
+
+    print('\n')
+    for account_type, name, currencies in config.account_configs:
+        for currency in currencies:
+            if account_type in ['cash', 'opaque_funds', 'liabilities']:
+                pad_statement_left = (f"{pad_date} pad Liabilities:{name}" if account_type == 'liabilities' else 
+                    f"{pad_date} pad Assets:{name}")
+                pad_account = (f"Income:{name}:PnL" if account_type == 'opaque_funds' else 
+                    f"Expenses:Unattributed:{name}")
+                print(f"{pad_statement_left:60}" + pad_account)
+
+    print()
+    for account_type, name, currencies in config.account_configs:
+        for currency in currencies:
+            if account_type in ['cash', 'opaque_funds', 'liabilities']:
+                balance_statement = (f"{balance_date} balance Liabilities:{name}" if account_type == 'liabilities' else 
+                    f"{balance_date} balance Assets:{name}")
+                print(f"{balance_statement:60}" + f"0 {currency}")
+
+if __name__ == '__main__':
+    cli(obj={})
