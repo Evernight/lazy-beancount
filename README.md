@@ -1,4 +1,5 @@
-This repository contains bootstrapping structure for your own Beancount repository.
+This repository contains bootstrapping structure for your own Beancount repository and a helper script.
+Check out the full guide on recommended usage here: https://lazy-beancount.xyz/.
 
 # Setup (local env via conda)
 
@@ -52,4 +53,4 @@ Run with local path and port attached to image:
 Currently this will take longer to install, also won't support all the features. Hovewer, in future docker setup should make everything actually much simpler.
 
 # Usage
-Read the guide at https://lazy-beancount.xyz/.
+Read the guide at https://lazy-beancount.xyz/
