@@ -53,4 +53,4 @@ Run with local path and port attached to image:
 Currently this will take longer to install, also won't support all the features. Hovewer, in future docker setup should make everything actually much simpler.
 
 # Usage
-Read the guide at https://lazy-beancount.xyz/
+Read the guide at https://lazy-beancount.xyz/.

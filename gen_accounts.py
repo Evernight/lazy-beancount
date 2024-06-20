@@ -24,6 +24,10 @@ ACCOUNTS_GEN_BY_TYPE = {
         'Equity:OpeningBalances:@',
         'Income:@:PnL'
     ],
+    'opaque_funds_valuation': [
+        'Assets:@',
+        'Equity:OpeningBalances:@',
+    ],
     'investments': [
         'Assets:@',
         'Equity:OpeningBalances:@',
@@ -145,6 +149,9 @@ def totals_update(ctx, date):
             if account_type in ['cash', 'opaque_funds', 'liabilities']:
                 balance_statement = (f"{balance_date} balance Liabilities:{name}" if account_type == 'liabilities' else 
                     f"{balance_date} balance Assets:{name}")
+                print(f"{balance_statement:60}" + f"0 {currency}")
+            elif account_type == 'opaque_funds_valuation':
+                balance_statement = f"{balance_date} custom \"valuation\" Assets:{name}"
                 print(f"{balance_statement:60}" + f"0 {currency}")
 
 if __name__ == '__main__':
