@@ -135,13 +135,12 @@ def totals_update(ctx, date):
 
     print('\n')
     for account_type, name, currencies in config.account_configs:
-        for currency in currencies:
-            if account_type in ['cash', 'opaque_funds', 'liabilities']:
-                pad_statement_left = (f"{pad_date} pad Liabilities:{name}" if account_type == 'liabilities' else 
-                    f"{pad_date} pad Assets:{name}")
-                pad_account = (f"Income:{name}:PnL" if account_type == 'opaque_funds' else 
-                    f"Expenses:Unattributed:{name}")
-                print(f"{pad_statement_left:60}" + pad_account)
+        if account_type in ['cash', 'opaque_funds', 'liabilities']:
+            pad_statement_left = (f"{pad_date} pad Liabilities:{name}" if account_type == 'liabilities' else 
+                f"{pad_date} pad Assets:{name}")
+            pad_account = (f"Income:{name}:PnL" if account_type == 'opaque_funds' else 
+                f"Expenses:Unattributed:{name}")
+            print(f"{pad_statement_left:60}" + pad_account)
 
     print()
     for account_type, name, currencies in config.account_configs:
