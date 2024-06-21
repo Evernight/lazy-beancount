@@ -24,7 +24,6 @@ Install required packages in the environment
     pip3 install beancount
     pip3 install fava
     pip3 install git+https://github.com/andreasgerstmayr/fava-dashboards.git
-    pip3 install git+https://github.com/andreasgerstmayr/fava-portfolio-returns.git
 
 Download these ones directly to avoid pulling unnecessary dependencies
 
@@ -37,6 +36,12 @@ Run fava on your ledger from the repository folder
     PYTHONPATH=PYTHONPATH:. fava main.bean
 
 Go to http://127.0.0.1:5000 and explore
+
+(optionally) Install additional plugins (all tested):
+
+    pip3 install git+https://github.com/andreasgerstmayr/fava-portfolio-returns.git
+    git clone https://github.com/Akuukis/beancount_share
+    git clone https://github.com/Akuukis/beancount_interpolate
 
 # Setup (docker): WIP
 

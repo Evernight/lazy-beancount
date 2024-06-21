@@ -5,7 +5,7 @@ ENV PYTHONUNBUFFERED=1
 ENV FAVA_PORT="8080"
 ENV FAVA_HOST="0.0.0.0"
 
-RUN adduser bean \
+RUN adduser beancount-user \
     && apt-get update \
     && apt-get install -y git dumb-init \
     && apt-get clean \
@@ -16,7 +16,7 @@ COPY ./requirements.txt /tmp/requirements.txt
 RUN python -m venv /opt/venv \
     && pip3 install --no-cache-dir -r /tmp/requirements.txt 
 WORKDIR /workspace
-USER bean
+USER beancount-user
 
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
 CMD [ "fava", "main.bean"]
