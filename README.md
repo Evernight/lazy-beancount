@@ -7,7 +7,7 @@ Check out the full guide here: https://lazy-beancount.xyz/.
 
 Clone repository and build the image:
 
-```bash
+```shell
     git clone https://github.com/Evernight/lazy-beancount
     cd lazy-beancount
 
@@ -16,7 +16,7 @@ Clone repository and build the image:
 
 Stop previous container (if exists) and run new container:
 
-```bash
+```shell
     docker rm lazybean;
     docker run -it \
         -v $PWD/example_data:/workspace \
@@ -31,7 +31,7 @@ Fava will be available on port 5000, importer interface for importers from [this
 
 Commands are available in container like: 
 
-```bash
+```shell
     docker exec -it lazybean bean-price example_data/main.bean -i --date=2024-01-05
 ```
 
@@ -41,27 +41,27 @@ Change ```example_data``` to ```data``` in docker launch command when you're rea
 
 First, clone this repository into your desired location
 
-```bash
+```shell
     git clone https://github.com/Evernight/lazy-beancount
     cd lazy-beancount
 ```
 
 Install conda
 
-```bash
+```shell
     brew install miniconda
 ```
 
 Then create and activate the environment
 
-```bash
+```shell
     conda create -n lazy-beancount-env python=3.11
     conda activate lazy-beancount-env
 ```
 
 Install required packages in the environment
 
-```bash
+```shell
     pip3 install beancount
     pip3 install fava
     pip3 install git+https://github.com/andreasgerstmayr/fava-dashboards.git
@@ -69,7 +69,7 @@ Install required packages in the environment
 
 Download these ones directly to avoid pulling unnecessary dependencies
 
-```bash
+```shell
     git clone https://github.com/tarioch/beancounttools
     git clone https://github.com/Akuukis/beancount_interpolate
     git clone https://github.com/Evernight/beancount-importers.git
@@ -77,7 +77,7 @@ Download these ones directly to avoid pulling unnecessary dependencies
 
 Run fava on your ledger from the repository folder
 
-```bash
+```shell
     PYTHONPATH=PYTHONPATH:. fava main.bean
 ```
 
@@ -85,7 +85,7 @@ Go to http://127.0.0.1:5000 and explore Fava.
 
 (optionally) Install additional plugins:
 
-```bash
+```shell
     pip3 install git+https://github.com/andreasgerstmayr/fava-portfolio-returns.git
     git clone https://github.com/Akuukis/beancount_share
     git clone https://github.com/Akuukis/beancount_interpolate
