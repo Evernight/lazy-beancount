@@ -6,11 +6,11 @@ option "operating_currency" "EUR"
 
 ; https://github.com/tarioch/beancounttools/
 ; Generate indirect prices for the current main currency
-plugin "beancounttools.src.tariochbctools.plugins.generate_base_ccy_prices" "GBP"
-plugin "beancounttools.src.tariochbctools.plugins.generate_base_ccy_prices" "USD"
-plugin "beancounttools.src.tariochbctools.plugins.generate_base_ccy_prices" "EUR"
+plugin "beancount-generate-base-ccy-prices.generate_base_ccy_prices" "GBP"
+plugin "beancount-generate-base-ccy-prices.generate_base_ccy_prices" "USD"
+plugin "beancount-generate-base-ccy-prices.generate_base_ccy_prices" "EUR"
 ; For fun you can enable GOLD or even LUMBER as operating currency, if you wish
-; plugin "tariochbctools.plugins.generate_base_ccy_prices" "GOLD"
+; plugin "beancount-generate-base-ccy-prices.generate_base_ccy_prices" "GOLD"
 
 ; You can switch default interface language if needed
 ; 2021-01-01 custom "fava-option" "language" "en"
@@ -44,11 +44,6 @@ option "inferred_tolerance_default" "*:0.00001"
 ; This doesn't work much in my setup yet, so disabled
 ; 2000-01-01 custom "fava-extension" "fava_investor" "{}"
 
-; Great plugin based on beangrow. I haven't made it work fully yet though
-2010-01-01 custom "fava-extension" "fava_portfolio_returns" "{
-  'beangrow_config': 'beangrow-simple.config',
-}"
-
 ; File where all accounts are defined
 include "accounts.bean"
 ; File where commodities are defined
@@ -58,6 +53,7 @@ include "prices.bean"
 
 ; Include all files from archive/<year>/<source>.bean
 ; include "archive/*/*.bean"
+
 ; File to track total values in accounts
 include "manual_totals_tracking.bean"
 
@@ -68,9 +64,20 @@ include "manual_transactions.bean"
 ; include "beancount_import_beans/*.bean"
 ; include "beancount_import_beans/*/*.bean"
 
+; Configure accounts that have opaque changes in value
+plugin "beancount-valuation.valuation"
+1970-01-01 custom "valuation-config" "{
+    'Assets:OpaqueFund:Total': 'OF_USD',
+}"
+
+; Great plugin based on beangrow. I haven't made it work fully yet though
+; 2010-01-01 custom "fava-extension" "fava_portfolio_returns" "{
+;   'beangrow_config': 'beangrow-simple.config',
+; }"
+
 ; Some other useful plugins
-plugin "beancount_interpolate.recur"
-plugin "beancount_interpolate.split"
+; plugin "beancount_interpolate.recur"
+; plugin "beancount_interpolate.split"
 
 ; Some hacky fix for dashboards to work properly
 ; include "regular_postings_fix.bean"
