@@ -3,7 +3,7 @@
 This repository contains bootstrapping structure for your own Beancount repository and a Docker config to ease setup.
 Check out the full guide here: https://lazy-beancount.xyz/.
 
-## Setup (Docker)
+# Setup (Docker)
 
 Clone repository and build the image:
 
@@ -37,7 +37,9 @@ Commands are available in container like:
 
 Change ```example_data``` to ```data``` in docker launch command when you're ready to switch to your own data.
 
-## Setup (local env via conda)
+# Setup (local env via conda)
+
+If you want to be able to upgrade individual packages and experiment with other (and your own) plugins, you may go down this route.
 
 First, clone this repository into your desired location
 
@@ -91,5 +93,5 @@ Go to http://127.0.0.1:5000 and explore Fava.
     git clone https://github.com/Akuukis/beancount_interpolate
 ```
 
-## Usage
+# Usage
 Read the guide at https://lazy-beancount.xyz/
