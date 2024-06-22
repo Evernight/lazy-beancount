@@ -17,14 +17,13 @@ RUN python -m venv /opt/venv \
     && pip3 install --no-cache-dir -r /tmp/requirements.txt 
 
 WORKDIR /beancount
-# RUN git clone https://github.com/Evernight/lazy-beancount
 RUN git clone https://github.com/Evernight/beancount-valuation
 RUN git clone https://github.com/Evernight/beancount-generate-base-ccy-prices
 RUN git clone https://github.com/beancount/beangulp
 RUN git clone https://github.com/Evernight/beancount-importers/
 
 ENV PYTHONPATH="/beancount:/beancount/beangulp:$PYTHONPATH"
-ENV PATH="/beancount/lazy-beancount:$PATH"
+ENV PATH="/beancount/:$PATH"
 
 COPY gen_accounts.py /beancount/gen_accounts.py
 COPY run_daemons.sh /beancount/run_daemons.sh
