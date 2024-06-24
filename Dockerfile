@@ -26,7 +26,9 @@ ENV PYTHONPATH="/beancount:/beancount/beangulp:$PYTHONPATH"
 ENV PATH="/beancount/:$PATH"
 
 COPY gen_accounts.py /beancount/gen_accounts.py
+COPY streamlit_frontend /beancount/streamlit_frontend
 COPY run_daemons.sh /beancount/run_daemons.sh
+COPY streamlit_frontend/.streamlit /home/beancount-user/.streamlit
 
 WORKDIR /workspace
 USER beancount-user

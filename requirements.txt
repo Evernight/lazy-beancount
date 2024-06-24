@@ -11,3 +11,7 @@ click==8.1.7
 setuptools>=42
 wheel
 setuptools_scm>=5.0.2
+# streamlit/frontend
+streamlit==1.36.0
+streamlit_option_menu==0.3.13
+streamlit_ace==0.1.1
