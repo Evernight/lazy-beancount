@@ -5,6 +5,7 @@ Check out the full guide here: https://lazy-beancount.xyz/.
 
 # Setup (Docker)
 
+You should have [Docker](https://www.docker.com/get-started/) installed and running.
 Clone repository and build the image:
 
 ```
