@@ -15,7 +15,6 @@
 ; I use Equity accounts only for "technical purposes. 
 ; Otherwise they are pretty meaningless to me.
 1970-01-01 open Equity:OpeningBalances:MyStockBroker:Cash
-1970-01-01 open Equity:OpeningBalances:MyFavouriteBank:Cash
 1970-01-01 open Equity:OpeningBalances:MyLessFavouriteBank:Cash
 1970-01-01 open Equity:OpeningBalances:MyAutomaticBroker:Total
 1970-01-01 open Equity:OpeningBalances:CashOnHands
@@ -86,9 +85,7 @@
 ; Stage III
 
 ; Holding specific assets
-1970-01-01 open Assets:MyCryptoBroker:ETH
 1970-01-01 open Assets:Vanguard:VANGUARD-LS-80
-1970-01-01 open Assets:MyStockBroker:SPX
 1970-01-01 open Assets:MyStockBroker:SPY
 
 ; Commissions

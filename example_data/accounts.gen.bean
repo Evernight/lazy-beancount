@@ -1,0 +1,67 @@
+1970-01-01 open Assets:Physical:Cash
+1970-01-01 open Equity:OpeningBalances:Physical:Cash
+1970-01-01 open Income:Unattributed:Physical:Cash
+1970-01-01 open Income:Uncategorized:Physical:Cash
+1970-01-01 open Expenses:Unattributed:Physical:Cash
+1970-01-01 open Expenses:Uncategorized:Physical:Cash
+
+1970-01-01 open Assets:MyFavouriteBank:Cash
+1970-01-01 open Equity:OpeningBalances:MyFavouriteBank:Cash
+1970-01-01 open Income:Unattributed:MyFavouriteBank:Cash
+1970-01-01 open Income:Uncategorized:MyFavouriteBank:Cash
+1970-01-01 open Expenses:Unattributed:MyFavouriteBank:Cash
+1970-01-01 open Expenses:Uncategorized:MyFavouriteBank:Cash
+
+1970-01-01 open Assets:MyFavouriteBank:Savings:USD
+1970-01-01 open Equity:OpeningBalances:MyFavouriteBank:Savings:USD
+1970-01-01 open Income:Unattributed:MyFavouriteBank:Savings:USD
+1970-01-01 open Income:Uncategorized:MyFavouriteBank:Savings:USD
+1970-01-01 open Expenses:Unattributed:MyFavouriteBank:Savings:USD
+1970-01-01 open Expenses:Uncategorized:MyFavouriteBank:Savings:USD
+
+1970-01-01 open Assets:MyFavouriteBank:Savings:GBP
+1970-01-01 open Equity:OpeningBalances:MyFavouriteBank:Savings:GBP
+1970-01-01 open Income:Unattributed:MyFavouriteBank:Savings:GBP
+1970-01-01 open Income:Uncategorized:MyFavouriteBank:Savings:GBP
+1970-01-01 open Expenses:Unattributed:MyFavouriteBank:Savings:GBP
+1970-01-01 open Expenses:Uncategorized:MyFavouriteBank:Savings:GBP
+
+1970-01-01 open Assets:MyLessFavouriteBank:Cash
+1970-01-01 open Equity:OpeningBalances:MyLessFavouriteBank:Cash
+1970-01-01 open Income:Unattributed:MyLessFavouriteBank:Cash
+1970-01-01 open Income:Uncategorized:MyLessFavouriteBank:Cash
+1970-01-01 open Expenses:Unattributed:MyLessFavouriteBank:Cash
+1970-01-01 open Expenses:Uncategorized:MyLessFavouriteBank:Cash
+
+1970-01-01 open Assets:MyLessFavouriteBank:Savings
+1970-01-01 open Equity:OpeningBalances:MyLessFavouriteBank:Savings
+1970-01-01 open Income:Unattributed:MyLessFavouriteBank:Savings
+1970-01-01 open Income:Uncategorized:MyLessFavouriteBank:Savings
+1970-01-01 open Expenses:Unattributed:MyLessFavouriteBank:Savings
+1970-01-01 open Expenses:Uncategorized:MyLessFavouriteBank:Savings
+
+1970-01-01 open Assets:MyStockBroker:Cash
+1970-01-01 open Equity:OpeningBalances:MyStockBroker:Cash
+1970-01-01 open Income:Unattributed:MyStockBroker:Cash
+1970-01-01 open Income:Uncategorized:MyStockBroker:Cash
+1970-01-01 open Expenses:Unattributed:MyStockBroker:Cash
+1970-01-01 open Expenses:Uncategorized:MyStockBroker:Cash
+
+1970-01-01 open Assets:SuperRoboBroker:Total
+1970-01-01 open Equity:OpeningBalances:SuperRoboBroker:Total
+1970-01-01 open Income:SuperRoboBroker:Total:PnL
+
+1970-01-01 open Assets:MyStockBroker:SPX
+1970-01-01 open Equity:OpeningBalances:MyStockBroker:SPX
+
+1970-01-01 open Assets:MyCryptoBroker:ETH
+1970-01-01 open Equity:OpeningBalances:MyCryptoBroker:ETH
+
+1970-01-01 open Liabilities:Shared:Unspecified
+1970-01-01 open Equity:OpeningBalances:Shared:Unspecified
+1970-01-01 open Expenses:Unattributed:Shared:Unspecified
+
+1970-01-01 open Liabilities:Shared:SomeDude
+1970-01-01 open Equity:OpeningBalances:Shared:SomeDude
+1970-01-01 open Expenses:Unattributed:Shared:SomeDude
+

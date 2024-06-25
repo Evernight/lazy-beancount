@@ -48,6 +48,37 @@ def fava_page():
     components.iframe("http://localhost:5000", height=640)
     st.page_link('http://localhost:5000', label='open in new tab', icon=':material/arrow_outward:')
 
+@st.experimental_dialog("File already exists. Overwrite?")
+def write_file_dialog(filename, file_contents):
+    st.text(f'Overwrite file {filename}?')
+    if st.button('Yes'):
+        with open(filename, 'w') as file:
+            file.write(file_contents)
+            st.text('Saved!')
+            st.rerun()
+    if st.button('Cancel'):
+        st.rerun()
+
+def file_editor_with_save(filename, additional_editor_params={}):
+    with open(filename, 'r') as f:
+        file_contents = f.read()
+    editor_params = {
+        'language':'yaml',
+        'theme': 'nord_dark',
+        'height': 560,
+        **additional_editor_params
+    }
+    result = st_ace(file_contents, **editor_params)
+    st.text("Don't forget to apply changes (cmd+enter) before clicking the button below")
+    if st.button('Save', type='primary'):
+        if not os.path.exists(filename):
+            with open(filename, 'w') as file:
+                file.write(result)
+                st.text('File created!')
+                st.rerun()
+        else:
+            write_file_dialog(filename, result)
+
 def totals_page():
     col1, col2, col3 = st.columns([1, 2, 3])
     with col1:
@@ -123,22 +154,12 @@ def totals_page():
     
     with col3:
         if not os.path.exists(filename):
-            st.header(f':green[{filename} (new)]')
+            st.subheader(f':green[{filename} (new)]')
         else:
-            st.header(filename)
+            st.subheader(filename)
         values = {(row['name'], row['currency']): row['value'] for row in edited_rows if row['value'] is not None}
         file_contents = gen_accounts.gen_update_totals(config, date, values, initial_check=(selected_file == 'Initial'))
         st.code(file_contents)
-
-        @st.experimental_dialog("File already exists. Overwrite?")
-        def write_file_dialog():
-            if st.button('Yes'):
-                with open(filename, 'w') as file:
-                    file.write(file_contents)
-                    st.text('Saved!')
-                    st.rerun()
-            if st.button('Cancel'):
-                st.rerun()
         
         @st.experimental_dialog("Remove the file?")
         def delete_file_dialog():
@@ -155,7 +176,7 @@ def totals_page():
                     st.text('File created!')
                     st.rerun()
             else:
-                write_file_dialog()
+                write_file_dialog(filename, file_contents)
         if os.path.exists(filename):
             if st.button('Delete'):
                 delete_file_dialog()
@@ -171,9 +192,10 @@ def prices_page():
 
     date = st.date_input("Select date", datetime.today().date(), max_value=datetime.today().date())
     with st.spinner('Fetching prices...'):
-        beanprice_output = subprocess.check_output(
-            ["bean-price", "main.bean" ,"-i", "-c", f"--date={date.strftime('%Y-%m-%d')}"]
-        )
+        command = ["bean-price", "main.bean" ,"-i", "-c", f"--date={date.strftime('%Y-%m-%d')}"]
+        st.code(' '.join(command), language='shell')
+        st.text('Processed output:')
+        beanprice_output = subprocess.check_output(command)
         processed_output = io.StringIO()
         for line in beanprice_output.decode('utf-8').split('\n'):
             res = re.search(r"^([\d-]+)\s+price\s+([\w-]+)\s+([\d\\.]+)\s+([\w-]+)", line)
@@ -192,8 +214,9 @@ def prices_page():
                     processed_output.write(f'{price_date} price {commodity:20} {updated_value:.8f} {currency}\n')
         st.code(processed_output.getvalue())
 
+        filename = os.path.join(PRICES_DIR, 'prices-' + date.strftime('%Y-%m-%d') + '.gen.bean') 
+        st.text(f'Save to {filename}?')
         if st.button('Save'):
-            filename = os.path.join(PRICES_DIR, 'prices-' + date.strftime('%Y-%m-%d') + '.gen.bean') 
             with open(filename, "w") as f:
                 f.write(processed_output.getvalue())
                 st.text(f'Successfully saved into {filename}')
@@ -202,27 +225,49 @@ def import_page():
     components.iframe("http://localhost:8101", height=640)
     st.page_link('http://localhost:8101', label='open in new tab', icon=':material/arrow_outward:')
 
-def accounts_page():
-    col1, col2 = st.columns([2, 1])
-    config = gen_accounts.parse_config(ACCOUNTS_CONFIG_FILE)
-    with col1:
-        st.header(ACCOUNTS_CONFIG_FILE)
-        with open(ACCOUNTS_CONFIG_FILE, 'r') as f:
-            accounts_config = f.read()
-        result = st_ace(accounts_config, language='yaml', theme='nord_dark', height=560)
-        with open(ACCOUNTS_CONFIG_FILE, 'w') as f:
-            f.write(result)
-    
-    with col2:
-        st.header(GENERATED_ACCOUNTS_FILE)
-        accounts_definitions = gen_accounts.gen_accounts(config)
-        with st.container(height=500, border=False):
-            st.code(accounts_definitions)
-        if st.button('Save'):
-            with open(GENERATED_ACCOUNTS_FILE, 'w') as f:
-                f.write(accounts_definitions)
-            st.text(f'Saved {GENERATED_ACCOUNTS_FILE}')
-
+def config_page():
+    selected_config = st.selectbox(
+        'File', 
+        options=[
+            'accounts_config.yml', 
+            'prices_config.yml', 
+            'main.bean', 
+            'accounts.bean', 
+            'commodities.bean', 
+            'manual_transactions.bean'
+        ],
+        label_visibility="collapsed"
+    )
+    if selected_config == 'accounts_config.yml':
+        col1, col2 = st.columns([2, 1])
+        config = gen_accounts.parse_config(ACCOUNTS_CONFIG_FILE)
+        with col1:
+            st.header(ACCOUNTS_CONFIG_FILE)
+            with open(ACCOUNTS_CONFIG_FILE, 'r') as f:
+                accounts_config = f.read()
+            result = st_ace(accounts_config, language='yaml', theme='nord_dark', height=560)
+            with open(ACCOUNTS_CONFIG_FILE, 'w') as f:
+                f.write(result)
+        
+        with col2:
+            st.header(GENERATED_ACCOUNTS_FILE)
+            accounts_definitions = gen_accounts.gen_accounts(config)
+            with st.container(height=500, border=False):
+                st.code(accounts_definitions)
+            if st.button('Save'):
+                with open(GENERATED_ACCOUNTS_FILE, 'w') as f:
+                    f.write(accounts_definitions)
+                st.text(f'Saved {GENERATED_ACCOUNTS_FILE}')
+    elif selected_config == 'prices_config.yml':
+        file_editor_with_save('prices_config.yml', {'height':460})
+    elif selected_config == 'main.bean':
+        file_editor_with_save('main.bean', {'language':'lisp', 'height':460})
+    elif selected_config == 'accounts.bean':
+        file_editor_with_save('accounts.bean', {'language':'lisp', 'height':460})
+    elif selected_config == 'commodities.bean':
+        file_editor_with_save('commodities.bean', {'language':'lisp', 'height':460})
+    elif selected_config == 'manual_transactions.bean':
+        file_editor_with_save('manual_transactions.bean', {'language':'lisp', 'height':460})
     
 
 pages = [
@@ -230,7 +275,7 @@ pages = [
     st.Page(totals_page, title="Totals", url_path='totals'),
     st.Page(import_page, title="Import", url_path='import'),
     st.Page(prices_page, title="Prices", url_path='prices'),
-    st.Page(accounts_page, title="Accounts", url_path='accounts'),
+    st.Page(config_page, title="Config", url_path='config'),
 ]
 pg = st.navigation(pages)
 

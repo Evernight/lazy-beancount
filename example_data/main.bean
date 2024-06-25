@@ -4,6 +4,11 @@ option "operating_currency" "GBP"
 option "operating_currency" "EUR"
 ; option "operating_currency" "GOLD"
 
+; See https://github.com/beancount/beancount/issues/742
+; This is required for the beancount_interpolate and beancount_share plugins
+; to work together with pad directives
+option "plugin_processing_mode" "raw"
+
 ; https://github.com/tarioch/beancounttools/
 ; Generate indirect prices for the current main currency
 plugin "beancount-generate-base-ccy-prices.generate_base_ccy_prices" "GBP"
@@ -44,25 +49,30 @@ option "inferred_tolerance_default" "*:0.00001"
 ; This doesn't work much in my setup yet, so disabled
 ; 2000-01-01 custom "fava-extension" "fava_investor" "{}"
 
+; Lazy Beancount: accounts generated from accounts_config.yml
+include "accounts.gen.bean"
+
 ; File where all accounts are defined
 include "accounts.bean"
 ; File where commodities are defined
 include "commodities.bean"
-; File where the fetched prices are stored
+
+; (example/deprecated) File where the fetched prices can be stored
 include "prices.bean"
 
-; Include all files from archive/<year>/<source>.bean
+; (example/deprecated) Include all files from archive/<year>/<source>.bean
 ; include "archive/*/*.bean"
 
-; File to track total values in accounts
+; (example/deprecated) File to track total values in accounts
 include "manual_totals_tracking.bean"
 
 ; Track transactions manually
 include "manual_transactions.bean"
 
 ; Import files generated using beancount-import
-; include "beancount_import_beans/*.bean"
-; include "beancount_import_beans/*/*.bean"
+include "beancount_import_beans/transactions.bean"
+include "beancount_import_beans/balance_accounts.bean"
+include "beancount_import_beans/*/*.bean"
 
 ; Configure accounts that have opaque changes in value
 plugin "beancount-valuation.valuation"
@@ -76,8 +86,21 @@ plugin "beancount-valuation.valuation"
 ; }"
 
 ; Some other useful plugins
-; plugin "beancount_interpolate.recur"
-; plugin "beancount_interpolate.split"
+plugin "beancount_interpolate.recur"
+plugin "beancount_interpolate.split"
+plugin "beancount_share.share" "{
+  'mark_name': 'share',
+  'meta_name': 'shared',
+  'open_date': None,
+  'account_debtors': 'Liabilities:Shared',
+  'account_creditors': 'Liabilities:Shared',
+}"
 
 ; Some hacky fix for dashboards to work properly
 ; include "regular_postings_fix.bean"
+
+; See https://github.com/beancount/beancount/issues/742
+; This is required for the beancount_interpolate and beancount_share plugins
+; to work together with pad directives
+plugin "beancount.ops.pad"
+plugin "beancount.ops.balance"
