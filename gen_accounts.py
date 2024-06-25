@@ -102,7 +102,7 @@ def gen_update_totals(config, date, values, initial_check=False):
                 pad_account = f"Income:{name}:PnL"
             else:
                 pad_account = f"Expenses:Unattributed:{name}"
-            output.write(f"{pad_statement_left:60} {pad_account} \n")
+            output.write(f"{pad_statement_left:65} {pad_account} \n")
 
     output.write('\n')
     for account_type, name, currencies in config.account_configs:
@@ -114,7 +114,7 @@ def gen_update_totals(config, date, values, initial_check=False):
                         f"{balance_date} balance Assets:{name}")
                 elif account_type == 'opaque_funds_valuation':
                     balance_statement = f"{balance_date} custom \"valuation\" Assets:{name}"
-                output.write(f"{balance_statement:60}" + f"{values[(name, currency)]} {currency}\n")
+                output.write(f"{balance_statement:65}" + f"{values[(name, currency)]} {currency}\n")
 
     return output.getvalue()
 

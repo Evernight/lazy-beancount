@@ -242,19 +242,18 @@ def config_page():
         col1, col2 = st.columns([2, 1])
         config = gen_accounts.parse_config(ACCOUNTS_CONFIG_FILE)
         with col1:
-            st.header(ACCOUNTS_CONFIG_FILE)
             with open(ACCOUNTS_CONFIG_FILE, 'r') as f:
                 accounts_config = f.read()
-            result = st_ace(accounts_config, language='yaml', theme='nord_dark', height=560)
+            result = st_ace(accounts_config, language='yaml', theme='nord_dark', height=600)
             with open(ACCOUNTS_CONFIG_FILE, 'w') as f:
                 f.write(result)
         
         with col2:
-            st.header(GENERATED_ACCOUNTS_FILE)
+            st.subheader(GENERATED_ACCOUNTS_FILE)
             accounts_definitions = gen_accounts.gen_accounts(config)
             with st.container(height=500, border=False):
                 st.code(accounts_definitions)
-            if st.button('Save'):
+            if st.button('Save', type='primary'):
                 with open(GENERATED_ACCOUNTS_FILE, 'w') as f:
                     f.write(accounts_definitions)
                 st.text(f'Saved {GENERATED_ACCOUNTS_FILE}')
@@ -268,7 +267,6 @@ def config_page():
         file_editor_with_save('commodities.bean', {'language':'lisp', 'height':460})
     elif selected_config == 'manual_transactions.bean':
         file_editor_with_save('manual_transactions.bean', {'language':'lisp', 'height':460})
-    
 
 pages = [
     st.Page(fava_page, title="Fava", url_path='fava'),

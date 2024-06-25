@@ -52,21 +52,15 @@ option "inferred_tolerance_default" "*:0.00001"
 ; Lazy Beancount: accounts generated from accounts_config.yml
 include "accounts.gen.bean"
 
-; File where all accounts are defined
+; File where the rest of accounts are defined (manually)
 include "accounts.bean"
 ; File where commodities are defined
 include "commodities.bean"
 
-; (example/deprecated) File where the fetched prices can be stored
-include "prices.bean"
-
 ; (example/deprecated) Include all files from archive/<year>/<source>.bean
 ; include "archive/*/*.bean"
 
-; (example/deprecated) File to track total values in accounts
-include "manual_totals_tracking.bean"
-
-; Track transactions manually
+; File to track transactions manually
 include "manual_transactions.bean"
 
 ; Import files generated using beancount-import
@@ -76,8 +70,8 @@ include "beancount_import_beans/*/*.bean"
 
 ; Configure accounts that have opaque changes in value
 plugin "beancount-valuation.valuation"
-1970-01-01 custom "valuation-config" "{
-    'Assets:OpaqueFund:Total': 'OF_USD',
+1970-01-01 custom "valua  tion-config" "{
+    'Assets:MyAutomaticBroker:Total': 'AUTO_BROKER_USD',
 }"
 
 ; Great plugin based on beangrow. I haven't made it work fully yet though

@@ -8,7 +8,7 @@
   Income:Salary:MyEmployer   -1000 GBP
 
 2024-02-11 * "Bought cool thing"
-  Assets:CashOnHands    -200 USD
+  Assets:Physical:Cash    -200 USD
   Expenses:Shopping   200 USD
 
 2024-03-03 * "Salary from MyEmployer"
