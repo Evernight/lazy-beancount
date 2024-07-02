@@ -216,7 +216,7 @@ def prices_page():
 
         filename = os.path.join(PRICES_DIR, 'prices-' + date.strftime('%Y-%m-%d') + '.gen.bean') 
         st.text(f'Save to {filename}?')
-        if st.button('Save'):
+        if st.button('Save', type='primary'):
             with open(filename, "w") as f:
                 f.write(processed_output.getvalue())
                 st.text(f'Successfully saved into {filename}')
