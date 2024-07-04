@@ -111,21 +111,27 @@ def totals_page():
             disabled=(selected_file == 'Initial')
         )
         filename = None
+        values = {}
         if selected_file == 'Initial':
             filename = os.path.join(TOTALS_DIR, 'initial.gen.bean')
+            values = {}
         else:
             filename = os.path.join(TOTALS_DIR, 'update-' + date.strftime('%Y-%m-%d') + '.gen.bean')
-
-        values = {}
-        if os.path.exists(filename):
-            with open(filename, 'r') as f:
-                for line in f:
-                    res = re.search(r".+\s+balance\s+\w+\:([\w\:]+)\s+([\d\.]+)\s+(\w+).*", line)
-                    if res:
-                        values[(res.group(1), res.group(3))] = float(res.group(2))
-                    res_val = re.search(r".+\s+\"valuation\"\s+\w+\:([\w\:]+)\s+([\d\.]+)\s+(\w+).*", line)
-                    if res_val:
-                        values[(res_val.group(1), res_val.group(3))] = float(res_val.group(2))
+            if os.path.exists(filename):
+                values = {}
+                with open(filename, 'r') as f:
+                    for line in f:
+                        res = re.search(r".+\s+balance\s+\w+\:([\w\:]+)\s+([\d\.]+)\s+(\w+).*", line)
+                        if res:
+                            values[(res.group(1), res.group(3))] = float(res.group(2))
+                        res_val = re.search(r".+\s+\"valuation\"\s+\w+\:([\w\:]+)\s+([\d\.]+)\s+(\w+).*", line)
+                        if res_val:
+                            values[(res_val.group(1), res_val.group(3))] = float(res_val.group(2))
+            else:
+                if selected_file == 'New':
+                    values = {}
+                else:
+                    values = st.session_state.get('totals_values', {})
 
         rows = []
         for account_type, name, currencies in config.account_configs:
@@ -138,6 +144,8 @@ def totals_page():
                     'currency': currency,
                     'value': values.get((name, currency), None)
                 })
+        st.session_state['totals_values'] = values
+
         edited_rows = st.data_editor(
             rows,
             column_config=

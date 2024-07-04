@@ -2,7 +2,7 @@
 
 docker rm lazybean;
 docker run -it \
-    -v $PWD:/workspace \
+    -v $PWD/$1:/workspace \
     -v $PWD/tmp:/home/beancount-user/ \
     -p 5000:5000 \
     -p 8101:8101 \
