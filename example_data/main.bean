@@ -60,13 +60,18 @@ include "commodities.bean"
 ; (example/deprecated) Include all files from archive/<year>/<source>.bean
 ; include "archive/*/*.bean"
 
+; Lazy Beancount: include generated files from Totals
+include "totals/*.bean"
+
+; Lazy Beancount: include fetched prices
+include "prices/*.bean"
+
 ; File to track transactions manually
 include "manual_transactions.bean"
 
 ; Import files generated using beancount-import
 include "beancount_import_output/transactions.bean"
 include "beancount_import_output/balance_accounts.bean"
-include "beancount_import_output/*/*.bean"
 
 ; Configure accounts that have opaque changes in value
 plugin "beancount-valuation.valuation"

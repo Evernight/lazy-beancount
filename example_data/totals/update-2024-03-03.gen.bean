@@ -1,10 +1,10 @@
-2024-03-02 pad Assets:Physical:Cash                               Expenses:Unattributed:Physical:Cash 
+; 2024-03-02 pad Assets:Physical:Cash                               Expenses:Unattributed:Physical:Cash 
 2024-03-02 pad Assets:MyFavouriteBank:Cash                        Expenses:Unattributed:MyFavouriteBank:Cash 
-2024-03-02 pad Assets:MyFavouriteBank:Savings:GBP                 Expenses:Unattributed:MyFavouriteBank:Savings:GBP 
-2024-03-02 pad Assets:MyLessFavouriteBank:Cash                    Expenses:Unattributed:MyLessFavouriteBank:Cash 
-2024-03-02 pad Assets:MyStockBroker:Cash                          Expenses:Unattributed:MyStockBroker:Cash 
-2024-03-02 pad Liabilities:Shared:Unspecified                     Expenses:Unattributed:Shared:Unspecified 
-2024-03-02 pad Liabilities:Shared:SomeDude                        Expenses:Unattributed:Shared:SomeDude 
+; 2024-03-02 pad Assets:MyFavouriteBank:Savings:GBP                 Expenses:Unattributed:MyFavouriteBank:Savings:GBP 
+; 2024-03-02 pad Assets:MyLessFavouriteBank:Cash                    Expenses:Unattributed:MyLessFavouriteBank:Cash 
+; 2024-03-02 pad Assets:MyStockBroker:Cash                          Expenses:Unattributed:MyStockBroker:Cash 
+; 2024-03-02 pad Liabilities:Shared:Unspecified                     Expenses:Unattributed:Shared:Unspecified 
+; 2024-03-02 pad Liabilities:Shared:SomeDude                        Expenses:Unattributed:Shared:SomeDude 
 
 2024-03-03 balance Assets:Physical:Cash                          100.0 USD
 2024-03-03 balance Assets:Physical:Cash                          40.0 GBP
