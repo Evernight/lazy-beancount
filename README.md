@@ -1,11 +1,12 @@
 # [Lazy Beancount](https://lazy-beancount.xyz/)
 
-Lazy Beancount is [Beancount](https://github.com/beancount/beancount) accounting system packaged in Docker with batteries included. The batteries being:
+Lazy Beancount is [Beancount](https://github.com/beancount/beancount) accounting system packaged in Docker with batteries included:
 
 - [Fava](https://github.com/beancount/fava) and [Fava dashboards](https://github.com/andreasgerstmayr/fava-dashboards)
 - [Beancount-import](https://github.com/jbms/beancount-import) and some specific [importers](https://github.com/Evernight/beancount-importers)
 - [Streamlit](https://streamlit.io/)-based interface to minimize entry barrier and simplify some specific workflows.
 
+The primary goal is to enable *gradual* and *incremental* migration of personal finances into Beancount.
 The full guide on usage is located at https://lazy-beancount.xyz/
 
 # Setup (Docker)
