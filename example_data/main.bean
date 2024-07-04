@@ -34,10 +34,6 @@ option "inferred_tolerance_default" "*:0.00001"
 ; option "default_tolerance" "USD:0.001"
 ; option "default_tolerance" "GBP:0.001"
 
-; Not sure what these are
-; plugin "beancount.plugins.unrealized" "Unrealized"
-; plugin "beancount.plugins.unique_prices"
-
 ; I've had this enabled for a while but then found that it's actually not more but
 ; less intuitive once you get used to standard Beancount conventions
 ; 1970-01-01 custom "fava-option" "invert-income-liabilities-equity" "True"
