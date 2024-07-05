@@ -97,7 +97,7 @@ def gen_update_totals(config, date, values, initial_check=False):
             pad_statement_left = (f"{pad_date} pad Liabilities:{name}" if account_type == 'liabilities' else 
                 f"{pad_date} pad Assets:{name}")
             if initial_check:
-                pad_account = 'Equity:OpeningBalances:{name}'
+                pad_account = f'Equity:OpeningBalances:{name}'
             elif account_type == 'opaque_funds':
                 pad_account = f"Income:{name}:PnL"
             else:

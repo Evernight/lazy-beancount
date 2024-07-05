@@ -6,7 +6,7 @@ Lazy Beancount is [Beancount](https://github.com/beancount/beancount) accounting
 - [Beancount-import](https://github.com/jbms/beancount-import) and some specific [importers](https://github.com/Evernight/beancount-importers)
 - [Streamlit](https://streamlit.io/)-based interface to minimize entry barrier and simplify some specific workflows.
 
-The primary goal is to enable *gradual* and *incremental* migration of personal finances into Beancount.
+The primary goal is to enable **gradual** and **incremental** migration of personal finances into Beancount.
 
 The full guide on usage is located at https://lazy-beancount.xyz/
 
@@ -78,3 +78,6 @@ Go to http://127.0.0.1:5000 and explore Fava.
     pip3 install git+https://github.com/andreasgerstmayr/fava-portfolio-returns.git
     git clone https://github.com/Akuukis/beancount_share
     git clone https://github.com/Akuukis/beancount_interpolate
+
+# Note
+It's not recommended to expose the ports, various system and data through a public server unless you really know what you're doing. This setup has not been developed and tested for security and authentication when run as a public service.
