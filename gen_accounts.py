@@ -114,7 +114,7 @@ def gen_update_totals(config, date, values, initial_check=False):
                         f"{balance_date} balance Assets:{name}")
                 elif account_type == 'opaque_funds_valuation':
                     balance_statement = f"{balance_date} custom \"valuation\" Assets:{name}"
-                output.write(f"{balance_statement:65}" + f"{values[(name, currency)]} {currency}\n")
+                output.write(f"{balance_statement:65} {values[(name, currency)]} {currency}\n")
 
     return output.getvalue()
 
@@ -161,7 +161,7 @@ def totals_init(ctx):
             if account_type in ['cash', 'opaque_funds', 'liabilities']:
                 pad_statement_left = (f"{pad_date} pad Liabilities:{name}" if account_type == 'liabilities' else 
                     f"{pad_date} pad Assets:{name}")
-                print(f"{pad_statement_left:60}" + f"Equity:OpeningBalances:{name}")
+                print(f"{pad_statement_left:60} Equity:OpeningBalances:{name}")
 
     print()
     for account_type, name, currencies in config.account_configs:
