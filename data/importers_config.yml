@@ -1,0 +1,33 @@
+importers:
+  # Importer key also corresponds to the subdirectory in the input data directory
+  # where the csv files will be looked up
+  # Possible "importer" values are "monzo", "revolut" and "wise"
+  # You can use different accounts for different directories
+  monzo:
+    importer: monzo
+    account: Assets:Monzo:Cash
+    currency: GBP
+  revolut_eur:
+    importer: revolut
+    account: Assets:Revolut:Cash
+    currency: EUR
+  revolut_gbp:
+    importer: revolut
+    account: Assets:Revolut:Cash
+    currency: GBP
+  revolut_usd:
+    importer: revolut
+    account: Assets:Revolut:Cash
+    currency: USD
+  wise_eur:
+    importer: wise
+    account: Assets:Wise:Cash
+    currency: EUR
+  wise_gbp:
+    importer: wise
+    account: Assets:Wise:Cash
+    currency: GBP
+  wise_usd:
+    importer: wise
+    account: Assets:Wise:Cash
+    currency: USD

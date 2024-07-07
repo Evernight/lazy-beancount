@@ -239,6 +239,7 @@ def config_page():
         options=[
             'accounts_config.yml', 
             'prices_config.yml', 
+            'importers_config.yml',
             'main.bean', 
             'accounts.bean', 
             'commodities.bean', 
@@ -267,6 +268,8 @@ def config_page():
                 st.text(f'Saved {GENERATED_ACCOUNTS_FILE}')
     elif selected_config == 'prices_config.yml':
         file_editor_with_save('prices_config.yml', {'height':460})
+    elif selected_config == 'importers_config.yml':
+        file_editor_with_save('importers_config.yml', {'height':460})
     elif selected_config == 'main.bean':
         file_editor_with_save('main.bean', {'language':'lisp', 'height':460})
     elif selected_config == 'accounts.bean':
