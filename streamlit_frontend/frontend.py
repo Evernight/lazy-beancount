@@ -194,7 +194,7 @@ def prices_page():
     with open(PRICES_CONFIG_FILE, 'r') as config:
         prices_config = yaml.safe_load(config)
     commodities_map = {}
-    for c in prices_config['commodities']:
+    for c in prices_config.get('commodities', []):
         for ind, val in c.items():
             commodities_map[ind] = val
 

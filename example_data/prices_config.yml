@@ -1,1 +1,5 @@
-commodities: []
+commodities:
+  # # Example: if that's necessary for some commodity, multiplier can be set
+  # # to use after the value is fetched via bean-price via the UI
+  # - EUR:
+  #     multiplier: 1.0
