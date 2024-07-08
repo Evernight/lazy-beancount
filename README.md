@@ -8,6 +8,8 @@ Lazy Beancount is [Beancount](https://github.com/beancount/beancount) accounting
 
 The primary goal is to enable **gradual** and **incremental** migration of personal finances into Beancount.
 
+![lazy-beancount](images/net_worth_with_title.png)
+
 The full guide on usage is located at https://lazy-beancount.xyz/
 
 # Setup (Docker compose)
