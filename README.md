@@ -10,11 +10,20 @@ The primary goal is to enable **gradual** and **incremental** migration of perso
 
 The full guide on usage is located at https://lazy-beancount.xyz/
 
+# Setup (Docker compose)
+
+    cd example_data
+    docker compose up
+
+Then go to http://localhost:8777/
+
+Fava is also available on port 5000, importer interface is available on port 8101.
+
 # Setup (Docker)
 
 You can just pull image from the public repository:
 
-    docker pull vandereer/lazy-beancount:0.1
+    docker pull vandereer/lazy-beancount:latest
 
 or build it yourself:
 
@@ -26,10 +35,6 @@ or build it yourself:
 To start, run:
 
     ./lazy_beancount.sh example_data
-
-and head to http://localhost:8777/. 
-
-Fava will be also available on port 5000, importer interface will be available on port 8101.
 
 Use ```./lazy_beancount.sh data``` when you want to start adding your own data under the ```data``` directory.
 

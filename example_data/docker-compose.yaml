@@ -1,0 +1,10 @@
+version: '1.0'
+services:
+  lazybean:
+    image: vandereer/lazy-beancount:latest
+    ports:
+      - '5000:5000'
+      - '8101:8101'
+      - '8777:8501'
+    volumes:
+      - .:/workspace
