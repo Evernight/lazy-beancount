@@ -28,6 +28,18 @@
   Income:Salary:MyEmployer   -1000 GBP
 
 
+2024-01-15 * "Withdrawn cash"
+  Assets:MyFavouriteBank:Cash    -100 GBP
+  Assets:Physical:Cash   100 GBP
+
+2024-02-19 * "Withdrawn cash"
+  Assets:MyFavouriteBank:Cash    -150 GBP
+  Assets:Physical:Cash   150 GBP
+
+2024-04-11 * "Withdrawn cash"
+  Assets:MyFavouriteBank:Cash    -100 GBP
+  Assets:Physical:Cash   100 GBP
+
 ; Normally transacrions would be ordered historically but these are just example
 ; ones
 ; and the numbers are obviously fictional

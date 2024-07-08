@@ -1,6 +1,9 @@
 #!/bin/bash
-echo "Lazy Beancount is available on port specified in the Docker file "
+echo "================================================================"
+echo "Lazy Beancount is available on port specified in the Docker file"
 echo "(default: 8777): http://localhost:8777/"
+echo "================================================================"
+echo ""
 
 fava main.bean &
 python3 /beancount/beancount-importers/beancount_import_run.py \
