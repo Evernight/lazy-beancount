@@ -1,6 +1,6 @@
 importers:
-  # Importer key also corresponds to the subdirectory in the input data directory
-  # where the csv files will be looked up
+  # Importer key also corresponds to the subdirectory in the beancount_import_data
+  # directory where the csv files will be looked up
   # Possible "importer" values are "monzo", "revolut" and "wise"
   # You can use different accounts for different directories
   monzo:
