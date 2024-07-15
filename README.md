@@ -22,7 +22,7 @@ The full guide on usage is located at https://lazy-beancount.xyz/
 
 Then go to http://localhost:8777/
 
-Fava is also available on port 5000, importer interface is available on port 8101.
+Fava is also available on port 5003, importer interface is available on port 8101 (overridable via config in docker-compose.yml).
 
 # Setup (Docker)
 
