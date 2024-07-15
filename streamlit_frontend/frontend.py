@@ -23,6 +23,9 @@ ACCOUNTS_CONFIG_FILE = 'accounts_config.yml'
 GENERATED_ACCOUNTS_FILE = 'accounts.gen.bean'
 PRICES_CONFIG_FILE = 'prices_config.yml'
 
+fava_port = os.environ['FAVA_PORT']
+beancount_import_port = os.environ['BEANCOUNT_IMPORT_PORT']
+
 st.set_page_config(
     layout="wide",
     page_title="Lazy Beancount",
@@ -45,8 +48,8 @@ hide_st_style = """
 st.markdown(hide_st_style, unsafe_allow_html=True)
 
 def fava_page():
-    components.iframe("http://localhost:5000", height=640)
-    st.page_link('http://localhost:5000', label='open in new tab', icon=':material/arrow_outward:')
+    components.iframe(f"http://localhost:{fava_port}", height=640)
+    st.page_link(f'http://localhost:{fava_port}', label='open in new tab', icon=':material/arrow_outward:')
 
 @st.experimental_dialog("File already exists. Overwrite?")
 def write_file_dialog(filename, file_contents):
@@ -230,8 +233,8 @@ def prices_page():
                 st.text(f'Successfully saved into {filename}')
 
 def import_page():
-    components.iframe("http://localhost:8101", height=640)
-    st.page_link('http://localhost:8101', label='open in new tab', icon=':material/arrow_outward:')
+    components.iframe(f"http://localhost:{beancount_import_port}", height=640)
+    st.page_link(f"http://localhost:{beancount_import_port}", label='open in new tab', icon=':material/arrow_outward:')
 
 def config_page():
     selected_config = st.selectbox(

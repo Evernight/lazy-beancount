@@ -2,8 +2,11 @@ FROM python:3.12.3-slim
 
 ENV PATH="/opt/venv/bin:$PATH"
 ENV PYTHONUNBUFFERED=1
-ENV FAVA_PORT="5000"
-ENV FAVA_HOST="0.0.0.0"
+
+ENV LAZY_BEANCOUNT_PORT="8777"
+ENV BEANCOUNT_IMPORT_PORT="8101"
+ENV FAVA_PORT="5003"
+ENV FAVA_PORT_INTERNAL="5000"
 
 RUN adduser beancount-user \
     && apt-get update \
@@ -35,5 +38,3 @@ USER beancount-user
 
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
 CMD [ "/beancount/run_daemons.sh" ]
-# CMD [ "fava", "main.bean"]
-# CMD [ "python3", "/beancount/beancount-importers/beancount_import_run.py", "--address", "0.0.0.0"]
