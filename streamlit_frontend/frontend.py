@@ -87,7 +87,7 @@ def file_editor_with_save(filename, additional_editor_params={}):
             write_file_dialog(filename, result)
 
 def totals_page():
-    col1, col2, col3 = st.columns([1, 2, 3])
+    col1, col2, col3 = st.columns([1, 2, 2])
     with col1:
         totals_files = sorted(os.listdir(TOTALS_DIR))
         totals_dates = []
