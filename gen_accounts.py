@@ -86,7 +86,7 @@ def parse_config(filename):
             opening_balances_date=opening_balances_date
         )
 
-def gen_update_totals(config, date, values, initial_check=False):
+def gen_update_totals(config, date, values, initial_check=False, comment_accounts=set()):
     output = io.StringIO()
 
     pad_date = (date - timedelta(days=1)).strftime('%Y-%m-%d')
@@ -94,15 +94,18 @@ def gen_update_totals(config, date, values, initial_check=False):
 
     for account_type, name, currencies in config.account_configs:
         if account_type in ['cash', 'opaque_funds', 'liabilities']:
-            pad_statement_left = (f"{pad_date} pad Liabilities:{name}" if account_type == 'liabilities' else 
-                f"{pad_date} pad Assets:{name}")
+            account_name = (f"Liabilities:{name}" if account_type == 'liabilities' else 
+                f"Assets:{name}")
             if initial_check:
                 pad_account = f'Equity:OpeningBalances:{name}'
             elif account_type == 'opaque_funds':
                 pad_account = f"Income:{name}:PnL"
             else:
                 pad_account = f"Expenses:Unattributed:{name}"
-            output.write(f"{pad_statement_left:65} {pad_account} \n")
+            if account_name in comment_accounts:
+                output.write(f"; {pad_date} pad {account_name:65} {pad_account} \n")
+            else:
+                output.write(f"{pad_date} pad {account_name:65} {pad_account} \n")
 
     output.write('\n')
     for account_type, name, currencies in config.account_configs:

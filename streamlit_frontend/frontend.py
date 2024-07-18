@@ -10,6 +10,7 @@ import io
 from decimal import Decimal
 import yaml
 from streamlit_ace import st_ace
+from beancount import loader
 
 ACCOUNT_TYPE_DESC = {
     'cash': '💶 Cash',
@@ -22,9 +23,10 @@ PRICES_DIR = 'prices'
 ACCOUNTS_CONFIG_FILE = 'accounts_config.yml'
 GENERATED_ACCOUNTS_FILE = 'accounts.gen.bean'
 PRICES_CONFIG_FILE = 'prices_config.yml'
+MAIN_LEDGER_FILE = 'main.bean'
 
-fava_port = os.environ['FAVA_PORT']
-beancount_import_port = os.environ['BEANCOUNT_IMPORT_PORT']
+fava_port = os.environ.get('FAVA_PORT', 5003)
+beancount_import_port = os.environ.get('BEANCOUNT_IMPORT_PORT', 8101)
 
 st.set_page_config(
     layout="wide",
@@ -52,13 +54,15 @@ def fava_page():
     st.page_link(f'http://localhost:{fava_port}', label='open in new tab', icon=':material/arrow_outward:')
 
 @st.experimental_dialog("File already exists. Overwrite?")
-def write_file_dialog(filename, file_contents):
+def write_file_dialog(filename, file_contents, on_confirm=None):
     st.text(f'Overwrite file {filename}?')
     if st.button('Yes'):
         with open(filename, 'w') as file:
             file.write(file_contents)
-            st.text('Saved!')
-            st.rerun()
+        if on_confirm:
+            on_confirm()
+        st.text('Saved!')
+        st.rerun()
     if st.button('Cancel'):
         st.rerun()
 
@@ -181,13 +185,28 @@ def totals_page():
                 st.rerun()
 
         if st.button('Save', type='primary'):
+            def comment_out_unused_pads():
+                entries, errors, options_map = loader.load_file(MAIN_LEDGER_FILE)
+                comment_pad_accounts = set()
+                for error in errors:
+                    if error.message == 'Unused Pad entry' and filename in error.source['filename']:
+                        comment_pad_accounts.add(error.entry.account)
+                file_contents_pad_commented = gen_accounts.gen_update_totals(
+                    config,
+                    date,
+                    values,
+                    initial_check=(selected_file == 'Initial'),
+                    comment_accounts=comment_pad_accounts)
+                with open(filename, 'w') as file:
+                    file.write(file_contents_pad_commented)
+
             if not os.path.exists(filename):
                 with open(filename, 'w') as file:
                     file.write(file_contents)
-                    st.text('File created!')
-                    st.rerun()
+                comment_out_unused_pads()
+                st.text('File created!')
             else:
-                write_file_dialog(filename, file_contents)
+                write_file_dialog(filename, file_contents, on_confirm=comment_out_unused_pads)
         if os.path.exists(filename):
             if st.button('Delete'):
                 delete_file_dialog()
