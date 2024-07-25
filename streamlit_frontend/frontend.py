@@ -146,7 +146,10 @@ def totals_page():
                 values = st.session_state.get('totals_values', {})
 
         rows = []
-        for account_type, name, currencies in config.account_configs:
+        for cfg in config.account_configs:
+            account_type = cfg.type
+            name = cfg.name
+            currencies = cfg.currencies
             if account_type not in ['cash', 'opaque_funds', 'opaque_funds_valuation', 'liabilities']:
                 continue
             for currency in currencies:

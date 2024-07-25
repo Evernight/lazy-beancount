@@ -24,11 +24,13 @@ opaque_funds_valuation:
   - MyAutomaticBroker:
       - Total:
           currencies: [USD]
+          booking_method: FIFO
 
 # Accounts holding investments (stocks, crypto, funds, etc)
 investments:
   - MyStockBroker:
       leaf_currencies: [SPX]
+      booking_method: LIFO
   - MyCryptoBroker:
       leaf_currencies: [ETH]
 

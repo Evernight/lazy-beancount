@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+from typing import Optional
+
 import datetime
 import io
 
@@ -43,7 +45,12 @@ ACCOUNTS_GEN_BY_TYPE = {
 
 ACCOUNT_TYPES = ACCOUNTS_GEN_BY_TYPE.keys()
 
-LeafConfig = namedtuple('LeafConfig', ['type', 'name', 'currencies'])
+@dataclass
+class LeafConfig:
+    type: str = field()
+    name: str = field()
+    currencies: list[str] = field()
+    booking_method: Optional[str] = field()
 
 @dataclass
 class ParsedConfig:
@@ -58,18 +65,23 @@ def generate_accounts_recursive(account_type, node, cur_name):
             result.extend(generate_accounts_recursive(account_type, item, cur_name))
         return result
     elif isinstance(node, dict):
+        results = []
+        booking_method = None
         for key in node.keys():
             if key == 'currencies':
-                return [LeafConfig(account_type, cur_name, node['currencies'])]
+                results = [LeafConfig(account_type, cur_name, node[key], None)]
             elif key == 'leaf_currencies':
-                result = []
-                for currency in node['leaf_currencies']:
-                    result.append(
-                        LeafConfig(account_type, f"{cur_name}:{currency}" if cur_name else currency, [currency])
+                for currency in node[key]:
+                    results.append(
+                        LeafConfig(account_type, f"{cur_name}:{currency}" if cur_name else currency, [currency], None)
                     )
-                return result
+            elif key == "booking_method":
+                booking_method = node[key]
             else:  
                 return generate_accounts_recursive(account_type, node[key], f"{cur_name}:{key}" if cur_name else key)
+        for result in results:
+            result.booking_method = booking_method
+        return results
     else:
         return []
     
@@ -93,7 +105,10 @@ def gen_update_totals(config, date, values, initial_check=False, comment_account
     pad_date = (date - timedelta(days=1)).strftime('%Y-%m-%d')
     balance_date = date.strftime('%Y-%m-%d')
 
-    for account_type, name, currencies in config.account_configs:
+    for cfg in config.account_configs:
+        account_type = cfg.type
+        name = cfg.name
+        currencies = cfg.currencies
         if account_type in ['cash', 'opaque_funds', 'liabilities']:
             account_name = (f"Liabilities:{name}" if account_type == 'liabilities' else 
                 f"Assets:{name}")
@@ -109,7 +124,10 @@ def gen_update_totals(config, date, values, initial_check=False, comment_account
                 output.write(f"{pad_date} pad {account_name:65} {pad_account} \n")
 
     output.write('\n')
-    for account_type, name, currencies in config.account_configs:
+    for cfg in config.account_configs:
+        account_type = cfg.type
+        name = cfg.name
+        currencies = cfg.currencies
         for currency in currencies:
             if (name, currency) in values:
                 balance_statement = ''
@@ -124,13 +142,19 @@ def gen_update_totals(config, date, values, initial_check=False, comment_account
 
 def gen_accounts(config):
     output = io.StringIO()
-    for account_type, name, _ in config.account_configs:
+    for cfg in config.account_configs:
+        account_type = cfg.type
+        name = cfg.name
+        booking_method = cfg.booking_method
         account_names = [
             account.replace('@', name)
             for account in ACCOUNTS_GEN_BY_TYPE[account_type]
         ]
         for account in account_names:
-            output.write(f"{ACCOUNTS_OPENING_DATE} open {account}\n")
+            if booking_method and account.startswith('Assets:'):
+                output.write(f"{ACCOUNTS_OPENING_DATE} open {account} \"{booking_method}\"\n")
+            else:
+                output.write(f"{ACCOUNTS_OPENING_DATE} open {account}\n")
         output.write('\n')
     return output.getvalue()
 
@@ -160,7 +184,10 @@ def totals_init(ctx):
     pad_date = (config.opening_balances_date - timedelta(days=1)).strftime('%Y-%m-%d')
     balance_date = config.opening_balances_date.strftime('%Y-%m-%d')
 
-    for account_type, name, currencies in config.account_configs:
+    for cfg in config.account_configs:
+        account_type = cfg.type
+        name = cfg.name
+        currencies = cfg.currencies
         for currency in currencies:
             if account_type in ['cash', 'opaque_funds', 'liabilities']:
                 pad_statement_left = (f"{pad_date} pad Liabilities:{name}" if account_type == 'liabilities' else 
@@ -168,7 +195,10 @@ def totals_init(ctx):
                 print(f"{pad_statement_left:60} Equity:OpeningBalances:{name}")
 
     print()
-    for account_type, name, currencies in config.account_configs:
+    for cfg in config.account_configs:
+        account_type = cfg.type
+        name = cfg.name
+        currencies = cfg.currencies
         for currency in currencies:
             if account_type in ['cash', 'opaque_funds', 'liabilities']:
                 balance_statement = (f"{balance_date} balance Liabilities:{name}" if account_type == 'liabilities' else 
