@@ -49,6 +49,11 @@ hide_st_style = """
     """
 st.markdown(hide_st_style, unsafe_allow_html=True)
 
+def trigger_fava_reload():
+    command = ["touch", MAIN_LEDGER_FILE]
+    subprocess.check_output(command)
+    print('Triggered Fava reload')
+
 def fava_page():
     components.iframe(f"http://localhost:{fava_port}", height=640)
     st.page_link(f'http://localhost:{fava_port}', label='open in new tab', icon=':material/arrow_outward:')
@@ -180,6 +185,7 @@ def totals_page():
         def delete_file_dialog():
             if st.button('Yes'):
                 os.remove(filename)
+                trigger_fava_reload()
                 st.rerun()
             if st.button('Cancel'):
                 st.rerun()
@@ -199,6 +205,7 @@ def totals_page():
                     comment_accounts=comment_pad_accounts)
                 with open(filename, 'w') as file:
                     file.write(file_contents_pad_commented)
+                trigger_fava_reload()
 
             if not os.path.exists(filename):
                 with open(filename, 'w') as file:
@@ -222,7 +229,7 @@ def prices_page():
 
     date = st.date_input("Select date", datetime.today().date(), max_value=datetime.today().date())
     with st.spinner('Fetching prices...'):
-        command = ["bean-price", "main.bean" ,"-i", "-c", f"--date={date.strftime('%Y-%m-%d')}"]
+        command = ["bean-price", MAIN_LEDGER_FILE ,"-i", "-c", f"--date={date.strftime('%Y-%m-%d')}"]
         st.code(' '.join(command), language='shell')
         st.text('Processed output:')
         beanprice_output = subprocess.check_output(command)
@@ -250,6 +257,7 @@ def prices_page():
             with open(filename, "w") as f:
                 f.write(processed_output.getvalue())
                 st.text(f'Successfully saved into {filename}')
+                trigger_fava_reload()
 
 def import_page():
     components.iframe(f"http://localhost:{beancount_import_port}", height=640)
