@@ -28,6 +28,7 @@ ACCOUNTS_GEN_BY_TYPE = {
     'opaque_funds_valuation': [
         'Assets:@',
         'Equity:OpeningBalances:@',
+        'Income:@:PnL'
     ],
     'investments': [
         'Assets:@',
