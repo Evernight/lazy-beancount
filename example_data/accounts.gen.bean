@@ -33,12 +33,19 @@
 1970-01-01 open Expenses:Unattributed:MyStockBroker:Cash
 1970-01-01 open Expenses:Uncategorized:MyStockBroker:Cash
 
+1970-01-01 open Assets:SomeBroker:Total
+1970-01-01 open Equity:OpeningBalances:SomeBroker:Total
+1970-01-01 open Income:SomeBroker:Total:PnL
+
 1970-01-01 open Assets:MyAutomaticBroker:Total "FIFO"
 1970-01-01 open Equity:OpeningBalances:MyAutomaticBroker:Total
 1970-01-01 open Income:MyAutomaticBroker:Total:PnL
 
-1970-01-01 open Assets:MyStockBroker:SPX "LIFO"
-1970-01-01 open Equity:OpeningBalances:MyStockBroker:SPX
+1970-01-01 open Assets:MyStockBroker:SPY "LIFO"
+1970-01-01 open Equity:OpeningBalances:MyStockBroker:SPY
+
+1970-01-01 open Assets:MyStockBroker:XVV
+1970-01-01 open Equity:OpeningBalances:MyStockBroker:XVV
 
 1970-01-01 open Assets:MyCryptoBroker:ETH
 1970-01-01 open Equity:OpeningBalances:MyCryptoBroker:ETH

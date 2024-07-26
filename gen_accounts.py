@@ -57,7 +57,7 @@ class ParsedConfig:
     account_configs: list = field()
     opening_balances_date: datetime = field()
 
-def generate_accounts_recursive(account_type, node, cur_name):
+def generate_accounts_recursive(account_type, node, cur_name, last_parent_key=None):
     # print(f'Gen {account_type}  {cur_name}')
     if isinstance(node, list):
         result = []
@@ -70,18 +70,36 @@ def generate_accounts_recursive(account_type, node, cur_name):
         for key in node.keys():
             if key == 'currencies':
                 results = [LeafConfig(account_type, cur_name, node[key], None)]
-            elif key == 'leaf_currencies':
-                for currency in node[key]:
-                    results.append(
-                        LeafConfig(account_type, f"{cur_name}:{currency}" if cur_name else currency, [currency], None)
-                    )
+            # elif key == 'leaf_currencies':
+            #     for currency in node[key]:
+            #         results.append(
+            #             LeafConfig(account_type, f"{cur_name}:{currency}" if cur_name else currency, [currency], None)
+            #         )
             elif key == "booking_method":
                 booking_method = node[key]
-            else:  
-                return generate_accounts_recursive(account_type, node[key], f"{cur_name}:{key}" if cur_name else key)
+            else:
+                # Part of account name                
+                return generate_accounts_recursive(
+                    account_type, 
+                    node[key], 
+                    f"{cur_name}:{key}" if cur_name else key, 
+                    last_parent_key=key
+                )
+        if not results:
+            # If currencies not specified, assume the leaf dictionary is named as currency
+            results = [
+                LeafConfig(
+                    account_type, 
+                    cur_name if cur_name else last_parent_key, 
+                    [last_parent_key], 
+                    None
+                )
+            ]
         for result in results:
             result.booking_method = booking_method
         return results
+    elif isinstance(node, str):
+        return [LeafConfig(account_type, f"{cur_name}:{node}" if cur_name else node, [node], None)]
     else:
         return []
     
