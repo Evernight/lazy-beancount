@@ -2,7 +2,9 @@ beancount==2.3.6
 fava==1.28
 fava-dashboards @ git+https://github.com/andreasgerstmayr/fava-dashboards.git@21f5fbeba61a203510276ad8b360b2576c004609
 beancount-import==1.4.0
-# fava-portfolio-returns @ git+https://github.com/andreasgerstmayr/fava-portfolio-returns.git@de68b54f3ac517adfde3a4ccb41fdb09a0da41d1
+numpy==1.26.4
+beanprice @ git+https://github.com/beancount/beanprice@e894c9182f4d16f9a46ccb87bdaeca1a7dede040
+# fava-portfolio-returns @ git+https://github.com/andreasgerstmayr/fava-portfolio-returns.git@4c76fe60b412875c453bcafa81c275142e8bfe46
 beancount_share @ git+https://github.com/Akuukis/beancount_share.git@8f925422b9947e88babbeab3fdf7d71c53c9aa9e
 beancount_interpolate @ git+https://github.com/Akuukis/beancount_interpolate.git@e9c1241d5980781d270a7cc5c17cf2ca99c10faa
 # for beancount-importers

@@ -9,7 +9,7 @@ opening_balances_date: "2023-12-01"
 
 # booking_method is an optional configuration, see
 # https://beancount.github.io/docs/how_inventories_work.html#per-account-booking-method
-# it's recommended for the opaque funds or investments where you don't care about 
+# it's recommended for the opaque funds or investments where you don't care about
 # specific lots traded explicitly or don't have access to this information
 
 # Accounts holding cash values
