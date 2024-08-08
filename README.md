@@ -64,22 +64,21 @@ Install conda
 
 Then create and activate the environment
 
-    conda create -n lazy-beancount-env python=3.11
+    conda create -n lazy-beancount-env python=3.12.3
     conda activate lazy-beancount-env
 
 Install required packages in the environment
 
-    pip3 install beancount
-    pip3 install fava
-    pip3 install git+https://github.com/andreasgerstmayr/fava-dashboards.git
+    pip3 install -r requirements.txt
 
-Download these ones directly to avoid pulling unnecessary dependencies
+Download repositories (TODO: move to pip installation as well)
 
-    git clone https://github.com/tarioch/beancounttools
-    git clone https://github.com/Akuukis/beancount_interpolate
-    git clone https://github.com/Evernight/beancount-importers.git
+    git clone https://github.com/beancount/beangulp
+    git clone https://github.com/Evernight/beancount-valuation
+    git clone https://github.com/Evernight/beancount-generate-base-ccy-prices
+    git clone https://github.com/Evernight/beancount-importers/
 
-Run fava on your ledger from the repository folder
+Run Fava on your ledger from the repository folder
 
     PYTHONPATH=PYTHONPATH:. fava main.bean
 
@@ -88,8 +87,6 @@ Go to http://127.0.0.1:5000 and explore Fava.
 (optionally) Install additional plugins:
 
     pip3 install git+https://github.com/andreasgerstmayr/fava-portfolio-returns.git
-    git clone https://github.com/Akuukis/beancount_share
-    git clone https://github.com/Akuukis/beancount_interpolate
 
 # Note
 It's not recommended to expose the ports, various system and data through a public server unless you really know what you're doing. This setup has not been developed and tested for security and authentication when run as a public service.

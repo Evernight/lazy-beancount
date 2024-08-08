@@ -22,7 +22,6 @@ RUN python -m venv /opt/venv \
 WORKDIR /beancount
 RUN git clone https://github.com/Evernight/beancount-valuation
 RUN git clone https://github.com/Evernight/beancount-generate-base-ccy-prices
-RUN git clone https://github.com/beancount/beangulp
 RUN git clone https://github.com/Evernight/beancount-importers/
 
 ENV PYTHONPATH="/beancount:/beancount/beangulp:$PYTHONPATH"
