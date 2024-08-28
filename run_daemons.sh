@@ -9,7 +9,7 @@ echo "================================================================"
 echo ""
 
 fava -H 0.0.0.0 -p $FAVA_PORT_INTERNAL main.bean &
-python3 /beancount/beancount-importers/beancount_import_run.py \
+python3 -m beancount_importers.beancount_import_run \
     --address 0.0.0.0 \
     --journal_file main.bean \
     --importers_config_file importers_config.yml &

@@ -16,6 +16,10 @@ setuptools>=42
 wheel
 setuptools_scm>=5.0.2
 # streamlit/frontend
-streamlit==1.36.0
+streamlit==1.38.0
 streamlit_option_menu==0.3.13
 streamlit_ace==0.1.1
+
+beancount-valuation @ git+https://github.com/Evernight/beancount-valuation@af35b2aeb9dd82d4db74148924a150ea43ab760d
+beancount-generate-base-ccy-prices @ git+https://github.com/Evernight/beancount-generate-base-ccy-prices@fd2bb3429a4f2704e2be3d804917bbf73ed2ca6b
+beancount-importers @ git+https://github.com/Evernight/beancount-importers@603064d9b9b9a488f22bb957745d33793836c623

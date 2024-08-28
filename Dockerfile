@@ -20,9 +20,6 @@ RUN python -m venv /opt/venv \
     && pip3 install --no-cache-dir -r /tmp/requirements.txt 
 
 WORKDIR /beancount
-RUN git clone https://github.com/Evernight/beancount-valuation
-RUN git clone https://github.com/Evernight/beancount-generate-base-ccy-prices
-RUN git clone https://github.com/Evernight/beancount-importers/
 
 ENV PYTHONPATH="/beancount:/beancount/beangulp:$PYTHONPATH"
 ENV PATH="/beancount/:$PATH"

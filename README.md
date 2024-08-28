@@ -9,7 +9,7 @@ Lazy Beancount is [Beancount](https://github.com/beancount/beancount) accounting
 - [Beancount-import](https://github.com/jbms/beancount-import) and some specific [importers](https://github.com/Evernight/beancount-importers)
 - [Streamlit](https://github.com/streamlit/streamlit)-based interface to minimize entry barrier and simplify some specific workflows.
 - And pre-installed plugins: [beancount_share](https://github.com/Akuukis/beancount_share), [beancount_interpolate](https://github.com/Akuukis/beancount_interpolate), subset of [tarioch/beancounttools](https://github.com/tarioch/beancounttools)
-- In progress: [fava-portfolio-returns](https://github.com/andreasgerstmayr/fava-portfolio-returns)
+- Tested together (for now, manually) in a coherent setup.
 
 The primary goal is to enable **gradual** and **incremental** migration of personal finances into Beancount.
 

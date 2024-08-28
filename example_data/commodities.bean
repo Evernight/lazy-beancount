@@ -17,8 +17,8 @@
   price: "USD:yahoo/GC=F"
   asset_class: "currency"
 
-1970-01-01 commodity SPX
-  price: "USD:yahoo/SPX"
+1970-01-01 commodity SPY
+  price: "USD:yahoo/SPY"
   asset_class: "stock"
   asset_allocation_stocks: 100
 

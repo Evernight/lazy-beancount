@@ -11,9 +11,9 @@ option "plugin_processing_mode" "raw"
 
 ; https://github.com/tarioch/beancounttools/
 ; Generate indirect prices for the current main currency
-plugin "beancount-generate-base-ccy-prices.generate_base_ccy_prices" "GBP"
-plugin "beancount-generate-base-ccy-prices.generate_base_ccy_prices" "USD"
-plugin "beancount-generate-base-ccy-prices.generate_base_ccy_prices" "EUR"
+plugin "beancount_generate_base_ccy_prices.generate_base_ccy_prices" "GBP"
+plugin "beancount_generate_base_ccy_prices.generate_base_ccy_prices" "USD"
+plugin "beancount_generate_base_ccy_prices.generate_base_ccy_prices" "EUR"
 
 ; You can switch default interface language if needed
 ; 2021-01-01 custom "fava-option" "language" "en"
@@ -54,7 +54,7 @@ include "beancount_import_output/transactions.bean"
 include "beancount_import_output/balance_accounts.bean"
 
 ; Configure accounts that have opaque changes in value
-plugin "beancount-valuation.valuation"
+plugin "beancount_valuation.valuation"
 1970-01-01 custom "valuation-config" "{
     'Assets:MyAutomaticBroker:Total': ('AUTO_BROKER_USD', 'Assets:MyAutomaticBroker:Total:PnL'),
 }"
