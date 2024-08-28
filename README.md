@@ -45,7 +45,7 @@ To start, run:
 
 Use ```./lazy_beancount.sh data``` when you want to start adding your own data under the ```data``` directory.
 
-Commands are available in the container like: 
+Commands are available in the container as: 
 
     docker exec -it lazybean bean-price example_data/main.bean -i --date=2024-01-05
 
@@ -70,13 +70,6 @@ Then create and activate the environment
 Install required packages in the environment
 
     pip3 install -r requirements.txt
-
-Download repositories (TODO: move to pip installation as well)
-
-    git clone https://github.com/beancount/beangulp
-    git clone https://github.com/Evernight/beancount-valuation
-    git clone https://github.com/Evernight/beancount-generate-base-ccy-prices
-    git clone https://github.com/Evernight/beancount-importers/
 
 Run Fava on your ledger from the repository folder
 

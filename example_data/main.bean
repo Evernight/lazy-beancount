@@ -21,7 +21,7 @@ plugin "beancount_generate_base_ccy_prices.generate_base_ccy_prices" "EUR"
 ; 2021-01-01 custom "fava-option" "language" "en"
 
 ; Redefine default starting page when you go to the Fava host (localhost by default)
-; 2021-01-01 custom "fava-option" "default-page" "extension/FavaDashboards/?dashboard=0&time=2022+to+day"
+2021-01-01 custom "fava-option" "default-page" "extension/FavaDashboards/?dashboard=0"
 
 ; Define folder where the documents are stored
 ; Note: I haven't found documents-related features particularly useful
