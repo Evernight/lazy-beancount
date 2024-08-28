@@ -328,7 +328,7 @@ for p in pages:
     selected_page_index += 1
 selected_page = option_menu(None, 
     [page.title for page in pages],
-    icons=['coin', 'pencil', 'upload', "graph-up", 'gear'],
+    icons=['coin', 'pencil', 'file-earmark-arrow-up', "graph-up", 'gear'],
     default_index=selected_page_index,
     orientation="horizontal"
 )
