@@ -512,7 +512,7 @@ dashboards:
   - name: Accounts
     panels:
       - title: Net Worth
-        width: 100%
+        width: 50%
         link: /beancount/income_statement/
         queries:
           - bql: |

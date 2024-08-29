@@ -2,6 +2,7 @@
   Assets:MyAutomaticBroker:Total    7000 USD
   Assets:MyFavouriteBank:Cash   -7000 USD
 
+
 2024-01-03 * "Salary from MyEmployer"
   Assets:MyFavouriteBank:Cash    1000 GBP
   Income:Salary:MyEmployer   -1000 GBP
@@ -379,4 +380,14 @@
   Assets:MyLessFavouriteBank:Cash -10 USD
   Expenses:Groceries 10 USD
 
+; Some demo stock transactions
+2024-04-11 * "Buy SPY"
+  Assets:MyStockBroker:SPY                                  3 SPY {517.9 USD}
+  Assets:MyStockBroker:Cash                            -1556.12 USD
+  Expenses:MyStockBroker:Commissions                       2.42 USD
 
+2024-06-17 * "Sell SPY"
+  Assets:MyStockBroker:SPY                                  -2 SPY {} @ 547 USD
+  Assets:MyStockBroker:Cash                             1090.99 USD
+  Expenses:MyStockBroker:Commissions                       3.01 USD
+  Income:MyStockBroker:PnL

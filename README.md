@@ -15,9 +15,11 @@ The primary goal is to enable **gradual** and **incremental** migration of perso
 
 ![lazy-beancount](images/net_worth_with_title.png)
 
-The full guide on usage is located at https://lazy-beancount.xyz/
+The full guide is located at https://lazy-beancount.xyz/
 
 # Setup (Docker compose)
+
+    git clone https://github.com/Evernight/lazy-beancount
 
     cd example_data
     docker compose up
