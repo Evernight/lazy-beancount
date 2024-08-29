@@ -42,21 +42,21 @@ dashboards:
             stack: expenses
             bql: |
               SELECT year, month, CONVERT(SUM(position), '{{ledger.ccy}}', LAST(date)) AS value
-              WHERE account ~ '^Expenses:Accommodation:' AND NOT 'travel' IN tags
+              WHERE account ~ '^Expenses:Accommodation' AND NOT 'travel' IN tags
               GROUP BY year, month
             link: /beancount/account/Expenses:Accommodation/?filter=-#travel&time={time}
           - name: EatingOut
             stack: expenses
             bql: |
               SELECT year, month, CONVERT(SUM(position), '{{ledger.ccy}}', LAST(date)) AS value
-              WHERE account ~ '^Expenses:EatingOut:' AND NOT 'travel' IN tags
+              WHERE account ~ '^Expenses:EatingOut' AND NOT 'travel' IN tags
               GROUP BY year, month
             link: /beancount/account/Expenses:EatingOut/?filter=-#travel&time={time}
           - name: Shopping
             stack: expenses
             bql: |
               SELECT year, month, CONVERT(SUM(position), '{{ledger.ccy}}', LAST(date)) AS value
-              WHERE account ~ '^Expenses:Shopping:' AND NOT 'travel' IN tags
+              WHERE account ~ '^Expenses:Shopping' AND NOT 'travel' IN tags
               GROUP BY year, month
             link: /beancount/account/Expenses:Shopping/?filter=-#travel&time={time}
           - name: Travel
@@ -70,7 +70,7 @@ dashboards:
             stack: expenses
             bql: |
               SELECT year, month, CONVERT(SUM(position), '{{ledger.ccy}}', LAST(date)) AS value
-              WHERE account ~ '^Expenses:' AND NOT account ~ '^Expenses:(Accommodation|EatingOut|Shopping):' AND NOT 'travel' IN tags
+              WHERE account ~ '^Expenses:' AND NOT account ~ '^Expenses:(Accommodation|EatingOut|Shopping)' AND NOT 'travel' IN tags
               GROUP BY year, month
             link: /beancount/account/Expenses/?filter=all(-account:"^Expenses:(Accommodation|EatingOut|Shopping)") -#travel&time={time}
         type: echarts
