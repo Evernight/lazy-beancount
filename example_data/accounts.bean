@@ -39,3 +39,7 @@
 
 ; Used for transactions or transaction parts that will be refunded or otheriwse returned soon
 1970-01-01 open Assets:TemporaryHold
+
+1970-01-01 open Equity:TechnicalPurposes
+1970-01-01 open Assets:MyAutomaticBroker:RegularFix
+1970-01-01 open Assets:MyStockBroker:RegularFix

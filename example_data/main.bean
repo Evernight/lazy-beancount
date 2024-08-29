@@ -91,8 +91,9 @@ plugin "beancount_share.share" "{
   'account_creditors': 'Liabilities:Shared',
 }"
 
-; Some hacky fix for dashboards to work properly
-; include "regular_postings_fix.bean"
+; Some hacky fix for dashboards to work properly.
+; At least one transaction per month needs to be present to display historical chart
+include "regular_postings_fix.bean"
 
 ; See https://github.com/beancount/beancount/issues/742
 ; This is required for the beancount_interpolate and beancount_share plugins

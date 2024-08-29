@@ -509,6 +509,96 @@ dashboards:
         type: echarts
         script: *assets_allocation
 
+  - name: Accounts
+    panels:
+      - title: Net Worth
+        width: 100%
+        link: /beancount/income_statement/
+        queries:
+          - bql: |
+              SELECT year, month,
+              CONVERT(LAST(balance), '{{ledger.ccy}}', DATE_TRUNC('month', FIRST(date)) + INTERVAL('1 month') - INTERVAL('1 day')) AS value
+              WHERE account_sortkey(account) ~ '^[01]'
+              GROUP BY year, month
+            link: /beancount/balance_sheet/?time={time}
+        type: echarts
+        script: &historical_graph |
+          const currencyFormatter = utils.currencyFormatter(ledger.ccy);
+          const months = utils.iterateMonths(ledger.dateFirst, ledger.dateLast).map((m) => `${m.month}/${m.year}`);
+          const amounts = {};
+
+          // the beancount query only returns months where there was at least one matching transaction, therefore we group by month
+          for (let row of panel.queries[0].result) {
+            amounts[`${row.month}/${row.year}`] = row.value[ledger.ccy];
+          }
+
+          return {
+            tooltip: {
+              trigger: "axis",
+              valueFormatter: currencyFormatter,
+            },
+            xAxis: {
+              data: months,
+            },
+            yAxis: {
+              axisLabel: {
+                formatter: currencyFormatter,
+              },
+            },
+            series: [
+              {
+                type: "line",
+                smooth: true,
+                connectNulls: true,
+                data: months.map((month) => amounts[month]),
+              },
+            ],
+            onClick: (event) => {
+              const [month, year] = event.name.split("/");
+              const link = panel.queries[0].link.replace("{time}", `${year}-${month.padStart(2, "0")}`);
+              window.open(helpers.urlFor(link));
+            },
+          };
+
+      - title: Cash
+        width: 50%
+        link: /beancount/income_statement/
+        queries:
+          - bql: |
+              SELECT year, month,
+              CONVERT(LAST(balance), '{{ledger.ccy}}', DATE_TRUNC('month', FIRST(date)) + INTERVAL('1 month') - INTERVAL('1 day')) AS value
+              WHERE account_sortkey(account) ~ '^[01]' AND account ~ '^Assets:(MyFavouriteBank:Savings|MyFavouriteBank:Cash|MyLessFavouriteBank:Cash|Physical:Cash)'
+              GROUP BY year, month
+            link: /beancount/balance_sheet/?time={time}
+        type: echarts
+        script: *historical_graph
+
+      - title: MyAutomaticBroker
+        width: 50%
+        link: /beancount/income_statement/
+        queries:
+          - bql: |
+              SELECT year, month,
+              CONVERT(LAST(balance), '{{ledger.ccy}}', DATE_TRUNC('month', FIRST(date)) + INTERVAL('1 month') - INTERVAL('1 day')) AS value
+              WHERE account_sortkey(account) ~ '^[01]' AND account ~ '^Assets:MyAutomaticBroker'
+              GROUP BY year, month
+            link: /beancount/balance_sheet/?time={time}
+        type: echarts
+        script: *historical_graph
+
+      - title: MyStockBroker
+        width: 50%
+        link: /beancount/income_statement/
+        queries:
+          - bql: |
+              SELECT year, month,
+              CONVERT(LAST(balance), '{{ledger.ccy}}', DATE_TRUNC('month', FIRST(date)) + INTERVAL('1 month') - INTERVAL('1 day')) AS value
+              WHERE account_sortkey(account) ~ '^[01]' AND account ~ '^Assets:MyStockBroker'
+              GROUP BY year, month
+            link: /beancount/balance_sheet/?time={time}
+        type: echarts
+        script: *historical_graph
+
   - name: Income and Expenses
     panels:
       - title: Avg. Income per Month 💰

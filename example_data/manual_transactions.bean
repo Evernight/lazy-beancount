@@ -2,7 +2,6 @@
   Assets:MyAutomaticBroker:Total    7000 USD
   Assets:MyFavouriteBank:Cash   -7000 USD
 
-
 2024-01-03 * "Salary from MyEmployer"
   Assets:MyFavouriteBank:Cash    1000 GBP
   Income:Salary:MyEmployer   -1000 GBP
@@ -88,7 +87,7 @@
   Assets:MyFavouriteBank:Cash -9 USD
   Expenses:Groceries 9 USD
 
-2024-01-11 * "Some transaction for Expenses:Travel:Flights"
+2024-01-11 * "Some transaction for Expenses:Travel:Flights" #travel
   Assets:MyLessFavouriteBank:Cash -203 USD
   Expenses:Travel:Flights 203 USD
 
@@ -379,4 +378,5 @@
 2024-06-29 * "Some transaction for Expenses:Groceries"
   Assets:MyLessFavouriteBank:Cash -10 USD
   Expenses:Groceries 10 USD
+
 

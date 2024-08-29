@@ -1,4 +1,10 @@
 2023-12-03 * "Fake transaction for generating summaries"
     recur: " / month"
-  Assets:MyAutomaticBroker:Total 0 USD
-  Equity:IDontKnowWhatIMDoing
+  Assets:MyAutomaticBroker:RegularFix                0.000001 USD
+  Equity:TechnicalPurposes
+
+2023-12-03 * "Fake transaction for generating summaries"
+    recur: " / month"
+  Assets:MyStockBroker:RegularFix 0.000001 USD
+  Equity:TechnicalPurposes
+  
