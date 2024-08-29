@@ -1,7 +1,7 @@
 # [Lazy Beancount](https://lazy-beancount.xyz/)
 
 [![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](LICENSE)
-![Docker Image Version](https://img.shields.io/docker/v/vandereer/lazy-beancount?color=blue)
+![Docker Image Version](https://img.shields.io/docker/v/vandereer/lazy-beancount?color=green)
 
 Lazy Beancount is [Beancount](https://github.com/beancount/beancount) accounting system packaged in Docker with batteries included:
 
@@ -9,13 +9,17 @@ Lazy Beancount is [Beancount](https://github.com/beancount/beancount) accounting
 - [Beancount-import](https://github.com/jbms/beancount-import) and some specific [importers](https://github.com/Evernight/beancount-importers)
 - [Streamlit](https://github.com/streamlit/streamlit)-based interface to lower the entry barrier and simplify some workflows/use-cases.
 - Pre-installed plugins: [beancount_share](https://github.com/Akuukis/beancount_share), [beancount_interpolate](https://github.com/Akuukis/beancount_interpolate), [beancount_reds_plugins](https://github.com/redstreet/beancount_reds_plugins/), subset of [tarioch/beancounttools](https://github.com/tarioch/beancounttools)
-- Tested together (for now, manually) in a coherent setup.
+- All tested together (manually) in a coherent setup.
 
 The primary goal is to enable **gradual** and **incremental** migration of personal finances into Beancount.
 
-![lazy-beancount](images/net_worth_with_title.png)
+![lazy-beancount](images/demo_dashboard.png)
 
-The full guide is located at https://lazy-beancount.xyz/
+The full guide is located at https://lazy-beancount.xyz/. The approach roughly follows these principles:
+- Some of the values should be tracked precisely (e.g. net worth)
+- Other things are an approximation (e.g. expenses breakdown)
+- Data entry should be automated or easy
+- But it should be possible to track things to any level of precision you need
 
 # Setup (Docker compose)
 
