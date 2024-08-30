@@ -12,6 +12,8 @@ import yaml
 from streamlit_ace import st_ace
 from beancount import loader
 
+from beancount_importers import beancount_import_run
+
 ACCOUNT_TYPE_DESC = {
     'cash': '💶 Cash',
     'opaque_funds': '🏦 Fund',
@@ -263,8 +265,34 @@ def prices_page():
                 trigger_fava_reload()
 
 def import_page():
-    components.iframe(f"http://localhost:{beancount_import_port}", height=640)
-    st.page_link(f"http://localhost:{beancount_import_port}", label='open in new tab', icon=':material/arrow_outward:')
+    selected_import_page = option_menu(None, 
+        ['Review data', 'Upload files'],
+        icons=['view-list', 'file-earmark-arrow-up-fill'],
+        orientation="horizontal"
+    )
+    if selected_import_page == 'Review data':
+        components.iframe(f"http://localhost:{beancount_import_port}", height=540)
+        st.page_link(f"http://localhost:{beancount_import_port}", label='open in new tab', icon=':material/arrow_outward:')
+    else:
+        st.markdown('Define configuration of importers in `importers_config.yml` under Config tab first. Then upload source files here.')
+        importers_config = beancount_import_run.load_import_config_from_file('importers_config.yml', 'beancount_import_data', 'beancount_import_output')
+        columns = st.columns(3)
+        col_ind = 0
+        for config in importers_config['all']['data_sources']:
+            with columns[col_ind].container(border=True):
+                uploaded_file = st.file_uploader(f"**{config['account']}**: {config['directory']}")
+                if uploaded_file is not None:
+                    bytes_data = uploaded_file.getvalue()
+                    available_file_name = uploaded_file.name
+                    ind = 0
+                    while os.path.exists(os.path.join(config['directory'], available_file_name)):
+                        ind += 1
+                        available_file_name = f"{uploaded_file.name}_{ind}"
+                    with open(os.path.join(config['directory'], available_file_name), 'wb') as f:
+                        f.write(bytes_data)
+                    st.write(f"Uploaded to **{os.path.join(config['directory'], available_file_name)}**")
+            col_ind = (col_ind + 1) % 3
+
 
 def config_page():
     selected_config = st.selectbox(
