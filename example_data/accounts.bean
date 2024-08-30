@@ -33,6 +33,7 @@
 1970-01-01 open Income:Salary:MyEmployer
 1970-01-01 open Income:SideHustle
 1970-01-01 open Income:MyStockBroker:PnL
+1970-01-01 open Income:MyCryptoBroker:PnL
 
 ; Commissions
 1970-01-01 open Expenses:MyStockBroker:Commissions

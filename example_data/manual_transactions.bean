@@ -391,3 +391,15 @@
   Assets:MyStockBroker:Cash                             1090.99 USD
   Expenses:MyStockBroker:Commissions                       3.01 USD
   Income:MyStockBroker:PnL
+
+
+2024-02-20 * "Buy ETH"
+  Assets:MyCryptoBroker:ETH                     0.8 ETH {2338 GBP}
+  Assets:MyFavouriteBank:Cash                            -1875.8 GBP
+  Expenses:MyCryptoBroker:Commissions                       5.4 GBP
+
+2024-08-19 * "Sell ETH"
+  Assets:MyCryptoBroker:ETH                    -0.8 ETH {} @ 2018 GBP
+  Assets:MyFavouriteBank:Cash                             1621.4 GBP
+  Expenses:MyCryptoBroker:Commissions                       7 GBP
+  Income:MyCryptoBroker:PnL

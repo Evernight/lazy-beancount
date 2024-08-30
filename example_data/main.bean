@@ -75,8 +75,8 @@ plugin "beancount_valuation.valuation"
     'Assets:MyAutomaticBroker:Total': ('AUTO_BROKER_USD', 'Assets:MyAutomaticBroker:Total:PnL'),
 }"
 
-; Great plugin based on beangrow. I haven't made it work fully yet though
-2010-01-01 custom "fava-extension" "fava_portfolio_returns" "{
+; Track portfolios' performance
+2024-01-01 custom "fava-extension" "fava_portfolio_returns" "{
   'beangrow_config': 'beangrow.config',
 }"
 
