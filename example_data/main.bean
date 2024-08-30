@@ -76,9 +76,9 @@ plugin "beancount_valuation.valuation"
 }"
 
 ; Great plugin based on beangrow. I haven't made it work fully yet though
-; 2010-01-01 custom "fava-extension" "fava_portfolio_returns" "{
-;   'beangrow_config': 'beangrow-simple.config',
-; }"
+2010-01-01 custom "fava-extension" "fava_portfolio_returns" "{
+  'beangrow_config': 'beangrow.config',
+}"
 
 ; Some other useful plugins
 plugin "beancount_interpolate.recur"

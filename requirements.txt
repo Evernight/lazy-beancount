@@ -6,7 +6,7 @@ numpy==1.26.4
 beanprice @ git+https://github.com/beancount/beanprice@e894c9182f4d16f9a46ccb87bdaeca1a7dede040
 beangulp @ git+https://github.com/beancount/beangulp@ec3752930efdfa7358890e263f1aba16151ae316
 
-# fava-portfolio-returns @ git+https://github.com/andreasgerstmayr/fava-portfolio-returns.git@4c76fe60b412875c453bcafa81c275142e8bfe46
+fava-portfolio-returns @ git+https://github.com/andreasgerstmayr/fava-portfolio-returns.git@152a1057c065c2ecd0e91ef62c9d73081f833329
 # for beancount-importers
 click==8.1.7
 # for beancount-import
