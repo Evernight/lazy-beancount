@@ -6,10 +6,19 @@
 Lazy Beancount is [Beancount](https://github.com/beancount/beancount) accounting system packaged in Docker with batteries included:
 
 - [Fava](https://github.com/beancount/fava) and [dashboards](https://github.com/andreasgerstmayr/fava-dashboards)
-- [Beancount-import](https://github.com/jbms/beancount-import) and some specific [importers](https://github.com/Evernight/beancount-importers)
-- [Streamlit](https://github.com/streamlit/streamlit)-based interface to lower the entry barrier and simplify some workflows/use-cases.
-- Pre-installed plugins: [beancount_share](https://github.com/Akuukis/beancount_share), [beancount_interpolate](https://github.com/Akuukis/beancount_interpolate), [beancount_reds_plugins](https://github.com/redstreet/beancount_reds_plugins/), subset of [tarioch/beancounttools](https://github.com/tarioch/beancounttools), and [fava-portfolio-returns](https://github.com/andreasgerstmayr/fava-portfolio-returns)
-- All tested together (manually) in a coherent setup.
+- [Beancount-import](https://github.com/jbms/beancount-import) and some [importers](https://github.com/Evernight/beancount-importers) set up to work with it out of the box:
+  - Wise, Monzo, Revolut
+  - From [uabean](https://github.com/OSadovy/uabean/): IBKR, Binance (not verified), Kraken (not verified)
+  - Other importers can be integrated on demand
+- [Streamlit](https://github.com/streamlit/streamlit)-based interface to provide additional functionality: tracking total values of the accounts, fetching commodity prices from the browser
+- Pre-installed plugins: 
+  - [beancount_share](https://github.com/Akuukis/beancount_share)
+  - [beancount_interpolate](https://github.com/Akuukis/beancount_interpolate)
+  - [beancount_reds_plugins](https://github.com/redstreet/beancount_reds_plugins/)
+  - [tarioch/generate_base_ccy_prices](https://github.com/tarioch/beancounttools/blob/master/src/tariochbctools/plugins/generate_base_ccy_prices.py)
+  - [fava-portfolio-returns](https://github.com/andreasgerstmayr/fava-portfolio-returns)
+- Configuration generator and example supporting many accounts (cash, investments, savings), multiple currencies, examples of common useful shortcuts and a couple of useful hacks.
+- All tested together (manually, but relatively regularly) in a coherent setup.
 
 The primary goal is to enable **gradual** and **incremental** migration of personal finances into Beancount.
 
@@ -82,10 +91,6 @@ Run Fava on your ledger from the repository folder
     PYTHONPATH=PYTHONPATH:. fava main.bean
 
 Go to http://127.0.0.1:5000 and explore Fava.
-
-(optionally) Install additional plugins:
-
-    pip3 install git+https://github.com/andreasgerstmayr/fava-portfolio-returns.git
 
 # Note
 It's not recommended to expose the ports, various system and data through a public server unless you really know what you're doing. This setup has not been developed and tested for security and authentication when run as a public service.

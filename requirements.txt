@@ -1,10 +1,8 @@
 beancount==2.3.6
 fava==1.28
 fava-dashboards @ git+https://github.com/andreasgerstmayr/fava-dashboards.git@21f5fbeba61a203510276ad8b360b2576c004609
-beancount-import==1.4.0
 numpy==1.26.4
 beanprice @ git+https://github.com/beancount/beanprice@e894c9182f4d16f9a46ccb87bdaeca1a7dede040
-beangulp @ git+https://github.com/beancount/beangulp@ec3752930efdfa7358890e263f1aba16151ae316
 
 fava-portfolio-returns @ git+https://github.com/andreasgerstmayr/fava-portfolio-returns.git@152a1057c065c2ecd0e91ef62c9d73081f833329
 # for beancount-importers
@@ -25,4 +23,4 @@ beancount-reds-plugins @ git+https://github.com/redstreet/beancount_reds_plugins
 
 beancount-valuation @ git+https://github.com/Evernight/beancount-valuation@af35b2aeb9dd82d4db74148924a150ea43ab760d
 beancount-generate-base-ccy-prices @ git+https://github.com/Evernight/beancount-generate-base-ccy-prices@fd2bb3429a4f2704e2be3d804917bbf73ed2ca6b
-beancount-importers @ git+https://github.com/Evernight/beancount-importers@603064d9b9b9a488f22bb957745d33793836c623
+beancount-importers @ git+https://github.com/Evernight/beancount-importers@9db6dc5ab9de3ea70d4c462292c44e46ce2ed7cd

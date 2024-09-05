@@ -1,8 +1,10 @@
 importers:
   # Importer key also corresponds to the subdirectory in the beancount_import_data
   # directory where the csv files will be looked up
-  # Possible "importer" values are "monzo", "revolut" and "wise"
-  # You can use different accounts for different directories
+  # Possible "importer" values are: 
+  # "monzo", "revolut", "wise", 
+  # "ibkr", "kraken", "binance"
+  # You can use different directories to distinguish between different accounts
   monzo:
     importer: monzo
     account: Assets:Monzo:Cash
@@ -31,3 +33,32 @@ importers:
     importer: wise
     account: Assets:Wise:Cash
     currency: USD
+
+  ibkr:
+    importer: ibkr
+    account: Assets:IB:Cash
+    currency: USD
+    params:
+      cash_account: "Assets:IB:Cash"
+      assets_account: "Assets:IB:{symbol}"
+      div_account: "Income:IB:{symbol}:Div"
+      interest_account: "Income:IB:Interest"
+      wht_account: "Expenses:IB:WithholdingTax"
+      fees_account: "Expenses:IB:Commissions"
+      pnl_account: "Income:IB:PnL"
+  kraken:
+    importer: kraken
+    account: Assets:Kraken
+    currency: USD
+  binance:
+    importer: binance
+    account: Assets:Binance
+    currency: USD
+    params:
+      spot_wallet_account: "Assets:Crypto:Binance:Cash"
+      fees_account: "Expenses:Fees:Crypto:Binance"
+      p2p_account: "Assets:Crypto:Binance:P2P"
+      savings_account: "Assets:Crypto:Binance:Savings"
+      income_interest_account: "Income:Crypto:Binance:Interest"
+      income_referal_account: "Income:Crypto:Binance:Referal"
+      income_distributions_account: "Income:Crypto:Binance:Distribution"
