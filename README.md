@@ -6,8 +6,8 @@
 Lazy Beancount is [Beancount](https://github.com/beancount/beancount) accounting system packaged in Docker with batteries included:
 
 - [Fava](https://github.com/beancount/fava) and [dashboards](https://github.com/andreasgerstmayr/fava-dashboards)
-- [Beancount-import](https://github.com/jbms/beancount-import) and some [importers](https://github.com/Evernight/beancount-importers) set up to work with it out of the box:
-  - Wise, Monzo, Revolut
+- [Beancount-import](https://github.com/jbms/beancount-import) and some importers set up to work with it out of the box:
+  - From [Evernight/beancount-importers](https://github.com/Evernight/beancount-importers): Wise, Monzo, Revolut
   - From [uabean](https://github.com/OSadovy/uabean/): IBKR, Binance (not verified), Kraken (not verified)
   - Other importers can be integrated on demand
 - [Streamlit](https://github.com/streamlit/streamlit)-based interface to provide additional functionality: tracking total values of the accounts, fetching commodity prices from the browser
@@ -18,7 +18,7 @@ Lazy Beancount is [Beancount](https://github.com/beancount/beancount) accounting
   - [tarioch/generate_base_ccy_prices](https://github.com/tarioch/beancounttools/blob/master/src/tariochbctools/plugins/generate_base_ccy_prices.py)
   - [fava-portfolio-returns](https://github.com/andreasgerstmayr/fava-portfolio-returns)
 - Configuration generator and example supporting many accounts (cash, investments, savings), multiple currencies, examples of common useful shortcuts and a couple of useful hacks.
-- All tested together (manually, but relatively regularly) in a coherent setup.
+- All tested together (manually) in a coherent setup.
 
 The primary goal is to enable **gradual** and **incremental** migration of personal finances into Beancount.
 
