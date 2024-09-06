@@ -7,9 +7,9 @@ Lazy Beancount is [Beancount](https://github.com/beancount/beancount) accounting
 
 - [Fava](https://github.com/beancount/fava) and [dashboards](https://github.com/andreasgerstmayr/fava-dashboards)
 - [Beancount-import](https://github.com/jbms/beancount-import) and some importers set up to work with it out of the box:
-  - From [Evernight/beancount-importers](https://github.com/Evernight/beancount-importers): Wise, Monzo, Revolut
-  - From [uabean](https://github.com/OSadovy/uabean/): IBKR, Binance (not verified), Kraken (not verified)
-  - Other importers can be integrated on demand
+  - from [Evernight/beancount-importers](https://github.com/Evernight/beancount-importers): Wise, Monzo, Revolut
+  - from [uabean](https://github.com/OSadovy/uabean/): IBKR, Binance (not verified), Kraken (not verified)
+  - more importers can be integrated/enabled on request
 - [Streamlit](https://github.com/streamlit/streamlit)-based interface to provide additional functionality: tracking total values of the accounts, fetching commodity prices from the browser
 - Pre-installed plugins: 
   - [beancount_share](https://github.com/Akuukis/beancount_share)
@@ -20,15 +20,15 @@ Lazy Beancount is [Beancount](https://github.com/beancount/beancount) accounting
 - Configuration generator and example supporting many accounts (cash, investments, savings), multiple currencies, examples of common useful shortcuts and a couple of useful hacks.
 - All tested together (manually) in a coherent setup.
 
-The primary goal is to enable **gradual** and **incremental** migration of personal finances into Beancount.
+The main goal is to enable **gradual** and **incremental** migration of personal finances into Beancount.
 
 ![lazy-beancount](images/demo_dashboard.png)
 
-The full guide is located at https://lazy-beancount.xyz/. The approach roughly follows these principles:
+Full guide is located at https://lazy-beancount.xyz/. The approach roughly follows these principles:
 - Some of the values should be tracked precisely (e.g. net worth)
-- Other things are an approximation (e.g. expenses breakdown)
+- Other things are an approximation (e.g. in expenses breakdown, unclassified or some misclassified entires are ok)
 - Data entry should be automated or easy
-- But it should be possible to track things to any level of precision you need
+- But it should be possible to track things to any level of precision if you need to
 
 # Setup (Docker compose)
 

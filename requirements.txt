@@ -23,4 +23,4 @@ beancount-reds-plugins @ git+https://github.com/redstreet/beancount_reds_plugins
 
 beancount-valuation @ git+https://github.com/Evernight/beancount-valuation@af35b2aeb9dd82d4db74148924a150ea43ab760d
 beancount-generate-base-ccy-prices @ git+https://github.com/Evernight/beancount-generate-base-ccy-prices@fd2bb3429a4f2704e2be3d804917bbf73ed2ca6b
-beancount-importers @ git+https://github.com/Evernight/beancount-importers@dcd7f705095ba52be9856034d36bb3747360e2c4
+beancount-importers @ git+https://github.com/Evernight/beancount-importers@f60123fb1e60f16335cd05ebc84343fad7c1e4a4

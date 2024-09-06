@@ -60,7 +60,7 @@ def fava_page():
     components.iframe(f"http://localhost:{fava_port}", height=640)
     st.page_link(f'http://localhost:{fava_port}', label='open in new tab', icon=':material/arrow_outward:')
 
-@st.experimental_dialog("File already exists. Overwrite?")
+@st.dialog("File already exists. Overwrite?")
 def write_file_dialog(filename, file_contents, on_confirm=None):
     st.text(f'Overwrite file {filename}?')
     if st.button('Yes'):
@@ -186,7 +186,7 @@ def totals_page():
         file_contents = gen_accounts.gen_update_totals(config, date, values, initial_check=(selected_file == 'Initial'))
         st.code(file_contents)
         
-        @st.experimental_dialog("Remove the file?")
+        @st.dialog("Remove the file?")
         def delete_file_dialog():
             if st.button('Yes'):
                 os.remove(filename)
@@ -279,8 +279,12 @@ def import_page():
         columns = st.columns(3)
         col_ind = 0
         for config in importers_config['all']['data_sources']:
+            config['description'] = None
             with columns[col_ind].container(border=True):
-                uploaded_file = st.file_uploader(f"**{config['account']}**: {config['directory']}")
+                uploaded_file = st.file_uploader(
+                    f"{config.get('emoji', '📄')} **{config['account']}**: {config['directory']}",
+                    help=config.get('description')
+                )
                 if uploaded_file is not None:
                     bytes_data = uploaded_file.getvalue()
                     available_file_name = uploaded_file.name
