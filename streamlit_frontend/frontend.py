@@ -279,7 +279,6 @@ def import_page():
         columns = st.columns(3)
         col_ind = 0
         for config in importers_config['all']['data_sources']:
-            config['description'] = None
             with columns[col_ind].container(border=True):
                 uploaded_file = st.file_uploader(
                     f"{config.get('emoji', '📄')} **{config['account']}**: {config['directory']}",
