@@ -37,7 +37,7 @@ Full guide is located at https://lazy-beancount.xyz/. The approach roughly follo
     cd example_data
     docker compose up
 
-This will pull repository with the example and config templates, and also pull latest version of the package from the [Docker Hub](https://hub.docker.com/r/vandereer/lazy-beancount/tags).
+This will pull repository with the example and config templates, and also pull and run the latest version of the package from the [Docker Hub](https://hub.docker.com/r/vandereer/lazy-beancount/tags).
 After this is done, go to http://localhost:8777/.
 
 Fava is also available on port 5003, importer interface is available on port 8101 (ports are overridable via config in docker-compose.yml).
