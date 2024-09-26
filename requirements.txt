@@ -17,10 +17,11 @@ streamlit_option_menu==0.3.13
 streamlit_ace==0.1.1
 
 # Beancount plugins
+beancount-lazy-plugins @ git+https://github.com/Evernight/beancount-lazy-plugins@13b711c8268708b66bb98362d2a178290a95ed7a
+beancount-valuation @ git+https://github.com/Evernight/beancount-valuation@400f510d6c8b8b4e6c767d805cb6fe69978dcd7f
 beancount_share @ git+https://github.com/Akuukis/beancount_share.git@8f925422b9947e88babbeab3fdf7d71c53c9aa9e
 beancount_interpolate @ git+https://github.com/Akuukis/beancount_interpolate.git@e9c1241d5980781d270a7cc5c17cf2ca99c10faa
 beancount-reds-plugins @ git+https://github.com/redstreet/beancount_reds_plugins@081acc4c7751d354d1c1481891fc983710428e7d
 
-beancount-valuation @ git+https://github.com/Evernight/beancount-valuation@af35b2aeb9dd82d4db74148924a150ea43ab760d
 beancount-generate-base-ccy-prices @ git+https://github.com/Evernight/beancount-generate-base-ccy-prices@fd2bb3429a4f2704e2be3d804917bbf73ed2ca6b
 beancount-importers @ git+https://github.com/Evernight/beancount-importers@d0cf8a5e1e50c37d43ab89874799dd5fb4f501ca

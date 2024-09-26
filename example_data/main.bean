@@ -1,4 +1,5 @@
 ; Define all currencies that you want to be able to use as operating currency
+; First of these will be used as the currency for Dashboards
 option "operating_currency" "USD"
 option "operating_currency" "GBP"
 option "operating_currency" "EUR"
@@ -11,8 +12,8 @@ option "plugin_processing_mode" "raw"
 
 ; https://github.com/tarioch/beancounttools/
 ; Generate indirect prices for the current main currency
-plugin "beancount_generate_base_ccy_prices.generate_base_ccy_prices" "GBP"
 plugin "beancount_generate_base_ccy_prices.generate_base_ccy_prices" "USD"
+plugin "beancount_generate_base_ccy_prices.generate_base_ccy_prices" "GBP"
 plugin "beancount_generate_base_ccy_prices.generate_base_ccy_prices" "EUR"
 ; For fun you can enable GOLD or even LUMBER as operating currency, if you wish
 ; plugin "beancount_generate_base_ccy_prices.generate_base_ccy_prices" "GOLD"
@@ -21,10 +22,16 @@ plugin "beancount_generate_base_ccy_prices.generate_base_ccy_prices" "EUR"
 ; 2021-01-01 custom "fava-option" "language" "en"
 
 ; Redefine default starting page when you go to the Fava host (localhost by default)
-2021-01-01 custom "fava-option" "default-page" "extension/FavaDashboards/?dashboard=0"
+1970-01-01 custom "fava-option" "default-page" "extension/FavaDashboards/?dashboard=0"
+
+; A set of useful shortcut links for the Fava's menu (left side)
+1970-01-01 custom "fava-sidebar-link" "This month" "/beancount/extension/FavaDashboards/?dashboard=4&conversion=USD&time=month"
+1970-01-01 custom "fava-sidebar-link" "Last month" "/beancount/extension/FavaDashboards/?dashboard=4&conversion=USD&time=month-1"
+1970-01-01 custom "fava-sidebar-link" "This year" "/beancount/extension/FavaDashboards/?dashboard=4&conversion=USD&time=year"
+1970-01-01 custom "fava-sidebar-link" "3Y monthly" "/beancount/extension/FavaDashboards/?dashboard=3&conversion=USD&time=year-2+to+month-1&filter=all%28-account%3A\"%5EExpenses%3ATaxes\"%29"
+1970-01-01 custom "fava-sidebar-link" "🔁 Reset filters" ".?"
 
 ; Define folder where the documents are stored
-; Note: I haven't found documents-related features particularly useful
 ; option "documents" "documents"
 
 ; Define precision options
@@ -81,8 +88,7 @@ plugin "beancount_valuation.valuation"
 }"
 
 ; Some other useful plugins
-plugin "beancount_interpolate.recur"
-plugin "beancount_interpolate.split"
+
 plugin "beancount_share.share" "{
   'mark_name': 'share',
   'meta_name': 'shared',
@@ -100,3 +106,12 @@ include "regular_postings_fix.bean"
 ; to work together with pad directives
 plugin "beancount.ops.pad"
 plugin "beancount.ops.balance"
+
+; After pad/balance operations activate plugin groupping pad transactions
+plugin "beancount_lazy_plugins.group_pad_transactions"
+
+; Activate after pad/balance generation as these plugins are mostly
+; used for cleaner graphs but we don't want to alter underlying source of truth
+; data too much
+plugin "beancount_interpolate.recur"
+plugin "beancount_interpolate.split"
