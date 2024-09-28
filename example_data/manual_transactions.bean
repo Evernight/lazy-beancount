@@ -4,28 +4,28 @@
 
 
 2024-01-03 * "Salary from MyEmployer"
-  Assets:MyFavouriteBank:Cash    1000 GBP
-  Income:Salary:MyEmployer   -1000 GBP
+  Assets:MyFavouriteBank:Cash    2000 GBP
+  Income:Salary:MyEmployer   -2000 GBP
 
 2024-02-03 * "Salary from MyEmployer"
-  Assets:MyFavouriteBank:Cash    1000 GBP
-  Income:Salary:MyEmployer   -1000 GBP
+  Assets:MyFavouriteBank:Cash    2000 GBP
+  Income:Salary:MyEmployer   -2000 GBP
 
 2024-03-03 * "Salary from MyEmployer"
-  Assets:MyFavouriteBank:Cash    1000 GBP
-  Income:Salary:MyEmployer   -1000 GBP
+  Assets:MyFavouriteBank:Cash    2000 GBP
+  Income:Salary:MyEmployer   -2000 GBP
 
 2024-04-03 * "Salary from MyEmployer"
-  Assets:MyFavouriteBank:Cash    1000 GBP
-  Income:Salary:MyEmployer   -1000 GBP
+  Assets:MyFavouriteBank:Cash    2000 GBP
+  Income:Salary:MyEmployer   -2000 GBP
 
 2024-05-03 * "Salary from MyEmployer"
-  Assets:MyFavouriteBank:Cash    1000 GBP
-  Income:Salary:MyEmployer   -1000 GBP
+  Assets:MyFavouriteBank:Cash    2000 GBP
+  Income:Salary:MyEmployer   -2000 GBP
 
 2024-06-03 * "Salary from MyEmployer"
-  Assets:MyFavouriteBank:Cash    1000 GBP
-  Income:Salary:MyEmployer   -1000 GBP
+  Assets:MyFavouriteBank:Cash    2000 GBP
+  Income:Salary:MyEmployer   -2000 GBP
 
 
 2024-01-15 * "Withdrawn cash"
@@ -88,11 +88,11 @@
   Assets:MyFavouriteBank:Cash -9 USD
   Expenses:Groceries 9 USD
 
-2024-01-11 * "Some transaction for Expenses:Travel:Flights" #travel
+2024-01-11 * "Some transaction for Expenses:Travel:Flights" #travel #trip-island-vacation
   Assets:MyLessFavouriteBank:Cash -203 USD
   Expenses:Travel:Flights 203 USD
 
-2024-01-15 * "Some transaction for Expenses:EatingOut"
+2024-01-15 * "Some transaction for Expenses:EatingOut" #trip-island-vacation
   Assets:MyFavouriteBank:Cash -17 USD
   Expenses:EatingOut 17 USD
 
@@ -399,7 +399,7 @@
   Expenses:MyCryptoBroker:Commissions                       5.4 GBP
 
 2024-08-19 * "Sell ETH"
-  Assets:MyCryptoBroker:ETH                    -0.8 ETH {} @ 2018 GBP
-  Assets:MyFavouriteBank:Cash                             1621.4 GBP
+  Assets:MyCryptoBroker:ETH                    -0.7 ETH {} @ 2018 GBP
+  Assets:MyFavouriteBank:Cash                             1412.6 GBP
   Expenses:MyCryptoBroker:Commissions                       7 GBP
   Income:MyCryptoBroker:PnL

@@ -518,8 +518,7 @@ dashboards:
                 type: "sunburst",
                 radius: "100%",
                 label: {
-                  rotate: "tangential",
-                  minAngle: 20,
+                  minAngle: 10,
                 },
                 labelLayout: {
                   hideOverlap: true,
@@ -1045,11 +1044,10 @@ dashboards:
               type: "scroll",
               orient: "vertical",
               right: 10,
-              top: 20,
-              bottom: 20,
+              top: 'middle',
             },
             grid: {
-              right: 300, // space for legend
+              right: 350, // space for legend
             },
             xAxis: {
               data: months,

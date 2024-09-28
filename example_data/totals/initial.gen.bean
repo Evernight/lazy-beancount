@@ -1,11 +1,13 @@
 2023-11-30 pad Assets:Physical:Cash                                              Equity:OpeningBalances:Physical:Cash 
 2023-11-30 pad Assets:MyFavouriteBank:Cash                                       Equity:OpeningBalances:MyFavouriteBank:Cash 
 ; 2023-11-30 pad Assets:MyFavouriteBank:Savings:GBP                                Equity:OpeningBalances:MyFavouriteBank:Savings:GBP 
-; 2023-11-30 pad Assets:MyLessFavouriteBank:Cash                                   Equity:OpeningBalances:MyLessFavouriteBank:Cash 
-; 2023-11-30 pad Assets:MyStockBroker:Cash                                         Equity:OpeningBalances:MyStockBroker:Cash 
+2023-11-30 pad Assets:MyLessFavouriteBank:Cash                                   Equity:OpeningBalances:MyLessFavouriteBank:Cash 
+2023-11-30 pad Assets:MyStockBroker:Cash                                         Equity:OpeningBalances:MyStockBroker:Cash 
 ; 2023-11-30 pad Assets:SomeBroker:Total                                           Equity:OpeningBalances:SomeBroker:Total 
 ; 2023-11-30 pad Liabilities:Shared:Unspecified                                    Equity:OpeningBalances:Shared:Unspecified 
 ; 2023-11-30 pad Liabilities:Shared:SomeDude                                       Equity:OpeningBalances:Shared:SomeDude 
 
 2023-12-01 balance Assets:Physical:Cash                           150.0 GBP
 2023-12-01 balance Assets:MyFavouriteBank:Cash                    4106.0 GBP
+2023-12-01 balance Assets:MyLessFavouriteBank:Cash                243.0 GBP
+2023-12-01 balance Assets:MyStockBroker:Cash                      2100.0 USD

@@ -1,14 +1,15 @@
-2024-03-02 pad Assets:Physical:Cash                               Expenses:Unattributed:Physical:Cash 
-2024-03-02 pad Assets:MyFavouriteBank:Cash                        Expenses:Unattributed:MyFavouriteBank:Cash 
-; 2024-03-02 pad Assets:MyFavouriteBank:Savings:GBP                 Expenses:Unattributed:MyFavouriteBank:Savings:GBP 
-; 2024-03-02 pad Assets:MyLessFavouriteBank:Cash                    Expenses:Unattributed:MyLessFavouriteBank:Cash 
-; 2024-03-02 pad Assets:MyStockBroker:Cash                          Expenses:Unattributed:MyStockBroker:Cash 
-; 2024-03-02 pad Liabilities:Shared:Unspecified                     Expenses:Unattributed:Shared:Unspecified 
-; 2024-03-02 pad Liabilities:Shared:SomeDude                        Expenses:Unattributed:Shared:SomeDude 
+2024-03-02 pad Assets:Physical:Cash                                              Expenses:Unattributed:Physical:Cash 
+2024-03-02 pad Assets:MyFavouriteBank:Cash                                       Expenses:Unattributed:MyFavouriteBank:Cash 
+; 2024-03-02 pad Assets:MyFavouriteBank:Savings:GBP                                Expenses:Unattributed:MyFavouriteBank:Savings:GBP 
+; 2024-03-02 pad Assets:MyLessFavouriteBank:Cash                                   Expenses:Unattributed:MyLessFavouriteBank:Cash 
+; 2024-03-02 pad Assets:MyStockBroker:Cash                                         Expenses:Unattributed:MyStockBroker:Cash 
+; 2024-03-02 pad Assets:SomeBroker:Total                                           Income:SomeBroker:Total:PnL 
+; 2024-03-02 pad Liabilities:Shared:Unspecified                                    Expenses:Unattributed:Shared:Unspecified 
+; 2024-03-02 pad Liabilities:Shared:SomeDude                                       Expenses:Unattributed:Shared:SomeDude 
 
 2024-03-03 balance Assets:Physical:Cash                           90.0 USD
 2024-03-03 balance Assets:Physical:Cash                           40.0 GBP
 2024-03-03 balance Assets:MyFavouriteBank:Cash                    1745.0 GBP
 2024-03-03 balance Assets:MyLessFavouriteBank:Cash                180.0 GBP
-2024-03-03 balance Assets:MyStockBroker:Cash                      200.0 USD
+2024-03-03 balance Assets:MyStockBroker:Cash                      2100.0 USD
 2024-03-03 custom "valuation" Assets:MyAutomaticBroker:Total      7419.0 USD
