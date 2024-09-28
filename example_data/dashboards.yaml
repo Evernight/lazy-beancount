@@ -162,9 +162,6 @@ dashboards:
             label: {
               alignTo: 'edge',
               formatter: params => `${params.name}\n{percent|${params.percent.toFixed(0)}%}`,
-              minMargin: 5,
-              edgeDistance: 10,
-              lineHeight: 15,
               rich: {
                 percent: {
                   fontSize: 10,
@@ -214,6 +211,10 @@ dashboards:
               axisLabel: {
                 formatter: currencyFormatter,
               },
+            },
+            grid: {
+              containLabel: true,
+              left: 0,
             },
             series: [
               {
@@ -538,7 +539,7 @@ dashboards:
   - name: Accounts
     panels:
       - title: Net Worth
-        width: 100%
+        width: 50%
         link: /beancount/income_statement/
         color: "#3ba272"
         queries:

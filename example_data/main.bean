@@ -1,22 +1,14 @@
 ; Define all currencies that you want to be able to use as operating currency
 ; First of these will be used as the currency for Dashboards
+option "operating_currency" "EUR"
 option "operating_currency" "USD"
 option "operating_currency" "GBP"
-option "operating_currency" "EUR"
 ; option "operating_currency" "GOLD"
 
 ; See https://github.com/beancount/beancount/issues/742
 ; This is required for the beancount_interpolate and beancount_share plugins
 ; to work together with pad directives
 option "plugin_processing_mode" "raw"
-
-; https://github.com/tarioch/beancounttools/
-; Generate indirect prices for the current main currency
-plugin "beancount_generate_base_ccy_prices.generate_base_ccy_prices" "USD"
-plugin "beancount_generate_base_ccy_prices.generate_base_ccy_prices" "GBP"
-plugin "beancount_generate_base_ccy_prices.generate_base_ccy_prices" "EUR"
-; For fun you can enable GOLD or even LUMBER as operating currency, if you wish
-; plugin "beancount_generate_base_ccy_prices.generate_base_ccy_prices" "GOLD"
 
 ; You can switch default interface language if needed
 ; 2021-01-01 custom "fava-option" "language" "en"
@@ -87,8 +79,13 @@ plugin "beancount_valuation.valuation"
   'beangrow_config': 'beangrow.config',
 }"
 
-; Some other useful plugins
+; https://github.com/tarioch/beancounttools/
+; Generate indirect prices for the current main currency
+plugin "beancount_generate_base_ccy_prices.generate_base_ccy_prices" "EUR"
+plugin "beancount_generate_base_ccy_prices.generate_base_ccy_prices" "USD"
+plugin "beancount_generate_base_ccy_prices.generate_base_ccy_prices" "GBP"
 
+; Plugin to share expenses
 plugin "beancount_share.share" "{
   'mark_name': 'share',
   'meta_name': 'shared',
