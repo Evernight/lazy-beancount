@@ -11,3 +11,4 @@
 2023-12-01 balance Assets:MyFavouriteBank:Cash                    4106.0 GBP
 2023-12-01 balance Assets:MyLessFavouriteBank:Cash                243.0 GBP
 2023-12-01 balance Assets:MyStockBroker:Cash                      2100.0 USD
+2023-12-01 custom "valuation" Assets:MyAutomaticBroker:Total      7500.0 USD

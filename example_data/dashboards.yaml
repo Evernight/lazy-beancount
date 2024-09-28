@@ -27,7 +27,7 @@ dashboards:
           const valueFmt = currencyFormatter(-value);
           return `<div style="font-size: 40px; font-weight: bold; color: #af3d3d; text-align: center;">${valueFmt}</div>`;
 
-      - title: Cash 💳
+      - title: Cash 💶
         width: 33%
         height: 80px
         link: /beancount/balance_sheet/

@@ -1,7 +1,8 @@
-2023-11-01 * "MyAutomaticBroker investment"
-  Assets:MyAutomaticBroker:Total    7500 USD
-  Assets:MyFavouriteBank:Cash   -7500 USD
+; 2023-11-02 balance Assets:MyAutomaticBroker:Total 7500 USD
 
+2023-11-01 * "MyAutomaticBroker initial"
+  Assets:MyAutomaticBroker:Total    7500 USD
+  Equity:OpeningBalances:MyAutomaticBroker:Total   -7500 USD
 
 2024-01-03 * "Salary from MyEmployer"
   Assets:MyFavouriteBank:Cash    2000 GBP
