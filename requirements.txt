@@ -17,7 +17,7 @@ streamlit_option_menu==0.3.13
 streamlit_ace==0.1.1
 
 # Beancount plugins
-beancount-lazy-plugins @ git+https://github.com/Evernight/beancount-lazy-plugins@13b711c8268708b66bb98362d2a178290a95ed7a
+beancount-lazy-plugins @ git+https://github.com/Evernight/beancount-lazy-plugins@389e7d9e4fea09b10474978d1c74dd4c718c852d
 beancount-valuation @ git+https://github.com/Evernight/beancount-valuation@400f510d6c8b8b4e6c767d805cb6fe69978dcd7f
 beancount_share @ git+https://github.com/Akuukis/beancount_share.git@8f925422b9947e88babbeab3fdf7d71c53c9aa9e
 beancount_interpolate @ git+https://github.com/Akuukis/beancount_interpolate.git@e9c1241d5980781d270a7cc5c17cf2ca99c10faa
