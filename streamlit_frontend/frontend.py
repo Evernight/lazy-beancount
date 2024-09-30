@@ -2,7 +2,7 @@ import streamlit as st
 import streamlit.components.v1 as components
 from streamlit_option_menu import option_menu
 import subprocess
-from datetime import datetime
+from datetime import datetime, timedelta
 import gen_accounts
 import os
 import re
@@ -11,6 +11,7 @@ from decimal import Decimal
 import yaml
 from streamlit_ace import st_ace
 from beancount import loader
+import pathlib
 
 from beancount_importers import beancount_import_run
 
@@ -120,7 +121,7 @@ def totals_page():
         date = st.date_input(
             "Select date", 
             cur_date, 
-            max_value=datetime.today().date(), 
+            max_value=(datetime.today() + timedelta(days=7)).date(), 
             min_value=config.opening_balances_date,
             disabled=(selected_file == 'Initial')
         )
@@ -290,10 +291,16 @@ def import_page():
                     ind = 0
                     while os.path.exists(os.path.join(config['directory'], available_file_name)):
                         ind += 1
-                        available_file_name = f"{uploaded_file.name}_{ind}"
+                        filename_and_ext = os.path.splitext(uploaded_file.name)
+                        available_file_name = f"{filename_and_ext[0]}_{ind}{filename_and_ext[1]}"
                     with open(os.path.join(config['directory'], available_file_name), 'wb') as f:
                         f.write(bytes_data)
-                    st.write(f"Uploaded to **{os.path.join(config['directory'], available_file_name)}**")
+                    
+                    @st.dialog("File uploaded")
+                    def file_uploaded():
+                        st.write(f"Uploaded to ```{os.path.join(config['directory'], available_file_name)}```")
+
+                    file_uploaded()
             col_ind = (col_ind + 1) % 3
 
 
