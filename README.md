@@ -12,12 +12,12 @@ Lazy Beancount is [Beancount](https://github.com/beancount/beancount) accounting
   - more importers can be integrated/enabled on request
 - [Streamlit](https://github.com/streamlit/streamlit)-based interface to provide additional functionality: tracking total values of the accounts, fetching commodity prices from the browser
 - Pre-installed plugins: 
-  - [beancount_share](https://github.com/Akuukis/beancount_share)
-  - [beancount_interpolate](https://github.com/Akuukis/beancount_interpolate)
+  - [beancount-lazy-plugins](https://github.com/Evernight/beancount-lazy-plugins), [beancount-valuation](https://github.com/Evernight/beancount-valuation)
+  - [beancount_share](https://github.com/Akuukis/beancount_share), [beancount_interpolate](https://github.com/Akuukis/beancount_interpolate)
   - [beancount_reds_plugins](https://github.com/redstreet/beancount_reds_plugins/)
   - [tarioch/generate_base_ccy_prices](https://github.com/tarioch/beancounttools/blob/master/src/tariochbctools/plugins/generate_base_ccy_prices.py)
   - [fava-portfolio-returns](https://github.com/andreasgerstmayr/fava-portfolio-returns)
-- Configuration generator and example supporting many accounts (cash, investments, savings), multiple currencies, examples of common useful shortcuts and a couple of useful hacks.
+- Configuration generator and example supporting any number of accounts (cash, investments, savings), multiple currencies, examples of common useful shortcuts and a couple of useful hacks.
 - All tested together (manually) in a coherent setup.
 
 The main goal is to enable **gradual** and **incremental** migration of personal finances into Beancount.
