@@ -11,7 +11,6 @@ from decimal import Decimal
 import yaml
 from streamlit_ace import st_ace
 from beancount import loader
-import pathlib
 
 from beancount_importers import beancount_import_run
 
@@ -350,11 +349,15 @@ def config_page():
     elif selected_config == 'manual_transactions.bean':
         file_editor_with_save('manual_transactions.bean', {'language':'lisp', 'height':460})
 
+def logs_page():
+    st.code(open('lazy-beancount.log', 'r').read(), line_numbers=True)
+
 pages = [
     st.Page(fava_page, title="Fava", url_path='fava'),
     st.Page(totals_page, title="Totals", url_path='totals'),
     st.Page(import_page, title="Import", url_path='import'),
     st.Page(prices_page, title="Prices", url_path='prices'),
+    st.Page(logs_page, title="Logs", url_path='logs'),
     st.Page(config_page, title="Config", url_path='config'),
 ]
 pg = st.navigation(pages)
@@ -366,7 +369,7 @@ for p in pages:
     selected_page_index += 1
 selected_page = option_menu(None, 
     [page.title for page in pages],
-    icons=['coin', 'pencil', 'file-earmark-arrow-up', "graph-up", 'gear'],
+    icons=['coin', 'pencil', 'file-earmark-arrow-up', "graph-up", 'file-text', 'gear'],
     default_index=selected_page_index,
     orientation="horizontal"
 )

@@ -24,4 +24,4 @@ beancount_interpolate @ git+https://github.com/Akuukis/beancount_interpolate.git
 beancount-reds-plugins @ git+https://github.com/redstreet/beancount_reds_plugins@081acc4c7751d354d1c1481891fc983710428e7d
 
 beancount-generate-base-ccy-prices @ git+https://github.com/Evernight/beancount-generate-base-ccy-prices@fd2bb3429a4f2704e2be3d804917bbf73ed2ca6b
-beancount-importers @ git+https://github.com/Evernight/beancount-importers@d0cf8a5e1e50c37d43ab89874799dd5fb4f501ca
+beancount-importers @ git+https://github.com/Evernight/beancount-importers@e0f92f9e9d804173dd40d6471266412b2911b897

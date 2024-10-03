@@ -8,11 +8,13 @@ echo "Beancount-import available on http://localhost:$BEANCOUNT_IMPORT_PORT/"
 echo "================================================================"
 echo ""
 
-fava -H 0.0.0.0 -p $FAVA_PORT_INTERNAL main.bean &
+echo "" > lazy-beancount.log
+fava -H 0.0.0.0 -p $FAVA_PORT_INTERNAL main.bean 2>&1 | tee lazy-beancount.log &
 python3 -m beancount_importers.beancount_import_run \
     --address 0.0.0.0 \
     --journal_file main.bean \
-    --importers_config_file importers_config.yml &
+    --importers_config_file importers_config.yml \
+    2>&1 | tee lazy-beancount.log &
 streamlit run /beancount/streamlit_frontend/frontend.py --server.address 0.0.0.0 &
 
 # Wait for any process to exit

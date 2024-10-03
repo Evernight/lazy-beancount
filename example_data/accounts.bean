@@ -9,12 +9,18 @@
 1970-01-01 open Expenses:Shopping
 1970-01-01 open Expenses:Accommodation
 1970-01-01 open Expenses:Bills
+1970-01-01 open Expenses:Bills:Internet
+1970-01-01 open Expenses:Bills:Housing
+1970-01-01 open Expenses:Bills:Phone
+1970-01-01 open Expenses:Bills:Electricity
 1970-01-01 open Expenses:Hobbies
 1970-01-01 open Expenses:Wellness
 1970-01-01 open Expenses:Wellness:Expendables
 1970-01-01 open Expenses:Transport
 1970-01-01 open Expenses:Travel
 1970-01-01 open Expenses:Travel:Flights
+1970-01-01 open Expenses:Travel:Accommodation
+1970-01-01 open Expenses:Travel:Transport
 1970-01-01 open Expenses:Entertainment
 1970-01-01 open Expenses:Donations
 1970-01-01 open Expenses:Services
@@ -45,3 +51,6 @@
 1970-01-01 open Equity:TechnicalPurposes
 1970-01-01 open Assets:MyAutomaticBroker:RegularFix
 1970-01-01 open Assets:MyStockBroker:RegularFix
+
+; for beancount-import
+1970-01-01 open Expenses:FIXME
