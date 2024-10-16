@@ -375,6 +375,9 @@ selected_page = option_menu(None,
     default_index=selected_page_index,
     orientation="horizontal"
 )
+with st.sidebar:
+    st.page_link(f'http://localhost:{fava_port}', label='Fava', icon=':material/arrow_outward:')
+    st.page_link(f"http://localhost:{beancount_import_port}", label='Beancount Import', icon=':material/arrow_outward:')
 pg.run()
 if selected_page != pg.title:
     for p in pages:
