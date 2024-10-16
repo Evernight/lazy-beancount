@@ -67,7 +67,8 @@ def write_file_dialog(filename, file_contents, on_confirm=None):
         with open(filename, 'w') as file:
             file.write(file_contents)
         if on_confirm:
-            on_confirm()
+            with st.spinner("Saving..."):
+                on_confirm()
         st.text('Saved!')
         st.rerun()
     if st.button('Cancel'):
@@ -213,10 +214,11 @@ def totals_page():
                 trigger_fava_reload()
 
             if not os.path.exists(filename):
-                with open(filename, 'w') as file:
-                    file.write(file_contents)
-                comment_out_unused_pads()
-                st.text('File created!')
+                with st.spinner('Saving...'):
+                    with open(filename, 'w') as file:
+                        file.write(file_contents)
+                    comment_out_unused_pads()
+                    st.text('File created!')
             else:
                 write_file_dialog(filename, file_contents, on_confirm=comment_out_unused_pads)
         if os.path.exists(filename):
