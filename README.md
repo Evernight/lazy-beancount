@@ -12,7 +12,7 @@ Lazy Beancount is [Beancount](https://github.com/beancount/beancount) accounting
   - more importers can be integrated/enabled on request
 - [Streamlit](https://github.com/streamlit/streamlit)-based interface to provide additional functionality: tracking total values of the accounts, fetching commodity prices from the browser
 - Pre-installed plugins: 
-  - [beancount-lazy-plugins](https://github.com/Evernight/beancount-lazy-plugins), [beancount-valuation](https://github.com/Evernight/beancount-valuation)
+  - [beancount-lazy-plugins](https://github.com/Evernight/beancount-lazy-plugins): [valuation](https://github.com/Evernight/beancount-lazy-plugins?tab=readme-ov-file#valuation), [filter_map](https://github.com/Evernight/beancount-lazy-plugins?tab=readme-ov-file#filter_map), [group_pad_transactions](https://github.com/Evernight/beancount-lazy-plugins?tab=readme-ov-file#group_pad_transactions)
   - [beancount_share](https://github.com/Akuukis/beancount_share), [beancount_interpolate](https://github.com/Akuukis/beancount_interpolate)
   - [beancount_reds_plugins](https://github.com/redstreet/beancount_reds_plugins/)
   - [tarioch/generate_base_ccy_prices](https://github.com/tarioch/beancounttools/blob/master/src/tariochbctools/plugins/generate_base_ccy_prices.py)
