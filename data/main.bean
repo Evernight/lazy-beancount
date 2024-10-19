@@ -77,10 +77,11 @@ include "beancount_import_output/transactions.bean"
 include "beancount_import_output/balance_accounts.bean"
 
 ; Configure accounts that have opaque changes in value
-plugin "beancount_valuation.valuation"
-1970-01-01 custom "valuation-config" "{
-    'Assets:MyAutomaticBroker:Total': ('AUTO_BROKER_USD', 'Assets:MyAutomaticBroker:Total:PnL'),
-}"
+plugin "beancount_lazy_plugins.valuation"
+1970-01-01 custom "valuation" "config"
+  account: "Assets:MyAutomaticBroker:Total" 
+  currency: "AUTO_BROKER_USD"
+  pnlAccount: "Assets:MyAutomaticBroker:Total:PnL"
 
 ; Track portfolios' performance
 2024-01-01 custom "fava-extension" "fava_portfolio_returns" "{
