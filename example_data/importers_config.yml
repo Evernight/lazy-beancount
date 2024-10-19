@@ -34,18 +34,6 @@ importers:
     account: Assets:Wise:Cash
     currency: USD
 
-  ibkr:
-    importer: ibkr
-    account: Assets:IB:Cash
-    currency: USD
-    params:
-      cash_account: "Assets:IB:Cash"
-      assets_account: "Assets:IB:{symbol}"
-      div_account: "Income:IB:{symbol}:Div"
-      interest_account: "Income:IB:Interest"
-      wht_account: "Expenses:IB:WithholdingTax"
-      fees_account: "Expenses:IB:Commissions"
-      pnl_account: "Income:IB:PnL"
   kraken:
     importer: kraken
     account: Assets:Kraken
@@ -62,3 +50,15 @@ importers:
       income_interest_account: "Income:Crypto:Binance:Interest"
       income_referal_account: "Income:Crypto:Binance:Referal"
       income_distributions_account: "Income:Crypto:Binance:Distribution"
+  ibkr:
+    importer: ibkr
+    account: Assets:IB:Cash
+    currency: USD
+    params:
+      cash_account: "Assets:IB:Cash"
+      assets_account: "Assets:IB:{symbol}"
+      div_account: "Income:IB:{symbol}:Div"
+      interest_account: "Income:IB:Interest"
+      wht_account: "Expenses:IB:WithholdingTax"
+      fees_account: "Expenses:IB:Commissions"
+      pnl_account: "Income:IB:PnL"

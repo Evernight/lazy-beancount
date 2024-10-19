@@ -1,0 +1,7 @@
+2000-01-01 * "Deposit"
+  time: "00:00:00"
+  Assets:Crypto:Binance:Cash   1024.36945387 USD
+  Assets:Crypto:Binance:Cash   1023.05320737 BUSD
+  Assets:Crypto:Binance:Cash  -1026.69615134 USD
+  Expenses:FIXME                  2.32669747 USD
+  Expenses:FIXME              -1023.05320737 BUSD
