@@ -108,8 +108,14 @@ plugin "beancount.ops.balance"
 ; After pad/balance operations activate plugin groupping pad transactions
 plugin "beancount_lazy_plugins.group_pad_transactions"
 
-; Activate after pad/balance generation as these plugins are mostly
+; Comes after almost everything but before the split plugin (it's used in some examples)
+plugin "beancount_lazy_plugins.filter_map"
+include "filter_map.bean"
+
+; Run beancount_interpolate after pad/balance generation as these plugins are mostly
 ; used for cleaner graphs but we don't want to alter underlying source of truth
-; data too much
+; data too much.
+; You may choose to disable split plugin in some cases, if you want more precise
+; actual data rather than more convenient view on Expenses
 plugin "beancount_interpolate.recur"
 plugin "beancount_interpolate.split"
