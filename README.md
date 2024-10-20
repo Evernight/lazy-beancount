@@ -8,7 +8,7 @@ Lazy Beancount is [Beancount](https://github.com/beancount/beancount) accounting
 - [Fava](https://github.com/beancount/fava) with [dashboards](https://github.com/andreasgerstmayr/fava-dashboards)
 - [Beancount-import](https://github.com/jbms/beancount-import) and some importers set up to work with it out of the box:
   - from [Evernight/beancount-importers](https://github.com/Evernight/beancount-importers): Wise, Monzo, Revolut
-  - from [uabean](https://github.com/OSadovy/uabean/): IBKR, Binance (not verified), Kraken (not verified)
+  - IBKR (adapted from [uabean](https://github.com/OSadovy/uabean/))
   - more importers can be integrated/enabled on request
 - [Streamlit](https://github.com/streamlit/streamlit)-based interface to provide additional functionality: tracking total values of the accounts, fetching commodity prices from the browser
 - Pre-installed plugins: 
