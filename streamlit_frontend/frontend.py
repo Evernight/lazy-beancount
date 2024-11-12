@@ -136,10 +136,10 @@ def totals_page():
             values = {}
             with open(filename, 'r') as f:
                 for line in f:
-                    res = re.search(r".+\s+balance\s+\w+\:([\w\:]+)\s+([\d\.]+)\s+(\w+).*", line)
+                    res = re.search(r".+\s+balance\s+\w+\:([\w\:]+)\s+([-\d\.]+)\s+(\w+).*", line)
                     if res:
                         values[(res.group(1), res.group(3))] = float(res.group(2))
-                    res_val = re.search(r".+\s+\"valuation\"\s+\w+\:([\w\:]+)\s+([\d\.]+)\s+(\w+).*", line)
+                    res_val = re.search(r".+\s+\"valuation\"\s+\w+\:([\w\:]+)\s+([-\d\.]+)\s+(\w+).*", line)
                     if res_val:
                         values[(res_val.group(1), res_val.group(3))] = float(res_val.group(2))
         else:
