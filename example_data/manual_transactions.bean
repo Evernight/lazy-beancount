@@ -69,6 +69,10 @@
   Expenses:Accommodation   500 GBP
 
 
+2024-03-10 * "Subscription for SomeService paid in a year-instalment" #subscription-year
+  Assets:MyFavouriteBank:Cash    -70 USD
+  Expenses:Services   -70 USD
+
 2024-01-03 * "Some transaction for Expenses:Donations"
   Assets:MyLessFavouriteBank:Cash -90 USD
   Expenses:Donations 90 USD
