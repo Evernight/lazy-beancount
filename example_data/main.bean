@@ -17,10 +17,13 @@ option "plugin_processing_mode" "raw"
 1970-01-01 custom "fava-option" "default-page" "extension/FavaDashboards/?dashboard=0"
 
 ; A set of useful shortcut links for the Fava's menu (left side)
-1970-01-01 custom "fava-sidebar-link" "This month" "/beancount/extension/FavaDashboards/?dashboard=4&conversion=USD&time=month"
-1970-01-01 custom "fava-sidebar-link" "Last month" "/beancount/extension/FavaDashboards/?dashboard=4&conversion=USD&time=month-1"
-1970-01-01 custom "fava-sidebar-link" "This year" "/beancount/extension/FavaDashboards/?dashboard=4&conversion=USD&time=year"
-1970-01-01 custom "fava-sidebar-link" "3Y monthly" "/beancount/extension/FavaDashboards/?dashboard=3&conversion=USD&time=year-2+to+month-1&filter=all%28-account%3A\"%5EExpenses%3ATaxes\"%29"
+1970-01-01 custom "fava-sidebar-link" "📈 This month" "/beancount/extension/FavaDashboards/?dashboard=4&conversion=USD&time=month"
+1970-01-01 custom "fava-sidebar-link" "📈 Last month" "/beancount/extension/FavaDashboards/?dashboard=4&conversion=USD&time=month-1"
+1970-01-01 custom "fava-sidebar-link" "📈 Rolling year" "/beancount/extension/FavaDashboards/?dashboard=4&conversion=USD&time=month-12+to+month"
+1970-01-01 custom "fava-sidebar-link" "📈 3Y monthly" "/beancount/extension/FavaDashboards/?dashboard=3&conversion=USD&time=year-2+to+month-1&filter=all%28-account%3A\"%5EExpenses%3ATaxes\"%29"
+1970-01-01 custom "fava-sidebar-link" "📜 M-3 to day" "/beancount/journal/?time=month-3+to+day"
+1970-01-01 custom "fava-sidebar-link" "📜 #fix" "/beancount/journal/?filter=%23fix"
+1970-01-01 custom "fava-sidebar-link" "📜 #recurring" "/beancount/journal/?filter=%23recurring&time=month-12+to+day"
 1970-01-01 custom "fava-sidebar-link" "🔁 Reset filters" ".?"
 
 ; Define folder where the documents are stored
