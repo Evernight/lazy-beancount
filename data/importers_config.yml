@@ -7,6 +7,10 @@ importers:
     importer: monzo
     account: Assets:Monzo:Cash
     currency: GBP
+      params:
+      # This will ignore Monzo's automatic categories. At some point beancount-import predictions will be better
+      # so you may want to enable it
+      #ignore_bank_categories: True
   revolut_eur:
     importer: revolut
     account: Assets:Revolut:Cash

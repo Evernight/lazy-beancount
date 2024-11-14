@@ -183,6 +183,9 @@ def totals_page():
             st.subheader(f':green[{filename} (new)]')
         else:
             st.subheader(filename)
+
+        st.markdown("Don't forget to save the file after editing. This may take few seconds for a large ledger")
+        
         values = {(row['name'], row['currency']): row['value'] for row in edited_rows if row['value'] is not None}
         file_contents = gen_accounts.gen_update_totals(config, date, values, initial_check=(selected_file == 'Initial'))
         st.code(file_contents)
