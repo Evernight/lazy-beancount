@@ -29,11 +29,12 @@ MAIN_LEDGER_FILE = 'main.bean'
 
 fava_port = os.environ.get('FAVA_PORT', 5003)
 beancount_import_port = os.environ.get('BEANCOUNT_IMPORT_PORT', 8101)
+lazy_beancount_port = os.environ.get('LAZY_BEANCOUNT_PORT', 8777)
 
 st.set_page_config(
     layout="wide",
     page_title="Lazy Beancount",
-    page_icon=":abacus:",
+    page_icon=f"http://localhost:{lazy_beancount_port}/app/static/favicon-32x32.png",
     menu_items=None,
     initial_sidebar_state='collapsed'
 )

@@ -6,6 +6,7 @@ showSidebarNavigation = false
 
 [server]
 headless = true
+enableStaticServing = true
 
 [theme]
 base="dark"
