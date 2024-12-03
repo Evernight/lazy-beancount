@@ -1,3 +1,5 @@
+<img height="128" align="left" src="images/logo.png"> 
+
 # [Lazy Beancount](https://lazy-beancount.xyz/)
 
 [![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](LICENSE)
