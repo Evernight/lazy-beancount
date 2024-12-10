@@ -32,7 +32,7 @@ Full guide is located at https://lazy-beancount.xyz/. The approach roughly follo
 - Data entry should be automated or easy
 - But it should be possible to track things to any level of precision if you need to
 
-# Setup (Docker compose)
+# Setup (docker-compose, recommended)
 
     git clone https://github.com/Evernight/lazy-beancount
 
@@ -44,7 +44,7 @@ After this is done, go to http://localhost:8777/.
 
 Fava is also available on port 5003, importer interface is available on port 8101 (ports are overridable via config in docker-compose.yml).
 
-# Setup (Docker)
+# Setup (docker)
 
 You can just pull image from the public repository:
 
@@ -67,7 +67,7 @@ Commands are available in the container as:
 
     docker exec -it lazybean bean-price example_data/main.bean -i --date=2024-01-05
 
-# Setup (local env via conda)
+# Setup (local, conda, for development)
 
 If you want to be able to upgrade individual packages and experiment with other (and your own) plugins or additional importers, you may go down this route.
 
@@ -96,4 +96,4 @@ Run Fava on your ledger from the repository folder
 Go to http://127.0.0.1:5000 and explore Fava.
 
 # Note
-It's not recommended to expose the ports, various system and data through a public server unless you really know what you're doing. This setup has not been developed and tested for security and authentication when run as a public service.
+I'd not recommend exposing the ports, various system and data through a public server unless you really know what you're doing. This setup has not been developed and tested for security and authentication when run as a public service.
