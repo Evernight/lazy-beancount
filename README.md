@@ -1,9 +1,9 @@
-<img height="128" align="left" src="images/logo.png"> 
+<img height="104" align="left" src="images/logo.png"> 
 
-# [Lazy Beancount](https://lazy-beancount.xyz/)
+### [Lazy Beancount](https://lazy-beancount.xyz/)
 
 [![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](LICENSE)
-![Docker Image Version](https://img.shields.io/docker/v/vandereer/lazy-beancount?color=green)
+![Docker Image Version](https://img.shields.io/docker/v/vandereer/lazy-beancount?color=goldenrod)
 
 Lazy Beancount is [Beancount](https://github.com/beancount/beancount) accounting system packaged in Docker with batteries included:
 
