@@ -280,14 +280,22 @@ def import_page():
         components.iframe(f"http://localhost:{beancount_import_port}", height=540)
         st.page_link(f"http://localhost:{beancount_import_port}", label='open in new tab', icon=':material/arrow_outward:')
     else:
-        st.markdown('Define configuration of importers in `importers_config.yml` under Config tab first. Then upload source files here.')
+        st.markdown('Define configuration of importers in `importers_config.yml` under Config tab first. Then upload statement files (for example, ```csv```) here.')
         importers_config = beancount_import_run.load_import_config_from_file('importers_config.yml', 'beancount_import_data', 'beancount_import_output')
         columns = st.columns(3)
         col_ind = 0
+        all_types = dict.fromkeys(c.get('type', '?') for c in importers_config['all']['data_sources'])
+        type_markers = '🔴🟣🟠🟢🟡🔵🟤'
+        type_marker = {}
+        for i, type in enumerate(all_types):
+            type_marker[type] = type_markers[i % len(type_markers)]
+
         for config in importers_config['all']['data_sources']:
             with columns[col_ind].container(border=True):
                 uploaded_file = st.file_uploader(
-                    f"{config.get('emoji', '📄')} **{config['account']}**: {config['directory']}",
+                    f"{config.get('emoji', '📄')} **{config['account']}**\n\n" +
+                    f"{type_marker[config.get('type', '?')]} 💱 **{config.get('currency', '?')}**\n\n" +
+                    f"{config['directory']}",
                     help=config.get('description')
                 )
                 if uploaded_file is not None:
@@ -304,6 +312,8 @@ def import_page():
                     @st.dialog("File uploaded")
                     def file_uploaded():
                         st.write(f"Uploaded to ```{os.path.join(config['directory'], available_file_name)}```")
+                        if st.button("Great!"):
+                            st.rerun()
 
                     file_uploaded()
             col_ind = (col_ind + 1) % 3
