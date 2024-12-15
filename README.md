@@ -36,7 +36,7 @@ Full guide is located at https://lazy-beancount.xyz/. The approach roughly follo
 
     git clone https://github.com/Evernight/lazy-beancount
 
-    cd example_data
+    cd lazy-beancount/example_data
     docker compose up
 
 This will pull repository with the example and config templates, and also pull and run the latest version of the package from the [Docker Hub](https://hub.docker.com/r/vandereer/lazy-beancount/tags).
