@@ -1,4 +1,4 @@
-<img height="104" align="left" src="images/logo.png"> 
+<img height="107" align="left" src="images/logo.png"> 
 
 ### [Lazy Beancount](https://lazy-beancount.xyz/)
 
