@@ -243,20 +243,14 @@ def prices_page():
                 prices_dates.append(
                     (res.group(1) + '-' + res.group(2) + '-' + res.group(3), int(res.group(3)))
                 )
-                # prices_dates.append(datetime(
-                #     year=int(res.group(1)), 
-                #     month=int(res.group(2)), 
-                #     day=int(res.group(3))
-                # ))
         heatmap = {
             'tooltip': {
                 'position': 'top',
-                # 'formatter': lambda d: d
             },
             'calendar': [
                 {
                     'orient': 'vertical',
-                    'range': '2024',
+                    'range': str(datetime.now().year),
                     'cellSize': [20, 'auto'],
                     'dayLabel': { 'show': True, 'color': '#ddd' },
                     'monthLabel': { 'show': True, 'color': '#ddd' },
