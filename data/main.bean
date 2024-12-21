@@ -91,6 +91,8 @@ plugin "beancount_lazy_plugins.valuation"
 2024-01-01 custom "fava-extension" "fava_portfolio_returns" "{
   'beangrow_config': 'beangrow.config',
 }"
+; Investing tools
+2010-01-01 custom "fava-extension" "fava_investor" "{}"
 
 ; Some other useful plugins
 

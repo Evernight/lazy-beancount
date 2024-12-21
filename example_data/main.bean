@@ -78,10 +78,22 @@ plugin "beancount_lazy_plugins.valuation"
   currency: "AUTO_BROKER_USD"
   pnlAccount: "Assets:MyAutomaticBroker:Total:PnL"
 
+
+plugin "beancount_reds_plugins.effective_date.effective_date" "{
+  'Expenses': {
+    'earlier': 'Liabilities:Hold:Expenses', 'later': 'Assets:Hold:Expenses'
+  },
+  'Income': {
+    'earlier': 'Assets:Hold:Income', 'later': 'Liabilities:Hold:Income'
+  },
+ }"
+
 ; Track portfolios' performance
 2024-01-01 custom "fava-extension" "fava_portfolio_returns" "{
   'beangrow_config': 'beangrow.config',
 }"
+; Investing tools
+2010-01-01 custom "fava-extension" "fava_investor" "{}"
 
 ; https://github.com/tarioch/beancounttools/
 ; Generate indirect prices for the current main currency
