@@ -13,6 +13,7 @@ setuptools_scm>=5.0.2
 streamlit==1.38.0
 streamlit_option_menu==0.3.13
 streamlit_ace==0.1.1
+streamlit-echarts==0.4.0
 
 # Fava extensions
 fava-dashboards @ git+https://github.com/andreasgerstmayr/fava-dashboards.git@21f5fbeba61a203510276ad8b360b2576c004609

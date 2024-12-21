@@ -1,5 +1,6 @@
 import streamlit as st
 import streamlit.components.v1 as components
+from streamlit_echarts import st_echarts
 from streamlit_option_menu import option_menu
 import subprocess
 from datetime import datetime, timedelta
@@ -11,6 +12,7 @@ from decimal import Decimal
 import yaml
 from streamlit_ace import st_ace
 from beancount import loader
+import pprint
 
 from beancount_importers import beancount_import_run
 
@@ -230,45 +232,87 @@ def totals_page():
                 delete_file_dialog()
 
 def prices_page():
-    prices_config = None
-    with open(PRICES_CONFIG_FILE, 'r') as config:
-        prices_config = yaml.safe_load(config)
-    commodities_map = {}
-    for c in prices_config.get('commodities') or []:
-        for ind, val in c.items():
-            commodities_map[ind] = val
-
-    date = st.date_input("Select date", datetime.today().date(), max_value=datetime.today().date())
-    with st.spinner('Fetching prices...'):
-        command = ["bean-price", MAIN_LEDGER_FILE ,"-i", "-c", f"--date={date.strftime('%Y-%m-%d')}"]
-        st.code(' '.join(command), language='shell')
-        st.text('Processed output:')
-        beanprice_output = subprocess.check_output(command)
-        processed_output = io.StringIO()
-        for line in beanprice_output.decode('utf-8').split('\n'):
-            res = re.search(r"^([\d-]+)\s+price\s+([\w-]+)\s+([\d\\.]+)\s+([\w-]+)", line)
+    col1, col2 = st.columns([1, 4])
+    with col1:
+        prices_files = sorted(os.listdir(PRICES_DIR))
+        prices_dates = []
+        for filename in prices_files: 
+            res = re.search(r"prices-(\d+)-(\d+)-(\d+)\.gen\.bean", filename)
             if res:
-                price_date = res.group(1)
-                commodity = res.group(2)
-                value = res.group(3)
-                currency = res.group(4)
+                # prices_dates.append(res.group(1) + '/' + res.group(2) + '/' + res.group(3))
+                prices_dates.append(
+                    (res.group(1) + '-' + res.group(2) + '-' + res.group(3), int(res.group(3)))
+                )
+                # prices_dates.append(datetime(
+                #     year=int(res.group(1)), 
+                #     month=int(res.group(2)), 
+                #     day=int(res.group(3))
+                # ))
+        heatmap = {
+            'tooltip': {
+                'position': 'top',
+                # 'formatter': lambda d: d
+            },
+            'calendar': [
+                {
+                    'orient': 'vertical',
+                    'range': '2024',
+                    'cellSize': [20, 'auto'],
+                    'dayLabel': { 'show': True, 'color': '#ddd' },
+                    'monthLabel': { 'show': True, 'color': '#ddd' },
+                    # 'itemStyle': {'color' : '#333'}
+                    # 'yearLabel': { 'show': False }
+                }
+            ],
+            'series': {
+                'type': 'heatmap',
+                'coordinateSystem': 'calendar',
+                # 'label': {'show': True},
+                'data': prices_dates
+            }
+        }
+        st_echarts(options=heatmap, height=640)
 
-                updated_value = Decimal(value)
-                if commodity in commodities_map and 'multiplier' in commodities_map[commodity]:
-                    updated_value *= Decimal(commodities_map[commodity]['multiplier'])
+    with col2:
+        prices_config = None
+        with open(PRICES_CONFIG_FILE, 'r') as config:
+            prices_config = yaml.safe_load(config)
+        commodities_map = {}
+        for c in prices_config.get('commodities') or []:
+            for ind, val in c.items():
+                commodities_map[ind] = val
 
-                # Ignore zero values
-                if updated_value > 0:
-                    processed_output.write(f'{price_date} price {commodity:20} {updated_value:.8f} {currency}\n')
-        st.code(processed_output.getvalue())
+        date = st.date_input("Select date", datetime.today().date(), max_value=datetime.today().date())
+        with st.spinner('Fetching prices...'):
+            command = ["bean-price", MAIN_LEDGER_FILE ,"-i", "-c", f"--date={date.strftime('%Y-%m-%d')}"]
+            st.code(' '.join(command), language='shell')
+            st.text('Processed output:')
+            beanprice_output = subprocess.check_output(command)
+            processed_output = io.StringIO()
+            for line in beanprice_output.decode('utf-8').split('\n'):
+                res = re.search(r"^([\d-]+)\s+price\s+([\w-]+)\s+([\d\\.]+)\s+([\w-]+)", line)
+                if res:
+                    price_date = res.group(1)
+                    commodity = res.group(2)
+                    value = res.group(3)
+                    currency = res.group(4)
 
-        filename = os.path.join(PRICES_DIR, 'prices-' + date.strftime('%Y-%m-%d') + '.gen.bean') 
-        st.text(f'Save to {filename}?')
-        if st.button('Save', type='primary'):
-            with open(filename, "w") as f:
-                f.write(processed_output.getvalue())
-                st.text(f'Successfully saved into {filename}')
-                trigger_fava_reload()
+                    updated_value = Decimal(value)
+                    if commodity in commodities_map and 'multiplier' in commodities_map[commodity]:
+                        updated_value *= Decimal(commodities_map[commodity]['multiplier'])
+
+                    # Ignore zero values
+                    if updated_value > 0:
+                        processed_output.write(f'{price_date} price {commodity:20} {updated_value:.8f} {currency}\n')
+            st.code(processed_output.getvalue())
+
+            filename = os.path.join(PRICES_DIR, 'prices-' + date.strftime('%Y-%m-%d') + '.gen.bean') 
+            st.text(f'Save to {filename}?')
+            if st.button('Save', type='primary'):
+                with open(filename, "w") as f:
+                    f.write(processed_output.getvalue())
+                    st.text(f'Successfully saved into {filename}')
+                    trigger_fava_reload()
 
 def import_page():
     selected_import_page = option_menu(None, 
