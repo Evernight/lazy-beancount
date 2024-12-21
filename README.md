@@ -21,6 +21,7 @@ Lazy Beancount is [Beancount](https://github.com/beancount/beancount) accounting
   - [beancount_reds_plugins](https://github.com/redstreet/beancount_reds_plugins/)
   - [generate_base_ccy_prices](https://github.com/tarioch/beancounttools/blob/master/src/tariochbctools/plugins/generate_base_ccy_prices.py)
   - [fava-portfolio-returns](https://github.com/andreasgerstmayr/fava-portfolio-returns)
+  - [fava_investor](https://github.com/redstreet/fava_investor)
 - Configuration generator and example supporting any number of accounts (cash, investments, savings), multiple currencies, examples of common useful shortcuts and a couple of useful hacks.
 - All tested together (manually) in a coherent setup.
 
