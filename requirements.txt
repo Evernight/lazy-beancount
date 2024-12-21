@@ -1,10 +1,8 @@
 beancount==2.3.6
 fava==1.28
-fava-dashboards @ git+https://github.com/andreasgerstmayr/fava-dashboards.git@21f5fbeba61a203510276ad8b360b2576c004609
 numpy==1.26.4
 beanprice @ git+https://github.com/beancount/beanprice@e894c9182f4d16f9a46ccb87bdaeca1a7dede040
 
-fava-portfolio-returns @ git+https://github.com/andreasgerstmayr/fava-portfolio-returns.git@152a1057c065c2ecd0e91ef62c9d73081f833329
 # for beancount-importers
 click==8.1.7
 # for beancount-import
@@ -15,6 +13,11 @@ setuptools_scm>=5.0.2
 streamlit==1.38.0
 streamlit_option_menu==0.3.13
 streamlit_ace==0.1.1
+
+# Fava extensions
+fava-dashboards @ git+https://github.com/andreasgerstmayr/fava-dashboards.git@21f5fbeba61a203510276ad8b360b2576c004609
+fava-portfolio-returns @ git+https://github.com/andreasgerstmayr/fava-portfolio-returns.git@152a1057c065c2ecd0e91ef62c9d73081f833329
+fava-investor @ git+https://github.com/redstreet/fava_investor@66eafa045157fa3cc499bdc09268acf59331ce8a
 
 # Beancount plugins
 beancount-lazy-plugins @ git+https://github.com/Evernight/beancount-lazy-plugins@8dfe6c3857100640eb49e4c96342f30213f63b17
