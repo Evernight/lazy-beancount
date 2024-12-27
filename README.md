@@ -4,7 +4,7 @@
 
 [![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](LICENSE)
 ![Docker Image Version](https://img.shields.io/docker/v/vandereer/lazy-beancount?color=goldenrod)
-![Docker Pulls](https://img.shields.io/docker/pulls/vandereer/lazy-beancount?color=darkgrey)
+![Docker Pulls](https://img.shields.io/docker/pulls/vandereer/lazy-beancount?color=silver)
 
 
 Lazy Beancount is [Beancount](https://github.com/beancount/beancount) accounting system packaged in Docker with batteries included:
@@ -13,6 +13,7 @@ Lazy Beancount is [Beancount](https://github.com/beancount/beancount) accounting
 - [Beancount-import](https://github.com/jbms/beancount-import) and some importers set up to work with it out of the box:
   - from [Evernight/beancount-importers](https://github.com/Evernight/beancount-importers): Wise, Monzo, Revolut
   - IBKR (adapted from [uabean](https://github.com/OSadovy/uabean/))
+  - configuration for multiple accounts using YAML config, plus a little helper UI for statement file upload
   - more importers can be integrated/enabled on request
 - [Streamlit](https://github.com/streamlit/streamlit)-based interface to provide additional functionality: tracking total values of the accounts, fetching commodity prices from the browser
 - Pre-installed plugins: 
@@ -22,8 +23,9 @@ Lazy Beancount is [Beancount](https://github.com/beancount/beancount) accounting
   - [generate_base_ccy_prices](https://github.com/tarioch/beancounttools/blob/master/src/tariochbctools/plugins/generate_base_ccy_prices.py)
   - [fava-portfolio-returns](https://github.com/andreasgerstmayr/fava-portfolio-returns)
   - [fava_investor](https://github.com/redstreet/fava_investor)
-- Configuration generator and example supporting any number of accounts (cash, investments, savings), multiple currencies, examples of common useful shortcuts and a couple of useful hacks.
-- All tested together (manually) in a coherent setup.
+- Configuration generator supporting any number of accounts (cash, investments, savings, crypto), multiple currencies and auto-conversions
+- Extensive configuration example including common useful shortcuts and some useful fixes (with comments)
+- All tested together (manually) in a coherent setup
 
 The main goal is to enable **gradual** and **incremental** migration of personal finances into Beancount.
 
