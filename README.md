@@ -15,7 +15,9 @@ Lazy Beancount is [Beancount](https://github.com/beancount/beancount) accounting
   - IBKR (adapted from [uabean](https://github.com/OSadovy/uabean/))
   - configuration for multiple accounts using YAML config, plus a little helper UI for statement file upload
   - more importers can be integrated/enabled on request
-- [Streamlit](https://github.com/streamlit/streamlit)-based interface to provide additional functionality: tracking total values of the accounts, fetching commodity prices from the browser
+- [Streamlit](https://github.com/streamlit/streamlit)-based interface for:
+  - manual input of total values of the accounts for automatic balancing
+  - fetching commodity prices via a couple clicks in the browser
 - Pre-installed plugins: 
   - [beancount-lazy-plugins](https://github.com/Evernight/beancount-lazy-plugins): [valuation](https://github.com/Evernight/beancount-lazy-plugins?tab=readme-ov-file#valuation), [filter_map](https://github.com/Evernight/beancount-lazy-plugins?tab=readme-ov-file#filter_map), [group_pad_transactions](https://github.com/Evernight/beancount-lazy-plugins?tab=readme-ov-file#group_pad_transactions)
   - [beancount_share](https://github.com/Akuukis/beancount_share), [beancount_interpolate](https://github.com/Akuukis/beancount_interpolate)
@@ -27,7 +29,7 @@ Lazy Beancount is [Beancount](https://github.com/beancount/beancount) accounting
 - Extensive configuration example including common useful shortcuts and some useful fixes (with comments)
 - All tested together (manually) in a coherent setup
 
-The main goal is to enable **gradual** and **incremental** migration of personal finances into Beancount.
+with the goal to enable **gradual** and **incremental** migration of personal finances into Beancount.
 
 ![lazy-beancount](images/demo_dashboard.png)
 
