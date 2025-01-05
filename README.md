@@ -39,6 +39,8 @@ Full guide is located at https://lazy-beancount.xyz/. The approach roughly follo
 - Data entry should be automated or easy
 - But it should be possible to track things to any level of precision if you need to
 
+![expenses-demo](images/demo_expenses.png)
+
 # Setup (docker-compose, recommended)
 
     git clone https://github.com/Evernight/lazy-beancount
