@@ -40,8 +40,12 @@ Full guide is located at https://lazy-beancount.xyz/. The approach roughly follo
 - But it should be possible to track things to any level of precision if you need to
 
 # Screenshots
-![totals-example](images/totals_example.png)
-![expenses-demo](images/demo_expenses.png)
+<p>
+<img src="images/totals_example.png" width="40%" hspace="10" vspace="10"/>
+  <img src="images/prices_page.png" width="40%" hspace="10" vspace="10" />
+<img src="images/config_accounts.png" width="40%" hspace="10" vspace="10" />
+<img src="images/demo_expenses.png" width="40%" hspace="10" vspace="10" />
+</p>
 
 # Setup (docker-compose, recommended)
 
