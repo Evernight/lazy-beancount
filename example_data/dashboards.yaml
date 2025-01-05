@@ -1012,7 +1012,7 @@ dashboards:
 
       - title: Expenses Over Time 🌊
         width: 100%
-        height: 700px
+        height: 600px
         queries:
           - bql: |
               SELECT year, month, root(account, 2) AS account, CONVERT(SUM(position), '{{ledger.ccy}}', LAST(date)) AS value
