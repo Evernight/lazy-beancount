@@ -82,6 +82,7 @@ def file_editor_with_save(filename, additional_editor_params={}):
         file_contents = f.read()
     editor_params = {
         'language':'yaml',
+        'tab_size': 2,
         'theme': 'nord_dark',
         'height': 560,
         **additional_editor_params
@@ -187,7 +188,10 @@ def totals_page():
         else:
             st.subheader(filename)
 
-        st.markdown("Don't forget to save the file after editing. This may take few seconds for a large ledger")
+        st.markdown(
+            "Don't forget to save the file after editing. This may take few seconds for a large ledger since it will " +
+            "check what ```pad``` operations are necessary."
+        )
         
         values = {(row['name'], row['currency']): row['value'] for row in edited_rows if row['value'] is not None}
         file_contents = gen_accounts.gen_update_totals(config, date, values, initial_check=(selected_file == 'Initial'))
@@ -371,19 +375,20 @@ def config_page():
         ],
         label_visibility="collapsed"
     )
-    if selected_config == 'accounts_config.yml':
-        col1, col2 = st.columns([2, 1])
+    if selected_config == ACCOUNTS_CONFIG_FILE:
+        col1, col2 = st.columns([1, 1])
         config = gen_accounts.parse_config(ACCOUNTS_CONFIG_FILE)
+        text_edit_content = None
         with col1:
             with open(ACCOUNTS_CONFIG_FILE, 'r') as f:
                 accounts_config = f.read()
-            result = st_ace(accounts_config, language='yaml', theme='nord_dark', height=600)
+            text_edit_content = st_ace(accounts_config, language='yaml', theme='nord_dark', height=600)
             with open(ACCOUNTS_CONFIG_FILE, 'w') as f:
-                f.write(result)
+                f.write(text_edit_content)
         
         with col2:
             st.subheader(GENERATED_ACCOUNTS_FILE)
-            accounts_definitions = gen_accounts.gen_accounts(config)
+            accounts_definitions = gen_accounts.gen_accounts(text_edit_content) if text_edit_content else config
             with st.container(height=500, border=False):
                 st.code(accounts_definitions)
             if st.button('Save', type='primary'):
@@ -404,6 +409,8 @@ def config_page():
         file_editor_with_save('manual_transactions.bean', {'language':'lisp', 'height':460})
 
 def logs_page():
+    if st.button('Trigger Fava reload'):
+        trigger_fava_reload()
     st.code(open('lazy-beancount.log', 'r').read(), line_numbers=True)
 
 pages = [
