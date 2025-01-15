@@ -117,7 +117,7 @@ def parse_config(filename):
             opening_balances_date=opening_balances_date
         )
 
-def gen_update_totals(config, date, values, initial_check=False, comment_accounts=set()):
+def gen_update_totals(config, date, values, is_initial_check=False, comment_accounts=set()):
     output = io.StringIO()
 
     pad_date = (date - timedelta(days=1)).strftime('%Y-%m-%d')
@@ -127,10 +127,10 @@ def gen_update_totals(config, date, values, initial_check=False, comment_account
         account_type = cfg.type
         name = cfg.name
         currencies = cfg.currencies
-        if account_type in ['cash', 'opaque_funds', 'liabilities']:
+        if account_type in ['cash', 'opaque_funds', 'opaque_funds_valuation', 'liabilities']:
             account_name = (f"Liabilities:{name}" if account_type == 'liabilities' else 
                 f"Assets:{name}")
-            if initial_check:
+            if is_initial_check:
                 pad_account = f'Equity:OpeningBalances:{name}'
             elif account_type == 'opaque_funds':
                 pad_account = f"Income:{name}:PnL"
@@ -149,7 +149,7 @@ def gen_update_totals(config, date, values, initial_check=False, comment_account
         for currency in currencies:
             if (name, currency) in values:
                 balance_statement = ''
-                if account_type in ['cash', 'opaque_funds', 'liabilities']:
+                if account_type in ['cash', 'opaque_funds', 'liabilities'] or (account_type == 'opaque_funds_valuation' and is_initial_check):
                     balance_statement = (f"{balance_date} balance Liabilities:{name}" if account_type == 'liabilities' else 
                         f"{balance_date} balance Assets:{name}")
                 elif account_type == 'opaque_funds_valuation':

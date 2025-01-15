@@ -194,7 +194,12 @@ def totals_page():
         )
         
         values = {(row['name'], row['currency']): row['value'] for row in edited_rows if row['value'] is not None}
-        file_contents = gen_accounts.gen_update_totals(config, date, values, initial_check=(selected_file == 'Initial'))
+        file_contents = gen_accounts.gen_update_totals(
+            config, 
+            date, 
+            values, 
+            is_initial_check=(selected_file == 'Initial')
+        )
         st.code(file_contents)
         
         @st.dialog("Remove the file?")
