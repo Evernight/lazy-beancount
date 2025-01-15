@@ -15,41 +15,46 @@ opening_balances_date: "2023-12-01"
 # Accounts holding cash values
 cash:
   - Physical:
-      - Cash:
-          currencies: [USD, GBP, EUR]
+    - Cash:
+        currencies: [USD, GBP, EUR]
+
   - MyFavouriteBank:
-      - Cash:
-          currencies: [GBP]
-      - Savings:
-          - GBP
+    - Cash:
+        currencies: [GBP]
+    - Savings:
+      - GBP
+
   - MyLessFavouriteBank:
-      - Cash:
-          currencies: [GBP]
+    - Cash:
+        currencies: [GBP]
+
   - MyStockBroker:
-      - Cash:
-          currencies: [USD]
+    - Cash:
+        currencies: [USD]
 
 # Funds where you can only track total value converted to currency and not
 # specific stocks (see https://github.com/Evernight/beancount-valuation)
 opaque_funds_valuation:
   - MyAutomaticBroker:
-      - Total:
-          currencies: [USD]
-          booking_method: FIFO
+    - Total:
+        currencies: [USD]
+        booking_method: FIFO
 
 # Accounts holding investments (stocks, crypto, funds, etc)
 investments:
   - MyStockBroker:
-      - SPY:
-          booking_method: LIFO
-      - XVV
+    - SPY:
+        booking_method: LIFO
+    - XVV
+    
   - MyCryptoBroker:
-      - ETH
+    - ETH
 
 # Liabilities accounts
 liabilities:
   - Shared:
-      - Unspecified:
-          currencies: [USD]
-      - SomeDude:
-          currencies: [USD]
+    - Unspecified:
+        currencies: [USD]
+
+    - SomeDude:
+        currencies: [USD]
