@@ -21,7 +21,7 @@ fava-portfolio-returns @ git+https://github.com/andreasgerstmayr/fava-portfolio-
 fava-investor @ git+https://github.com/redstreet/fava_investor@66eafa045157fa3cc499bdc09268acf59331ce8a
 
 # Beancount plugins
-beancount-lazy-plugins @ git+https://github.com/Evernight/beancount-lazy-plugins@006cbcf0a4d76d9172efbed285d614731a19293e
+beancount-lazy-plugins @ git+https://github.com/Evernight/beancount-lazy-plugins@a6f20b938198b61097498e44169f6800d1fa88ea
 beancount_share @ git+https://github.com/Akuukis/beancount_share.git@8f925422b9947e88babbeab3fdf7d71c53c9aa9e
 beancount_interpolate @ git+https://github.com/Akuukis/beancount_interpolate.git@e9c1241d5980781d270a7cc5c17cf2ca99c10faa
 beancount-reds-plugins @ git+https://github.com/redstreet/beancount_reds_plugins@081acc4c7751d354d1c1481891fc983710428e7d
