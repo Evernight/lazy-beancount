@@ -16,7 +16,7 @@ opening_balances_date: "2023-12-01"
 cash:
   - Physical:
       - Cash:
-          currencies: [USD, GBP]
+          currencies: [USD, GBP, EUR]
   - MyFavouriteBank:
       - Cash:
           currencies: [GBP]

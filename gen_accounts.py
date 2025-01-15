@@ -101,24 +101,36 @@ def generate_accounts_recursive(account_type, node, cur_name, last_parent_key=No
         return []
 
 
-def parse_config(filename):
-    with open(filename, "r") as config:
-        parsed_config = yaml.safe_load(config)
-        # print(json.dumps(parsed_config, indent=4))
-        configs = []
-        for account_type in ACCOUNT_TYPES:
-            if account_type in parsed_config:
-                configs.extend(
-                    generate_accounts_recursive(
-                        account_type, parsed_config.get(account_type), ""
-                    )
+def _config_object_to_parsed_config(config_object):
+    # print(json.dumps(config_object, indent=4))
+    configs = []
+    for account_type in ACCOUNT_TYPES:
+        if account_type in config_object:
+            configs.extend(
+                generate_accounts_recursive(
+                    account_type, config_object.get(account_type), ""
                 )
-        opening_balances_date = datetime.strptime(
-            parsed_config["opening_balances_date"], "%Y-%m-%d"
-        )
-        return ParsedConfig(
-            account_configs=configs, opening_balances_date=opening_balances_date
-        )
+            )
+    opening_balances_date = datetime.strptime(
+        config_object["opening_balances_date"], "%Y-%m-%d"
+    )
+    return ParsedConfig(
+        account_configs=configs, opening_balances_date=opening_balances_date
+    )
+
+
+def parse_config_from_string(config_string):
+    config_object = yaml.safe_load(io.StringIO(config_string))
+    return _config_object_to_parsed_config(config_object)
+
+
+def parse_config(filename):
+    parsed_config = None
+    with open(filename, "r") as config:
+        config_object = yaml.safe_load(config)
+        parsed_config = _config_object_to_parsed_config(config_object)
+
+    return parsed_config
 
 
 def gen_update_totals(
@@ -191,6 +203,7 @@ def gen_accounts(config):
         account_names = [
             account.replace("@", name) for account in ACCOUNTS_GEN_BY_TYPE[account_type]
         ]
+        output.write(f"; account {name} ({account_type})\n")
         for account in account_names:
             if booking_method and account.startswith("Assets:"):
                 output.write(

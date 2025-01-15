@@ -93,7 +93,6 @@ def file_editor_with_save(filename, additional_editor_params={}):
         file_contents = f.read()
     editor_params = {
         "language": "yaml",
-        "tab_size": 2,
         "theme": "nord_dark",
         "height": 560,
         **additional_editor_params,
@@ -222,7 +221,7 @@ def totals_page():
 
         st.markdown(
             "Don't forget to save the file after editing. This may take few seconds for a large ledger since it will "
-            + "check what ```pad``` operations are necessary."
+            + "check which ```pad``` operations are necessary and which should be commented out."
         )
 
         values = {
@@ -466,30 +465,51 @@ def config_page():
     )
     if selected_config == ACCOUNTS_CONFIG_FILE:
         col1, col2 = st.columns([1, 1])
-        config = gen_accounts.parse_config(ACCOUNTS_CONFIG_FILE)
-        text_edit_content = None
+        # config = gen_accounts.parse_config(ACCOUNTS_CONFIG_FILE)
         with col1:
             with open(ACCOUNTS_CONFIG_FILE, "r") as f:
                 accounts_config = f.read()
             text_edit_content = st_ace(
-                accounts_config, language="yaml", theme="nord_dark", height=600
+                accounts_config,
+                auto_update=True,
+                language="yaml",
+                theme="nord_dark",
+                height=600,
+                tab_size=2,
+                font_size=12,
             )
-            with open(ACCOUNTS_CONFIG_FILE, "w") as f:
-                f.write(text_edit_content)
 
         with col2:
             st.subheader(GENERATED_ACCOUNTS_FILE)
-            accounts_definitions = (
-                gen_accounts.gen_accounts(text_edit_content)
-                if text_edit_content
-                else config
+            st.markdown(
+                "This editor is experimental, please save periodically / back up content / "
+                + "don't type a lot at once or use an external editor in addition"
             )
-            with st.container(height=500, border=False):
-                st.code(accounts_definitions)
-            if st.button("Save", type="primary"):
+
+            result_content = ""
+            error = False
+            try:
+                parsed_config = gen_accounts.parse_config_from_string(text_edit_content)
+                result_content = gen_accounts.gen_accounts(parsed_config)
+            except Exception as e:
+                result_content = str(e)
+                error = True
+
+            with st.container(height=480, border=False):
+                st.code(result_content, line_numbers=True)
+            if st.button(
+                f"Save file and update {GENERATED_ACCOUNTS_FILE}",
+                type="primary",
+                disabled=error,
+            ):
+                with open(ACCOUNTS_CONFIG_FILE, "w") as f:
+                    f.write(text_edit_content)
                 with open(GENERATED_ACCOUNTS_FILE, "w") as f:
-                    f.write(accounts_definitions)
-                st.text(f"Saved {GENERATED_ACCOUNTS_FILE}")
+                    f.write(result_content)
+                st.text(
+                    f"Saved {ACCOUNTS_CONFIG_FILE} and updated {GENERATED_ACCOUNTS_FILE}"
+                )
+
     elif selected_config == "prices_config.yml":
         file_editor_with_save("prices_config.yml", {"height": 460})
     elif selected_config == "importers_config.yml":
@@ -507,8 +527,10 @@ def config_page():
 
 
 def logs_page():
-    if st.button("Trigger Fava reload"):
+    if st.button("Trigger Fava reload", type="primary"):
         trigger_fava_reload()
+    if st.button("Catch up with logs", type="primary"):
+        pass
     st.code(open("lazy-beancount.log", "r").read(), line_numbers=True)
 
 
