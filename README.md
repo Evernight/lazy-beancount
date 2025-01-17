@@ -110,5 +110,15 @@ Run Fava on your ledger from the repository folder
 
 Go to http://127.0.0.1:5000 and explore Fava.
 
-# Note
+## Note
 I'd not recommend exposing the ports, various system and data through a public server unless you really know what you're doing. This setup has not been developed and tested for security and authentication when run as a public service.
+
+# Similar projects
+* [paisa](https://paisa.fyi/)
+* [full-fledged-hledger](https://github.com/adept/full-fledged-hledger)
+* [hledger-docker](https://github.com/adept/hledger-docker)
+
+# Feedback and contributions
+* Feel free to [create an issue](https://github.com/Evernight/lazy-beancount/issues).
+* [lazy-beancount.xyz](https://lazy-beancount.xyz/) has giscus connected to enable commenting directly at pages.
+* [Matrix chat](https://matrix.to/#/#lazy-beancount:matrix.org) for small questions.
