@@ -119,6 +119,6 @@ I'd not recommend exposing the ports, various system and data through a public s
 * [hledger-docker](https://github.com/adept/hledger-docker)
 
 # Feedback and contributions
-* Feel free to [create an issue](https://github.com/Evernight/lazy-beancount/issues).
+* Feel free to [create an issue](https://github.com/Evernight/lazy-beancount/issues) or contribute a fix.
 * [lazy-beancount.xyz](https://lazy-beancount.xyz/) has giscus connected to enable commenting directly at pages.
 * [Matrix chat](https://matrix.to/#/#lazy-beancount:matrix.org) for small questions.
