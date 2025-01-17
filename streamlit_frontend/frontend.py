@@ -332,52 +332,55 @@ def prices_page():
             "Select date", datetime.today().date(), max_value=datetime.today().date()
         )
         with st.spinner("Fetching prices..."):
-            command = [
-                "bean-price",
-                MAIN_LEDGER_FILE,
-                "-i",
-                "-c",
-                f"--date={date.strftime('%Y-%m-%d')}",
-            ]
-            st.code(" ".join(command), language="shell")
-            st.text("Processed output:")
-            beanprice_output = subprocess.check_output(command)
-            processed_output = io.StringIO()
-            for line in beanprice_output.decode("utf-8").split("\n"):
-                res = re.search(
-                    r"^([\d-]+)\s+price\s+([\w-]+)\s+([\d\\.]+)\s+([\w-]+)", line
+            try:
+                command = [
+                    "bean-price",
+                    MAIN_LEDGER_FILE,
+                    "-i",
+                    "-c",
+                    f"--date={date.strftime('%Y-%m-%d')}",
+                ]
+                st.code(" ".join(command), language="shell")
+                st.text("Processed output:")
+                beanprice_output = subprocess.check_output(command)
+                processed_output = io.StringIO()
+                for line in beanprice_output.decode("utf-8").split("\n"):
+                    res = re.search(
+                        r"^([\d-]+)\s+price\s+([\w-]+)\s+([\d\\.]+)\s+([\w-]+)", line
+                    )
+                    if res:
+                        price_date = res.group(1)
+                        commodity = res.group(2)
+                        value = res.group(3)
+                        currency = res.group(4)
+
+                        updated_value = Decimal(value)
+                        if (
+                            commodity in commodities_map
+                            and "multiplier" in commodities_map[commodity]
+                        ):
+                            updated_value *= Decimal(
+                                commodities_map[commodity]["multiplier"]
+                            )
+
+                        # Ignore zero values
+                        if updated_value > 0:
+                            processed_output.write(
+                                f"{price_date} price {commodity:20} {updated_value:.8f} {currency}\n"
+                            )
+                st.code(processed_output.getvalue())
+
+                filename = os.path.join(
+                    PRICES_DIR, "prices-" + date.strftime("%Y-%m-%d") + ".gen.bean"
                 )
-                if res:
-                    price_date = res.group(1)
-                    commodity = res.group(2)
-                    value = res.group(3)
-                    currency = res.group(4)
-
-                    updated_value = Decimal(value)
-                    if (
-                        commodity in commodities_map
-                        and "multiplier" in commodities_map[commodity]
-                    ):
-                        updated_value *= Decimal(
-                            commodities_map[commodity]["multiplier"]
-                        )
-
-                    # Ignore zero values
-                    if updated_value > 0:
-                        processed_output.write(
-                            f"{price_date} price {commodity:20} {updated_value:.8f} {currency}\n"
-                        )
-            st.code(processed_output.getvalue())
-
-            filename = os.path.join(
-                PRICES_DIR, "prices-" + date.strftime("%Y-%m-%d") + ".gen.bean"
-            )
-            st.text(f"Save to {filename}?")
-            if st.button("Save", type="primary"):
-                with open(filename, "w") as f:
-                    f.write(processed_output.getvalue())
-                    st.text(f"Successfully saved into {filename}")
-                    trigger_fava_reload()
+                st.text(f"Save to {filename}?")
+                if st.button("Save", type="primary"):
+                    with open(filename, "w") as f:
+                        f.write(processed_output.getvalue())
+                        st.text(f"Successfully saved into {filename}")
+                        trigger_fava_reload()
+            except Exception as e:
+                st.code(str(e))
 
 
 def import_page():
@@ -530,6 +533,7 @@ def logs_page():
     if st.button("Trigger Fava reload", type="primary"):
         trigger_fava_reload()
     if st.button("Catch up with logs", type="primary"):
+        # Don't do anything in particular but this will update the st.code element on the page
         pass
     st.code(open("lazy-beancount.log", "r").read(), line_numbers=True)
 
