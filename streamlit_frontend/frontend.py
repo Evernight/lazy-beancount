@@ -258,7 +258,7 @@ def totals_page():
                     config,
                     date,
                     values,
-                    initial_check=(selected_file == "Initial"),
+                    is_initial_check=(selected_file == "Initial"),
                     comment_accounts=comment_pad_accounts,
                 )
                 with open(filename, "w") as file:
