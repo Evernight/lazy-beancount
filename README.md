@@ -116,7 +116,7 @@ Go to http://127.0.0.1:5000 and explore Fava.
 I'd not recommend exposing the ports, various system and data through a public server unless you really know what you're doing. This setup has not been developed and tested for security and authentication when run as a public service.
 
 # Acknowledgements
-This is mostly an integration project and would not have been possible without all of the great code from authors and contributors of all the repositories mentioned above, the Beancount and greater PTA community. Please support, star and otherwise contribute to respective projects.
+This is mostly an integration project and would not have been possible without all of the great code from authors and contributors of all the repositories mentioned above, the Beancount and plain text accounting community. Please support, star and otherwise contribute to respective projects.
 
 # Similar projects
 * [paisa](https://paisa.fyi/)
