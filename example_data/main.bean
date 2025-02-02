@@ -1,21 +1,45 @@
-; Define all currencies that you want to be able to use as operating currency
-; First of these will be used as the currency for Dashboards
-option "operating_currency" "EUR"
-option "operating_currency" "USD"
-option "operating_currency" "GBP"
-; option "operating_currency" "GOLD"
-
+* Beancount configuration
 ; See https://github.com/beancount/beancount/issues/742
 ; This is required for the beancount_interpolate and beancount_share plugins
 ; to work together with pad directives
 option "plugin_processing_mode" "raw"
 
+* Operating currencies
+** All and default definitions
+; Define all currencies that you want to be able to use as operating currency
+; First of these will be used as the currency for Dashboards
+option "operating_currency" "EUR"
+option "operating_currency" "USD"
+option "operating_currency" "GBP"
+
+** Precision options
+; See https://beancount.github.io/docs/precision_tolerances.html
+; and https://beancount.github.io/docs/rounding_precision_in_beancount.html
+option "inferred_tolerance_default" "*:0.00000001"
+option "inferred_tolerance_default" "USD:0.003"
+option "inferred_tolerance_default" "GBP:0.003"
+
+option "inferred_tolerance_multiplier" "1.2"
+
+** Other settings
+plugin "beancount.ops.documents"
+
+; Define folder where the documents are stored
+; option "documents" "documents"
+
+* Fava options
 ; You can switch default interface language if needed
 ; 2021-01-01 custom "fava-option" "language" "en"
 
+; I've had this enabled for a while but then found that it's actually not more but
+; less intuitive once you get used to standard Beancount conventions
+; 1970-01-01 custom "fava-option" "invert-income-liabilities-equity" "True"
+
+** Default page
 ; Redefine default starting page when you go to the Fava host (localhost by default)
 1970-01-01 custom "fava-option" "default-page" "extension/FavaDashboards/?dashboard=0"
 
+** Sidebar links
 ; A set of useful shortcut links for the Fava's menu (left side)
 1970-01-01 custom "fava-sidebar-link" "📈 This month" "/beancount/extension/FavaDashboards/?dashboard=4&conversion=USD&time=month"
 1970-01-01 custom "fava-sidebar-link" "📈 Last month" "/beancount/extension/FavaDashboards/?dashboard=4&conversion=USD&time=month-1"
@@ -26,27 +50,20 @@ option "plugin_processing_mode" "raw"
 1970-01-01 custom "fava-sidebar-link" "📜 #recurring" "/beancount/journal/?filter=%23recurring&time=month-12+to+day"
 1970-01-01 custom "fava-sidebar-link" "🔁 Reset filters" ".?"
 
-; Define folder where the documents are stored
-; option "documents" "documents"
-
-; Define precision options
-option "inferred_tolerance_default" "*:0.00001"
-; option "inferred_tolerance_default" "USD:0.003"
-; option "inferred_tolerance_default" "GBP:0.003"
-; option "default_tolerance" "USD:0.001"
-; option "default_tolerance" "GBP:0.001"
-
-; I've had this enabled for a while but then found that it's actually not more but
-; less intuitive once you get used to standard Beancount conventions
-; 1970-01-01 custom "fava-option" "invert-income-liabilities-equity" "True"
-
+** Fava extensions
 ; Dashboards are a great feature that may partially work from the start
 ; May need some configuration and fine-tuning via dashboards.yaml
 2010-01-01 custom "fava-extension" "fava_dashboards"
 
-; This doesn't work much in my setup yet, so disabled
-; 2000-01-01 custom "fava-extension" "fava_investor" "{}"
+; Track portfolios' performance
+2024-01-01 custom "fava-extension" "fava_portfolio_returns" "{
+  'beangrow_config': 'beangrow.config',
+}"
 
+; Investing tools
+2010-01-01 custom "fava-extension" "fava_investor" "{}"
+
+* Includes
 ; Lazy Beancount: accounts generated from accounts_config.yml
 include "accounts.gen.bean"
 
@@ -71,12 +88,35 @@ include "manual_transactions.bean"
 include "beancount_import_output/transactions.bean"
 include "beancount_import_output/balance_accounts.bean"
 
+* Plugins
+** Valuation plugin
 ; Configure accounts that have opaque changes in value
 plugin "beancount_lazy_plugins.valuation"
 1970-01-01 custom "valuation" "config"
   account: "Assets:MyAutomaticBroker:Total" 
   currency: "AUTO_BROKER_USD"
   pnlAccount: "Assets:MyAutomaticBroker:Total:PnL"
+
+** Autogenerating prices
+; Generate implicit prices from costs
+; It's better to place it before beancount_generate_base_ccy_prices so that transitive conversions may happen
+plugin "beancount.plugins.implicit_prices"
+
+; https://github.com/tarioch/beancounttools/
+; Generate indirect prices for the current main currency
+plugin "beancount_generate_base_ccy_prices.generate_base_ccy_prices" "EUR"
+plugin "beancount_generate_base_ccy_prices.generate_base_ccy_prices" "USD"
+plugin "beancount_generate_base_ccy_prices.generate_base_ccy_prices" "GBP"
+
+** Shared expenses
+; Plugin to share expenses
+plugin "beancount_share.share" "{
+  'mark_name': 'share',
+  'meta_name': 'shared',
+  'open_date': None,
+  'account_debtors': 'Liabilities:Shared',
+  'account_creditors': 'Liabilities:Shared',
+}"
 
 
 plugin "beancount_reds_plugins.effective_date.effective_date" "{
@@ -88,28 +128,6 @@ plugin "beancount_reds_plugins.effective_date.effective_date" "{
   },
  }"
 
-; Track portfolios' performance
-2024-01-01 custom "fava-extension" "fava_portfolio_returns" "{
-  'beangrow_config': 'beangrow.config',
-}"
-; Investing tools
-2010-01-01 custom "fava-extension" "fava_investor" "{}"
-
-; https://github.com/tarioch/beancounttools/
-; Generate indirect prices for the current main currency
-plugin "beancount_generate_base_ccy_prices.generate_base_ccy_prices" "EUR"
-plugin "beancount_generate_base_ccy_prices.generate_base_ccy_prices" "USD"
-plugin "beancount_generate_base_ccy_prices.generate_base_ccy_prices" "GBP"
-
-; Plugin to share expenses
-plugin "beancount_share.share" "{
-  'mark_name': 'share',
-  'meta_name': 'shared',
-  'open_date': None,
-  'account_debtors': 'Liabilities:Shared',
-  'account_creditors': 'Liabilities:Shared',
-}"
-
 ; Some hacky fix for dashboards to work properly.
 ; At least one transaction per month needs to be present to display historical chart
 include "regular_postings_fix.bean"
@@ -120,7 +138,7 @@ include "regular_postings_fix.bean"
 plugin "beancount.ops.pad"
 plugin "beancount.ops.balance"
 
-; After pad/balance operations activate plugin groupping pad transactions
+; Should be included after beancount.ops.pad
 plugin "beancount_lazy_plugins.group_pad_transactions"
 
 ; Comes after almost everything but before the split plugin (it's used in some examples)
