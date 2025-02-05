@@ -3,13 +3,8 @@ fava @ https://github.com/Evernight/fava/raw/11d522fe5e8316fff8bc78aa0a30f206a77
 numpy==1.26.4
 beanprice @ git+https://github.com/beancount/beanprice@e894c9182f4d16f9a46ccb87bdaeca1a7dede040 # not on pypi, fix commit
 
-# for beancount-importers
-# click==8.1.7
-
-# for beancount-import
-# setuptools>=42
-# wheel
-# setuptools_scm>=5.0.2
+# missing requirements for beancount-import
+setuptools_scm>=5.0.2
 
 # streamlit/frontend
 streamlit==1.38.0
@@ -19,7 +14,7 @@ streamlit-echarts==0.4.0
 
 # Fava extensions
 # with local fixes for the ThemeToggle switch to work correctly
-fava-dashboards @ git+https://github.com/Evernight/fava-dashboards.git@5458e320fca4fb66d23675f8ce1b49dcf805a2c9
+fava-dashboards @ git+https://github.com/Evernight/fava-dashboards.git@9872223222039fa02690d7170d721b4c96fd549e
 
 fava-portfolio-returns @ git+https://github.com/andreasgerstmayr/fava-portfolio-returns.git@3ced616ef06895c13b8f7d8870bec86a122f7c2c
 fava-investor==1.0.1
