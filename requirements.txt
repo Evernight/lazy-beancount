@@ -16,7 +16,7 @@ streamlit-echarts==0.4.0
 # with local fixes for the ThemeToggle switch to work correctly
 fava-dashboards @ git+https://github.com/Evernight/fava-dashboards.git@9872223222039fa02690d7170d721b4c96fd549e
 
-fava-portfolio-returns @ git+https://github.com/andreasgerstmayr/fava-portfolio-returns.git@3ced616ef06895c13b8f7d8870bec86a122f7c2c
+fava-portfolio-returns @ git+https://github.com/andreasgerstmayr/fava-portfolio-returns.git@7ce9c635552cf1777847693c01f9c7125dcad2d8
 fava-investor==1.0.1
 
 # Beancount plugins
