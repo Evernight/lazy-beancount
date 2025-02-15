@@ -1,7 +1,11 @@
 beancount==2.3.6
+
+# fava prebuilt with https://github.com/beancount/fava/pull/1950 to install via wheel
 fava @ https://github.com/Evernight/fava/raw/11d522fe5e8316fff8bc78aa0a30f206a7734219/prebuilt_wheels/fava-1.30.2.dev1+ga7b87c98.tar.gz#sha1=d4061699fc6fc70c93f9f2afbd099d939df7a3cf
-numpy==1.26.4
 beanprice @ git+https://github.com/beancount/beanprice@e894c9182f4d16f9a46ccb87bdaeca1a7dede040 # not on pypi, fix commit
+
+# this version resolution needed for features compatibility, need to double-check if it's needed anymore
+numpy==1.26.4
 
 # missing requirements for beancount-import
 setuptools_scm>=5.0.2
@@ -13,10 +17,9 @@ streamlit_ace==0.1.1
 streamlit-echarts==0.4.0
 
 # Fava extensions
-# with local fixes for the ThemeToggle switch to work correctly
-fava-dashboards @ git+https://github.com/Evernight/fava-dashboards.git@9872223222039fa02690d7170d721b4c96fd549e
-
-fava-portfolio-returns @ git+https://github.com/andreasgerstmayr/fava-portfolio-returns.git@7ce9c635552cf1777847693c01f9c7125dcad2d8
+# fava-dashboards with local fixes for the ThemeToggle switch to work correctly (see https://github.com/beancount/fava/pull/1950)
+fava-dashboards @ git+https://github.com/Evernight/fava-dashboards.git@9e89792c985935ae610a096625399fa558ba59bf
+fava-portfolio-returns @ git+https://github.com/andreasgerstmayr/fava-portfolio-returns.git@733e9972aea01c396786f03989f600a973d12127
 fava-investor==1.0.1
 
 # Beancount plugins
