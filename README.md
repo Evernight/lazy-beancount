@@ -3,7 +3,7 @@
 ### [Lazy Beancount](https://lazy-beancount.xyz/)
 
 [![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](LICENSE)
-[![Docker Image Version](https://img.shields.io/docker/v/vandereer/lazy-beancount?color=goldenrod)]([https://hub.docker.com/r/vandereer/lazy-beancount](https://github.com/Evernight/lazy-beancount/releases))
+[![Docker Image Version](https://img.shields.io/docker/v/vandereer/lazy-beancount?color=goldenrod)](https://github.com/Evernight/lazy-beancount/releases)
 [![Docker Pulls](https://img.shields.io/docker/pulls/vandereer/lazy-beancount?color=silver)](https://hub.docker.com/r/vandereer/lazy-beancount)
 
 
