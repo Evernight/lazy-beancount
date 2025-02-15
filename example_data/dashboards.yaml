@@ -4,7 +4,7 @@ dashboards:
     - title: Assets 💰
       width: 33%
       height: 80px
-      link: /beancount/balance_sheet/
+      link: ../../balance_sheet/
       queries:
         - bql: SELECT CONVERT(SUM(position), '{{ledger.ccy}}') AS value WHERE account ~ '^Assets:'
       type: html
@@ -17,7 +17,7 @@ dashboards:
     - title: Liabilities 💳
       width: 33%
       height: 80px
-      link: /beancount/balance_sheet/
+      link: ../../balance_sheet/
       queries:
         - bql: SELECT CONVERT(SUM(position), '{{ledger.ccy}}') AS value WHERE account ~ '^Liabilities:'
       type: html
@@ -30,7 +30,7 @@ dashboards:
     - title: Cash 💶
       width: 33%
       height: 80px
-      link: /beancount/balance_sheet/
+      link: ../../balance_sheet/
       queries:
         - bql: SELECT CONVERT(SUM(position), '{{ledger.ccy}}') AS value WHERE account ~ '^Assets:(MyFavouriteBank:Cash|MyFavouriteBank:Savings|Physical:Cash|MyLessFavouriteBank:Cash|MyStockBroker:Cash)'
       type: html
@@ -41,7 +41,7 @@ dashboards:
         return `<div style="font-size: 40px; font-weight: bold; color: #3daf46; text-align: center;">${valueFmt}</div>`;
     - title: Income/Expenses 💸
       height: 520px
-      link: /beancount/income_statement/
+      link: ../../income_statement/
       queries:
         - name: Income
           stack: income
@@ -49,42 +49,42 @@ dashboards:
             SELECT year, month, CONVERT(SUM(position), '{{ledger.ccy}}', LAST(date)) AS value
             WHERE account ~ '^Income:'
             GROUP BY year, month
-          link: /beancount/account/Income/?time={time}
+          link: ../../account/Income/?time={time}
         - name: Accommodation
           stack: expenses
           bql: |
             SELECT year, month, CONVERT(SUM(position), '{{ledger.ccy}}', LAST(date)) AS value
             WHERE account ~ '^Expenses:Accommodation' AND NOT 'travel' IN tags
             GROUP BY year, month
-          link: /beancount/account/Expenses:Accommodation/?filter=-#travel&time={time}
+          link: ../../account/Expenses:Accommodation/?filter=-#travel&time={time}
         - name: EatingOut
           stack: expenses
           bql: |
             SELECT year, month, CONVERT(SUM(position), '{{ledger.ccy}}', LAST(date)) AS value
             WHERE account ~ '^Expenses:EatingOut' AND NOT 'travel' IN tags
             GROUP BY year, month
-          link: /beancount/account/Expenses:EatingOut/?filter=-#travel&time={time}
+          link: ../../account/Expenses:EatingOut/?filter=-#travel&time={time}
         - name: Shopping
           stack: expenses
           bql: |
             SELECT year, month, CONVERT(SUM(position), '{{ledger.ccy}}', LAST(date)) AS value
             WHERE account ~ '^Expenses:Shopping' AND NOT 'travel' IN tags
             GROUP BY year, month
-          link: /beancount/account/Expenses:Shopping/?filter=-#travel&time={time}
+          link: ../../account/Expenses:Shopping/?filter=-#travel&time={time}
         - name: Travel
           stack: expenses
           bql: |
             SELECT year, month, CONVERT(SUM(position), '{{ledger.ccy}}', LAST(date)) AS value
             WHERE account ~ '^Expenses:' AND 'travel' IN tags
             GROUP BY year, month
-          link: /beancount/account/Expenses/?filter=#travel&time={time}
+          link: ../../account/Expenses/?filter=#travel&time={time}
         - name: Other
           stack: expenses
           bql: |
             SELECT year, month, CONVERT(SUM(position), '{{ledger.ccy}}', LAST(date)) AS value
             WHERE account ~ '^Expenses:' AND NOT account ~ '^Expenses:(Accommodation|EatingOut|Shopping)' AND NOT 'travel' IN tags
             GROUP BY year, month
-          link: /beancount/account/Expenses/?filter=all(-account:"^Expenses:(Accommodation|EatingOut|Shopping)") -#travel&time={time}
+          link: ../../account/Expenses/?filter=all(-account:"^Expenses:(Accommodation|EatingOut|Shopping)") -#travel&time={time}
       type: echarts
       script: |
         const currencyFormatter = utils.currencyFormatter(ledger.ccy);
@@ -141,7 +141,7 @@ dashboards:
             WHERE account_sortkey(account) ~ '^[01]'
             GROUP BY currency
             ORDER BY market_value
-          link: /beancount/account/{account}/?time={time}
+          link: ../../account/{account}/?time={time}
       type: echarts
       script: |
         const currencyFormatter = utils.currencyFormatter(ledger.ccy);
@@ -180,14 +180,14 @@ dashboards:
 
     - title: Net Worth 💰
       width: 50%
-      link: /beancount/income_statement/
+      link: ../../income_statement/
       queries:
         - bql: |
             SELECT year, month,
             CONVERT(LAST(balance), '{{ledger.ccy}}', DATE_TRUNC('month', FIRST(date)) + INTERVAL('1 month') - INTERVAL('1 day')) AS value
             WHERE account_sortkey(account) ~ '^[01]'
             GROUP BY year, month
-          link: /beancount/balance_sheet/?time={time}
+          link: ../../balance_sheet/?time={time}
       type: echarts
       script: |
         const currencyFormatter = utils.currencyFormatter(ledger.ccy);
@@ -241,7 +241,7 @@ dashboards:
             CONVERT(COST(LAST(balance)), '{{ledger.ccy}}', DATE_TRUNC('month', FIRST(date)) + INTERVAL('1 month') - INTERVAL('1 day')) AS book_value
             WHERE account ~ '^Assets:' AND currency != '{{ledger.ccy}}'
             GROUP BY year, month
-          link: /beancount/balance_sheet/?time={time}
+          link: ../../balance_sheet/?time={time}
       type: echarts
       script: |
         const currencyFormatter = utils.currencyFormatter(ledger.ccy);
@@ -348,7 +348,7 @@ dashboards:
           years.map((year) =>
             ext.api.get("query", {
               bql: `SELECT currency,
-                    CONVERT(SUM(position), '${ledger.ccy}') as market_value
+                    CONVERT(SUM(position), '${ledger.ccy}', ${year}-12-31) as market_value
                     FROM CLOSE ON ${year + 1}-01-01
                     WHERE account_sortkey(account) ~ '^[01]'
                     GROUP BY currency`,
@@ -445,6 +445,10 @@ dashboards:
             {
               type: "sunburst",
               radius: "100%",
+              itemStyle: {
+                borderColor: '#0000',
+                borderWidth: 0
+              },
               label: {
                 minAngle: 3,
                 width: 170,
@@ -518,6 +522,10 @@ dashboards:
             {
               type: "sunburst",
               radius: "100%",
+              itemStyle: {
+                borderColor: '#0000',
+                borderWidth: 0
+              },
               label: {
                 minAngle: 10,
               },
@@ -540,7 +548,7 @@ dashboards:
   panels:
     - title: Net Worth
       width: 50%
-      link: /beancount/income_statement/
+      link: ../../income_statement/
       color: "#3ba272"
       queries:
         - bql: |
@@ -548,7 +556,7 @@ dashboards:
             CONVERT(LAST(balance), '{{ledger.ccy}}', DATE_TRUNC('month', FIRST(date)) + INTERVAL('1 month') - INTERVAL('1 day')) AS value
             WHERE account_sortkey(account) ~ '^[01]'
             GROUP BY year, month
-          link: /beancount/balance_sheet/?time={time}
+          link: ../../balance_sheet/?time={time}
       type: echarts
       script: &historical_graph |
         const currencyFormatter = utils.currencyFormatter(ledger.ccy);
@@ -592,40 +600,40 @@ dashboards:
 
     - title: Cash
       width: 50%
-      link: /beancount/income_statement/
+      link: ../../income_statement/
       queries:
         - bql: |
             SELECT year, month,
             CONVERT(LAST(balance), '{{ledger.ccy}}', DATE_TRUNC('month', FIRST(date)) + INTERVAL('1 month') - INTERVAL('1 day')) AS value
             WHERE account_sortkey(account) ~ '^[01]' AND account ~ '^Assets:(MyFavouriteBank:Savings|MyFavouriteBank:Cash|MyLessFavouriteBank:Cash|Physical:Cash)'
             GROUP BY year, month
-          link: /beancount/balance_sheet/?time={time}
+          link: ../../balance_sheet/?time={time}
       type: echarts
       script: *historical_graph
 
     - title: MyAutomaticBroker
       width: 50%
-      link: /beancount/income_statement/
+      link: ../../income_statement/
       queries:
         - bql: |
             SELECT year, month,
             CONVERT(LAST(balance), '{{ledger.ccy}}', DATE_TRUNC('month', FIRST(date)) + INTERVAL('1 month') - INTERVAL('1 day')) AS value
             WHERE account_sortkey(account) ~ '^[01]' AND account ~ '^Assets:MyAutomaticBroker'
             GROUP BY year, month
-          link: /beancount/balance_sheet/?time={time}
+          link: ../../balance_sheet/?time={time}
       type: echarts
       script: *historical_graph
 
     - title: MyStockBroker
       width: 50%
-      link: /beancount/income_statement/
+      link: ../../income_statement/
       queries:
         - bql: |
             SELECT year, month,
             CONVERT(LAST(balance), '{{ledger.ccy}}', DATE_TRUNC('month', FIRST(date)) + INTERVAL('1 month') - INTERVAL('1 day')) AS value
             WHERE account_sortkey(account) ~ '^[01]' AND account ~ '^Assets:MyStockBroker'
             GROUP BY year, month
-          link: /beancount/balance_sheet/?time={time}
+          link: ../../balance_sheet/?time={time}
       type: echarts
       script: *historical_graph
 
@@ -634,7 +642,7 @@ dashboards:
     - title: Avg. Income per Month 💰
       width: 33.3%
       height: 80px
-      link: /beancount/account/Income/?r=changes
+      link: ../../account/Income/?r=changes
       queries:
         - bql: SELECT CONVERT(SUM(position), '{{ledger.ccy}}') AS value WHERE account ~ '^Income:'
       type: html
@@ -649,7 +657,7 @@ dashboards:
     - title: Avg. Expenses per Month 💸
       width: 33.3%
       height: 80px
-      link: /beancount/account/Expenses/?r=changes
+      link: ../../account/Expenses/?r=changes
       queries:
         - bql: SELECT CONVERT(SUM(position), '{{ledger.ccy}}') AS value WHERE account ~ '^Expenses:'
       type: html
@@ -664,7 +672,7 @@ dashboards:
     - title: Avg. Savings per Month ✨
       width: 33.3%
       height: 80px
-      link: /beancount/income_statement/
+      link: ../../income_statement/
       queries:
         - bql: SELECT CONVERT(SUM(position), '{{ledger.ccy}}') AS value WHERE account ~ '^Income:'
         - bql: SELECT CONVERT(SUM(position), '{{ledger.ccy}}') AS value WHERE account ~ '^Expenses:'
@@ -684,15 +692,112 @@ dashboards:
         const value = `${currencyFormatter(rate)} (${percentFormat.format(ratePercent)})`;
         return `<div style="font-size: 40px; font-weight: bold; color: #3daf46; text-align: center;">${value}</div>`;
 
+    - title: Savings Heatmap 💰
+      link: ../../income_statement/
+      queries:
+      - bql: |
+          SELECT year, month, CONVERT(SUM(position), '{{ledger.ccy}}', LAST(date)) AS value
+          WHERE account ~ '^(Income|Expenses):'
+          GROUP BY year, month
+        link: ../../income_statement/?time={time}
+      type: echarts
+      script: |
+        const currencyFormatter = utils.currencyFormatter(ledger.ccy);
+        const monthFormatter = new Intl.DateTimeFormat(undefined, { month: "short" }).format;
+        const years = utils.iterateYears(ledger.dateFirst, ledger.dateLast);
+
+        // the beancount query only returns months where there was at least one matching transaction, therefore we group by month
+        const monthly = {};
+        const yearly = {};
+        for (let row of panel.queries[0].result) {
+          const savings = -row.value[ledger.ccy];
+          monthly[`${row.year}-${row.month}`] = savings;
+          yearly[row.year] = (yearly[row.year] ?? 0) + savings;
+        }
+
+        const data = [];
+        for (const year of years) {
+          data.push([`${year}`, yearly[year] ?? 0]);
+          for (let month = 1; month <= 12; month++) {
+            data.push([`${year}-${month}`, monthly[`${year}-${month}`] ?? 0]);
+          }
+        }
+        const max = Math.max(...data.map(([label, val]) => (label.includes("-") ? Math.abs(val) : 0)));
+        const maxRounded = Math.round(max * 100) / 100;
+
+        return {
+          tooltip: {
+            position: "top",
+            valueFormatter: currencyFormatter,
+          },
+          grid: {
+            top: 30,
+            height: Math.min(50 * years.length, 280),
+            bottom: 100, // space for visualMap
+          },
+          xAxis: {
+            type: "category",
+          },
+          yAxis: {
+            type: "category",
+          },
+          visualMap: {
+            min: -maxRounded,
+            max: maxRounded,
+            calculable: true, // show handles
+            orient: "horizontal",
+            left: "center",
+            bottom: 0, // place visualMap at bottom of chart
+            itemHeight: 400, // width
+            inRange: {
+              color: ["#af3d3d", "#fff", "#3daf46"],
+            },
+            formatter: currencyFormatter,
+          },
+          series: [
+            {
+              type: "heatmap",
+              data: data.map(([label, value]) => {
+                if (!label.includes("-")) {
+                  return ["Entire Year", label, value];
+                }
+
+                const [year, month] = label.split("-");
+                const monthLocale = monthFormatter(new Date(parseInt(year), parseInt(month) - 1, 1));
+                return [monthLocale, year, value];
+              }),
+              label: {
+                show: true,
+                formatter: (params) => currencyFormatter(params.data[2]),
+              },
+              emphasis: {
+                itemStyle: {
+                  shadowBlur: 10,
+                  shadowColor: "rgba(0, 0, 0, 0.5)",
+                },
+              },
+            },
+          ],
+          onClick: (event) => {
+            let time = data[event.dataIndex][0];
+            if (time.includes("-")) {
+              const [year, month] = time.split("-");
+              time = `${year}-${month.padStart(2, "0")}`;
+            }
+            const link = panel.queries[0].link.replace("{time}", time);
+            window.open(helpers.urlFor(link));
+          },
+        };
+
     - title: Income Categories (per month) 💸
       width: 50%
-      link: /beancount/account/Income/?r=changes
+      link: ../../account/Income/?r=changes
       queries:
         - bql: |
             SELECT root(account, 4) AS account, CONVERT(SUM(position), '{{ledger.ccy}}') AS value
             WHERE account ~ '^Income:'
             GROUP BY account
-          link: /beancount/account/{account}/?r=changes
+          link: ../../account/{account}/?r=changes
       type: echarts
       script: |
         const currencyFormatter = utils.currencyFormatter(ledger.ccy);
@@ -713,6 +818,10 @@ dashboards:
           series: [
             {
               type: "sunburst",
+              itemStyle: {
+                borderColor: '#0000',
+                borderWidth: 0
+              },
               radius: "100%",
               levels: [
                 {},
@@ -753,13 +862,13 @@ dashboards:
     - title: Expenses Categories (per month) 💸
       width: 50%
       height: 600px
-      link: /beancount/account/Expenses/?r=changes
+      link: ../../account/Expenses/?r=changes
       queries:
         - bql: |
             SELECT root(account, 3) AS account, CONVERT(SUM(position), '{{ledger.ccy}}') AS value
             WHERE account ~ '^Expenses:'
             GROUP BY account
-          link: /beancount/account/{account}/?r=changes
+          link: ../../account/{account}/?r=changes
       type: echarts
       script: |
         const currencyFormatter = utils.currencyFormatter(ledger.ccy);
@@ -780,6 +889,10 @@ dashboards:
           series: [
             {
               type: "sunburst",
+              itemStyle: {
+                borderColor: '#0000',
+                borderWidth: 0
+              },
               radius: "100%",
               levels: [
                 {},
@@ -819,26 +932,26 @@ dashboards:
 
     - title: Recurring, Regular and Irregular Expenses 🔁
       width: 50%
-      link: /beancount/income_statement/
+      link: ../../income_statement/
       queries:
         - name: Recurring
           bql: |
             SELECT year, month, CONVERT(SUM(position), '{{ledger.ccy}}', LAST(date)) AS value
             WHERE account ~ '^Expenses:' AND 'recurring' IN tags
             GROUP BY year, month
-          link: /beancount/account/Expenses/?filter=#recurring&time={time}
+          link: ../../account/Expenses/?filter=#recurring&time={time}
         - name: Regular
           bql: |
             SELECT year, month, CONVERT(SUM(position), '{{ledger.ccy}}', LAST(date)) AS value
             WHERE account ~ '^Expenses:' AND NOT 'recurring' IN tags AND NOT 'irregular' IN tags
             GROUP BY year, month
-          link: /beancount/account/Expenses/?filter=-#recurring -#irregular&time={time}
+          link: ../../account/Expenses/?filter=-#recurring -#irregular&time={time}
         - name: Irregular
           bql: |
             SELECT year, month, CONVERT(SUM(position), '{{ledger.ccy}}', LAST(date)) AS value
             WHERE account ~ '^Expenses:' AND 'irregular' IN tags
             GROUP BY year, month
-          link: /beancount/account/Expenses/?filter=#irregular&time={time}
+          link: ../../account/Expenses/?filter=#irregular&time={time}
       type: echarts
       script: |
         const currencyFormatter = utils.currencyFormatter(ledger.ccy);
@@ -886,13 +999,13 @@ dashboards:
 
     - title: EatingOut Expenses 🥐
       width: 50%
-      link: /beancount/account/Expenses:EatingOut/
+      link: ../../account/Expenses:EatingOut/
       queries:
         - bql: |
             SELECT year, month, CONVERT(SUM(position), '{{ledger.ccy}}', LAST(date)) AS value
             WHERE account ~ '^Expenses:EatingOut:'
             GROUP BY year, month
-          link: /beancount/account/Expenses:EatingOut/?time={time}
+          link: ../../account/Expenses:EatingOut/?time={time}
       type: echarts
       script: |
         const currencyFormatter = utils.currencyFormatter(ledger.ccy);
@@ -938,7 +1051,7 @@ dashboards:
             SELECT year, root(account, 3) AS account, CONVERT(SUM(position), '{{ledger.ccy}}', LAST(date)) AS value
             WHERE account ~ "^Income:"
             GROUP BY account, year
-          link: /beancount/account/{account}/?time={time}
+          link: ../../account/{account}/?time={time}
       type: echarts
       script: &year_over_year |
         const currencyFormatter = utils.currencyFormatter(ledger.ccy);
@@ -1006,7 +1119,7 @@ dashboards:
             SELECT year, root(account, 2) AS account, CONVERT(SUM(position), '{{ledger.ccy}}', LAST(date)) AS value
             WHERE account ~ "^Expenses:"
             GROUP BY account, year
-          link: /beancount/account/{account}/?time={time}
+          link: ../../account/{account}/?time={time}
       type: echarts
       script: *year_over_year
 
@@ -1018,7 +1131,7 @@ dashboards:
             SELECT year, month, root(account, 2) AS account, CONVERT(SUM(position), '{{ledger.ccy}}', LAST(date)) AS value
             WHERE account ~ "^Expenses:"
             GROUP BY account, year, month
-          link: /beancount/account/{account}/?time={time}
+          link: ../../account/{account}/?time={time}
       type: echarts
       script: |
         const currencyFormatter = utils.currencyFormatter(ledger.ccy);
@@ -1120,14 +1233,14 @@ dashboards:
 
     - title: Unattributed Expenses 🔧
       width: 100%
-      link: /beancount/income_statement/
+      link: ../../income_statement/
       queries:
         - name: Unattributed
           bql: |
             SELECT year, month, CONVERT(SUM(position), '{{ledger.ccy}}', LAST(date)) AS value, account
             WHERE account ~ '^Expenses:Unattributed'
             GROUP BY year, month, account
-          link: /beancount/account/{account}/?time={time}
+          link: ../../account/{account}/?time={time}
       type: echarts
       script: |
         const currencyFormatter = utils.currencyFormatter(ledger.ccy);
@@ -1183,7 +1296,7 @@ dashboards:
 
     - title: Top 30 biggest expenses
       queries:
-        - bql: SELECT date, payee, narration, CONVERT(position, '{{ledger.ccy}}') AS position WHERE account ~ "^Expenses:" ORDER BY position DESC LIMIT 30
+        - bql: SELECT date, account, MAXWIDTH(narration, 80) AS narration, SUM(CONVERT(position, '{{ledger.ccy}}')) AS position, JOINSTR(tags) as tags WHERE account ~ "^Expenses:" ORDER BY position DESC LIMIT 30
       type: jinja2
       template: |
         {% import "_query_table.html" as querytable %}
@@ -1207,7 +1320,7 @@ dashboards:
     - title: Income 💰
       width: 33.3%
       height: 60px
-      link: /beancount/account/Income/?r=changes
+      link: ../../account/Income/?r=changes
       queries:
         - bql: SELECT CONVERT(SUM(position), '{{ledger.ccy}}') AS value WHERE account ~ '^Income:'
       type: html
@@ -1220,7 +1333,7 @@ dashboards:
     - title: Expenses 💸
       width: 33.3%
       height: 60px
-      link: /beancount/account/Expenses/?r=changes
+      link: ../../account/Expenses/?r=changes
       queries:
         - bql: SELECT CONVERT(SUM(position), '{{ledger.ccy}}') AS value WHERE account ~ '^Expenses:'
       type: html
@@ -1234,7 +1347,7 @@ dashboards:
     - title: Savings ✨
       width: 33.3%
       height: 60px
-      link: /beancount/income_statement/
+      link: ../../income_statement/
       queries:
         - bql: SELECT CONVERT(SUM(position), '{{ledger.ccy}}') AS value WHERE account ~ '^Income:'
         - bql: SELECT CONVERT(SUM(position), '{{ledger.ccy}}') AS value WHERE account ~ '^Expenses:'
@@ -1255,13 +1368,13 @@ dashboards:
     - title: Categories
       width: 60%
       height: 540px
-      link: /beancount/account/Expenses/?interval=day
+      link: ../../account/Expenses/?interval=day
       queries:
         - bql: |
             SELECT root(account, 3) AS account, CONVERT(SUM(position), '{{ledger.ccy}}') AS value
             WHERE account ~ '^Expenses:'
             GROUP BY account
-          link: /beancount/account/{account}/?interval=day
+          link: ../../account/{account}/?interval=day
       type: echarts
       script: |
         const currencyFormat = new Intl.NumberFormat(undefined, {
@@ -1274,7 +1387,6 @@ dashboards:
           style: "percent",
           maximumFractionDigits: 0,
         });
-        console.log('panel.queries[0].result', panel.queries[0].result);
         const filteredResult = panel.queries[0].result.filter(r => r.value[ledger.ccy] > 0);
         const accountTree = utils.buildAccountTree(
           filteredResult,
@@ -1282,7 +1394,6 @@ dashboards:
           (parts, i) => parts[i],
         );
         const totalValue = accountTree.children[0].value;
-        console.log('accountTree', accountTree);
         // use click event on desktop, dblclick on mobile
         const clickEvt = window.screen.width < 800 ? "onDblClick" : "onClick";
 
@@ -1321,6 +1432,10 @@ dashboards:
                   }
                 }
               ],
+              itemStyle: {
+                borderColor: '#0000',
+                borderWidth: 0
+              },
               nodeClick: false,
               data: accountTree.children[0]?.children ?? [],
             },
@@ -1334,26 +1449,26 @@ dashboards:
 
     - title: Recurring, Regular and Irregular Expenses 🔁
       width: 40%
-      link: /beancount/income_statement/
+      link: ../../income_statement/
       queries:
         - name: Recurring
           bql: |
             SELECT year, month, CONVERT(SUM(position), '{{ledger.ccy}}', LAST(date)) AS value
             WHERE account ~ '^Expenses:' AND 'recurring' IN tags
             GROUP BY year, month
-          link: /beancount/account/Expenses/?filter=#recurring&time={time}
+          link: ../../account/Expenses/?filter=#recurring&time={time}
         - name: Regular
           bql: |
             SELECT year, month, CONVERT(SUM(position), '{{ledger.ccy}}', LAST(date)) AS value
             WHERE account ~ '^Expenses:' AND NOT 'recurring' IN tags AND NOT 'irregular' IN tags
             GROUP BY year, month
-          link: /beancount/account/Expenses/?filter=-#recurring -#irregular&time={time}
+          link: ../../account/Expenses/?filter=-#recurring -#irregular&time={time}
         - name: Irregular
           bql: |
             SELECT year, month, CONVERT(SUM(position), '{{ledger.ccy}}', LAST(date)) AS value
             WHERE account ~ '^Expenses:' AND 'irregular' IN tags
             GROUP BY year, month
-          link: /beancount/account/Expenses/?filter=#irregular&time={time}
+          link: ../../account/Expenses/?filter=#irregular&time={time}
       type: echarts
       script: |
         const currencyFormatter = utils.currencyFormatter(ledger.ccy);
@@ -1374,6 +1489,9 @@ dashboards:
           },
           legend: {
             top: "bottom",
+          },
+          grid: {
+            left: 100
           },
           xAxis: {
             axisLabel: {
@@ -1437,13 +1555,13 @@ dashboards:
   panels:
     - title: Travel Costs per Year 📅
       # Note: Holidays over New Year's Eve are counted in both years aliquot.
-      link: /beancount/income_statement/?filter=#travel
+      link: ../../income_statement/?filter=#travel
       queries:
         - bql: |
             SELECT year, CONVERT(SUM(position), '{{ledger.ccy}}', LAST(date)) AS value
             WHERE account ~ '^Expenses:' AND 'travel' IN tags
             GROUP BY year
-          link: /beancount/account/Expenses/?filter=#travel&time={time}
+          link: ../../account/Expenses/?filter=#travel&time={time}
       type: echarts
       script: |
         const currencyFormatter = utils.currencyFormatter(ledger.ccy);
@@ -1482,13 +1600,13 @@ dashboards:
 
     - title: Destinations ✈️
       height: 300px
-      link: /beancount/income_statement/?filter=#travel
+      link: ../../income_statement/?filter=#travel
       queries:
         - bql: |
-            SELECT tags, CONVERT(position, '{{ledger.ccy}}') AS value
+            SELECT tags, CONVERT(position, '{{ledger.ccy}}', date) AS value
             WHERE account ~ '^Expenses:' AND 'travel' IN tags
             ORDER BY date ASC
-          link: /beancount/account/Expenses/?filter=#{travel}
+          link: ../../account/Expenses/?filter=#{travel}
       type: echarts
       script: |
         const currencyFormatter = utils.currencyFormatter(ledger.ccy);
@@ -1543,14 +1661,14 @@ dashboards:
 - name: Sankey
   panels:
     - title: Sankey (per month) 💸
-      height: 800px
-      link: /beancount/income_statement/
+      height: 600px
+      link: ../../income_statement/
       queries:
         - bql: |
             SELECT account, CONVERT(SUM(position), '{{ledger.ccy}}') AS value
             WHERE account ~ '^(Income|Expenses):'
             GROUP BY account
-          link: /beancount/account/{account}/
+          link: ../../account/{account}/
       type: d3_sankey
       script: |
         const currencyFormatter = utils.currencyFormatter(ledger.ccy);
@@ -1620,14 +1738,14 @@ dashboards:
 - name: Projection
   panels:
     - title: Net Worth 💰
-      link: /beancount/income_statement/
+      link: ../../income_statement/
       queries:
         - bql: |
             SELECT year, month,
             CONVERT(LAST(balance), '{{ledger.ccy}}', DATE_TRUNC('month', FIRST(date)) + INTERVAL('1 month') - INTERVAL('1 day')) AS value
             WHERE account_sortkey(account) ~ '^[01]'
             GROUP BY year, month
-          link: /beancount/balance_sheet/?time={time}
+          link: ../../balance_sheet/?time={time}
         # ignore onetime income and expenses, for example winning the lottery or wedding expenses
         - bql: |
             SELECT year, month,
