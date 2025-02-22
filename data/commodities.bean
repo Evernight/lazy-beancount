@@ -2,19 +2,19 @@
 ; https://github.com/redstreet/fava_investor/tree/main/fava_investor/modules/assetalloc_class#readme
 
 1970-01-01 commodity GBP
-  price: "USD:yahoo/GBPUSD=X"
+  price: "USD:pricehist.beanprice.yahoo/GBPUSD=X"
   asset_class: "currency"
 
 1970-01-01 commodity USD
-  price: "GBP:yahoo/USDGBP=X"
+  price: "GBP:pricehist.beanprice.yahoo/USDGBP=X"
   asset_class: "currency"
 
 1970-01-01 commodity EUR
-  price: "USD:yahoo/EURUSD=X"
+  price: "USD:pricehist.beanprice.yahoo/EURUSD=X"
   asset_class: "currency"
   
 1970-01-01 commodity ETH
-  price: "GBP:yahoo/ETH-GBP"
+  price: "GBP:pricehist.beanprice.yahoo/ETH-GBP"
   asset_class: "crypto"
   asset_allocation_crypto: 100
 

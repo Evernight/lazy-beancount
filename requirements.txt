@@ -2,7 +2,8 @@ beancount==2.3.6
 
 # fava prebuilt with https://github.com/beancount/fava/pull/1950 to install via wheel
 fava @ https://github.com/Evernight/fava/raw/11d522fe5e8316fff8bc78aa0a30f206a7734219/prebuilt_wheels/fava-1.30.2.dev1+ga7b87c98.tar.gz#sha1=d4061699fc6fc70c93f9f2afbd099d939df7a3cf
-beanprice @ git+https://github.com/beancount/beanprice@e894c9182f4d16f9a46ccb87bdaeca1a7dede040 # not on pypi, fix commit
+# not on pypi, using fixed commit, also depending on Beancount v2
+beanprice @ git+https://github.com/beancount/beanprice@e894c9182f4d16f9a46ccb87bdaeca1a7dede040
 pricehist==1.4.12
 
 # this version resolution needed for features compatibility, need to double-check if it's needed anymore
