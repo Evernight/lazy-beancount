@@ -1,4 +1,4 @@
-beancount==2.3.6
+beancount==3.1.0
 
 # fava prebuilt with https://github.com/beancount/fava/pull/1950 to install via wheel
 fava @ https://github.com/Evernight/fava/raw/11d522fe5e8316fff8bc78aa0a30f206a7734219/prebuilt_wheels/fava-1.30.2.dev1+ga7b87c98.tar.gz#sha1=d4061699fc6fc70c93f9f2afbd099d939df7a3cf
@@ -32,4 +32,4 @@ beancount-reds-plugins @ git+https://github.com/redstreet/beancount_reds_plugins
 # Plugins without PyPI releases
 beancount-lazy-plugins @ git+https://github.com/Evernight/beancount-lazy-plugins@a6f20b938198b61097498e44169f6800d1fa88ea
 beancount-generate-base-ccy-prices @ git+https://github.com/Evernight/beancount-generate-base-ccy-prices@fd2bb3429a4f2704e2be3d804917bbf73ed2ca6b
-beancount-importers @ git+https://github.com/Evernight/beancount-importers@3df316fe83ae322dc2c7582832217c524ebd74db
+beancount-importers @ git+https://github.com/Evernight/beancount-importers@e7ec835eee6dbf65faf998c676a73b252a7e7e81
