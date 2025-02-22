@@ -5,6 +5,7 @@ import os
 import pprint
 import re
 import subprocess
+from collections import defaultdict
 from datetime import datetime, timedelta
 from decimal import Decimal
 
@@ -14,7 +15,7 @@ import yaml
 from beancount import loader
 from beancount_importers import beancount_import_run
 from streamlit_ace import st_ace
-from streamlit_echarts import st_echarts
+from streamlit_echarts import JsCode, st_echarts
 from streamlit_option_menu import option_menu
 
 import gen_accounts
@@ -282,12 +283,91 @@ def totals_page():
 
 def prices_page():
     col1, col2 = st.columns([1, 4])
+
+    date = None
+    prices_for_dates = st.session_state.get("prices_for_dates", defaultdict(str))
+    with col2:
+        prices_config = None
+        with open(PRICES_CONFIG_FILE, "r") as config:
+            prices_config = yaml.safe_load(config)
+        commodities_map = {}
+        for c in prices_config.get("commodities") or []:
+            for ind, val in c.items():
+                commodities_map[ind] = val
+
+        date = st.date_input(
+            "Select date", datetime.today().date(), max_value=datetime.today().date()
+        )
+        date_str = str(date)
+        if st.button("Fetch", type="primary"):
+            with st.spinner("Fetching prices..."):
+                try:
+                    command = [
+                        "bean-price",
+                        MAIN_LEDGER_FILE,
+                        "-i",
+                        "-c",
+                        f"--date={date.strftime('%Y-%m-%d')}",
+                    ]
+                    st.code(" ".join(command), language="shell")
+
+                    beanprice_output = subprocess.check_output(command)
+                    processed_output = io.StringIO()
+                    for line in beanprice_output.decode("utf-8").split("\n"):
+                        res = re.search(
+                            r"^([\d-]+)\s+price\s+([\w-]+)\s+([\d\\.]+)\s+([\w-]+)",
+                            line,
+                        )
+                        if res:
+                            price_date = res.group(1)
+                            commodity = res.group(2)
+                            value = res.group(3)
+                            currency = res.group(4)
+
+                            updated_value = Decimal(value)
+                            if (
+                                commodity in commodities_map
+                                and "multiplier" in commodities_map[commodity]
+                            ):
+                                updated_value *= Decimal(
+                                    commodities_map[commodity]["multiplier"]
+                                )
+
+                            # Ignore zero values
+                            if updated_value > 0:
+                                processed_output.write(
+                                    f"{price_date} price {commodity:20} {updated_value:.8f} {currency}\n"
+                                )
+
+                    prices_for_dates[date_str] = processed_output.getvalue()
+                    st.session_state["prices_for_dates"] = prices_for_dates
+
+                except Exception as e:
+                    st.code(str(e))
+
+        st.subheader("Processed output:")
+        st.code(prices_for_dates[date_str])
+
+        filename = os.path.join(
+            PRICES_DIR, "prices-" + date.strftime("%Y-%m-%d") + ".gen.bean"
+        )
+        st.markdown(f"Save to ```{filename}```?")
+        if st.button(
+            "Save", type="primary", disabled=(prices_for_dates[date_str] == "")
+        ):
+            print("saving")
+            print(prices_for_dates[date_str])
+            with open(filename, "w") as f:
+                f.write(prices_for_dates[date_str])
+                st.markdown(f"Successfully saved into ```{filename}```")
+                trigger_fava_reload()
+
     with col1:
         prices_files = sorted(os.listdir(PRICES_DIR))
         prices_dates = []
         for filename in prices_files:
             res = re.search(r"prices-(\d+)-(\d+)-(\d+)\.gen\.bean", filename)
-            if res:
+            if res and res.group(1) == str(date.year):
                 # prices_dates.append(res.group(1) + '/' + res.group(2) + '/' + res.group(3))
                 prices_dates.append(
                     (
@@ -302,9 +382,9 @@ def prices_page():
             "calendar": [
                 {
                     "orient": "vertical",
-                    "range": str(datetime.now().year),
+                    "range": str(date.year),
                     "cellSize": [20, "auto"],
-                    "dayLabel": {"show": True, "color": "#ddd"},
+                    "dayLabel": {"show": True, "firstDay": 1, "color": "#ddd"},
                     "monthLabel": {"show": True, "color": "#ddd"},
                     # 'itemStyle': {'color' : '#333'}
                     # 'yearLabel': { 'show': False }
@@ -313,74 +393,16 @@ def prices_page():
             "series": {
                 "type": "heatmap",
                 "coordinateSystem": "calendar",
-                # 'label': {'show': True},
+                "symbolSize": 0,
+                "label": {
+                    "show": True,
+                    "formatter": JsCode("function(p) {return p.data[1];}").js_code,
+                    "fontSize": 8,
+                },
                 "data": prices_dates,
             },
         }
         st_echarts(options=heatmap, height=640)
-
-    with col2:
-        prices_config = None
-        with open(PRICES_CONFIG_FILE, "r") as config:
-            prices_config = yaml.safe_load(config)
-        commodities_map = {}
-        for c in prices_config.get("commodities") or []:
-            for ind, val in c.items():
-                commodities_map[ind] = val
-
-        date = st.date_input(
-            "Select date", datetime.today().date(), max_value=datetime.today().date()
-        )
-        with st.spinner("Fetching prices..."):
-            try:
-                command = [
-                    "bean-price",
-                    MAIN_LEDGER_FILE,
-                    "-i",
-                    "-c",
-                    f"--date={date.strftime('%Y-%m-%d')}",
-                ]
-                st.code(" ".join(command), language="shell")
-                st.text("Processed output:")
-                beanprice_output = subprocess.check_output(command)
-                processed_output = io.StringIO()
-                for line in beanprice_output.decode("utf-8").split("\n"):
-                    res = re.search(
-                        r"^([\d-]+)\s+price\s+([\w-]+)\s+([\d\\.]+)\s+([\w-]+)", line
-                    )
-                    if res:
-                        price_date = res.group(1)
-                        commodity = res.group(2)
-                        value = res.group(3)
-                        currency = res.group(4)
-
-                        updated_value = Decimal(value)
-                        if (
-                            commodity in commodities_map
-                            and "multiplier" in commodities_map[commodity]
-                        ):
-                            updated_value *= Decimal(
-                                commodities_map[commodity]["multiplier"]
-                            )
-
-                        # Ignore zero values
-                        if updated_value > 0:
-                            processed_output.write(
-                                f"{price_date} price {commodity:20} {updated_value:.8f} {currency}\n"
-                            )
-                st.code(processed_output.getvalue())
-
-                filename = os.path.join(
-                    PRICES_DIR, "prices-" + date.strftime("%Y-%m-%d") + ".gen.bean"
-                )
-                st.text(f"Save to {filename}?")
-                if st.button("Save", type="primary"):
-                    with open(filename, "w") as f:
-                        f.write(processed_output.getvalue())
-                        st.text(f"Successfully saved into {filename}")
-                        trigger_fava_reload()
-            except Exception as e:
-                st.code(str(e))
 
 
 def import_page():
