@@ -48,7 +48,9 @@ plugin "beancount.ops.documents"
 1970-01-01 custom "fava-sidebar-link" "📜 M-3 to day" "/beancount/journal/?time=month-3+to+day"
 1970-01-01 custom "fava-sidebar-link" "📜 #fix" "/beancount/journal/?filter=%23fix"
 1970-01-01 custom "fava-sidebar-link" "📜 #recurring" "/beancount/journal/?filter=%23recurring&time=month-12+to+day"
+1970-01-01 custom "fava-sidebar-link" "🚥 Budgets" "/beancount/account/Expenses/?r=changes&conversion=USD"
 1970-01-01 custom "fava-sidebar-link" "🔁 Reset filters" ".?"
+
 
 ** Fava extensions
 ; Dashboards are a great feature that may partially work from the start
@@ -83,6 +85,9 @@ include "prices/*.bean"
 
 ; File to track transactions manually
 include "manual_transactions.bean"
+
+; Budget definitions
+include "budgets.bean"
 
 ; Import files generated using beancount-import
 include "beancount_import_output/transactions.bean"
