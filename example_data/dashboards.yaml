@@ -1516,7 +1516,108 @@ dashboards:
             }
           },
         };
+        
+    - title: Calendar Heatmap 📅
+      width: 100%
+      height: 150px
+      queries:
+        - bql: |
+            SELECT date, root(account, 2) AS account, CONVERT(SUM(position), '{{ledger.ccy}}', LAST(date)) AS value
+            WHERE account ~ "^Expenses:"
+            GROUP BY account, date
+          link: ../../journal/?time={time}
+      type: echarts
+      script: |
+        // dirty hack for dark mode fix for the calendar heatmap
+        const localStorageThemeSetting = localStorage.getItem('theme');
+        const isDarkMode = (
+          window.matchMedia && 
+          window.matchMedia("(prefers-color-scheme: dark)").matches && 
+          localStorageThemeSetting != "light"
+        );
+        const outerLineStyleColor = isDarkMode ? "lightgray" : "black";
 
+        const currencyFormatter = utils.currencyFormatter(ledger.ccy);
+        const months = utils.iterateMonths(ledger.dateFirst, ledger.dateLast).map((m) => `${m.month}/${m.year}`);
+        const monthsByYear = Object.groupBy(utils.iterateMonths(ledger.dateFirst, ledger.dateLast), m => m.year);
+        let mostCommonYear = null;
+        let mostCommonYearMonths = 0;
+        for (let [year, months] of Object.entries(monthsByYear)) {
+          if (months.length > mostCommonYearMonths) {
+            mostCommonYear = year;
+            mostCommonYearMonths = months.length;
+          }
+        }
+        const query = panel.queries[0];
+        const amounts = {};
+        
+        let maxAmount = 0;
+        for (let row of query.result) {
+          if (isNaN(row.value[ledger.ccy])) {
+            continue;
+          }
+          if (!amounts[row.date]) {
+            amounts[row.date] = row.value[ledger.ccy];
+          } else {
+            amounts[row.date] += row.value[ledger.ccy];
+          }
+          maxAmount = Math.max(maxAmount, amounts[row.date]);
+        }
+        const allValues = Object.values(amounts).sort((a, b) => a - b);
+        const percentileValue = allValues[Math.floor(allValues.length * 0.95)];
+
+        const maxScaleValue = percentileValue;
+
+        return {
+          tooltip: {
+            position: 'top',
+            formatter: function (p) {
+              return p.data[0] + ':<br/>' + "<b style='font-weight: 700'>" + p.data[1] + ` ${ledger.ccy}` + '</b>';
+            }
+          },
+          visualMap: [
+            {
+              min: 0,
+              max: maxScaleValue,
+              calculable: true,
+              orient: 'vertical',
+              top: 'middle',
+              right: 10,
+            },
+          ],
+          calendar: {
+            top: 'middle',
+            left: 80,
+            right: 100,
+            cellSize: ['auto', 15],
+            range: mostCommonYear,
+            splitLine: {
+              lineStyle: {
+                color: outerLineStyleColor,
+              },
+            },
+            itemStyle: {
+              borderWidth: 0.5
+            },
+            dayLabel: {
+              firstDay: 1,
+            },
+            yearLabel: {
+              show: true,
+              margin: 40
+            },
+          },
+          series: {
+            type: 'heatmap',
+            coordinateSystem: 'calendar',
+            data: Object.entries(amounts)
+          },
+          onClick: (event) => {
+            const link = query.link.replace("{time}", event.data[0]).replace('{account}', '');
+            window.open(helpers.urlFor(link));
+          },
+        };
+        
     - title: Notes
       width: 100%
       height: 90px
