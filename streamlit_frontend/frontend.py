@@ -33,6 +33,7 @@ GENERATED_ACCOUNTS_FILE = "accounts.gen.bean"
 PRICES_CONFIG_FILE = "prices_config.yml"
 MAIN_LEDGER_FILE = "main.bean"
 
+hostname = os.environ.get("LAZY_BEANCOUNT_HOST", "localhost")
 fava_port = os.environ.get("FAVA_PORT", 5003)
 beancount_import_port = os.environ.get("BEANCOUNT_IMPORT_PORT", 8101)
 lazy_beancount_port = os.environ.get("LAZY_BEANCOUNT_PORT", 8777)
@@ -40,7 +41,7 @@ lazy_beancount_port = os.environ.get("LAZY_BEANCOUNT_PORT", 8777)
 st.set_page_config(
     layout="wide",
     page_title="Lazy Beancount",
-    page_icon=f"http://localhost:{lazy_beancount_port}/app/static/favicon-32x32.png",
+    page_icon=f"http://{hostname}:{lazy_beancount_port}/app/static/favicon-32x32.png",
     menu_items=None,
     initial_sidebar_state="collapsed",
 )
@@ -66,9 +67,9 @@ def trigger_fava_reload():
 
 
 def fava_page():
-    components.iframe(f"http://localhost:{fava_port}", height=640)
+    components.iframe(f"http://{hostname}:{fava_port}", height=640)
     st.page_link(
-        f"http://localhost:{fava_port}",
+        f"http://{hostname}:{fava_port}",
         label="open in new tab",
         icon=":material/arrow_outward:",
     )
@@ -413,9 +414,9 @@ def import_page():
         orientation="horizontal",
     )
     if selected_import_page == "Review data":
-        components.iframe(f"http://localhost:{beancount_import_port}", height=540)
+        components.iframe(f"http://{hostname}:{beancount_import_port}", height=540)
         st.page_link(
-            f"http://localhost:{beancount_import_port}",
+            f"http://{hostname}:{beancount_import_port}",
             label="open in new tab",
             icon=":material/arrow_outward:",
         )
@@ -584,10 +585,10 @@ selected_page = option_menu(
 )
 with st.sidebar:
     st.page_link(
-        f"http://localhost:{fava_port}", label="Fava", icon=":material/arrow_outward:"
+        f"http://{hostname}:{fava_port}", label="Fava", icon=":material/arrow_outward:"
     )
     st.page_link(
-        f"http://localhost:{beancount_import_port}",
+        f"http://{hostname}:{beancount_import_port}",
         label="Beancount Import",
         icon=":material/arrow_outward:",
     )
