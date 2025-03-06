@@ -54,16 +54,18 @@ Full guide is located at https://lazy-beancount.xyz/. The approach roughly follo
     git clone https://github.com/Evernight/lazy-beancount
 
     cd lazy-beancount/example_data
-    docker compose up
+    env UID=$(id -u) GID=$(id -g) docker compose up
 
 This will pull repository with the example and config templates, and also pull and run the latest version of the package from the [Docker Hub](https://hub.docker.com/r/vandereer/lazy-beancount/tags).
 After this is done, go to http://localhost:8777/.
 
 Fava is also available on port 5003, importer interface is available on port 8101 (ports are overridable via config in docker-compose.yml).
 
+On Mac you can also remove ```user``` parameter from ```docker-compose.yaml``` and just use ```docker compose up```
+
 # Setup (docker)
 
-You can just pull image from the public repository:
+You can pull image from the public repository:
 
     docker pull vandereer/lazy-beancount:latest
 
@@ -72,7 +74,7 @@ or build it yourself:
     git clone https://github.com/Evernight/lazy-beancount
     cd lazy-beancount
 
-    docker build . -t lazy-beancount
+    docker build . -t vandereer/lazy-beancount:latest
 
 To start, run:
 
@@ -83,6 +85,8 @@ Use ```./lazy_beancount.sh data``` when you want to start adding your own data u
 Commands are available in the container as: 
 
     docker exec -it lazybean bean-price example_data/main.bean -i --date=2024-01-05
+
+You can also run container using Podman, via ```lazy_beancount_podman.sh``` script.
 
 # Setup (local, conda, for development)
 
