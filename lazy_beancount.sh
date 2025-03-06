@@ -14,4 +14,5 @@ docker run -it \
     -e FAVA_PORT=$FAVA_PORT \
     -e BEANCOUNT_IMPORT_PORT=$BEANCOUNT_IMPORT_PORT \
     --name lazybean \
-    lazy-beancount
+    --user $(id -u):$(id -g) \
+    vandereer/lazy-beancount:latest

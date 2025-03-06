@@ -2,6 +2,7 @@ version: '1.0'
 services:
   lazybean:
     image: vandereer/lazy-beancount:latest
+    user: "${UID}:${GID}"
     ports:
       - "5003:5000"
       - "8101:8101"

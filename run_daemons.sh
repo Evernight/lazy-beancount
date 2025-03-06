@@ -15,7 +15,15 @@ python3 -m beancount_importers.beancount_import_run \
     --journal_file main.bean \
     --importers_config_file importers_config.yml \
     2>&1 | tee lazy-beancount.log &
-streamlit run /beancount/streamlit_frontend/frontend.py --server.address 0.0.0.0 &
+streamlit run /beancount/streamlit_frontend/frontend.py \
+    --server.address 0.0.0.0 \
+    --server.headless "true" \
+    --server.enableStaticServing "true" \
+    --browser.gatherUsageStats "false" \
+    --client.showSidebarNavigation "false" \
+    --theme.base "dark" \
+    --theme.primaryColor "#004583" \
+    >&1 | tee lazy-beancount.log &
 
 # Wait for any process to exit
 wait -n
