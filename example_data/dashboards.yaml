@@ -1944,6 +1944,100 @@ dashboards:
           },
         };
 
+- name: Accounts (HF)
+  panels:
+    - title: Net Worth
+      width: 100%
+      link: ../../income_statement/
+      color: "#3ba272"
+      queries:
+        - bql: |
+            SELECT 
+            date_bin(interval('7 days'), date, 1970-01-01) + INTERVAL('6 days') as datebin,
+            CONVERT(LAST(balance), '{{ledger.ccy}}', date_bin(interval('7 days'), LAST(date), 1970-01-01) + INTERVAL('6 days')) AS value
+            WHERE account_sortkey(account) ~ '^[01]'
+            GROUP BY datebin
+          link: ../../balance_sheet/?time={time}
+      type: echarts
+      script: &historical_graph_weekly |
+        const currencyFormatter = utils.currencyFormatter(ledger.ccy);
+        // const months = utils.iterateMonths(ledger.dateFirst, ledger.dateLast).map((m) => `${m.month}/${m.year}`);
+        const amounts = {};
+
+        for (let row of panel.queries[0].result) {
+          amounts[`${row.datebin}`] = row.value[ledger.ccy];
+        }
+        return {
+          tooltip: {
+            trigger: "axis",
+            valueFormatter: currencyFormatter,
+          },
+          xAxis: {
+            data: Object.keys(amounts),
+          },
+          yAxis: {
+            axisLabel: {
+              formatter: currencyFormatter,
+            },
+          },
+          series: [
+            {
+              type: "line",
+              color: panel.color,
+              smooth: true,
+              connectNulls: true,
+              data: Object.values(amounts),
+              areaStyle: {}
+            },
+          ],
+          onClick: (event) => {
+            const link = panel.queries[0].link.replace("{time}", `${event.name}`);
+            window.open(helpers.urlFor(link));
+          },
+        };
+
+    - title: Cash
+      width: 50%
+      link: ../../income_statement/
+      queries:
+        - bql: |
+            SELECT 
+            date_bin(interval('7 days'), date, 1970-01-01) + INTERVAL('6 days') as datebin,
+            CONVERT(LAST(balance), '{{ledger.ccy}}', date_bin(interval('7 days'), LAST(date), 1970-01-01) + INTERVAL('6 days')) AS value
+            WHERE account_sortkey(account) ~ '^[01]' AND account ~ '^Assets:(MyFavouriteBank:Savings|MyFavouriteBank:Cash|MyLessFavouriteBank:Cash|Physical:Cash)'
+            GROUP BY datebin
+          link: ../../balance_sheet/?time={time}
+      type: echarts
+      script: *historical_graph_weekly
+
+    - title: MyAutomaticBroker
+      width: 50%
+      link: ../../income_statement/
+      queries:
+        - bql: |
+            SELECT 
+            date_bin(interval('7 days'), date, 1970-01-01) + INTERVAL('6 days') as datebin,
+            CONVERT(LAST(balance), '{{ledger.ccy}}', date_bin(interval('7 days'), LAST(date), 1970-01-01) + INTERVAL('6 days')) AS value
+            WHERE account_sortkey(account) ~ '^[01]' AND account ~ '^Assets:MyAutomaticBroker'
+            GROUP BY datebin
+          link: ../../balance_sheet/?time={time}
+      type: echarts
+      script: *historical_graph_weekly
+
+    - title: MyStockBroker
+      width: 50%
+      link: ../../income_statement/
+      queries:
+        - bql: |
+            SELECT 
+            date_bin(interval('7 days'), date, 1970-01-01) + INTERVAL('6 days') as datebin,
+            CONVERT(LAST(balance), '{{ledger.ccy}}', date_bin(interval('7 days'), LAST(date), 1970-01-01) + INTERVAL('6 days')) AS value
+            WHERE account_sortkey(account) ~ '^[01]' AND account ~ '^Assets:MyStockBroker'
+            GROUP BY datebin
+          link: ../../balance_sheet/?time={time}
+      type: echarts
+      script: *historical_graph_weekly
+
 utils:
   inline: |
     function iterateMonths(dateFirst, dateLast) {
