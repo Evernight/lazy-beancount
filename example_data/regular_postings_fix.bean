@@ -1,10 +1,13 @@
+; see issue and explanation: 
+; https://github.com/andreasgerstmayr/fava-dashboards/issues/28
+
 2023-12-03 * "Fake transaction for generating summaries"
-    recur: " / month"
+    recur: " / week"
   Assets:MyAutomaticBroker:RegularFix                0.000001 USD
   Equity:TechnicalPurposes
 
 2023-12-03 * "Fake transaction for generating summaries"
-    recur: " / month"
+    recur: " / week"
   Assets:MyStockBroker:RegularFix 0.000001 USD
   Equity:TechnicalPurposes
   
