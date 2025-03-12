@@ -28,6 +28,9 @@ plugin "beancount.ops.documents"
 ; option "documents" "documents"
 
 * Fava options
+** Other Fava options
+1970-01-01 custom "fava-option" "default-file" "manual_transactions.bean"
+
 ; You can switch default interface language if needed
 ; 2021-01-01 custom "fava-option" "language" "en"
 

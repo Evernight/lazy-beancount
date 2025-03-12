@@ -28,13 +28,6 @@ plugin "beancount.ops.documents"
 ; option "documents" "documents"
 
 * Fava options
-; You can switch default interface language if needed
-; 2021-01-01 custom "fava-option" "language" "en"
-
-; I've had this enabled for a while but then found that it's actually not more but
-; less intuitive once you get used to standard Beancount conventions
-; 1970-01-01 custom "fava-option" "invert-income-liabilities-equity" "True"
-
 ** Default page
 ; Redefine default starting page when you go to the Fava host (localhost by default)
 1970-01-01 custom "fava-option" "default-page" "extension/FavaDashboards/?dashboard=0"
@@ -50,6 +43,16 @@ plugin "beancount.ops.documents"
 1970-01-01 custom "fava-sidebar-link" "📜 #recurring" "/beancount/journal/?filter=%23recurring&time=month-12+to+day"
 1970-01-01 custom "fava-sidebar-link" "🚥 Budgets" "/beancount/account/Expenses/?r=changes&conversion=USD"
 1970-01-01 custom "fava-sidebar-link" "🔁 Reset filters" ".?"
+
+** Other Fava options
+1970-01-01 custom "fava-option" "default-file" "manual_transactions.bean"
+
+; You can switch default interface language if needed
+; 2021-01-01 custom "fava-option" "language" "en"
+
+; I've had this enabled for a while but then found that it's actually not more but
+; less intuitive once you get used to standard Beancount conventions
+; 1970-01-01 custom "fava-option" "invert-income-liabilities-equity" "True"
 
 ** Fava extensions
 ; Dashboards are a great feature that may partially work from the start
