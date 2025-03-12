@@ -1540,17 +1540,11 @@ dashboards:
         const currencyFormatter = utils.currencyFormatter(ledger.ccy);
         const months = utils.iterateMonths(ledger.dateFirst, ledger.dateLast).map((m) => `${m.month}/${m.year}`);
         const monthsByYear = Object.groupBy(utils.iterateMonths(ledger.dateFirst, ledger.dateLast), m => m.year);
-        let mostCommonYear = null;
-        let mostCommonYearMonths = 0;
-        for (let [year, months] of Object.entries(monthsByYear)) {
-          if (months.length > mostCommonYearMonths) {
-            mostCommonYear = year;
-            mostCommonYearMonths = months.length;
-          }
-        }
+        
         const query = panel.queries[0];
         const amounts = {};
-        
+        const counts = {};
+
         let maxAmount = 0;
         for (let row of query.result) {
           if (isNaN(row.value[ledger.ccy])) {
@@ -1562,11 +1556,27 @@ dashboards:
             amounts[row.date] += row.value[ledger.ccy];
           }
           maxAmount = Math.max(maxAmount, amounts[row.date]);
+
+          const year = row.date.substring(0, 4);
+          if (!counts[year]) {
+            counts[year] = 1;
+          } else {
+            counts[year] += 1;
+          }
         }
         const allValues = Object.values(amounts).sort((a, b) => a - b);
         const percentileValue = allValues[Math.floor(allValues.length * 0.95)];
 
         const maxScaleValue = percentileValue;
+
+        let mostMentionedYear = null;
+        let mostMentionedYearCounts = -1;
+        for (let [year, count] of Object.entries(counts)) {
+          if (count > mostMentionedYearCounts) {
+            mostMentionedYear = year;
+            mostMentionedYearCounts = count;
+          }
+        }
 
         return {
           tooltip: {
@@ -1590,7 +1600,7 @@ dashboards:
             left: 80,
             right: 100,
             cellSize: ['auto', 15],
-            range: mostCommonYear,
+            range: mostMentionedYear,
             splitLine: {
               lineStyle: {
                 color: outerLineStyleColor,
@@ -1653,6 +1663,7 @@ dashboards:
       template: |
         {% import "_query_table.html" as querytable %}
         {{ querytable.querytable(favaledger, None, panel.queries[0].result_types, panel.queries[0].result) }}
+
 - name: Travelling
   panels:
     - title: Travel Costs per Year 📅
@@ -1708,7 +1719,7 @@ dashboards:
             SELECT tags, CONVERT(position, '{{ledger.ccy}}', date) AS value
             WHERE account ~ '^Expenses:' AND 'travel' IN tags
             ORDER BY date ASC
-          link: ../../account/Expenses/?filter=#{travel}
+          link: ../../extension/FavaDashboards/?dashboard=4&filter=#{trip_tag}
       type: echarts
       script: |
         const currencyFormatter = utils.currencyFormatter(ledger.ccy);
@@ -1755,7 +1766,7 @@ dashboards:
             },
           ],
           onClick: (event) => {
-            const link = panel.queries[0].link.replace("{travel}", event.name);
+            const link = panel.queries[0].link.replace("{trip_tag}", event.name);
             window.open(helpers.urlFor(link));
           },
         };
