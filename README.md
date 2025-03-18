@@ -44,6 +44,8 @@ Full guide is located at https://lazy-beancount.xyz/. The approach roughly follo
 <img src="images/totals_example.png" width="40%" hspace="10" vspace="10"/>
 <img src="images/prices_page.png" width="40%" hspace="10" vspace="10" />
 <img src="images/config_accounts.png" width="40%" hspace="10" vspace="10" />
+<img src="images/beancount_import_interface.png" width="40%" hspace="10" vspace="10" />
+<img src="images/expenses_heatmap.png" width="40%" hspace="10" vspace="10" />
 <img src="images/demo_expenses.png" width="40%" hspace="10" vspace="10" />
 <img src="images/expenses_detailed.png" width="40%" hspace="10" vspace="10" />
 <img src="images/dashboards_sankey.png" width="40%" hspace="10" vspace="10" />
