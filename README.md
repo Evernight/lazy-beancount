@@ -10,8 +10,8 @@
 Lazy Beancount is [Beancount](https://github.com/beancount/beancount) accounting system packaged in Docker with batteries included:
 
 - [Fava](https://github.com/beancount/fava) with [fava-dashboards](https://github.com/andreasgerstmayr/fava-dashboards)
-- [Beancount-import](https://github.com/jbms/beancount-import) for automatic transaction categorization and review UI:
-  - Importers set up to work with it out of the box:
+- [Beancount-import](https://github.com/jbms/beancount-import) for automatic transaction categorisation and review UI:
+  - Importers set up to work out of the box:
     - Wise, Monzo, Revolut, IBKR ([Evernight/beancount-importers](https://github.com/Evernight/beancount-importers), [uabean](https://github.com/OSadovy/uabean/))
     - more importers can be integrated/enabled on request
   - configuration for multiple accounts using YAML config
@@ -133,4 +133,4 @@ This is mostly an integration project and would not have been possible without a
 # Feedback and contributions
 * Feel free to [create an issue](https://github.com/Evernight/lazy-beancount/issues) or contribute a fix.
 * [lazy-beancount.xyz](https://lazy-beancount.xyz/) has giscus connected to enable commenting directly at pages.
-* [Matrix chat](https://matrix.to/#/#lazy-beancount:matrix.org) for small questions.
+* [matrix chat](https://matrix.to/#/#lazy-beancount:matrix.org) for small questions.
