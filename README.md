@@ -10,14 +10,15 @@
 Lazy Beancount is [Beancount](https://github.com/beancount/beancount) accounting system packaged in Docker with batteries included:
 
 - [Fava](https://github.com/beancount/fava) with [fava-dashboards](https://github.com/andreasgerstmayr/fava-dashboards)
-- [Beancount-import](https://github.com/jbms/beancount-import) and some importers set up to work with it out of the box:
-  - from [Evernight/beancount-importers](https://github.com/Evernight/beancount-importers): Wise, Monzo, Revolut
-  - IBKR (adapted from [uabean](https://github.com/OSadovy/uabean/))
-  - configuration for multiple accounts using YAML config, plus a little helper UI for statement file upload
-  - more importers can be integrated/enabled on request
-- [Streamlit](https://github.com/streamlit/streamlit)-based interface for:
-  - manual input of total values of the accounts for automatic balancing
-  - fetching commodity prices via a couple clicks in the browser
+- [Beancount-import](https://github.com/jbms/beancount-import) for automatic transaction categorization and review UI:
+  - Importers set up to work with it out of the box:
+    - Wise, Monzo, Revolut, IBKR ([Evernight/beancount-importers](https://github.com/Evernight/beancount-importers), [uabean](https://github.com/OSadovy/uabean/))
+    - more importers can be integrated/enabled on request
+  - configuration for multiple accounts using YAML config
+  - UI for statement file upload
+- Additional web interfaces ([Streamlit](https://github.com/streamlit/streamlit)-based) for:
+  - regularly providing total values of the accounts for automatic balancing
+  - fetching currency/commodity prices
 - Pre-installed plugins: 
   - [beancount-lazy-plugins](https://github.com/Evernight/beancount-lazy-plugins): [valuation](https://github.com/Evernight/beancount-lazy-plugins?tab=readme-ov-file#valuation), [filter_map](https://github.com/Evernight/beancount-lazy-plugins?tab=readme-ov-file#filter_map), [group_pad_transactions](https://github.com/Evernight/beancount-lazy-plugins?tab=readme-ov-file#group_pad_transactions)
   - [beancount_share](https://github.com/Akuukis/beancount_share), [beancount_interpolate](https://github.com/Akuukis/beancount_interpolate)
@@ -26,18 +27,18 @@ Lazy Beancount is [Beancount](https://github.com/beancount/beancount) accounting
   - [fava-portfolio-returns](https://github.com/andreasgerstmayr/fava-portfolio-returns)
   - [fava_investor](https://github.com/redstreet/fava_investor)
 - Configuration generator supporting any number of accounts (cash, investments, savings, crypto), multiple currencies and auto-conversions
-- Extensive configuration example including common useful shortcuts and some useful fixes (with comments)
+- Extensive configuration example with comments, including common useful shortcuts and solutions to common problems 
 - All tested together (manually) in a coherent setup
 
 with the goal to enable **gradual** and **incremental** migration of personal finances into Beancount.
 
 ![lazy-beancount](images/demo_dashboard.png)
 
-Full guide is located at https://lazy-beancount.xyz/. The approach roughly follows these principles:
+Full guide is located at https://lazy-beancount.xyz/. The approach follows these principles:
 - Some of the values should be tracked precisely (e.g. net worth)
 - Other things are an approximation (e.g. in expenses breakdown, unclassified or some misclassified entires are ok)
 - Data entry should be automated or easy
-- But it should be possible to track things to any level of precision if you need to
+- But it should be possible to track things to any level of precision if you choose to
 
 # Screenshots
 <p>
