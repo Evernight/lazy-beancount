@@ -14,11 +14,11 @@ Lazy Beancount is [Beancount](https://github.com/beancount/beancount) accounting
   - Importers set up to work out of the box:
     - Wise, Monzo, Revolut, IBKR ([Evernight/beancount-importers](https://github.com/Evernight/beancount-importers), [uabean](https://github.com/OSadovy/uabean/))
     - more importers can be integrated/enabled on request
-  - configuration for multiple accounts using YAML config
+  - configuration for multiple accounts via YAML config file
   - UI for statement file upload
 - Additional web interfaces ([Streamlit](https://github.com/streamlit/streamlit)-based) for:
   - regularly providing total values of the accounts for automatic balancing
-  - fetching currency/commodity prices
+  - fetching currency rates / commodity prices
 - Pre-installed plugins: 
   - [beancount-lazy-plugins](https://github.com/Evernight/beancount-lazy-plugins): [valuation](https://github.com/Evernight/beancount-lazy-plugins?tab=readme-ov-file#valuation), [filter_map](https://github.com/Evernight/beancount-lazy-plugins?tab=readme-ov-file#filter_map), [group_pad_transactions](https://github.com/Evernight/beancount-lazy-plugins?tab=readme-ov-file#group_pad_transactions)
   - [beancount_share](https://github.com/Akuukis/beancount_share), [beancount_interpolate](https://github.com/Akuukis/beancount_interpolate)
@@ -26,7 +26,8 @@ Lazy Beancount is [Beancount](https://github.com/beancount/beancount) accounting
   - [generate_base_ccy_prices](https://github.com/tarioch/beancounttools/blob/master/src/tariochbctools/plugins/generate_base_ccy_prices.py)
   - [fava-portfolio-returns](https://github.com/andreasgerstmayr/fava-portfolio-returns)
   - [fava_investor](https://github.com/redstreet/fava_investor)
-- Configuration generator supporting any number of accounts (cash, investments, savings, crypto), multiple currencies and auto-conversions
+- Configuration generator allows to define any number of accounts (cash, investments, savings, crypto)
+- Multiple currencies and auto-conversions between them
 - Extensive configuration example with comments, including common useful shortcuts and solutions to common problems 
 - All tested together (manually) in a coherent setup
 
