@@ -35,6 +35,7 @@ fava-investor==1.0.1
 beancount_share @ git+https://github.com/Akuukis/beancount_share.git@8f925422b9947e88babbeab3fdf7d71c53c9aa9e
 beancount_interpolate @ git+https://github.com/Akuukis/beancount_interpolate.git@e9c1241d5980781d270a7cc5c17cf2ca99c10faa
 beancount-reds-plugins @ git+https://github.com/redstreet/beancount_reds_plugins@081acc4c7751d354d1c1481891fc983710428e7d
+autobean @ git+https://github.com/SEIAROTg/autobean@b14d040eaa75a55731ef650e76425d7d356ec2b9
 
 # Plugins without PyPI releases
 beancount-lazy-plugins @ git+https://github.com/Evernight/beancount-lazy-plugins@a6f20b938198b61097498e44169f6800d1fa88ea
