@@ -2050,6 +2050,42 @@ dashboards:
       type: echarts
       script: *historical_graph_weekly
 
+- name: Subscriptions
+  panels:
+    - title: Quick links 🔗
+      width: 100%
+      height: 20px
+      type: html
+      script: |
+        return `<div style="font-size: 15px; text-align: center;">
+          <a style="font-weight: bold;" href="?dashboard=4&time=month-12+to+month-1&filter=%23recurring">Expenses breakdown</a> · 
+          <a style="font-weight: bold;" href="/beancount/journal/?filter=%23recurring&time=month-12+to+day#">Journal</a> ·
+          <a style="font-weight: bold;" href="/beancount/journal/?filter=-%23recurring+-%23fake+any%28account%3A%27Expenses%27%29+all%28-account%3A%27Liabilities%27%29+all%28-account%3A%27Income%27%29+-narration%3A%27Padding.*%27&time=month-12+to+day#">Candidates</a>
+        </div>`;
+    - title: Notes
+      width: 100%
+      height: 30px
+      type: html
+      script: |
+        return `<div style="font-size: 15px; text-align: center;">
+          <div>
+          Transactions marked as <b>#recurring</b> will appear here. Add <b>subscriptionName</b> metadata to transaction manually or using <b>filterMap</b> plugin. <br /> You can also follow examples on using <b>#subscription-year</b> tag.
+        </div>`;
+    - title: Recurring (last year)
+      queries:
+        - bql: |
+            SELECT
+            COALESCE(STR(entry.meta['subscriptionName']), payee, MAXWIDTH(description, 15)) AS name,
+            account, CONVERT(SUM(position), 'EUR', LAST(date)) AS value, COUNT(1) AS count, LAST(date) as recent, JOINSTR(tags) AS tags
+            WHERE account ~ '^Expenses' AND 'recurring' in tags 
+            AND date >= DATE_ADD({{ledger.dateLast}}, -365)
+            GROUP BY name, account, tags
+            ORDER BY value DESC
+      type: jinja2
+      template: |
+        {% import "_query_table.html" as querytable %}
+        {{ querytable.querytable(favaledger, None, panel.queries[0].result_types, panel.queries[0].result) }}
+
 utils:
   inline: |
     function iterateMonths(dateFirst, dateLast) {
