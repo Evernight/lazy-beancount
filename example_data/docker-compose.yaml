@@ -12,5 +12,5 @@ services:
     environment:
       - FAVA_PORT=5003
       - BEANCOUNT_IMPORT_PORT=8101
-      - LAZY_BEANCOUNT_HOST="localhost"
+      - LAZY_BEANCOUNT_HOST=localhost
       - LAZY_BEANCOUNT_PORT=8777
