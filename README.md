@@ -33,7 +33,7 @@ Lazy Beancount is [Beancount](https://github.com/beancount/beancount) accounting
 
 with the goal to enable **gradual** and **incremental** migration of personal finances into Beancount.
 
-![lazy-beancount](images/demo_dashboard.png)
+![lazy-beancount](images/demo_dashboard_0_3_5.png)
 
 Full guide is located at https://lazy-beancount.xyz/. The approach follows these principles:
 - Some of the values should be tracked precisely (e.g. net worth)
