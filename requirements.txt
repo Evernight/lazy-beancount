@@ -4,8 +4,9 @@ beancount==3.1.0
 # changes from upstream fava:
 # * includes behaviour change for filters: https://github.com/beancount/fava/pull/1969
 # * includes dark mode switch: https://github.com/beancount/fava/pull/1950
+# * includes filter presets feature
 # browse full changes history here: https://github.com/Evernight/fava/commits/custom-fava-build/
-fava @ https://github.com/Evernight/fava/raw/5650f901c2b034bc7ade8058ccfe6af7dfa08ef8/prebuilt_wheels/fava-1.31.dev24+g9ed5ccd3.tar.gz#sha1=04df229d031b78f543d857c508dd0e6b936b95d3
+fava @ https://github.com/Evernight/fava/raw/e5b1e94ced91144816b07808c79fb383f4616f8e/prebuilt_wheels/fava-1.31.dev25+g4c745bc5.tar.gz#sha1=1e24b9583fd802bc4255a3ab9290154465ceed74
 # not on pypi, using fixed commit, also depending on Beancount v2
 beanprice @ git+https://github.com/beancount/beanprice@7a6efa7e0b0c9567df27c98e3fd4e8fc3e1c7117
 # last commit before ec250696e1955edbbef8d01e5a33030be94d935c that breaks current Fava compatibility
