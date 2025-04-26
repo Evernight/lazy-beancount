@@ -40,5 +40,5 @@ autobean @ git+https://github.com/SEIAROTg/autobean@b14d040eaa75a55731ef650e7642
 
 # Plugins without PyPI releases
 beancount-lazy-plugins @ git+https://github.com/Evernight/beancount-lazy-plugins@cf4780d9c8a259ac4d7c06cdde984bbc686fa9d6
-beancount-generate-base-ccy-prices @ git+https://github.com/Evernight/beancount-generate-base-ccy-prices@fd2bb3429a4f2704e2be3d804917bbf73ed2ca6b
+beancount-generate-base-ccy-prices @ git+https://github.com/Evernight/beancount-generate-base-ccy-prices@b40999e2b2307f7ce121ce06821628ec0ad70f91
 beancount-importers @ git+https://github.com/Evernight/beancount-importers@06fcd1200d3825eb7a0669f35bd313b2efcaf8cd
