@@ -552,29 +552,28 @@ dashboards:
       color: "#3ba272"
       queries:
         - bql: |
-            SELECT year, month,
-            CONVERT(LAST(balance), '{{ledger.ccy}}', DATE_TRUNC('month', FIRST(date)) + INTERVAL('1 month') - INTERVAL('1 day')) AS value
+            SELECT 
+            date_bin(interval('7 days'), date, 1970-01-01) + INTERVAL('6 days') as datebin,
+            CONVERT(LAST(balance), '{{ledger.ccy}}', date_bin(interval('7 days'), LAST(date), 1970-01-01) + INTERVAL('6 days')) AS value
             WHERE account_sortkey(account) ~ '^[01]'
-            GROUP BY year, month
+            GROUP BY datebin
           link: ../../balance_sheet/?time={time}
       type: echarts
-      script: &historical_graph |
+      script: &historical_graph_weekly |
         const currencyFormatter = utils.currencyFormatter(ledger.ccy);
-        const months = utils.iterateMonths(ledger.dateFirst, ledger.dateLast).map((m) => `${m.month}/${m.year}`);
+        // const months = utils.iterateMonths(ledger.dateFirst, ledger.dateLast).map((m) => `${m.month}/${m.year}`);
         const amounts = {};
 
-        // the beancount query only returns months where there was at least one matching transaction, therefore we group by month
         for (let row of panel.queries[0].result) {
-          amounts[`${row.month}/${row.year}`] = row.value[ledger.ccy];
+          amounts[`${row.datebin}`] = row.value[ledger.ccy];
         }
-
         return {
           tooltip: {
             trigger: "axis",
             valueFormatter: currencyFormatter,
           },
           xAxis: {
-            data: months,
+            data: Object.keys(amounts),
           },
           yAxis: {
             axisLabel: {
@@ -587,13 +586,12 @@ dashboards:
               color: panel.color,
               smooth: true,
               connectNulls: true,
-              data: months.map((month) => amounts[month]),
+              data: Object.values(amounts),
               areaStyle: {}
             },
           ],
           onClick: (event) => {
-            const [month, year] = event.name.split("/");
-            const link = panel.queries[0].link.replace("{time}", `${year}-${month.padStart(2, "0")}`);
+            const link = panel.queries[0].link.replace("{time}", `${event.name}`);
             window.open(helpers.urlFor(link));
           },
         };
@@ -601,41 +599,45 @@ dashboards:
     - title: Cash
       width: 50%
       link: ../../income_statement/
+      color: "#e9c366"
       queries:
         - bql: |
-            SELECT year, month,
-            CONVERT(LAST(balance), '{{ledger.ccy}}', DATE_TRUNC('month', FIRST(date)) + INTERVAL('1 month') - INTERVAL('1 day')) AS value
+            SELECT 
+            date_bin(interval('7 days'), date, 1970-01-01) + INTERVAL('6 days') as datebin,
+            CONVERT(LAST(balance), '{{ledger.ccy}}', date_bin(interval('7 days'), LAST(date), 1970-01-01) + INTERVAL('6 days')) AS value
             WHERE account_sortkey(account) ~ '^[01]' AND account ~ '^Assets:(MyFavouriteBank:Savings|MyFavouriteBank:Cash|MyLessFavouriteBank:Cash|Physical:Cash)'
-            GROUP BY year, month
+            GROUP BY datebin
           link: ../../balance_sheet/?time={time}
       type: echarts
-      script: *historical_graph
+      script: *historical_graph_weekly
 
     - title: MyAutomaticBroker
       width: 50%
       link: ../../income_statement/
       queries:
         - bql: |
-            SELECT year, month,
-            CONVERT(LAST(balance), '{{ledger.ccy}}', DATE_TRUNC('month', FIRST(date)) + INTERVAL('1 month') - INTERVAL('1 day')) AS value
+            SELECT 
+            date_bin(interval('7 days'), date, 1970-01-01) + INTERVAL('6 days') as datebin,
+            CONVERT(LAST(balance), '{{ledger.ccy}}', date_bin(interval('7 days'), LAST(date), 1970-01-01) + INTERVAL('6 days')) AS value
             WHERE account_sortkey(account) ~ '^[01]' AND account ~ '^Assets:MyAutomaticBroker'
-            GROUP BY year, month
+            GROUP BY datebin
           link: ../../balance_sheet/?time={time}
       type: echarts
-      script: *historical_graph
+      script: *historical_graph_weekly
 
     - title: MyStockBroker
       width: 50%
       link: ../../income_statement/
       queries:
         - bql: |
-            SELECT year, month,
-            CONVERT(LAST(balance), '{{ledger.ccy}}', DATE_TRUNC('month', FIRST(date)) + INTERVAL('1 month') - INTERVAL('1 day')) AS value
+            SELECT 
+            date_bin(interval('7 days'), date, 1970-01-01) + INTERVAL('6 days') as datebin,
+            CONVERT(LAST(balance), '{{ledger.ccy}}', date_bin(interval('7 days'), LAST(date), 1970-01-01) + INTERVAL('6 days')) AS value
             WHERE account_sortkey(account) ~ '^[01]' AND account ~ '^Assets:MyStockBroker'
-            GROUP BY year, month
+            GROUP BY datebin
           link: ../../balance_sheet/?time={time}
       type: echarts
-      script: *historical_graph
+      script: *historical_graph_weekly
 
 - name: Income and Expenses
   panels:
@@ -1304,19 +1306,6 @@ dashboards:
 
 - name: Expenses Detailed
   panels:
-    - title: Quick links 🔗
-      width: 100%
-      height: 20px
-      type: html
-      script: |
-        return `<div style="font-size: 15px; text-align: center;">
-          <a style="font-weight: bold;" href="?dashboard=4&time=month">Month</a> · 
-          <a style="font-weight: bold;" href="?dashboard=4&time=month-1">Month-1</a> ·
-          <a style="font-weight: bold;" href="?dashboard=4&time=month-2">Month-2</a> ·
-          <a style="font-weight: bold;" href="?dashboard=4&time=quarter">Quarter</a> ·
-          <a style="font-weight: bold;" href="?dashboard=4&time=year">Year</a> · 
-          <a style="font-weight: bold;" href="?dashboard=4&time=year&filter=all%28-account%3A%22Expenses%3ATaxes%22%29">Year (ex-Taxes)</a>
-        </div>`;
     - title: Income 💰
       width: 33.3%
       height: 60px
@@ -1516,7 +1505,7 @@ dashboards:
             }
           },
         };
-
+        
     - title: Calendar Heatmap 📅
       width: 100%
       height: 150px
@@ -1628,7 +1617,6 @@ dashboards:
           },
         };
         
-
     - title: Notes
       width: 100%
       height: 90px
@@ -1956,100 +1944,6 @@ dashboards:
           },
         };
 
-- name: Accounts (HF)
-  panels:
-    - title: Net Worth
-      width: 100%
-      link: ../../income_statement/
-      color: "#3ba272"
-      queries:
-        - bql: |
-            SELECT 
-            date_bin(interval('7 days'), date, 1970-01-01) + INTERVAL('6 days') as datebin,
-            CONVERT(LAST(balance), '{{ledger.ccy}}', date_bin(interval('7 days'), LAST(date), 1970-01-01) + INTERVAL('6 days')) AS value
-            WHERE account_sortkey(account) ~ '^[01]'
-            GROUP BY datebin
-          link: ../../balance_sheet/?time={time}
-      type: echarts
-      script: &historical_graph_weekly |
-        const currencyFormatter = utils.currencyFormatter(ledger.ccy);
-        // const months = utils.iterateMonths(ledger.dateFirst, ledger.dateLast).map((m) => `${m.month}/${m.year}`);
-        const amounts = {};
-
-        for (let row of panel.queries[0].result) {
-          amounts[`${row.datebin}`] = row.value[ledger.ccy];
-        }
-        return {
-          tooltip: {
-            trigger: "axis",
-            valueFormatter: currencyFormatter,
-          },
-          xAxis: {
-            data: Object.keys(amounts),
-          },
-          yAxis: {
-            axisLabel: {
-              formatter: currencyFormatter,
-            },
-          },
-          series: [
-            {
-              type: "line",
-              color: panel.color,
-              smooth: true,
-              connectNulls: true,
-              data: Object.values(amounts),
-              areaStyle: {}
-            },
-          ],
-          onClick: (event) => {
-            const link = panel.queries[0].link.replace("{time}", `${event.name}`);
-            window.open(helpers.urlFor(link));
-          },
-        };
-
-    - title: Cash
-      width: 50%
-      link: ../../income_statement/
-      queries:
-        - bql: |
-            SELECT 
-            date_bin(interval('7 days'), date, 1970-01-01) + INTERVAL('6 days') as datebin,
-            CONVERT(LAST(balance), '{{ledger.ccy}}', date_bin(interval('7 days'), LAST(date), 1970-01-01) + INTERVAL('6 days')) AS value
-            WHERE account_sortkey(account) ~ '^[01]' AND account ~ '^Assets:(MyFavouriteBank:Savings|MyFavouriteBank:Cash|MyLessFavouriteBank:Cash|Physical:Cash)'
-            GROUP BY datebin
-          link: ../../balance_sheet/?time={time}
-      type: echarts
-      script: *historical_graph_weekly
-
-    - title: MyAutomaticBroker
-      width: 50%
-      link: ../../income_statement/
-      queries:
-        - bql: |
-            SELECT 
-            date_bin(interval('7 days'), date, 1970-01-01) + INTERVAL('6 days') as datebin,
-            CONVERT(LAST(balance), '{{ledger.ccy}}', date_bin(interval('7 days'), LAST(date), 1970-01-01) + INTERVAL('6 days')) AS value
-            WHERE account_sortkey(account) ~ '^[01]' AND account ~ '^Assets:MyAutomaticBroker'
-            GROUP BY datebin
-          link: ../../balance_sheet/?time={time}
-      type: echarts
-      script: *historical_graph_weekly
-
-    - title: MyStockBroker
-      width: 50%
-      link: ../../income_statement/
-      queries:
-        - bql: |
-            SELECT 
-            date_bin(interval('7 days'), date, 1970-01-01) + INTERVAL('6 days') as datebin,
-            CONVERT(LAST(balance), '{{ledger.ccy}}', date_bin(interval('7 days'), LAST(date), 1970-01-01) + INTERVAL('6 days')) AS value
-            WHERE account_sortkey(account) ~ '^[01]' AND account ~ '^Assets:MyStockBroker'
-            GROUP BY datebin
-          link: ../../balance_sheet/?time={time}
-      type: echarts
-      script: *historical_graph_weekly
-
 - name: Subscriptions
   panels:
     - title: Quick links 🔗
@@ -2060,7 +1954,7 @@ dashboards:
         return `<div style="font-size: 15px; text-align: center;">
           <a style="font-weight: bold;" href="?dashboard=4&time=month-12+to+month-1&filter=%23recurring">Expenses breakdown</a> · 
           <a style="font-weight: bold;" href="/beancount/journal/?filter=%23recurring&time=month-12+to+day#">Journal</a> ·
-          <a style="font-weight: bold;" href="/beancount/journal/?filter=-%23recurring+-%23fake+any%28account%3A%27Expenses%27%29+all%28-account%3A%27Liabilities%27%29+all%28-account%3A%27Income%27%29+-narration%3A%27Padding.*%27&time=month-12+to+day#">Candidates</a>
+          <a style="font-weight: bold;" href="/beancount/journal/?filter=-%23recurring+-%23fake+any%28account%3A%27Expenses%27%29+all%28-account%3A%27Liabilities%27%29+all%28-account%3A%27Income%27%29+-narration%3A%27Padding.*%27&time=month-12+to+day#">Unlabeled candidates</a>
         </div>`;
     - title: Notes
       width: 100%
