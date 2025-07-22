@@ -1301,8 +1301,7 @@ dashboards:
         - bql: SELECT date, account, MAXWIDTH(narration, 80) AS narration, SUM(CONVERT(position, '{{ledger.ccy}}')) AS position, JOINSTR(tags) as tags WHERE account ~ "^Expenses:" ORDER BY position DESC LIMIT 30
       type: jinja2
       template: |
-        {% import "_query_table.html" as querytable %}
-        {{ querytable.querytable(favaledger, None, panel.queries[0].result_types, panel.queries[0].result) }}
+        <svelte-component type="query-table"><script type="application/json">{{ panel.queries[0].querytable|tojson }}</script></svelte-component>
 
 - name: Expenses Detailed
   panels:
@@ -1640,8 +1639,7 @@ dashboards:
         - bql: SELECT date, account, MAXWIDTH(narration, 80) AS narration, SUM(CONVERT(position, '{{ledger.ccy}}')) AS position, JOINSTR(tags) as tags WHERE account ~ "^Expenses:" ORDER BY position DESC LIMIT 30
       type: jinja2
       template: |
-        {% import "_query_table.html" as querytable %}
-        {{ querytable.querytable(favaledger, None, panel.queries[0].result_types, panel.queries[0].result) }}
+        <svelte-component type="query-table"><script type="application/json">{{ panel.queries[0].querytable|tojson }}</script></svelte-component>
 
     - title: Top negative (or small) expenses
       width: 100%
@@ -1649,8 +1647,7 @@ dashboards:
         - bql: SELECT date, account, MAXWIDTH(narration, 80) AS narration, SUM(CONVERT(position, '{{ledger.ccy}}')) AS position, JOINSTR(tags) as tags WHERE account ~ "^Expenses:" AND position.units.number != 0 ORDER BY position ASC LIMIT 15
       type: jinja2
       template: |
-        {% import "_query_table.html" as querytable %}
-        {{ querytable.querytable(favaledger, None, panel.queries[0].result_types, panel.queries[0].result) }}
+        <svelte-component type="query-table"><script type="application/json">{{ panel.queries[0].querytable|tojson }}</script></svelte-component>
 
 - name: Travelling
   panels:
@@ -1977,8 +1974,7 @@ dashboards:
             ORDER BY value DESC
       type: jinja2
       template: |
-        {% import "_query_table.html" as querytable %}
-        {{ querytable.querytable(favaledger, None, panel.queries[0].result_types, panel.queries[0].result) }}
+        <svelte-component type="query-table"><script type="application/json">{{ panel.queries[0].querytable|tojson }}</script></svelte-component>
 
 utils:
   inline: |
