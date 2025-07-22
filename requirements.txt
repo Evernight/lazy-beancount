@@ -1,19 +1,21 @@
+# 3.1.0 and some later updates
 beancount==3.1.0
 
-# fava prebuilt with https://github.com/beancount/fava/pull/1950 to install via wheel
-# changes from upstream fava:
+# custom fava wheel prebuilt, changes from upstream fava:
 # * includes behaviour change for filters: https://github.com/beancount/fava/pull/1969
-# * includes dark mode switch: https://github.com/beancount/fava/pull/1950
-# * includes filter presets feature
-# browse full changes history here: https://github.com/Evernight/fava/commits/custom-fava-build/
-fava @ https://github.com/Evernight/fava/raw/e5b1e94ced91144816b07808c79fb383f4616f8e/prebuilt_wheels/fava-1.31.dev25+g4c745bc5.tar.gz#sha1=1e24b9583fd802bc4255a3ab9290154465ceed74
-# not on pypi, using fixed commit, also depending on Beancount v2
-beanprice @ git+https://github.com/beancount/beanprice@7a6efa7e0b0c9567df27c98e3fd4e8fc3e1c7117
+# * includes filter presets feature: https://github.com/beancount/fava/pull/1994
+# browse full changes history here: https://github.com/beancount/fava/compare/main...Evernight:fava:custom-fava-build-2
+fava @ https://github.com/Evernight/fava/raw/ba88909c2cc8ffe3afb3bec45a1b61dfedc3e135/prebuilt_wheels/fava-1.30.4.tar.gz#sha1=d96ab47056bddc12b7b497957e94be786e09371e
+# fava @ git+https://github.com/beancount/fava.git@72d7504e6a86e72654d3974d2ca3ee3f3982f6ba
+
+# not on pypi, using fixed commit
+beanprice @ git+https://github.com/beancount/beanprice.git@f649ae69edd5a8c7ee2618dfebd219cc0119635f
 # last commit before ec250696e1955edbbef8d01e5a33030be94d935c that breaks current Fava compatibility
 beanquery @ git+https://github.com/beancount/beanquery.git@4a0e62a61e64807c9cd01ce32fb24721907b4c3b
 pricehist==1.4.12
 
-# this version resolution needed for features compatibility, need to double-check if it's needed anymore
+# this version resolution needed for features compatibility
+# double-check if specifying it is still required
 numpy==1.26.4
 
 # missing requirements for beancount-import
@@ -25,17 +27,21 @@ streamlit_option_menu==0.3.13
 streamlit_ace==0.1.1
 streamlit-echarts==0.4.0
 
+# pyarrow 21 doesn't get built with older version of streamlit
+# revisit after upgrading streamlit
+pyarrow==16.1.0
+
 # Fava extensions
 # fava-dashboards with local fixes for the ThemeToggle switch to work correctly (see https://github.com/beancount/fava/pull/1950)
-fava-dashboards @ git+https://github.com/Evernight/fava-dashboards.git@9e89792c985935ae610a096625399fa558ba59bf
+fava-dashboards @ git+https://github.com/Evernight/fava-dashboards.git@cf5bf7d3e49fff8daea47a9b7b64cc2c9fea537e
 # fava-portfolio-returns also with the fix for the dark-mode
-fava-portfolio-returns @ git+https://github.com/Evernight/fava-portfolio-returns.git@7be2b3a7a3b6d18bead952391eea9dededb2b3ae
+fava-portfolio-returns @ git+https://github.com/Evernight/fava-portfolio-returns.git@df5b200452fbe0ba82722a6b713fd5e4567b23e8
 fava-investor==1.0.1
 
 # Beancount plugins
-beancount_share @ git+https://github.com/Akuukis/beancount_share.git@8f925422b9947e88babbeab3fdf7d71c53c9aa9e
+beancount_share @ git+https://github.com/Akuukis/beancount_share.git@4101c45e16948c0683520cebcf88afe4862224c4
 beancount_interpolate @ git+https://github.com/Akuukis/beancount_interpolate.git@e9c1241d5980781d270a7cc5c17cf2ca99c10faa
-beancount-reds-plugins @ git+https://github.com/redstreet/beancount_reds_plugins@081acc4c7751d354d1c1481891fc983710428e7d
+beancount-reds-plugins @ git+https://github.com/redstreet/beancount_reds_plugins@41af12d13c6ba5b2949b2939dfa180f43a5cb307
 autobean @ git+https://github.com/SEIAROTg/autobean@b14d040eaa75a55731ef650e76425d7d356ec2b9
 
 # Plugins without PyPI releases
