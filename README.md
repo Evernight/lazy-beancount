@@ -14,11 +14,11 @@ Lazy Beancount is [Beancount](https://github.com/beancount/beancount) accounting
   - Importers set up to work out of the box:
     - Wise, Monzo, Revolut, IBKR ([Evernight/beancount-importers](https://github.com/Evernight/beancount-importers), [uabean](https://github.com/OSadovy/uabean/))
     - more importers can be integrated/enabled on request
-  - configuration for multiple accounts via YAML config file
+  - configuration for multiple accounts via [YAML config file](https://lazy-beancount.xyz/docs/stage2_expenses/automated_import/#lazy-beancount-ui)
   - UI for statement file upload
 - Additional web interfaces ([Streamlit](https://github.com/streamlit/streamlit)-based) for:
-  - regularly providing total values of the accounts for automatic balancing
-  - fetching currency rates / commodity prices
+  - regularly providing [total values](https://lazy-beancount.xyz/docs/stage1_totals/motivation/) of the accounts for automatic balancing
+  - [fetching](https://lazy-beancount.xyz/docs/stage1_totals/currencies/#conversion-rates) currency rates / commodity prices
 - Pre-installed plugins: 
   - collections:
     - [beancount-lazy-plugins](https://github.com/Evernight/beancount-lazy-plugins) ([valuation](https://github.com/Evernight/beancount-lazy-plugins?tab=readme-ov-file#valuation), [filter_map](https://github.com/Evernight/beancount-lazy-plugins?tab=readme-ov-file#filter_map), [group_pad_transactions](https://github.com/Evernight/beancount-lazy-plugins?tab=readme-ov-file#group_pad_transactions))
@@ -26,9 +26,9 @@ Lazy Beancount is [Beancount](https://github.com/beancount/beancount) accounting
     - [autobean](https://github.com/SEIAROTg/autobean/tree/master/autobean/) ([stock_split](https://github.com/SEIAROTg/autobean/tree/master/autobean/stock_split), [share](https://github.com/SEIAROTg/autobean/tree/master/autobean/share), and more)
   - large plugins: [fava-dashboards](https://github.com/andreasgerstmayr/fava-dashboards), [fava-portfolio-returns](https://github.com/andreasgerstmayr/fava-portfolio-returns), [fava_investor](https://github.com/redstreet/fava_investor)
   - smaller ones: [beancount_share](https://github.com/Akuukis/beancount_share), [beancount_interpolate](https://github.com/Akuukis/beancount_interpolate), [generate_base_ccy_prices](https://github.com/tarioch/beancounttools/blob/master/src/tariochbctools/plugins/generate_base_ccy_prices.py)
-- Configuration generator allows to define any number of accounts (cash, investments, savings, crypto)
-- Multiple currencies and auto-conversions between them
-- Extensive configuration example with comments, including common useful shortcuts and solutions to common problems 
+- [Configuration generator](https://lazy-beancount.xyz/docs/stage1_totals/using_ui/#defining-accounts) allows to define any number of accounts (cash, investments, savings, crypto, any other assets)
+- Multiple [currencies](https://lazy-beancount.xyz/docs/stage1_totals/currencies/) and auto-conversions between them
+- Extensive configuration example with comments, including common useful shortcuts and [solutions to common problems](https://lazy-beancount.xyz/docs/stage4_improvements/overview/) 
 - All tested together (manually) in a coherent setup
 
 with the goal to enable **gradual** and **incremental** migration of personal finances into Beancount.
