@@ -131,6 +131,9 @@ This is mostly an integration project and would not have been possible without a
 * [full-fledged-hledger](https://github.com/adept/full-fledged-hledger)
 * [hledger-docker](https://github.com/adept/hledger-docker)
 
+# See also
+* [beancount-plugin-tax-uk](https://github.com/Evernight/beancount-plugin-tax-uk/)
+
 # Feedback and contributions
 * Feel free to [create an issue](https://github.com/Evernight/lazy-beancount/issues) or contribute a fix.
 * [lazy-beancount.xyz](https://lazy-beancount.xyz/) has giscus connected to enable commenting directly at pages.
