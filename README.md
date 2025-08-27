@@ -53,7 +53,8 @@ Full guide is located at https://lazy-beancount.xyz/. The approach follows these
 <img src="images/dashboards_sankey.png" width="40%" hspace="10" vspace="10" />
 </p>
 
-# Setup (docker-compose, recommended)
+# Setup (docker-compose: recommended)
+Make sure you have Docker [installed](https://docs.docker.com/engine/install/) first. Then:
 
     git clone https://github.com/Evernight/lazy-beancount
 
@@ -61,9 +62,9 @@ Full guide is located at https://lazy-beancount.xyz/. The approach follows these
     env UID=$(id -u) GID=$(id -g) docker compose up
 
 This will pull repository with the example and config templates, and also pull and run the latest version of the package from the [Docker Hub](https://hub.docker.com/r/vandereer/lazy-beancount/tags).
-After this is done, go to http://localhost:8777/.
+The service will start at http://localhost:8777/ by default.
 
-Fava is also available on port 5003, importer interface is available on port 8101 (ports are overridable via config in docker-compose.yml).
+Fava is also available on [port 5003](http://localhost:5003/), importer interface is available on [port 8101](http://localhost:8101/) (ports are overridable via config in docker-compose.yml).
 
 On Mac you can also remove ```user``` parameter from ```docker-compose.yaml``` and just use ```docker compose up```
 
@@ -92,9 +93,9 @@ Commands are available in the container as:
 
 You can also run container using Podman, via ```lazy_beancount_podman.sh``` script.
 
-# Setup (local, conda, for development)
+# Setup (local, conda/venv: development)
 
-If you want to be able to upgrade individual packages and experiment with other (and your own) plugins or additional importers, you may go down this route.
+If you want to be able to upgrade individual packages and experiment with other (and your own) plugins or additional importers, use venv or conda to make sure you run correct dependencies.
 
 First, clone this repository into your desired location
 
@@ -121,7 +122,7 @@ Run Fava on your ledger from the repository folder
 Go to http://127.0.0.1:5000 and explore Fava.
 
 ## Note
-I'd not recommend exposing the ports, various system and data through a public server unless you really know what you're doing. This setup has not been developed and tested for security and authentication when run as a public service.
+I'd not recommend exposing the ports, various system and data through a public server unless you really know what you're doing. This setup has not been developed and tested for security and authentication when run as a public service. If you're interested in self-hosting Lazy Beancount, vote for the [feature](https://github.com/Evernight/lazy-beancount/issues/10) or feel free to contribute ideas and code.
 
 # Acknowledgements
 This is mostly an integration project and would not have been possible without all of the great code from authors and contributors of all the repositories mentioned above, the Beancount and plain text accounting community. Please support, star and otherwise contribute to respective projects.
