@@ -91,11 +91,11 @@ Commands are available in the container as:
 
     docker exec -it lazybean bean-price example_data/main.bean -i --date=2024-01-05
 
-You can also run container using Podman, via ```lazy_beancount_podman.sh``` script.
+You can also run container using Podman, adding "podman" as an additional argument to the ```lazy_beancount.sh``` script (e.g. ```lazy_beancount.sh data podman```).
 
 # Setup (local, conda/venv: development)
 
-If you want to be able to upgrade individual packages and experiment with other (and your own) plugins or additional importers, use venv or conda to make sure you run correct dependencies.
+If you want to be able to upgrade individual packages and experiment with other (and your own) plugins or additional importers, use venv or conda to make sure you run correct dependencies. Conda is used in the example as it's a little bit easier to manage Python versions with it compared to venv. 
 
 First, clone this repository into your desired location
 
@@ -108,7 +108,7 @@ Install conda
 
 Then create and activate the environment
 
-    conda create -n lazy-beancount-env python=3.12.3
+    conda create -n lazy-beancount-env python=3.12.11
     conda activate lazy-beancount-env
 
 Install required packages in the environment
@@ -117,7 +117,7 @@ Install required packages in the environment
 
 Run Fava on your ledger from the repository folder
 
-    PYTHONPATH=PYTHONPATH:. fava main.bean
+    fava main.bean
 
 Go to http://127.0.0.1:5000 and explore Fava.
 
@@ -131,6 +131,7 @@ This is mostly an integration project and would not have been possible without a
 * [paisa](https://paisa.fyi/)
 * [full-fledged-hledger](https://github.com/adept/full-fledged-hledger)
 * [hledger-docker](https://github.com/adept/hledger-docker)
+* [fava-docker](https://github.com/yegle/fava-docker/)
 
 # See also
 * [beancount-plugin-tax-uk](https://github.com/Evernight/beancount-plugin-tax-uk/)
