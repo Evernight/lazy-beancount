@@ -48,6 +48,7 @@ class LeafConfig:
 class ParsedConfig:
     account_configs: list = field()
     opening_balances_date: datetime = field()
+    default_booking_method: Optional[str] = field()
 
 
 def generate_accounts_recursive(account_type, node, cur_name, last_parent_key=None):
@@ -88,8 +89,9 @@ def generate_accounts_recursive(account_type, node, cur_name, last_parent_key=No
                     None,
                 )
             ]
-        for result in results:
-            result.booking_method = booking_method
+        if booking_method:
+            for result in results:
+                result.booking_method = booking_method
         return results
     elif isinstance(node, str):
         return [
@@ -115,7 +117,9 @@ def _config_object_to_parsed_config(config_object):
         config_object["opening_balances_date"], "%Y-%m-%d"
     )
     return ParsedConfig(
-        account_configs=configs, opening_balances_date=opening_balances_date
+        account_configs=configs,
+        opening_balances_date=opening_balances_date,
+        default_booking_method=config_object.get("default_booking_method"),
     )
 
 
@@ -200,6 +204,8 @@ def gen_accounts(config):
         account_type = cfg.type
         name = cfg.name
         booking_method = cfg.booking_method
+        if not booking_method and config.default_booking_method:
+            booking_method = config.default_booking_method
         account_names = [
             account.replace("@", name) for account in ACCOUNTS_GEN_BY_TYPE[account_type]
         ]
