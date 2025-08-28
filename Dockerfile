@@ -23,9 +23,9 @@ RUN python -m venv /opt/venv \
 ENV PYTHONPATH="/beancount:/beancount/beangulp:$PYTHONPATH"
 ENV PATH="/beancount/:$PATH"
 
-COPY gen_accounts.py /beancount/gen_accounts.py
-COPY streamlit_frontend /beancount/streamlit_frontend
-COPY run_daemons.sh /beancount/run_daemons.sh
+COPY src/gen_accounts.py /beancount/gen_accounts.py
+COPY src/streamlit_frontend /beancount/streamlit_frontend
+COPY src/scripts/run_daemons.sh /beancount/run_daemons.sh
 
 WORKDIR /workspace
 USER beancount-user
