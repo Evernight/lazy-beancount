@@ -20,7 +20,7 @@ COPY ./requirements.txt /tmp/requirements.txt
 RUN python -m venv /opt/venv \
     && pip3 install --no-cache-dir -r /tmp/requirements.txt 
 
-ENV PYTHONPATH="/beancount:/beancount/beangulp:$PYTHONPATH"
+ENV PYTHONPATH="${PYTHONPATH}:/beancount:/beancount/beangulp"
 ENV PATH="/beancount/:$PATH"
 
 COPY src/gen_accounts.py /beancount/gen_accounts.py

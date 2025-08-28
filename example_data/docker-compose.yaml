@@ -1,4 +1,3 @@
-version: '1.0'
 services:
   lazybean:
     image: vandereer/lazy-beancount:latest
