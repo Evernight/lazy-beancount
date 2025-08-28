@@ -159,5 +159,4 @@ plugin "beancount_lazy_plugins.filter_map"
 plugin "beancount_interpolate.recur"
 plugin "beancount_interpolate.split"
 
-; May cause some errors to go unnoticed but also may be helpful while testing various naming options
-;plugin "beancount.plugins.auto_accounts"
+plugin "beancount_lazy_plugins.auto_accounts"
