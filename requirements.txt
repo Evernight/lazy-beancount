@@ -18,6 +18,8 @@ pricehist==1.4.12
 # double-check if specifying it is still required
 numpy==1.26.4
 
+# to suppress beancount-import related warning
+setuptools<81
 # missing requirements for beancount-import
 setuptools_scm>=5.0.2
 
@@ -32,10 +34,8 @@ streamlit-echarts==0.4.0
 pyarrow==16.1.0
 
 # Fava extensions
-# fava-dashboards with local fixes for the ThemeToggle switch to work correctly (see https://github.com/beancount/fava/pull/1950)
-fava-dashboards @ git+https://github.com/Evernight/fava-dashboards.git@cf5bf7d3e49fff8daea47a9b7b64cc2c9fea537e
-# fava-portfolio-returns also with the fix for the dark-mode
-fava-portfolio-returns @ git+https://github.com/Evernight/fava-portfolio-returns.git@df5b200452fbe0ba82722a6b713fd5e4567b23e8
+fava-dashboards @ git+https://github.com/andreasgerstmayr/fava-dashboards.git@73bdfe25226a780a9e4d1bfe59fce8d0573c33b0
+fava-portfolio-returns @ git+https://github.com/andreasgerstmayr/fava-portfolio-returns.git@32f9b0c6c5c003a991f77279f13aa9925dc88bbf
 fava-investor==1.0.1
 
 # Beancount plugins
@@ -45,6 +45,6 @@ beancount-reds-plugins @ git+https://github.com/redstreet/beancount_reds_plugins
 autobean @ git+https://github.com/SEIAROTg/autobean@b14d040eaa75a55731ef650e76425d7d356ec2b9
 
 # Plugins without PyPI releases
-beancount-lazy-plugins @ git+https://github.com/Evernight/beancount-lazy-plugins@cf4780d9c8a259ac4d7c06cdde984bbc686fa9d6
+beancount-lazy-plugins @ git+https://github.com/Evernight/beancount-lazy-plugins@06abac4cf9d0652771d2f712eb6ca127294e8c50
 beancount-generate-base-ccy-prices @ git+https://github.com/Evernight/beancount-generate-base-ccy-prices@b40999e2b2307f7ce121ce06821628ec0ad70f91
 beancount-importers @ git+https://github.com/Evernight/beancount-importers@06fcd1200d3825eb7a0669f35bd313b2efcaf8cd
