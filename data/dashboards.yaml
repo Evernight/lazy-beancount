@@ -1505,9 +1505,8 @@ dashboards:
           },
         };
         
-    - title: Calendar Heatmap 📅
-      width: 100%
-      height: 150px
+    - title: Expenses Calendar Heatmap 📅
+      height: 450px
       queries:
         - bql: |
             SELECT date, root(account, 2) AS account, CONVERT(SUM(position), '{{ledger.ccy}}', LAST(date)) AS value
@@ -1517,18 +1516,16 @@ dashboards:
       type: echarts
       script: |
         // dirty hack for dark mode fix for the calendar heatmap
-        const localStorageThemeSetting = localStorage.getItem('theme');
-        const isDarkMode = (
-          window.matchMedia && 
-          window.matchMedia("(prefers-color-scheme: dark)").matches && 
-          localStorageThemeSetting != "light"
-        );
+        const storedThemeSetting = document.documentElement.style.colorScheme;
+        const isDarkMode =
+          storedThemeSetting == "dark" ||
+          (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches && storedThemeSetting != "light");
         const outerLineStyleColor = isDarkMode ? "lightgray" : "black";
 
         const currencyFormatter = utils.currencyFormatter(ledger.ccy);
         const months = utils.iterateMonths(ledger.dateFirst, ledger.dateLast).map((m) => `${m.month}/${m.year}`);
-        const monthsByYear = Object.groupBy(utils.iterateMonths(ledger.dateFirst, ledger.dateLast), m => m.year);
-        
+        const monthsByYear = Object.groupBy(utils.iterateMonths(ledger.dateFirst, ledger.dateLast), (m) => m.year);
+
         const query = panel.queries[0];
         const amounts = {};
         const counts = {};
@@ -1566,55 +1563,63 @@ dashboards:
           }
         }
 
+        var allYears = Object.keys(counts);
+        allYears = allYears.slice(0, 3);
+        const calendars = allYears.map((year, ind) => ({
+          left: 80,
+          right: 100,
+          top: ind * 150,
+          cellSize: [10, 15],
+          range: year,
+          splitLine: {
+            lineStyle: {
+              color: outerLineStyleColor,
+            },
+          },
+          itemStyle: {
+            borderWidth: 0.5,
+          },
+          dayLabel: {
+            firstDay: 1,
+          },
+          yearLabel: {
+            show: true,
+            margin: 40,
+          },
+        }));
+        const seriesData = allYears.map((year, ind) => ({
+          type: "heatmap",
+          coordinateSystem: "calendar",
+          calendarIndex: ind,
+          data: Object.entries(amounts),
+        }));
+
         return {
           tooltip: {
-            position: 'top',
+            position: "top",
             formatter: function (p) {
-              return p.data[0] + ':<br/>' + "<b style='font-weight: 700'>" + p.data[1] + ` ${ledger.ccy}` + '</b>';
-            }
+              return p.data[0] + ":<br/>" + "<b style='font-weight: 700'>" + p.data[1] + ` ${ledger.ccy}` + "</b>";
+            },
           },
           visualMap: [
             {
               min: 0,
               max: maxScaleValue,
               calculable: true,
-              orient: 'vertical',
-              top: 'middle',
+              orient: "vertical",
+              top: "middle",
               right: 10,
+              itemHeight: 300,
             },
           ],
-          calendar: {
-            top: 'middle',
-            left: 80,
-            right: 100,
-            cellSize: ['auto', 15],
-            range: mostMentionedYear,
-            splitLine: {
-              lineStyle: {
-                color: outerLineStyleColor,
-              },
-            },
-            itemStyle: {
-              borderWidth: 0.5
-            },
-            dayLabel: {
-              firstDay: 1,
-            },
-            yearLabel: {
-              show: true,
-              margin: 40
-            },
-          },
-          series: {
-            type: 'heatmap',
-            coordinateSystem: 'calendar',
-            data: Object.entries(amounts)
-          },
+          calendar: calendars,
+          series: seriesData,
           onClick: (event) => {
-            const link = query.link.replace("{time}", event.data[0]).replace('{account}', '');
+            const link = query.link.replace("{time}", event.data[0]).replace("{account}", "");
             window.open(helpers.urlFor(link));
           },
         };
+
         
     - title: Notes
       width: 100%
