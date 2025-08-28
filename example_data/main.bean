@@ -34,6 +34,7 @@ plugin "beancount.ops.documents"
 
 ** Sidebar links
 ; A set of useful shortcut links for the Fava's menu (left side)
+1970-01-01 custom "fava-sidebar-link" "🪙 Lazy Beancount" "http://localhost:8777/"
 1970-01-01 custom "fava-sidebar-link" "💸 Expenses" "/beancount/extension/FavaDashboards/?dashboard=4&conversion=USD&time=year-2+to+year"
 1970-01-01 custom "fava-sidebar-link" "📅 Subscriptions" "/beancount/extension/FavaDashboards/?dashboard=8&conversion=USD"
 1970-01-01 custom "fava-sidebar-link" "🚥 Budgets" "/beancount/account/Expenses/?r=changes&conversion=USD"
