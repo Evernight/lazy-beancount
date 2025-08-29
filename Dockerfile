@@ -27,6 +27,8 @@ COPY src/gen_accounts.py /beancount/gen_accounts.py
 COPY src/streamlit_frontend /beancount/streamlit_frontend
 COPY src/scripts/run_daemons.sh /beancount/run_daemons.sh
 
+COPY images/logo.png /beancount/streamlit_frontend/static/favicon-32x32.png
+
 WORKDIR /workspace
 USER beancount-user
 
