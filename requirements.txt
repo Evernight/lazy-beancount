@@ -35,7 +35,9 @@ pyarrow==16.1.0
 
 # Fava extensions
 fava-dashboards @ git+https://github.com/andreasgerstmayr/fava-dashboards.git@73bdfe25226a780a9e4d1bfe59fce8d0573c33b0
-fava-portfolio-returns @ git+https://github.com/andreasgerstmayr/fava-portfolio-returns.git@32f9b0c6c5c003a991f77279f13aa9925dc88bbf
+# contains few cherry-picked commits not merged into upstream yet 
+# https://github.com/Evernight/fava-portfolio-returns/tree/cherry-picked-pre-release-for-lb-0.3.7
+fava-portfolio-returns @ git+https://github.com/Evernight/fava-portfolio-returns.git@17ee92439fc41c485a76b8ffc71666e350e2169e
 fava-investor==1.0.1
 
 # Beancount plugins
