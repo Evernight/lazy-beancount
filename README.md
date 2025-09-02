@@ -45,7 +45,7 @@ Full guide is located at https://lazy-beancount.xyz/. The approach follows these
 - But it should be possible to track things to any level of precision if you choose to
 
 # Screenshots
-<p>
+<div align="center">
 <img src="images/totals_example.png" width="40%" hspace="10" vspace="10"/>
 <img src="images/prices_page.png" width="40%" hspace="10" vspace="10" />
 <img src="images/config_accounts.png" width="40%" hspace="10" vspace="10" />
@@ -54,9 +54,10 @@ Full guide is located at https://lazy-beancount.xyz/. The approach follows these
 <img src="images/demo_expenses.png" width="40%" hspace="10" vspace="10" />
 <img src="images/expenses_detailed.png" width="40%" hspace="10" vspace="10" />
 <img src="images/dashboards_sankey.png" width="40%" hspace="10" vspace="10" />
-</p>
+</div>
 
-# Setup (docker-compose: recommended)
+# ⚙️ Setup
+## 🐳 Docker-compose: recommended
 Make sure you have Docker [installed](https://docs.docker.com/engine/install/) first. Then:
 
     git clone https://github.com/Evernight/lazy-beancount
@@ -71,7 +72,7 @@ Fava is also available on [port 5003](http://localhost:5003/), importer interfac
 
 On Mac you can also remove ```user``` parameter from ```docker-compose.yaml``` and just use ```docker compose up```
 
-# Setup (docker)
+## 🐳 Docker
 
 You can pull image from the public repository:
 
@@ -96,7 +97,7 @@ Commands are available in the container as:
 
 You can also run container using Podman, adding "podman" as an additional argument to the ```lazy_beancount.sh``` script (e.g. ```lazy_beancount.sh data podman```).
 
-# Setup (local, conda/venv: development)
+## 🐍 Local development: conda/venv
 
 If you want to be able to upgrade individual packages and experiment with other (and your own) plugins or additional importers, use venv or conda to make sure you run correct dependencies. Conda is used in the example as it's a little bit easier to manage Python versions with it compared to venv. 
 
@@ -127,19 +128,19 @@ Go to http://127.0.0.1:5000 and explore Fava.
 ## Note
 I'd not recommend exposing the ports, various system and data through a public server unless you really know what you're doing. This setup has not been developed and tested for security and authentication when run as a public service. If you're interested in self-hosting Lazy Beancount, vote for the [feature](https://github.com/Evernight/lazy-beancount/issues/10) or feel free to contribute ideas and code.
 
-# Acknowledgements
+# 🙏 Acknowledgements
 This is mostly an integration project and would not have been possible without all of the great code from authors and contributors of all the repositories mentioned above, the Beancount and plain text accounting community. Please support, star and otherwise contribute to respective projects.
 
-# Similar projects
+# 🔗 Similar projects
 * [paisa](https://paisa.fyi/)
 * [full-fledged-hledger](https://github.com/adept/full-fledged-hledger)
 * [hledger-docker](https://github.com/adept/hledger-docker)
 * [fava-docker](https://github.com/yegle/fava-docker/)
-
-# See also
+ 
+See also:
 * [beancount-plugin-tax-uk](https://github.com/Evernight/beancount-plugin-tax-uk/)
 
-# Feedback and contributions
+# 💬 Feedback and contributions
 * Feel free to [create an issue](https://github.com/Evernight/lazy-beancount/issues) or contribute a fix.
 * [lazy-beancount.xyz](https://lazy-beancount.xyz/) has giscus connected to enable commenting directly at pages.
 * [matrix chat](https://matrix.to/#/#lazy-beancount:matrix.org) for small questions.
