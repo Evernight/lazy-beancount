@@ -1,11 +1,14 @@
-<img height="107" align="left" src="images/logo.png"> 
+<div align="center">
+  <img src="images/logo.png" height="128" width="128" alt="LB logo"/>
+  <h1>Lazy Beancount</h1>
+  <p><strong>Beancount accounting in Docker, <a href="https://lazy-beancount.xyz/">guide</a> and batteries included</strong></p>
 
-### [Lazy Beancount](https://lazy-beancount.xyz/)
-
-[![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](LICENSE)
-[![Docker Image Version](https://img.shields.io/docker/v/vandereer/lazy-beancount?color=goldenrod)](https://github.com/Evernight/lazy-beancount/releases)
-[![Docker Pulls](https://img.shields.io/docker/pulls/vandereer/lazy-beancount?color=silver)](https://hub.docker.com/r/vandereer/lazy-beancount)
-
+  <p>
+    <a href="LICENSE"><img src="https://img.shields.io/badge/License-GPL%20v2-blue.svg" alt="License: GPL v2"></a>
+    <a href="https://github.com/Evernight/lazy-beancount/releases"><img src="https://img.shields.io/docker/v/vandereer/lazy-beancount?color=goldenrod" alt="Docker Image Version"></a>
+    <a href="https://hub.docker.com/r/vandereer/lazy-beancount"><img src="https://img.shields.io/docker/pulls/vandereer/lazy-beancount?color=silver" alt="Docker Pulls"></a>
+  </p>
+</div>
 
 Lazy Beancount is [Beancount](https://github.com/beancount/beancount) accounting system packaged in Docker with batteries included:
 
