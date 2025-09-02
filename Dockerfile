@@ -1,4 +1,4 @@
-FROM python:3.12.3-slim
+FROM python:3.12.11-slim
 
 ENV PATH="/opt/venv/bin:$PATH"
 ENV PYTHONUNBUFFERED=1
@@ -20,7 +20,7 @@ COPY ./requirements.txt /tmp/requirements.txt
 RUN python -m venv /opt/venv \
     && pip3 install --no-cache-dir -r /tmp/requirements.txt 
 
-ENV PYTHONPATH="${PYTHONPATH}:/beancount:/beancount/beangulp"
+ENV PYTHONPATH="${PYTHONPATH:-}:/beancount:/beancount/beangulp"
 ENV PATH="/beancount/:$PATH"
 
 COPY src/gen_accounts.py /beancount/gen_accounts.py
