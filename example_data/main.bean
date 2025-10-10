@@ -19,7 +19,7 @@ option "inferred_tolerance_default" "*:0.00000001"
 option "inferred_tolerance_default" "USD:0.003"
 option "inferred_tolerance_default" "GBP:0.003"
 
-option "inferred_tolerance_multiplier" "1.2"
+option "tolerance_multiplier" "1.2"
 
 ** Other settings
 plugin "beancount.ops.documents"
@@ -122,9 +122,9 @@ plugin "beancount.plugins.implicit_prices"
 
 ; https://github.com/tarioch/beancounttools/
 ; Generate indirect prices for the current main currency
-plugin "beancount_generate_base_ccy_prices.generate_base_ccy_prices" "EUR"
-plugin "beancount_generate_base_ccy_prices.generate_base_ccy_prices" "USD"
-plugin "beancount_generate_base_ccy_prices.generate_base_ccy_prices" "GBP"
+plugin "beancount_lazy_plugins.generate_base_ccy_prices" "EUR"
+plugin "beancount_lazy_plugins.generate_base_ccy_prices" "USD"
+plugin "beancount_lazy_plugins.generate_base_ccy_prices" "GBP"
 
 ** Shared expenses
 ; Plugin to share expenses

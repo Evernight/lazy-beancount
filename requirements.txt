@@ -1,18 +1,16 @@
-# 3.1.0 and some later updates
-beancount==3.1.0
+beancount==3.2.0
 
 # custom fava wheel prebuilt, changes from upstream fava:
-# * includes behaviour change for filters: https://github.com/beancount/fava/pull/1969
+# * fix for recent Fava journal update: https://github.com/beancount/fava/pull/2109
 # * includes filter presets feature: https://github.com/beancount/fava/pull/1994
-# browse full changes history here: https://github.com/beancount/fava/compare/main...Evernight:fava:custom-fava-build-2
-fava @ https://github.com/Evernight/fava/raw/ba88909c2cc8ffe3afb3bec45a1b61dfedc3e135/prebuilt_wheels/fava-1.30.4.tar.gz#sha1=d96ab47056bddc12b7b497957e94be786e09371e
-# fava @ git+https://github.com/beancount/fava.git@72d7504e6a86e72654d3974d2ca3ee3f3982f6ba
+# browse full changes history here: https://github.com/beancount/fava/compare/main...Evernight:fava:fava-custom-build
+fava @ https://github.com/Evernight/fava/raw/49b0016f9dbe6a902692f6e3182a957b2903f486/prebuilt_wheels/fava-1.30.7.dev7+g7e29b8c5c.tar.gz#sha1=1420561b61134678b6f89fd5f24becdad869f135
 
 # not on pypi, using fixed commit
 beanprice @ git+https://github.com/beancount/beanprice.git@f649ae69edd5a8c7ee2618dfebd219cc0119635f
 # last commit before ec250696e1955edbbef8d01e5a33030be94d935c that breaks current Fava compatibility
 beanquery @ git+https://github.com/beancount/beanquery.git@4a0e62a61e64807c9cd01ce32fb24721907b4c3b
-pricehist==1.4.12
+pricehist==1.4.14
 
 # this version resolution needed for features compatibility
 # double-check if specifying it is still required
@@ -47,5 +45,5 @@ beancount-reds-plugins @ git+https://github.com/redstreet/beancount_reds_plugins
 autobean @ git+https://github.com/SEIAROTg/autobean@b14d040eaa75a55731ef650e76425d7d356ec2b9
 
 # Plugins without PyPI releases
-beancount-lazy-plugins @ git+https://github.com/Evernight/beancount-lazy-plugins@d6529d5f4caffdeb37338c51735dcd482644fb8c
+beancount-lazy-plugins @ git+https://github.com/Evernight/beancount-lazy-plugins@c63c45e50c4a627a28c93ef0427cfc9866752cf2
 beancount-importers @ git+https://github.com/Evernight/beancount-importers@06fcd1200d3825eb7a0669f35bd313b2efcaf8cd
