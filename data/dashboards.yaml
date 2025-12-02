@@ -881,8 +881,6 @@ dashboards:
           (row) => (row.value[ledger.ccy] ?? 0) / divisor,
           (parts, i) => parts[i],
         );
-        // use click event on desktop, dblclick on mobile
-        const clickEvt = window.screen.width < 800 ? "onDblClick" : "onClick";
 
         return {
           tooltip: {
@@ -921,11 +919,10 @@ dashboards:
               label: {
                 minAngle: 20,
               },
-              nodeClick: false,
               data: accountTree.children[0]?.children ?? [],
             },
           ],
-          [clickEvt]: (event) => {
+          onDblClick: (event) => {
             const account = "Expenses" + event.treePathInfo.map((i) => i.name).join(":");
             const link = panel.queries[0].link.replace("{account}", account);
             window.open(helpers.urlFor(link));
@@ -1382,8 +1379,6 @@ dashboards:
           (parts, i) => parts[i],
         );
         const totalValue = accountTree.children[0].value;
-        // use click event on desktop, dblclick on mobile
-        const clickEvt = window.screen.width < 800 ? "onDblClick" : "onClick";
 
         return {
           tooltip: {
@@ -1424,11 +1419,10 @@ dashboards:
                 borderColor: '#0000',
                 borderWidth: 0
               },
-              nodeClick: false,
               data: accountTree.children[0]?.children ?? [],
             },
           ],
-          [clickEvt]: (event) => {
+          onDblClick: (event) => {
             const account = "Expenses" + event.treePathInfo.map((i) => i.name).join(":");
             const link = panel.queries[0].link.replace("{account}", account);
             window.open(helpers.urlFor(link));
