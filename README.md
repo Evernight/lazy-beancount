@@ -13,6 +13,7 @@
 Lazy Beancount is [Beancount](https://github.com/beancount/beancount) accounting system packaged in Docker with batteries included:
 
 - [Fava](https://github.com/beancount/fava) with [fava-dashboards](https://github.com/andreasgerstmayr/fava-dashboards)
+  - and [filter presets](https://github.com/beancount/fava/pull/1994) feature
 - [Beancount-import](https://github.com/jbms/beancount-import) for automatic transaction categorisation and review UI:
   - Importers set up to work out of the box:
     - Wise, Monzo, Revolut, IBKR ([Evernight/beancount-importers](https://github.com/Evernight/beancount-importers), [uabean](https://github.com/OSadovy/uabean/))
