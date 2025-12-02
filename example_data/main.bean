@@ -21,6 +21,10 @@ option "inferred_tolerance_default" "GBP:0.003"
 
 option "tolerance_multiplier" "1.2"
 
+option "display_precision" "USD:0.01"
+option "display_precision" "GBP:0.01"
+option "display_precision" "EUR:0.01"
+
 ** Other settings
 plugin "beancount.ops.documents"
 
