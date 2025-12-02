@@ -4,7 +4,7 @@ beancount==3.2.0
 # * fix for recent Fava journal update: https://github.com/beancount/fava/pull/2109
 # * includes filter presets feature: https://github.com/beancount/fava/pull/1994
 # browse full changes history here: https://github.com/beancount/fava/compare/main...Evernight:fava:fava-custom-build
-fava @ https://github.com/Evernight/fava/raw/49b0016f9dbe6a902692f6e3182a957b2903f486/prebuilt_wheels/fava-1.30.7.dev7+g7e29b8c5c.tar.gz#sha1=1420561b61134678b6f89fd5f24becdad869f135
+fava @ https://github.com/Evernight/fava/raw/ec8ffc88d5ffa4e8d3c7bc0a38f98c5ed252af60/prebuilt_wheels/fava-1.30.7.dev24+gc4452d09b.tar.gz#sha1=b4461e79a7c4caf2ea182021c9b8c7cc18c75af7
 
 # not on pypi, using fixed commit
 beanprice @ git+https://github.com/beancount/beanprice.git@f649ae69edd5a8c7ee2618dfebd219cc0119635f
