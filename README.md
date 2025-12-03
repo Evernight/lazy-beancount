@@ -5,8 +5,8 @@
 
   <p>
     <a href="LICENSE"><img src="https://img.shields.io/badge/License-GPL%20v2-blue.svg" alt="License: GPL v2"></a>
-    <a href="https://github.com/Evernight/lazy-beancount/releases"><img src="https://img.shields.io/docker/v/vandereer/lazy-beancount?color=goldenrod" alt="Docker Image Version"></a>
-    <a href="https://hub.docker.com/r/vandereer/lazy-beancount"><img src="https://img.shields.io/docker/pulls/vandereer/lazy-beancount?color=silver" alt="Docker Pulls"></a>
+    <a href="https://github.com/Evernight/lazy-beancount/releases"><img src="https://img.shields.io/docker/v/vandereer/lazy-beancount?color=goldenrod&cacheSeconds=43200" alt="Docker Image Version"></a>
+    <a href="https://hub.docker.com/r/vandereer/lazy-beancount"><img src="https://img.shields.io/docker/pulls/vandereer/lazy-beancount?color=silver&cacheSeconds=43200" alt="Docker Pulls"></a>
   </p>
 </div>
 
