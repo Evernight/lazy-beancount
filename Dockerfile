@@ -1,4 +1,4 @@
-FROM python:3.12.11-slim AS base
+FROM python:3.12-slim AS base
 
 ENV PATH="/opt/venv/bin:$PATH"
 ENV PYTHONUNBUFFERED=1
