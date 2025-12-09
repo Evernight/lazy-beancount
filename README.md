@@ -98,6 +98,9 @@ Commands are available in the container as:
 
 You can also run container using Podman, adding "podman" as an additional argument to the ```lazy_beancount.sh``` script (e.g. ```lazy_beancount.sh data podman```).
 
+### Extra dependencies
+Additional ```vandereer/lazy-beancount:extra``` image exists that will contain more optional dependencies defined in [requirements-extra.txt](https://github.com/Evernight/lazy-beancount/blob/main/requirements-extra.txt)
+
 ## 🐍 Local development: conda/venv
 
 If you want to be able to upgrade individual packages and experiment with other (and your own) plugins or additional importers, use venv or conda to make sure you run correct dependencies. Conda is used in the example as it's a little bit easier to manage Python versions with it compared to venv. 
