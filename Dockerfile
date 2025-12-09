@@ -1,4 +1,4 @@
-FROM python:3.12.11-slim
+FROM python:3.12.11-slim AS base
 
 ENV PATH="/opt/venv/bin:$PATH"
 ENV PYTHONUNBUFFERED=1
@@ -28,6 +28,20 @@ COPY src/streamlit_frontend /beancount/streamlit_frontend
 COPY src/scripts/run_daemons.sh /beancount/run_daemons.sh
 
 COPY images/logo.png /beancount/streamlit_frontend/static/favicon-32x32.png
+
+
+FROM base AS regular
+WORKDIR /workspace
+USER beancount-user
+
+ENTRYPOINT ["/usr/bin/dumb-init", "--"]
+CMD [ "/beancount/run_daemons.sh" ]
+
+
+FROM base AS extra
+COPY ./requirements-extra.txt /tmp/requirements-extra.txt
+RUN python -m venv /opt/venv \
+    && pip3 install --no-cache-dir -r /tmp/requirements-extra.txt 
 
 WORKDIR /workspace
 USER beancount-user
