@@ -22,14 +22,10 @@ setuptools<81
 setuptools_scm>=5.0.2
 
 # streamlit/frontend
-streamlit==1.38.0
+streamlit==1.52.1
 streamlit_option_menu==0.3.13
 streamlit_ace==0.1.1
 streamlit-echarts==0.4.0
-
-# pyarrow 21 doesn't get built with older version of streamlit
-# revisit after upgrading streamlit
-pyarrow==16.1.0
 
 # Fava extensions
 fava-dashboards @ git+https://github.com/andreasgerstmayr/fava-dashboards.git@73bdfe25226a780a9e4d1bfe59fce8d0573c33b0
