@@ -1,4 +1,7 @@
 * Beancount configuration
+; Note that plugin order is important
+; The comment with explanation will usually be added with explanation where appropriate
+
 ; See https://github.com/beancount/beancount/issues/742
 ; This is required for the beancount_interpolate and beancount_share plugins
 ; to work together with pad directives
@@ -123,6 +126,8 @@ plugin "beancount_lazy_plugins.valuation"
 ; Generate implicit prices from costs
 ; It's better to place it before beancount_generate_base_ccy_prices so that transitive conversions may happen
 plugin "beancount.plugins.implicit_prices"
+
+plugin "beancount_lazy_plugins.generate_inverse_prices"
 
 ; https://github.com/tarioch/beancounttools/
 ; Generate indirect prices for the current main currency
