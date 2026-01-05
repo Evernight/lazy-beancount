@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
 import io
+from math import isnan
 import os
-import pprint
 import re
 import subprocess
 from collections import defaultdict
@@ -211,7 +211,7 @@ def totals_page():
                 "value": st.column_config.NumberColumn("Value"),
             },
             disabled=["type", "name", "currency"],
-            use_container_width=True,
+            width='stretch',
             height=560,
         )
 
@@ -229,7 +229,7 @@ def totals_page():
         values = {
             (row["name"], row["currency"]): row["value"]
             for row in edited_rows
-            if row["value"] is not None
+            if row["value"] is not None and not isnan(row["value"])
         }
         file_contents = gen_accounts.gen_update_totals(
             config, date, values, is_initial_check=(selected_file == "Initial")
