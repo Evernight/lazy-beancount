@@ -207,8 +207,8 @@ def totals_page():
             column_config={
                 "type": "Type",
                 "name": "Name",
-                "currency": "Currency",
-                "value": st.column_config.NumberColumn("Value"),
+                "currency": st.column_config.MultiselectColumn("Currency", color=["#5470c6", "#91cc75", "#fac858", "#ee6666", "#73c0de", "#3ba272", "#fc8452", "#9a60b4", "#ea7ccc"]),
+                "value": st.column_config.NumberColumn("Value", format="accounting"),
             },
             disabled=["type", "name", "currency"],
             width='stretch',
@@ -226,8 +226,10 @@ def totals_page():
             + "check which ```pad``` operations are necessary and which should be commented out."
         )
 
+        for row in edited_rows:
+            print(row["name"], " ", row["currency"], " ", row["value"])
         values = {
-            (row["name"], row["currency"]): row["value"]
+            (str(row["name"]), str(row["currency"])): Decimal(row["value"])
             for row in edited_rows
             if row["value"] is not None and not isnan(row["value"])
         }

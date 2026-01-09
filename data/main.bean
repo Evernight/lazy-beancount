@@ -116,10 +116,10 @@ include "beancount_import_output/balance_accounts.bean"
 ** Valuation plugin
 ; Configure accounts that have opaque changes in value
 plugin "beancount_lazy_plugins.valuation"
-1970-01-01 custom "valuation" "config"
-  account: "Assets:MyAutomaticBroker:Total" 
-  currency: "AUTO_BROKER_USD"
-  pnlAccount: "Assets:MyAutomaticBroker:Total:PnL"
+; 1970-01-01 custom "valuation" "config"
+;   account: "Assets:MyAutomaticBroker:Total" 
+;   currency: "AUTO_BROKER_USD"
+;   pnlAccount: "Assets:MyAutomaticBroker:Total:PnL"
 
 ** Autogenerating prices
 ; Generate implicit prices from costs
