@@ -180,6 +180,8 @@ def totals_page():
                 values = st.session_state.get("totals_values", {})
 
         rows = []
+        all_currencies = set()
+
         for cfg in config.account_configs:
             account_type = cfg.type
             name = cfg.name
@@ -200,14 +202,20 @@ def totals_page():
                         "value": values.get((name, currency), None),
                     }
                 )
+                all_currencies.add(currency)
         st.session_state["totals_values"] = values
+
 
         edited_rows = st.data_editor(
             rows,
             column_config={
                 "type": "Type",
                 "name": "Name",
-                "currency": st.column_config.MultiselectColumn("Currency", color=["#5470c6", "#91cc75", "#fac858", "#ee6666", "#73c0de", "#3ba272", "#fc8452", "#9a60b4", "#ea7ccc"]),
+                "currency": st.column_config.MultiselectColumn(
+                    "Currency", 
+                    color=["#5470c6", "#91cc75", "#fac858", "#ee6666", "#73c0de", "#3ba272", "#fc8452", "#9a60b4", "#ea7ccc"],
+                    options=all_currencies
+                ),
                 "value": st.column_config.NumberColumn("Value", format="accounting"),
             },
             disabled=["type", "name", "currency"],
@@ -226,8 +234,6 @@ def totals_page():
             + "check which ```pad``` operations are necessary and which should be commented out."
         )
 
-        for row in edited_rows:
-            print(row["name"], " ", row["currency"], " ", row["value"])
         values = {
             (str(row["name"]), str(row["currency"])): Decimal(row["value"])
             for row in edited_rows
