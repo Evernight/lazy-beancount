@@ -73,6 +73,8 @@ Fava is also available on [port 5003](http://localhost:5003/), importer interfac
 
 On Mac you can also remove ```user``` parameter from ```docker-compose.yaml``` and just use ```docker compose up```
 
+Update image to the latest version from time to time using ```docker compose pull```
+
 ## 🐳 Docker
 
 You can pull image from the public repository:
