@@ -235,7 +235,7 @@ def totals_page():
         )
 
         values = {
-            (str(row["name"]), str(row["currency"])): Decimal(row["value"])
+            (str(row["name"]), str(row["currency"])): Decimal(str(row["value"]))
             for row in edited_rows
             if row["value"] is not None and not isnan(row["value"])
         }
