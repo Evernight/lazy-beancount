@@ -39,5 +39,5 @@ beancount-reds-plugins @ git+https://github.com/redstreet/beancount_reds_plugins
 autobean @ git+https://github.com/SEIAROTg/autobean@b14d040eaa75a55731ef650e76425d7d356ec2b9
 
 # Plugins without PyPI releases
-beancount-lazy-plugins @ git+https://github.com/Evernight/beancount-lazy-plugins@81e71a7cfcb6479337bd471f403cf1a89cca5081
+beancount-lazy-plugins @ git+https://github.com/Evernight/beancount-lazy-plugins@da64ff9c90c9f11eb0c317b166699d782f98dfa3
 beancount-importers @ git+https://github.com/Evernight/beancount-importers@06fcd1200d3825eb7a0669f35bd313b2efcaf8cd
