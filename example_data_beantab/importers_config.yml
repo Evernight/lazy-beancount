@@ -1,0 +1,68 @@
+importers:
+  # Importer key also corresponds to the subdirectory in the beancount_import_data
+  # directory where the csv files will be looked up
+  # Possible "importer" values are: 
+  # "monzo", "revolut", "wise", 
+  # "ibkr", "kraken", "binance"
+  # You can use different directories to distinguish between different accounts
+  monzo:
+    importer: monzo
+    account: Assets:Monzo:Cash
+    currency: GBP
+    params:
+      # This will ignore Monzo's automatic categories. At some point beancount-import predictions will be better
+      # so you may want to enable it
+      ignore_bank_categories: True
+  revolut_eur:
+    importer: revolut
+    account: Assets:Revolut:Cash
+    currency: EUR
+  revolut_gbp:
+    importer: revolut
+    account: Assets:Revolut:Cash
+    currency: GBP
+  revolut_usd:
+    importer: revolut
+    account: Assets:Revolut:Cash
+    currency: USD
+  wise_eur:
+    importer: wise
+    account: Assets:Wise:Cash
+    currency: EUR
+  wise_gbp:
+    importer: wise
+    account: Assets:Wise:Cash
+    currency: GBP
+  wise_usd:
+    importer: wise
+    account: Assets:Wise:Cash
+    currency: USD
+
+  kraken:
+    importer: kraken
+    account: Assets:Kraken
+    currency: USD
+  binance:
+    importer: binance
+    account: Assets:Binance
+    currency: USD
+    params:
+      spot_wallet_account: "Assets:Crypto:Binance:Cash"
+      fees_account: "Expenses:Fees:Crypto:Binance"
+      p2p_account: "Assets:Crypto:Binance:P2P"
+      savings_account: "Assets:Crypto:Binance:Savings"
+      income_interest_account: "Income:Crypto:Binance:Interest"
+      income_referal_account: "Income:Crypto:Binance:Referal"
+      income_distributions_account: "Income:Crypto:Binance:Distribution"
+  ibkr:
+    importer: ibkr
+    account: Assets:IB:Cash
+    currency: USD
+    params:
+      cash_account: "Assets:IB:Cash"
+      assets_account: "Assets:IB:{symbol}"
+      div_account: "Income:IB:{symbol}:Div"
+      interest_account: "Income:IB:Interest"
+      wht_account: "Expenses:IB:WithholdingTax"
+      fees_account: "Expenses:IB:Commissions"
+      pnl_account: "Income:IB:PnL"

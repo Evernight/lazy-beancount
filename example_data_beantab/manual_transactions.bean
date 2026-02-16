@@ -1,0 +1,410 @@
+; 2023-11-02 balance Assets:MyAutomaticBroker:Total 7500 USD
+
+2023-11-01 * "MyAutomaticBroker initial"
+  Assets:MyAutomaticBroker:Total    7500 USD
+  Equity:OpeningBalances:MyAutomaticBroker:Total   -7500 USD
+
+2024-01-03 * "Salary from MyEmployer"
+  Assets:MyFavouriteBank:Cash    2000 GBP
+  Income:Salary:MyEmployer   -2000 GBP
+
+2024-02-03 * "Salary from MyEmployer"
+  Assets:MyFavouriteBank:Cash    2000 GBP
+  Income:Salary:MyEmployer   -2000 GBP
+
+2024-03-03 * "Salary from MyEmployer"
+  Assets:MyFavouriteBank:Cash    2000 GBP
+  Income:Salary:MyEmployer   -2000 GBP
+
+2024-04-03 * "Salary from MyEmployer"
+  Assets:MyFavouriteBank:Cash    2000 GBP
+  Income:Salary:MyEmployer   -2000 GBP
+
+2024-05-03 * "Salary from MyEmployer"
+  Assets:MyFavouriteBank:Cash    2000 GBP
+  Income:Salary:MyEmployer   -2000 GBP
+
+2024-06-03 * "Salary from MyEmployer"
+  Assets:MyFavouriteBank:Cash    2000 GBP
+  Income:Salary:MyEmployer   -2000 GBP
+
+
+2024-01-15 * "Withdrawn cash"
+  Assets:MyFavouriteBank:Cash    -100 GBP
+  Assets:Physical:Cash   100 GBP
+
+2024-02-19 * "Withdrawn cash"
+  Assets:MyFavouriteBank:Cash    -150 GBP
+  Assets:Physical:Cash   150 GBP
+
+2024-04-11 * "Withdrawn cash"
+  Assets:MyFavouriteBank:Cash    -100 GBP
+  Assets:Physical:Cash   100 GBP
+
+; Normally transacrions would be ordered historically but these are just example
+; ones
+; and the numbers are obviously fictional
+2024-01-03 * "Monthly rent"
+  Assets:MyFavouriteBank:Cash    -500 GBP
+  Expenses:Accommodation   500 GBP
+
+2024-02-03 * "Monthly rent"
+  Assets:MyFavouriteBank:Cash    -500 GBP
+  Expenses:Accommodation   500 GBP
+
+2024-03-03 * "Monthly rent"
+  Assets:MyFavouriteBank:Cash    -500 GBP
+  Expenses:Accommodation   500 GBP
+
+2024-04-03 * "Monthly rent"
+  Assets:MyFavouriteBank:Cash    -500 GBP
+  Expenses:Accommodation   500 GBP
+
+2024-05-03 * "Monthly rent"
+  Assets:MyFavouriteBank:Cash    -500 GBP
+  Expenses:Accommodation   500 GBP
+
+2024-06-03 * "Monthly rent"
+  Assets:MyFavouriteBank:Cash    -500 GBP
+  Expenses:Accommodation   500 GBP
+
+
+2024-03-10 * "Subscription for SomeService paid in a year-instalment" #subscription-year
+  Assets:MyFavouriteBank:Cash    -70 USD
+  Expenses:Services   -70 USD
+
+2024-01-03 * "Some transaction for Expenses:Donations"
+  Assets:MyLessFavouriteBank:Cash -90 USD
+  Expenses:Donations 90 USD
+
+2024-01-04 * "Some transaction for Expenses:Groceries"
+  Assets:MyFavouriteBank:Cash -11 USD
+  Expenses:Groceries 11 USD
+
+2024-01-07 * "Some transaction for Expenses:EatingOut:Coffee"
+  Assets:Physical:Cash -3 USD
+  Expenses:EatingOut:Coffee 3 USD
+
+2024-01-08 * "Some transaction for Expenses:Shopping"
+  Assets:Physical:Cash -68 USD
+  Expenses:Shopping 68 USD
+
+2024-01-09 * "Some transaction for Expenses:Groceries"
+  Assets:MyFavouriteBank:Cash -9 USD
+  Expenses:Groceries 9 USD
+
+2024-01-11 * "Some transaction for Expenses:Travel:Flights" #travel #trip-island-vacation
+  Assets:MyLessFavouriteBank:Cash -203 USD
+  Expenses:Travel:Flights 203 USD
+
+2024-01-15 * "Some transaction for Expenses:EatingOut" #trip-island-vacation
+  Assets:MyFavouriteBank:Cash -17 USD
+  Expenses:EatingOut 17 USD
+
+2024-01-18 * "Some transaction for Expenses:EatingOut:Coffee"
+  Assets:MyFavouriteBank:Cash -4 USD
+  Expenses:EatingOut:Coffee 4 USD
+
+2024-01-19 * "Some transaction for Expenses:Groceries"
+  Assets:MyFavouriteBank:Cash -35 USD
+  Expenses:Groceries 35 USD
+
+2024-01-20 * "Some transaction for Expenses:Groceries"
+  Assets:MyFavouriteBank:Cash -34 USD
+  Expenses:Groceries 34 USD
+
+2024-01-22 * "Some transaction for Expenses:EatingOut"
+  Assets:Physical:Cash -28 USD
+  Expenses:EatingOut 28 USD
+
+2024-01-27 * "Some transaction for Expenses:Groceries"
+  Assets:Physical:Cash -5 USD
+  Expenses:Groceries 5 USD
+
+2024-01-30 * "Some transaction for Expenses:Groceries"
+  Assets:MyFavouriteBank:Cash -28 USD
+  Expenses:Groceries 28 USD
+
+2024-01-31 * "Some transaction for Expenses:Groceries"
+  Assets:MyFavouriteBank:Cash -16 USD
+  Expenses:Groceries 16 USD
+
+2024-02-04 * "Some transaction for Expenses:Groceries"
+  Assets:Physical:Cash -24 USD
+  Expenses:Groceries 24 USD
+
+2024-02-07 * "Some transaction for Expenses:Groceries"
+  Assets:MyLessFavouriteBank:Cash -31 USD
+  Expenses:Groceries 31 USD
+
+2024-02-12 * "Some transaction for Expenses:EatingOut"
+  Assets:MyLessFavouriteBank:Cash -24 USD
+  Expenses:EatingOut 24 USD
+
+2024-02-14 * "Some transaction for Expenses:EatingOut:Coffee"
+  Assets:Physical:Cash -4 USD
+  Expenses:EatingOut:Coffee 4 USD
+
+2024-02-15 * "Some transaction for Expenses:Groceries"
+  Assets:MyFavouriteBank:Cash -37 USD
+  Expenses:Groceries 37 USD
+
+2024-02-15 * "Some transaction for Expenses:EatingOut"
+  Assets:MyLessFavouriteBank:Cash -19 USD
+  Expenses:EatingOut 19 USD
+
+2024-02-17 * "Some transaction for Expenses:Groceries"
+  Assets:MyLessFavouriteBank:Cash -12 USD
+  Expenses:Groceries 12 USD
+
+2024-02-19 * "Some transaction for Expenses:Groceries"
+  Assets:MyLessFavouriteBank:Cash -12 USD
+  Expenses:Groceries 12 USD
+
+2024-02-22 * "Some transaction for Expenses:EatingOut:Coffee"
+  Assets:MyLessFavouriteBank:Cash -3 USD
+  Expenses:EatingOut:Coffee 3 USD
+
+2024-02-23 * "Some transaction for Expenses:EatingOut"
+  Assets:MyLessFavouriteBank:Cash -15 USD
+  Expenses:EatingOut 15 USD
+
+2024-02-25 * "Some transaction for Expenses:Groceries"
+  Assets:MyFavouriteBank:Cash -10 USD
+  Expenses:Groceries 10 USD
+
+2024-02-28 * "Some transaction for Expenses:EatingOut"
+  Assets:Physical:Cash -15 USD
+  Expenses:EatingOut 15 USD
+
+2024-02-29 * "Some transaction for Expenses:Groceries"
+  Assets:MyFavouriteBank:Cash -39 USD
+  Expenses:Groceries 39 USD
+
+2024-03-04 * "Some transaction for Expenses:Groceries"
+  Assets:MyFavouriteBank:Cash -34 USD
+  Expenses:Groceries 34 USD
+
+2024-03-04 * "Some transaction for Expenses:EatingOut:Coffee"
+  Assets:MyFavouriteBank:Cash -3 USD
+  Expenses:EatingOut:Coffee 3 USD
+
+2024-03-05 * "Some transaction for Expenses:Groceries"
+  Assets:MyFavouriteBank:Cash -38 USD
+  Expenses:Groceries 38 USD
+
+2024-03-08 * "Some transaction for Expenses:Groceries"
+  Assets:Physical:Cash -20 USD
+  Expenses:Groceries 20 USD
+
+2024-03-12 * "Some transaction for Expenses:Groceries"
+  Assets:MyFavouriteBank:Cash -21 USD
+  Expenses:Groceries 21 USD
+
+2024-03-14 * "Some transaction for Expenses:Groceries"
+  Assets:MyFavouriteBank:Cash -32 USD
+  Expenses:Groceries 32 USD
+
+2024-03-20 * "Some transaction for Expenses:Travel:Flights"
+  Assets:MyFavouriteBank:Cash -149 USD
+  Expenses:Travel:Flights 149 USD
+
+2024-03-21 * "Some transaction for Expenses:Groceries"
+  Assets:Physical:Cash -30 USD
+  Expenses:Groceries 30 USD
+
+2024-03-24 * "Some transaction for Expenses:Groceries"
+  Assets:MyLessFavouriteBank:Cash -7 USD
+  Expenses:Groceries 7 USD
+
+2024-03-24 * "Some transaction for Expenses:EatingOut"
+  Assets:MyFavouriteBank:Cash -28 USD
+  Expenses:EatingOut 28 USD
+
+2024-03-25 * "Some transaction for Expenses:Donations"
+  Assets:MyFavouriteBank:Cash -95 USD
+  Expenses:Donations 95 USD
+
+2024-03-27 * "Some transaction for Expenses:EatingOut"
+  Assets:MyLessFavouriteBank:Cash -21 USD
+  Expenses:EatingOut 21 USD
+
+2024-03-28 * "Some transaction for Expenses:Groceries"
+  Assets:MyFavouriteBank:Cash -14 USD
+  Expenses:Groceries 14 USD
+
+2024-03-29 * "Some transaction for Expenses:EatingOut"
+  Assets:MyFavouriteBank:Cash -29 USD
+  Expenses:EatingOut 29 USD
+
+2024-03-30 * "Some transaction for Expenses:Groceries"
+  Assets:Physical:Cash -10 USD
+  Expenses:Groceries 10 USD
+
+2024-04-01 * "Some transaction for Expenses:Groceries"
+  Assets:MyFavouriteBank:Cash -25 USD
+  Expenses:Groceries 25 USD
+
+2024-04-05 * "Some transaction for Expenses:Travel:Flights"
+  Assets:MyLessFavouriteBank:Cash -196 USD
+  Expenses:Travel:Flights 196 USD
+
+2024-04-09 * "Some transaction for Expenses:Groceries"
+  Assets:Physical:Cash -19 USD
+  Expenses:Groceries 19 USD
+
+2024-04-13 * "Some transaction for Expenses:Groceries"
+  Assets:MyFavouriteBank:Cash -7 USD
+  Expenses:Groceries 7 USD
+
+2024-04-14 * "Some transaction for Expenses:Groceries"
+  Assets:MyFavouriteBank:Cash -10 USD
+  Expenses:Groceries 10 USD
+
+2024-04-19 * "Some transaction for Expenses:Groceries"
+  Assets:MyFavouriteBank:Cash -33 USD
+  Expenses:Groceries 33 USD
+
+2024-04-21 * "Some transaction for Expenses:EatingOut:Coffee"
+  Assets:MyFavouriteBank:Cash -3 USD
+  Expenses:EatingOut:Coffee 3 USD
+
+2024-04-22 * "Some transaction for Expenses:EatingOut:Coffee"
+  Assets:MyFavouriteBank:Cash -3 USD
+  Expenses:EatingOut:Coffee 3 USD
+
+2024-04-24 * "Some transaction for Expenses:Groceries"
+  Assets:MyFavouriteBank:Cash -27 USD
+  Expenses:Groceries 27 USD
+
+2024-04-28 * "Some transaction for Expenses:Groceries"
+  Assets:MyFavouriteBank:Cash -13 USD
+  Expenses:Groceries 13 USD
+
+2024-04-28 * "Some transaction for Expenses:EatingOut"
+  Assets:MyLessFavouriteBank:Cash -17 USD
+  Expenses:EatingOut 17 USD
+
+2024-04-30 * "Some transaction for Expenses:Travel"
+  Assets:Physical:Cash -160 USD
+  Expenses:Travel 160 USD
+
+2024-05-01 * "Some transaction for Expenses:Groceries"
+  Assets:MyFavouriteBank:Cash -30 USD
+  Expenses:Groceries 30 USD
+
+2024-05-02 * "Some transaction for Expenses:EatingOut"
+  Assets:MyFavouriteBank:Cash -17 USD
+  Expenses:EatingOut 17 USD
+
+2024-05-07 * "Some transaction for Expenses:Groceries"
+  Assets:MyFavouriteBank:Cash -29 USD
+  Expenses:Groceries 29 USD
+
+2024-05-09 * "Some transaction for Expenses:Groceries"
+  Assets:MyLessFavouriteBank:Cash -15 USD
+  Expenses:Groceries 15 USD
+
+2024-05-13 * "Some transaction for Expenses:EatingOut"
+  Assets:MyLessFavouriteBank:Cash -27 USD
+  Expenses:EatingOut 27 USD
+
+2024-05-13 * "Some transaction for Expenses:Shopping"
+  Assets:MyFavouriteBank:Cash -52 USD
+  Expenses:Shopping 52 USD
+
+2024-05-17 * "Some transaction for Expenses:EatingOut"
+  Assets:MyLessFavouriteBank:Cash -16 USD
+  Expenses:EatingOut 16 USD
+
+2024-05-18 * "Some transaction for Expenses:Groceries"
+  Assets:MyFavouriteBank:Cash -12 USD
+  Expenses:Groceries 12 USD
+
+2024-05-20 * "Some transaction for Expenses:EatingOut"
+  Assets:MyLessFavouriteBank:Cash -17 USD
+  Expenses:EatingOut 17 USD
+
+2024-05-23 * "Some transaction for Expenses:Groceries"
+  Assets:MyLessFavouriteBank:Cash -12 USD
+  Expenses:Groceries 12 USD
+
+2024-05-24 * "Some transaction for Expenses:EatingOut"
+  Assets:Physical:Cash -15 USD
+  Expenses:EatingOut 15 USD
+
+2024-05-25 * "Some transaction for Expenses:Groceries"
+  Assets:MyFavouriteBank:Cash -26 USD
+  Expenses:Groceries 26 USD
+
+2024-05-31 * "Some transaction for Expenses:EatingOut"
+  Assets:MyFavouriteBank:Cash -23 USD
+  Expenses:EatingOut 23 USD
+
+2024-06-03 * "Some transaction for Expenses:EatingOut"
+  Assets:MyFavouriteBank:Cash -18 USD
+  Expenses:EatingOut 18 USD
+
+2024-06-07 * "Some transaction for Expenses:EatingOut"
+  Assets:MyFavouriteBank:Cash -17 USD
+  Expenses:EatingOut 17 USD
+
+2024-06-11 * "Some transaction for Expenses:Groceries"
+  Assets:MyLessFavouriteBank:Cash -22 USD
+  Expenses:Groceries 22 USD
+
+2024-06-11 * "Some transaction for Expenses:EatingOut:Coffee"
+  Assets:MyFavouriteBank:Cash -3 USD
+  Expenses:EatingOut:Coffee 3 USD
+
+2024-06-13 * "Some transaction for Expenses:EatingOut:Coffee"
+  Assets:MyFavouriteBank:Cash -4 USD
+  Expenses:EatingOut:Coffee 4 USD
+
+2024-06-17 * "Some transaction for Expenses:EatingOut"
+  Assets:MyFavouriteBank:Cash -20 USD
+  Expenses:EatingOut 20 USD
+
+2024-06-18 * "Some transaction for Expenses:Travel"
+  Assets:MyFavouriteBank:Cash -134 USD
+  Expenses:Travel 134 USD
+
+2024-06-19 * "Some transaction for Expenses:EatingOut"
+  Assets:MyFavouriteBank:Cash -24 USD
+  Expenses:EatingOut 24 USD
+
+2024-06-23 * "Some transaction for Expenses:EatingOut"
+  Assets:MyLessFavouriteBank:Cash -23 USD
+  Expenses:EatingOut 23 USD
+
+2024-06-27 * "Some transaction for Expenses:EatingOut"
+  Assets:MyFavouriteBank:Cash -34 USD
+  Expenses:EatingOut 34 USD
+
+2024-06-29 * "Some transaction for Expenses:Groceries"
+  Assets:MyLessFavouriteBank:Cash -10 USD
+  Expenses:Groceries 10 USD
+
+; Some demo stock transactions
+2024-04-11 * "Buy SPY"
+  Assets:MyStockBroker:SPY                                  3 SPY {517.9 USD}
+  Assets:MyStockBroker:Cash                            -1556.12 USD
+  Expenses:MyStockBroker:Commissions                       2.42 USD
+
+2024-06-17 * "Sell SPY"
+  Assets:MyStockBroker:SPY                                  -2 SPY {} @ 547 USD
+  Assets:MyStockBroker:Cash                             1090.99 USD
+  Expenses:MyStockBroker:Commissions                       3.01 USD
+  Income:MyStockBroker:PnL
+
+
+2024-02-20 * "Buy ETH"
+  Assets:MyCryptoBroker:ETH                     0.8 ETH {2338 GBP}
+  Assets:MyFavouriteBank:Cash                            -1875.8 GBP
+  Expenses:MyCryptoBroker:Commissions                       5.4 GBP
+
+2024-08-19 * "Sell ETH"
+  Assets:MyCryptoBroker:ETH                    -0.7 ETH {} @ 2018 GBP
+  Assets:MyFavouriteBank:Cash                             1412.6 GBP
+  Expenses:MyCryptoBroker:Commissions                       7 GBP
+  Income:MyCryptoBroker:PnL

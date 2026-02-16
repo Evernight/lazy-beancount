@@ -1,0 +1,67 @@
+# Use the date from which you want to start tracking values of the accounts
+opening_balances_date: "2023-12-01"
+
+# Following are the groups of accounts of various types
+# The configuration is defined in tree-like structure, the names of accounts
+# will be built traversing down to the leaves(e.g. Assets:Physical:Cash)
+# If the leaf node (can be a dict or str) doesn't have a 'currencies' key, its
+# name will be treated as a currency (e.g. Assets:MyFavouriteBank:Savings:GBP)
+
+# booking_method is an optional configuration, see
+# https://beancount.github.io/docs/how_inventories_work.html#per-account-booking-method
+# it's recommended for the opaque funds or investments where you don't care about
+# specific lots traded explicitly or don't have access to this information
+
+# Accounts holding cash values
+cash:
+  - Physical:
+    - Cash:
+        currencies: [USD, GBP]
+
+  - MyFavouriteBank:
+    - Cash:
+        currencies: [GBP]
+    - Savings:
+      - GBP
+
+  - MyLessFavouriteBank:
+    - Cash:
+        currencies: [GBP]
+
+  - MyStockBroker:
+    - Cash:
+        currencies: [USD]
+
+# Funds where you can only track total value converted to currency and not
+# specific stocks (see https://github.com/Evernight/beancount-valuation)
+opaque_funds_valuation:
+  - MyAutomaticBroker:
+    - Total:
+        currencies: [USD]
+        booking_method: FIFO
+
+# Same but balanced via pad/balance (opaque_funds_valuation is recommended to
+# use instead)
+opaque_funds:
+  - SomeBroker:
+    - Total:
+        currencies: [USD]
+
+# Accounts holding investments (stocks, crypto, funds, etc)
+investments:
+  - MyStockBroker:
+    - SPY:
+        booking_method: LIFO
+    - XVV
+    
+  - MyCryptoBroker:
+    - ETH
+
+# Liabilities accounts
+liabilities:
+  - Shared:
+    - Unspecified:
+        currencies: [USD]
+        
+    - SomeDude:
+        currencies: [USD]
