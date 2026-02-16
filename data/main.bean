@@ -87,6 +87,9 @@ plugin "beancount.ops.documents"
 ; Investing tools
 2010-01-01 custom "fava-extension" "fava_investor" "{}"
 
+; Git operations for Beancount files
+2010-01-01 custom "fava-extension" "fava_git"
+
 * Includes
 ; Lazy Beancount: accounts generated from accounts_config.yml
 include "accounts.gen.bean"

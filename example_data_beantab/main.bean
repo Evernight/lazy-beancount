@@ -88,6 +88,9 @@ plugin "beancount.ops.documents"
 ; Investing tools
 2010-01-01 custom "fava-extension" "fava_investor" "{}"
 
+; Git operations for Beancount files
+2010-01-01 custom "fava-extension" "fava_git"
+
 ; BeanTab for spreadsheet-style balance assertions
 2024-01-01 custom "fava-extension" "beantab" "{}"
 
