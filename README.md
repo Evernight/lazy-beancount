@@ -21,8 +21,8 @@ Lazy Beancount is [Beancount](https://github.com/beancount/beancount) accounting
   - configuration for multiple accounts via [YAML config file](https://lazy-beancount.xyz/docs/stage2_expenses/automated_import/#lazy-beancount-ui)
   - UI for statement file upload
 - Additional web interfaces ([Streamlit](https://github.com/streamlit/streamlit)-based) for:
-  - regularly providing [total values](https://lazy-beancount.xyz/docs/stage1_totals/motivation/) of the accounts for automatic balancing
-  - [fetching](https://lazy-beancount.xyz/docs/stage1_totals/currencies/#conversion-rates) currency rates / commodity prices
+  - regularly providing [total values](https://lazy-beancount.xyz/docs/stage1_totals/motivation/) of the accounts for automatic balancing (to be replaced by [beantab](https://github.com/Evernight/beantab))
+  - [fetching](https://lazy-beancount.xyz/docs/stage1_totals/currencies/#conversion-rates) currency rates / commodity prices (to be replaced by [fava-currency-tracker](https://github.com/Evernight/fava-currency-tracker))
 - Pre-installed plugins: 
   - collections:
     - [beancount-lazy-plugins](https://github.com/Evernight/beancount-lazy-plugins) ([valuation](https://github.com/Evernight/beancount-lazy-plugins?tab=readme-ov-file#valuation), [filter_map](https://github.com/Evernight/beancount-lazy-plugins?tab=readme-ov-file#filter_map), [balance_extended](https://github.com/Evernight/beancount-lazy-plugins?tab=readme-ov-file#balance_extended), [currency_convert](https://github.com/Evernight/beancount-lazy-plugins?tab=readme-ov-file#currency_convert), and more)
