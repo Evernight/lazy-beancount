@@ -27,7 +27,7 @@ streamlit_ace==0.1.1
 streamlit-echarts==0.4.0
 
 # Fava extensions
-fava-dashboards @ git+https://github.com/andreasgerstmayr/fava-dashboards.git@88da44615106696d68a9f4a1bec923fb1c660c34
+fava-dashboards @ git+https://github.com/andreasgerstmayr/fava-dashboards.git@73bdfe25226a780a9e4d1bfe59fce8d0573c33b0
 fava-portfolio-returns @ git+https://github.com/andreasgerstmayr/fava-portfolio-returns.git@7ffeb3ada2e7f7f300be15199f5bfbb3aa97456f
 fava-currency-tracker @ git+https://github.com/Evernight/fava-currency-tracker.git@6d715cf3e777494d5e40473972afbd9f423b0442
 fava-investor==1.0.1
