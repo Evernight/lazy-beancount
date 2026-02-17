@@ -32,7 +32,7 @@ fava-portfolio-returns @ git+https://github.com/andreasgerstmayr/fava-portfolio-
 fava-currency-tracker @ git+https://github.com/Evernight/fava-currency-tracker.git@f0223a532517088fd2c2a712a3cd2e07ca4ec937
 fava-investor==1.0.1
 fava-git @ git+https://github.com/Evernight/fava-git.git@18a9b6e64b636bfa8673eee808892da01adf661b
-beantab @ git+https://github.com/Evernight/beantab.git@f30bcab97dc85d5570cb662b2db9266926b089ae
+beantab @ git+https://github.com/Evernight/beantab.git@cb7b066c18084bcffcf5b5934923a67f16a8b517
 
 # Beancount plugins
 beancount_share @ git+https://github.com/Akuukis/beancount_share.git@4101c45e16948c0683520cebcf88afe4862224c4
@@ -41,5 +41,5 @@ beancount-reds-plugins @ git+https://github.com/redstreet/beancount_reds_plugins
 autobean @ git+https://github.com/SEIAROTg/autobean@b14d040eaa75a55731ef650e76425d7d356ec2b9
 
 # Plugins without PyPI releases
-beancount-lazy-plugins @ git+https://github.com/Evernight/beancount-lazy-plugins@8cb22aaaf9a56e3af74102a4a845fcbe064646c6
+beancount-lazy-plugins @ git+https://github.com/Evernight/beancount-lazy-plugins@bce45d4c1e3bf38a26bdfb760d1a65a001bc914d
 beancount-importers @ git+https://github.com/Evernight/beancount-importers@06fcd1200d3825eb7a0669f35bd313b2efcaf8cd
