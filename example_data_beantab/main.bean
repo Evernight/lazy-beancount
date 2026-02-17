@@ -48,6 +48,7 @@ plugin "beancount.ops.documents"
 1970-01-01 custom "fava-sidebar-link" "📜 M-3 to day" "/beancount/journal/?time=month-3+to+day"
 1970-01-01 custom "fava-sidebar-link" "📜 #fix" "/beancount/journal/?filter=%23fix"
 1970-01-01 custom "fava-sidebar-link" "📉 Example portfolio" "/beancount/extension/FavaPortfolioReturns/#/portfolio?investments=g%3ABuy+High+Sell+Low+ETH&chart=1&currency=USD"
+1970-01-01 custom "fava-sidebar-link" "🧮 BeanTab Assets" "/beancount/extension/BeanTab/?sortProp=account&sortOrder=asc&accountFilter=%5B%22Assets%3A.*%22%5D&hideAccountsWithNoEntries=true"
 1970-01-01 custom "fava-sidebar-link" "🔁 Reset filters" ".?"
 
 ** Filter presets
@@ -127,43 +128,6 @@ include "beancount_import_output/balance_accounts.bean"
 
 
 * Plugins
-** BeanTab / balance-ext and pad-ext
-; should be run before:
-; pad_extended plugin: because it may generate pad-ext entries
-; valuation plugin: because it may generate valuation entries
-; ops.balance: may generate regular balance statements, and it doesn't do the actual balance assertions
-plugin "beancount_lazy_plugins.balance_extended"
-
-; balance-ext config: default balance types per account
-1970-01-01 custom "balance-ext" "config"
-  account_regex: "Assets:.*"
-  balance_type: "padded"
-1970-01-01 custom "balance-ext" "config"
-  account_regex: "Liabilities:Loan.*"
-  balance_type: "full-padded"
-1970-01-01 custom "balance-ext" "config"
-  account_regex: "Assets:MyAutomaticBroker:Total|Assets:StockBroker:Portfolio|Assets:MyBank:Savings"
-  balance_type: "valuation"
-
-; should be run before:
-; ops.pad: if handle_default_pad_directives is False, it won't handle the pad directives
-; auto_accounts: because it may use new accounts with names based on a template
-plugin "beancount_lazy_plugins.pad_extended" "{
-  'handle_default_pad_directives': False,
-  'default_pad_account': [
-    (r'^Assets:.*$', 'Expenses:Unattributed:{name}', 'Income:Unattributed:{name}'),
-    (r'^Liabilities:.*$', 'Equity:OpeningBalances')
-  ]
-}"
-
-** Valuation plugin
-; Configure accounts that have opaque changes in value
-plugin "beancount_lazy_plugins.valuation"
-1970-01-01 custom "valuation" "config"
-  account: "Assets:MyAutomaticBroker:Total" 
-  currency: "AUTO_BROKER_USD"
-  pnlAccount: "Assets:MyAutomaticBroker:Total:PnL"
-
 ** Autogenerating prices
 ; Generate implicit prices from costs
 ; It's better to place it before beancount_generate_base_ccy_prices so that transitive conversions may happen
@@ -187,7 +151,6 @@ plugin "beancount_share.share" "{
   'account_creditors': 'Liabilities:Shared',
 }"
 
-
 plugin "beancount_reds_plugins.effective_date.effective_date" "{
   'Expenses': {
     'earlier': 'Liabilities:Hold:Expenses', 'later': 'Assets:Hold:Expenses'
@@ -197,17 +160,52 @@ plugin "beancount_reds_plugins.effective_date.effective_date" "{
   },
  }"
 
+** BeanTab / balance-ext and pad-ext
+
+; should be run before:
+; pad_extended plugin: because it may generate pad-ext entries
+; valuation plugin: because it may generate valuation entries
+; ops.balance: may generate regular balance statements, and it doesn't do the actual balance assertions
+plugin "beancount_lazy_plugins.balance_extended"
+
+; balance-ext config: default balance types per account
+1970-01-01 custom "balance-ext" "config"
+  account_regex: "Assets:.*"
+  balance_type: "padded"
+1970-01-01 custom "balance-ext" "config"
+  account_regex: "Liabilities:Loan.*"
+  balance_type: "full-padded"
+1970-01-01 custom "balance-ext" "config"
+  account_regex: "Assets:MyAutomaticBroker:Total|Assets:StockBroker:Portfolio|Assets:MyBank:Savings"
+  balance_type: "valuation"
+
+; should be run before:
+; auto_accounts: because it may use new accounts with names based on a template
+plugin "beancount_lazy_plugins.pad_extended"
+
+** Valuation plugin
+; Configure accounts that have opaque changes in value
+plugin "beancount_lazy_plugins.valuation"
+1970-01-01 custom "valuation" "config"
+  account: "Assets:MyAutomaticBroker:Total" 
+  currency: "AUTO_BROKER_USD"
+  pnlAccount: "Assets:MyAutomaticBroker:Total:PnL"
+
+; After valuation plugin as it may change set of currencies for accounts
+plugin "beancount_lazy_plugins.currencies_used" "{
+  'extend_open_directives': True
+}"
+
 ; Some hacky fix for dashboards to work properly.
 ; At least one transaction per month needs to be present to display historical chart
 include "regular_postings_fix.bean"
 
 ; Original pad + balance operations from vanilla Beancount
 ; They need to be included explicitly because of the 'option "plugin_processing_mode" "raw"'
-plugin "beancount.ops.pad"
 plugin "beancount.ops.balance"
 
 
-; Should be included after beancount.ops.pad
+; Should be included after beancount.ops.pad / pad_extended
 plugin "beancount_lazy_plugins.group_pad_transactions"
 
 ; Comes after almost everything but before the split plugin (it's used in some examples)

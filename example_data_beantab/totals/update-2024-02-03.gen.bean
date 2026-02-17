@@ -8,7 +8,7 @@
 ; 2024-02-02 pad Liabilities:Shared:SomeDude                                       Expenses:Unattributed:Shared:SomeDude 
 
 2024-02-03 balance Assets:Physical:Cash                           100.0 USD
-2024-02-03 balance Assets:Physical:Cash                           40.0 GBP
+2024-02-03 custom "balance-ext" Assets:Physical:Cash 40 GBP
 2024-02-03 balance Assets:MyFavouriteBank:Cash                    3520.0 GBP
 2024-02-03 balance Assets:MyLessFavouriteBank:Cash                180.0 GBP
 2024-02-03 balance Assets:MyStockBroker:Cash                      2100.0 USD
