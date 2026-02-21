@@ -1,0 +1,10 @@
+; see issue and explanation:
+; https://github.com/andreasgerstmayr/fava-dashboards/issues/28
+;
+; Balance chart queries use Equity:RegularTransacionForSummariesFrom to generate
+; regular date points for price conversions (beanquery limitation).
+
+2023-12-03 * "Regular transaction for summaries" #auxiliary
+    recur: " / 6 days"
+  Equity:RegularTransacionForSummariesFrom 0 USD
+  Equity:RegularTransacionForSummariesTo 0 USD
