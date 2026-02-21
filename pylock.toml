@@ -109,8 +109,8 @@ name = "beancount-lazy-plugins"
 [packages.vcs]
 type = "git"
 url = "https://github.com/Evernight/beancount-lazy-plugins"
-requested-revision = "bce45d4c1e3bf38a26bdfb760d1a65a001bc914d"
-commit-id = "bce45d4c1e3bf38a26bdfb760d1a65a001bc914d"
+requested-revision = "75b048627b5743efe64622223b861ee0d61e6297"
+commit-id = "75b048627b5743efe64622223b861ee0d61e6297"
 
 [[packages]]
 name = "beancount-plugin-utils"
@@ -165,8 +165,8 @@ name = "beanquery"
 [packages.vcs]
 type = "git"
 url = "https://github.com/beancount/beanquery.git"
-requested-revision = "4a0e62a61e64807c9cd01ce32fb24721907b4c3b"
-commit-id = "4a0e62a61e64807c9cd01ce32fb24721907b4c3b"
+requested-revision = "f8079cd6ca6aa2f38dfc5490ad29333cea20309a"
+commit-id = "f8079cd6ca6aa2f38dfc5490ad29333cea20309a"
 
 [[packages]]
 name = "beantab"
@@ -256,14 +256,14 @@ sha256 = "0a98e6759f854bd25a58a73fa88833fba3b7c491169f86ce1180c948ab3fd394"
 
 [[packages]]
 name = "cheroot"
-version = "10.0.1"
+version = "11.1.2"
 
 [[packages.wheels]]
-name = "cheroot-10.0.1-py3-none-any.whl"
-url = "https://files.pythonhosted.org/packages/5b/9e/111f4441bc0e4736251ee0e61094904432ab19292a4cc7bd7127ed94f81e/cheroot-10.0.1-py3-none-any.whl"
+name = "cheroot-11.1.2-py3-none-any.whl"
+url = "https://files.pythonhosted.org/packages/41/99/af65511a10c4212438ac52bc5e45e486e7a04d292201ad84dfd9208fe9a8/cheroot-11.1.2-py3-none-any.whl"
 
 [packages.wheels.hashes]
-sha256 = "6ea332f20bfcede14e66174d112b30e9807492320d737ca628badc924d997595"
+sha256 = "0f6c0ba05c00fbc869fb46b1de4ec2384e1d85418ae963d3bc10ae83b688dbfa"
 
 [[packages]]
 name = "click"
@@ -357,10 +357,10 @@ sha256 = "7a91720bc756843502c3b7504c77b8fe44217c85c537d85037f0f536151b2caa"
 name = "fava"
 
 [packages.archive]
-url = "https://github.com/Evernight/fava/raw/ec8ffc88d5ffa4e8d3c7bc0a38f98c5ed252af60/prebuilt_wheels/fava-1.30.7.dev24+gc4452d09b.tar.gz"
+url = "https://github.com/Evernight/fava/raw/5eaeb1c627314c67d6620ca61b09fb8be574e8f0/prebuilt_wheels/fava-1.30.11.dev24+g38469e585.tar.gz"
 
 [packages.archive.hashes]
-sha1 = "b4461e79a7c4caf2ea182021c9b8c7cc18c75af7"
+sha1 = "a7f8ec8c8b1fd995c038c734f460320bd319e64f"
 
 [[packages]]
 name = "fava-currency-tracker"
@@ -368,8 +368,8 @@ name = "fava-currency-tracker"
 [packages.vcs]
 type = "git"
 url = "https://github.com/Evernight/fava-currency-tracker.git"
-requested-revision = "f0223a532517088fd2c2a712a3cd2e07ca4ec937"
-commit-id = "f0223a532517088fd2c2a712a3cd2e07ca4ec937"
+requested-revision = "f5d2ff52de4bcdad88f1d83a57f86d7d1a9e04ca"
+commit-id = "f5d2ff52de4bcdad88f1d83a57f86d7d1a9e04ca"
 
 [[packages]]
 name = "fava-dashboards"
@@ -377,8 +377,8 @@ name = "fava-dashboards"
 [packages.vcs]
 type = "git"
 url = "https://github.com/andreasgerstmayr/fava-dashboards.git"
-requested-revision = "73bdfe25226a780a9e4d1bfe59fce8d0573c33b0"
-commit-id = "73bdfe25226a780a9e4d1bfe59fce8d0573c33b0"
+requested-revision = "88da44615106696d68a9f4a1bec923fb1c660c34"
+commit-id = "88da44615106696d68a9f4a1bec923fb1c660c34"
 
 [[packages]]
 name = "fava-git"
@@ -406,19 +406,19 @@ name = "fava-portfolio-returns"
 [packages.vcs]
 type = "git"
 url = "https://github.com/andreasgerstmayr/fava-portfolio-returns.git"
-requested-revision = "7ffeb3ada2e7f7f300be15199f5bfbb3aa97456f"
-commit-id = "7ffeb3ada2e7f7f300be15199f5bfbb3aa97456f"
+requested-revision = "5ecc3607069df644b150e6e287731d039eb13b9e"
+commit-id = "5ecc3607069df644b150e6e287731d039eb13b9e"
 
 [[packages]]
 name = "flask"
-version = "3.1.2"
+version = "3.1.3"
 
 [[packages.wheels]]
-name = "flask-3.1.2-py3-none-any.whl"
-url = "https://files.pythonhosted.org/packages/ec/f9/7f9263c5695f4bd0023734af91bedb2ff8209e8de6ead162f35d8dc762fd/flask-3.1.2-py3-none-any.whl"
+name = "flask-3.1.3-py3-none-any.whl"
+url = "https://files.pythonhosted.org/packages/7f/9c/34f6962f9b9e9c71f6e5ed806e0d0ff03c9d1b0b2340088a0cf4bce09b18/flask-3.1.3-py3-none-any.whl"
 
 [packages.wheels.hashes]
-sha256 = "ca1d8112ec8a6158cc29ea4858963350011b5c846a414cdb7a954aa9e967d03c"
+sha256 = "f4bcbefc124291925f1a26446da31a5178f9483862233b23c0c96a20701f670c"
 
 [[packages]]
 name = "flask-babel"
@@ -673,14 +673,14 @@ sha256 = "3fd2f887589c7aa868e02632612ba39acb0b8948faf5cc58f0850e165bd46f35"
 
 [[packages]]
 name = "peewee"
-version = "3.19.0"
+version = "4.0.0"
 
 [[packages.wheels]]
-name = "peewee-3.19.0-py3-none-any.whl"
-url = "https://files.pythonhosted.org/packages/1a/41/19c65578ef9a54b3083253c68a607f099642747168fe00f3a2bceb7c3a34/peewee-3.19.0-py3-none-any.whl"
+name = "peewee-4.0.0-py3-none-any.whl"
+url = "https://files.pythonhosted.org/packages/39/40/89664cce41f4bedab105d705885cbb152d7bd85ce0facbf0ec02e90eb02a/peewee-4.0.0-py3-none-any.whl"
 
 [packages.wheels.hashes]
-sha256 = "de220b94766e6008c466e00ce4ba5299b9a832117d9eb36d45d0062f3cfd7417"
+sha256 = "6de14ff11ab50c3152dc1d4e12628c1b28c1e03ff4e4213e463429bfcd7340b6"
 
 [[packages]]
 name = "pillow"
@@ -849,14 +849,14 @@ sha256 = "381329a9f99628c9069361716891d34ad94af76e461dcb0335825aecc7692231"
 
 [[packages]]
 name = "regex"
-version = "2026.1.15"
+version = "2026.2.19"
 
 [[packages.wheels]]
-name = "regex-2026.1.15-cp312-cp312-macosx_11_0_arm64.whl"
-url = "https://files.pythonhosted.org/packages/19/4d/16d0773d0c818417f4cc20aa0da90064b966d22cd62a8c46765b5bd2d643/regex-2026.1.15-cp312-cp312-macosx_11_0_arm64.whl"
+name = "regex-2026.2.19-cp312-cp312-macosx_11_0_arm64.whl"
+url = "https://files.pythonhosted.org/packages/f9/87/3997fc72dc59233426ef2e18dfdd105bb123812fff740ee9cc348f1a3243/regex-2026.2.19-cp312-cp312-macosx_11_0_arm64.whl"
 
 [packages.wheels.hashes]
-sha256 = "9250d087bc92b7d4899ccd5539a1b2334e44eee85d848c4c1aef8e221d3f8c8f"
+sha256 = "db970bcce4d63b37b3f9eb8c893f0db980bbf1d404a1d8d2b17aa8189de92c53"
 
 [[packages]]
 name = "requests"
@@ -1177,14 +1177,14 @@ sha256 = "86890e837d61574c92a97496d590968b23c2ef0aeb8a9bc9421d174cd378ae39"
 
 [[packages]]
 name = "werkzeug"
-version = "3.1.5"
+version = "3.1.6"
 
 [[packages.wheels]]
-name = "werkzeug-3.1.5-py3-none-any.whl"
-url = "https://files.pythonhosted.org/packages/ad/e4/8d97cca767bcc1be76d16fb76951608305561c6e056811587f36cb1316a8/werkzeug-3.1.5-py3-none-any.whl"
+name = "werkzeug-3.1.6-py3-none-any.whl"
+url = "https://files.pythonhosted.org/packages/4d/ec/d58832f89ede95652fd01f4f24236af7d32b70cab2196dfcc2d2fd13c5c2/werkzeug-3.1.6-py3-none-any.whl"
 
 [packages.wheels.hashes]
-sha256 = "5111e36e91086ece91f93268bb39b4a35c1e6f1feac762c9c822ded0a4e322dc"
+sha256 = "7ddf3357bb9564e407607f988f683d72038551200c704012bb9a4c523d42f131"
 
 [[packages]]
 name = "xlrd"
