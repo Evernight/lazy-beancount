@@ -1,0 +1,7 @@
+; Chart note events for balance charts.
+; Enable "Events" in the Accounts dashboard to see vertical marker lines
+; on Net Worth and Cash charts.
+
+2024-02-01 event "chart_note" "Bonus received"
+2024-03-15 event "chart_note" "Tax payment"
+2024-05-01 event "chart_note" "Salary raise"
