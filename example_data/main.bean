@@ -37,23 +37,23 @@ plugin "beancount.ops.documents"
 * Fava options
 ** Default page
 ; Redefine default starting page when you go to the Fava host (localhost by default)
-1970-01-01 custom "fava-option" "default-page" "extension/FavaDashboards/?dashboard=0"
+1970-01-01 custom "fava-option" "default-page" "extension/FavaDashboards/?dashboard=overview"
 
 ** Sidebar links
 ; A set of useful shortcut links for the Fava's menu (left side)
 1970-01-01 custom "fava-sidebar-link" "🪙 Lazy Beancount" "http://localhost:8777/"
-1970-01-01 custom "fava-sidebar-link" "💸 Expenses" "/beancount/extension/FavaDashboards/?dashboard=4&conversion=USD&time=year-2+to+year"
-1970-01-01 custom "fava-sidebar-link" "📅 Subscriptions" "/beancount/extension/FavaDashboards/?dashboard=8&conversion=USD"
+1970-01-01 custom "fava-sidebar-link" "💸 Expenses" "/beancount/extension/FavaDashboards/?dashboard=expenses-detailed&conversion=USD&time=year-2+to+year"
+1970-01-01 custom "fava-sidebar-link" "📅 Subscriptions" "/beancount/extension/FavaDashboards/?dashboard=subscriptions&conversion=USD"
 1970-01-01 custom "fava-sidebar-link" "🚥 Budgets" "/beancount/account/Expenses/?r=changes&conversion=USD"
 1970-01-01 custom "fava-sidebar-link" "📜 M-3 to day" "/beancount/journal/?time=month-3+to+day"
 1970-01-01 custom "fava-sidebar-link" "📜 #fix" "/beancount/journal/?filter=%23fix"
-1970-01-01 custom "fava-sidebar-link" "📉 Example portfolio" "/beancount/extension/FavaPortfolioReturns/#/portfolio?investments=g%3ABuy+High+Sell+Low+ETH&chart=1&currency=USD"
+1970-01-01 custom "fava-sidebar-link" "📉 Example portfolio" "/beancount/extension/FavaPortfolioReturns/?investments=g_Buy+High+Sell+Low+ETH&path=performance"
 1970-01-01 custom "fava-sidebar-link" "🔁 Reset filters" ".?"
 
 ** Filter presets
 1970-01-01 custom "fava-filter-preset" "time" "month" "month"
 1970-01-01 custom "fava-filter-preset" "time" "month-1" "month-1"
-1970-01-01 custom "fava-filter-preset" "time" "day-89 to day" "quarter"
+1970-01-01 custom "fava-filter-preset" "time" "day-90 to day" "quarter"
 1970-01-01 custom "fava-filter-preset" "time" "day-365 to day" "year"
 1970-01-01 custom "fava-filter-preset" "time" "year-2 to year" "3Y"
 1970-01-01 custom "fava-filter-preset" "time" "year-4 to year" "5Y"
@@ -114,6 +114,12 @@ include "manual_transactions.bean"
 
 ; Budget definitions
 include "budgets.bean"
+
+; Location events for expense timeline charts (Expenses Detailed dashboard)
+include "locations.bean"
+
+; Chart note events for balance charts (Accounts dashboard)
+include "events.bean"
 
 ; Import files generated using beancount-import
 include "beancount_import_output/transactions.bean"

@@ -1,0 +1,11 @@
+; Location events for expense timeline charts.
+; Enable "Location areas" in the Account Expenses Timeline panel (Expenses Detailed dashboard)
+; to see colored background regions between location changes.
+
+2024-01-05 event "location" "Home"
+2024-01-28 event "location" "Business trip"
+2024-02-12 event "location" "Home"
+2024-03-15 event "location" "Holiday"
+2024-04-02 event "location" "Home"
+2024-04-20 event "location" "Conference"
+2024-05-05 event "location" "Home"
