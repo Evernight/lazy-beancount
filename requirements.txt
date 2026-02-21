@@ -8,7 +8,7 @@ fava @ https://github.com/Evernight/fava/raw/5eaeb1c627314c67d6620ca61b09fb8be57
 # not on pypi, using fixed commit
 beanprice @ git+https://github.com/beancount/beanprice.git@3cd060713d753b414ed042586d9980cdd0cb0832
 # last commit before ec250696e1955edbbef8d01e5a33030be94d935c that breaks current Fava compatibility
-beanquery @ git+https://github.com/beancount/beanquery.git@4a0e62a61e64807c9cd01ce32fb24721907b4c3b
+beanquery @ git+https://github.com/beancount/beanquery.git@f8079cd6ca6aa2f38dfc5490ad29333cea20309a
 pricehist==1.4.14
 
 # this version resolution needed for features compatibility
