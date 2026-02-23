@@ -1,0 +1,39 @@
+forms:
+  - name: add-expense
+    display_name: "Add expense"
+    fields:
+      - name: date
+        type: date
+        display_name: "Date"
+        required: true
+      - name: narration
+        type: str
+        display_name: "Narration"
+        default: "Expense"
+        required: true
+      - name: amount
+        type: number
+        display_name: "Amount"
+        required: true
+      - name: currency
+        type: currency
+        display_name: "Currency"
+        required: true
+        creatable: true
+      - name: expense_account
+        type: account
+        display_name: "Expense account"
+        required: true
+        creatable: true
+      - name: cash_account
+        type: account
+        display_name: "Cash account"
+        required: true
+        creatable: true
+    operations:
+      - type: append
+        file: "manual_transactions.bean"
+        content: |
+          {{ date }} * {{ narration | tojson }}
+            {{ cash_account }}  -{{ amount }} {{ currency }}
+            {{ expense_account }}  {{ amount }} {{ currency }}

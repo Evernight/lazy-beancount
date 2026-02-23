@@ -37,6 +37,7 @@ hostname = os.environ.get("LAZY_BEANCOUNT_HOST", "localhost")
 fava_port = os.environ.get("FAVA_PORT", 5003)
 beancount_import_port = os.environ.get("BEANCOUNT_IMPORT_PORT", 8101)
 lazy_beancount_port = os.environ.get("LAZY_BEANCOUNT_PORT", 8777)
+beanhub_forms_port = os.environ.get("BEANHUB_FORMS_PORT", 8310)
 
 st.set_page_config(
     layout="wide",
@@ -70,6 +71,15 @@ def fava_page():
     components.iframe(f"http://{hostname}:{fava_port}", height=640)
     st.page_link(
         f"http://{hostname}:{fava_port}",
+        label="open in new tab",
+        icon=":material/arrow_outward:",
+    )
+
+
+def forms_page():
+    components.iframe(f"http://{hostname}:{beanhub_forms_port}", height=640)
+    st.page_link(
+        f"http://{hostname}:{beanhub_forms_port}",
         label="open in new tab",
         icon=":material/arrow_outward:",
     )
@@ -573,6 +583,7 @@ pages = [
     st.Page(fava_page, title="Fava", url_path="fava"),
     st.Page(totals_page, title="Totals", url_path="totals"),
     st.Page(import_page, title="Import", url_path="import"),
+    st.Page(forms_page, title="Forms", url_path="forms"),
     st.Page(prices_page, title="Prices", url_path="prices"),
     st.Page(logs_page, title="Logs", url_path="logs"),
     st.Page(config_page, title="Config", url_path="config"),
@@ -587,7 +598,15 @@ for p in pages:
 selected_page = option_menu(
     None,
     [page.title for page in pages],
-    icons=["coin", "pencil", "file-earmark-arrow-up", "graph-up", "file-text", "gear"],
+    icons=[
+        "coin",
+        "pencil",
+        "file-earmark-arrow-up",
+        "ui-checks",
+        "graph-up",
+        "file-text",
+        "gear",
+    ],
     default_index=selected_page_index,
     orientation="horizontal",
 )

@@ -25,6 +25,8 @@ streamlit==1.52.2
 streamlit_option_menu==0.3.13
 streamlit_ace==0.1.1
 streamlit-echarts==0.4.0
+beanhub-forms
+beanhub-cli
 
 # Fava extensions
 fava-dashboards @ git+https://github.com/andreasgerstmayr/fava-dashboards.git@88da44615106696d68a9f4a1bec923fb1c660c34
