@@ -19,6 +19,34 @@ const LOCATION_COLORS = [
   "rgba(171, 71, 188, 0.1)",
 ];
 
+// Solid colors for location pie charts (same hues as LOCATION_COLORS)
+const LOCATION_PIE_COLORS = [
+  "rgb(100, 181, 246)",
+  "rgb(129, 199, 132)",
+  "rgb(255, 183, 77)",
+  "rgb(149, 117, 21)",
+  "rgb(239, 83, 80)",
+  "rgb(77, 208, 225)",
+  "rgb(255, 138, 101)",
+  "rgb(171, 71, 188)",
+];
+
+function locationPieColorsByIndex(descriptions: string[]): (description: string) => string {
+  const unique: string[] = [];
+  const seen = new Set<string>();
+  for (const d of descriptions) {
+    const key = d ?? "";
+    if (!seen.has(key)) {
+      seen.add(key);
+      unique.push(key);
+    }
+  }
+  return (description: string) => {
+    const idx = unique.indexOf(description ?? "");
+    return LOCATION_PIE_COLORS[idx >= 0 ? idx % LOCATION_PIE_COLORS.length : 0];
+  };
+}
+
 function locationColorsByIndex(descriptions: string[]): (description: string) => string {
   const unique: string[] = [];
   const seen = new Set<string>();
@@ -101,11 +129,11 @@ function movingAverage<T extends { date: string; value: number | null }>(
 
 function iterateDays(dateFirst: string, dateLast: string): string[] {
   const dates: string[] = [];
-  const d = new Date(dateFirst);
-  const last = new Date(dateLast);
+  const d = new Date(dateFirst + "T00:00:00Z");
+  const last = new Date(dateLast + "T00:00:00Z");
   while (d <= last) {
     dates.push(d.toISOString().slice(0, 10));
-    d.setDate(d.getDate() + 1);
+    d.setUTCDate(d.getUTCDate() + 1);
   }
   return dates;
 }
@@ -500,6 +528,69 @@ async function ExpensesTable(
       "& .MuiDataGrid-row.even": { backgroundColor: "rgba(0, 0, 0, 0.2)" },
       "& .expenses-value-bold": { fontWeight: "bold" },
       "& .expenses-tags-muted": { color: "text.secondary", fontStyle: "italic" },
+    },
+    pageSizeOptions: [20, 50, 100],
+    initialState: {
+      pagination: {
+        paginationModel: { page: 0, pageSize: 20 },
+      },
+    },
+  };
+}
+
+type LocationPeriodRow = {
+  location: string;
+  startDate: string;
+  endDate: string;
+  daysInLocation: number;
+};
+
+async function getLocationPeriods(ledger: Ledger): Promise<LocationPeriodRow[]> {
+  const locationEvents = await ledger
+    .query<{ date: string; description: string }>(`SELECT date, description FROM events WHERE type = 'location'`)
+    .catch(() => [] as { date: string; description: string }[]);
+
+  const sortedEvents = [...locationEvents].sort((a, b) => a.date.localeCompare(b.date));
+  const rows: LocationPeriodRow[] = [];
+
+  for (let i = 0; i < sortedEvents.length; i++) {
+    const ev = sortedEvents[i];
+    const location = ev.description ?? "";
+    if (!location) continue;
+
+    const startDate = ev.date;
+    let endDate: string;
+    if (i < sortedEvents.length - 1) {
+      endDate = sortedEvents[i + 1].date;
+    } else {
+      endDate = ledger.dateLast;
+    }
+    const daysInLocation =
+      Math.round(
+        (new Date(endDate).getTime() - new Date(startDate).getTime()) / (1000 * 60 * 60 * 24),
+      ) + 1;
+
+    rows.push({ location, startDate, endDate, daysInLocation });
+  }
+
+  return rows;
+}
+
+async function LocationsTable(ledger: Ledger): Promise<TableSpec<LocationPeriodRow>> {
+  const rows = await getLocationPeriods(ledger);
+
+  return {
+    columns: [
+      { field: "location", flex: 1, minWidth: 120, headerName: "Location" },
+      { field: "startDate", minWidth: 110, headerName: "Start Date" },
+      { field: "endDate", minWidth: 110, headerName: "End Date" },
+      { field: "daysInLocation", minWidth: 120, headerName: "Days in Location" },
+    ],
+    rows: rows.map((row, i) => ({ ...row, id: i })),
+    density: "compact",
+    getRowClassName: (params) => (params.indexRelativeToCurrentPage % 2 === 0 ? "even" : "odd"),
+    sx: {
+      "& .MuiDataGrid-row.even": { backgroundColor: "rgba(0, 0, 0, 0.2)" },
     },
     pageSizeOptions: [20, 50, 100],
     initialState: {
@@ -2920,6 +3011,201 @@ export default defineConfig({
       name: "Travelling",
       variables: [currencyVariable],
       panels: [
+        {
+          title: "Locations Calendar 📍",
+          width: "100%",
+          height: "450px",
+          link: "../../journal/",
+          kind: "echarts",
+          spec: async ({ ledger }) => {
+            const locationEvents = await ledger
+              .query<{ date: string; description: string }>(`SELECT date, description FROM events WHERE type = 'location'`)
+              .catch(() => [] as { date: string; description: string }[]);
+
+            const sortedEvents = [...locationEvents].sort((a, b) => a.date.localeCompare(b.date));
+            const locationColor = locationPieColorsByIndex(sortedEvents.map((e) => e.description ?? ""));
+
+            // For each date, compute active locations. On transition days (new location event),
+            // both previous and new location are active.
+            const dateFirst = ledger.dateFirst;
+            const dateLast = ledger.dateLast;
+            const allDates = iterateDays(dateFirst, dateLast);
+
+            const activeLocationsByDate: Record<string, string[]> = {};
+            let eventIndex = 0;
+            let currentLocation: string | null = null;
+
+            for (const d of allDates) {
+              const locations: string[] = [];
+              let hasEventOnThisDay = false;
+
+              while (eventIndex < sortedEvents.length && sortedEvents[eventIndex].date <= d) {
+                const ev = sortedEvents[eventIndex];
+                const loc = ev.description ?? "";
+
+                if (ev.date === d) {
+                  hasEventOnThisDay = true;
+                  if (currentLocation && !locations.includes(currentLocation)) {
+                    locations.push(currentLocation);
+                  }
+                  if (loc && !locations.includes(loc)) {
+                    locations.push(loc);
+                  }
+                  currentLocation = loc;
+                } else {
+                  currentLocation = loc;
+                }
+                eventIndex++;
+              }
+
+              if (!hasEventOnThisDay && currentLocation) {
+                locations.push(currentLocation);
+              }
+
+              if (locations.length > 0) {
+                activeLocationsByDate[d] = locations;
+              }
+            }
+
+            const storedThemeSetting = document.documentElement.style.colorScheme;
+            const isDarkMode =
+              storedThemeSetting == "dark" ||
+              (window.matchMedia?.("(prefers-color-scheme: dark)").matches && storedThemeSetting != "light");
+            const outerLineStyleColor = isDarkMode ? "lightgray" : "black";
+
+            const years = iterateYears(dateFirst, dateLast);
+            const allYears = years.slice(-3);
+            const uniqueLocations = [...new Set(sortedEvents.map((e) => e.description ?? "").filter(Boolean))];
+
+            const calendars = allYears.map((year, ind) => ({
+              left: 80,
+              right: 100,
+              top: ind * 150,
+              cellSize: [10, 15],
+              range: String(year),
+              splitLine: { lineStyle: { color: outerLineStyleColor } },
+              itemStyle: { borderWidth: 0.5 },
+              dayLabel: { firstDay: 1 },
+              yearLabel: { show: true, margin: 40 },
+            }));
+
+            const calendarInnerData: Record<string, any> = {};
+            for (const d of allDates) {
+              const locations = activeLocationsByDate[d];
+              if (!locations?.length) continue;
+
+              const year = parseInt(d.substring(0, 4), 10);
+              if (!allYears.includes(year)) continue;
+
+              const calendarIndex = allYears.indexOf(year);
+              calendarInnerData[d] = {
+                id: `pie-${d.replace(/-/g, "")}`,
+                name: d,
+                type: "pie",
+                coordinateSystem: "calendar",
+                calendarIndex,
+                center: d,
+                radius: 6,
+                data: locations.map((name) => ({
+                  name,
+                  value: 1,
+                  itemStyle: { color: locationColor(name) },
+                })),
+                label: { show: false },
+                emphasis: { scaleSize: 2 },
+              };
+            }
+
+            return {
+              tooltip: {
+                trigger: "item",
+                formatter: (params: any) => {
+                  const dateStr = params.seriesName ?? "";
+                  const locs = activeLocationsByDate[dateStr] ?? [];
+                  return `${dateStr}<br/>${locs.join(", ")}`;
+                },
+              },
+              legend: {
+                data: uniqueLocations,
+                top: "bottom",
+              },
+              calendar: calendars,
+              series: Object.values(calendarInnerData),
+              onClick: (event: any) => {
+                const dateStr = event.seriesName ?? "";
+                if (dateStr) {
+                  const link = "../../journal/?time={time}".replace("{time}", dateStr);
+                  window.open(ledger.urlFor(link));
+                }
+              },
+            };
+          },
+        },
+        {
+          title: "Notes",
+          width: "100%",
+          height: "60px",
+          kind: "html",
+          spec: async () =>
+            `<div style="font-size: 15px; text-align: center;">
+              <p>Location data comes from Beancount events with <code>type: "location"</code> and <code>description</code> as the location name, e.g. <code>2024-01-01 event "location" "London"</code>.</p>
+              <p>Days in location are counted inclusively: both the start date and end date are included.</p>
+            </div>`,
+        },
+        {
+          title: "Locations",
+          width: "60%",
+          height: "600px",
+          kind: "table",
+          spec: ({ ledger }) => LocationsTable(ledger),
+        },
+        {
+          title: "Days by Location",
+          width: "40%",
+          height: "600px",
+          kind: "echarts",
+          spec: async ({ ledger }) => {
+            const rows = await getLocationPeriods(ledger);
+            const daysByLocation: Record<string, number> = {};
+            for (const row of rows) {
+              daysByLocation[row.location] = (daysByLocation[row.location] ?? 0) + row.daysInLocation;
+            }
+            const data = Object.entries(daysByLocation).map(([name, value]) => ({ name, value }));
+            const locationColor = locationPieColorsByIndex(Object.keys(daysByLocation));
+            return {
+              tooltip: {
+                trigger: "item",
+                formatter: (params: any) => {
+                  const total = data.reduce((s, d) => s + d.value, 0);
+                  const pct = total ? ((params.value / total) * 100).toFixed(1) : "0";
+                  return `${params.marker} ${params.name}: ${params.value} days (${pct}%)`;
+                },
+              },
+              series: [
+                {
+                  type: "pie",
+                  radius: ["30%", "50%"],
+                  center: ["50%", "50%"],
+                  data: data.map((d) => ({
+                    name: d.name,
+                    value: d.value,
+                    itemStyle: { color: locationColor(d.name) },
+                  })),
+                  label: {
+                    formatter: (params: any) => `${params.name}\n${params.value} days`,
+                  },
+                  emphasis: {
+                    itemStyle: {
+                      shadowBlur: 10,
+                      shadowOffsetX: 0,
+                      shadowColor: "rgba(0, 0, 0, 0.5)",
+                    },
+                  },
+                },
+              ],
+            };
+          },
+        },
         {
           title: "Travel Costs per Year 📅",
           width: "100%",
