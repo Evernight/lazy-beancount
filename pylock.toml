@@ -109,8 +109,8 @@ name = "beancount-lazy-plugins"
 [packages.vcs]
 type = "git"
 url = "https://github.com/Evernight/beancount-lazy-plugins"
-requested-revision = "75b048627b5743efe64622223b861ee0d61e6297"
-commit-id = "75b048627b5743efe64622223b861ee0d61e6297"
+requested-revision = "4886aef1313c58464de13046aaae73aed85a7a8e"
+commit-id = "4886aef1313c58464de13046aaae73aed85a7a8e"
 
 [[packages]]
 name = "beancount-plugin-utils"
@@ -174,8 +174,8 @@ name = "beantab"
 [packages.vcs]
 type = "git"
 url = "https://github.com/Evernight/beantab.git"
-requested-revision = "cb7b066c18084bcffcf5b5934923a67f16a8b517"
-commit-id = "cb7b066c18084bcffcf5b5934923a67f16a8b517"
+requested-revision = "16ef914333e3339cd1115f95be8dd7028ac09031"
+commit-id = "16ef914333e3339cd1115f95be8dd7028ac09031"
 
 [[packages]]
 name = "beautifulsoup4"
@@ -212,14 +212,14 @@ sha256 = "8c9717235b3c651603fff0076db52d6acbfd1b338b8ed50256092f7ce9c85bda"
 
 [[packages]]
 name = "certifi"
-version = "2026.1.4"
+version = "2026.2.25"
 
 [[packages.wheels]]
-name = "certifi-2026.1.4-py3-none-any.whl"
-url = "https://files.pythonhosted.org/packages/e6/ad/3cc14f097111b4de0040c83a525973216457bbeeb63739ef1ed275c1c021/certifi-2026.1.4-py3-none-any.whl"
+name = "certifi-2026.2.25-py3-none-any.whl"
+url = "https://files.pythonhosted.org/packages/9a/3c/c17fb3ca2d9c3acff52e30b309f538586f9f5b9c9cf454f3845fc9af4881/certifi-2026.2.25-py3-none-any.whl"
 
 [packages.wheels.hashes]
-sha256 = "9943707519e4add1115f44c2bc244f782c0249876bf51b6599fee1ffbedd685c"
+sha256 = "027692e4402ad994f1c42e52a4997a9763c646b73e4096e4d5d6db8af1d6f0fa"
 
 [[packages]]
 name = "cffi"
@@ -234,25 +234,25 @@ sha256 = "8eca2a813c1cb7ad4fb74d368c2ffbbb4789d377ee5bb8df98373c2cc0dee76c"
 
 [[packages]]
 name = "chardet"
-version = "5.2.0"
+version = "7.0.1"
 
 [[packages.wheels]]
-name = "chardet-5.2.0-py3-none-any.whl"
-url = "https://files.pythonhosted.org/packages/38/6f/f5fbc992a329ee4e0f288c1fe0e2ad9485ed064cac731ed2fe47dcc38cbf/chardet-5.2.0-py3-none-any.whl"
+name = "chardet-7.0.1-cp312-cp312-macosx_11_0_arm64.whl"
+url = "https://files.pythonhosted.org/packages/f9/fb/3b92a2433eadef83ae131fa720a17857cfbf7687c5f188bfb2f9eee2d3dd/chardet-7.0.1-cp312-cp312-macosx_11_0_arm64.whl"
 
 [packages.wheels.hashes]
-sha256 = "e1cf59446890a00105fe7b7912492ea04b6e6f06d4b742b2c788469e34c82970"
+sha256 = "169951fa88d449e72e0c6194cec1c5e405fd36a6cfbe74c7dab5494cc35f1700"
 
 [[packages]]
 name = "charset-normalizer"
-version = "3.4.4"
+version = "3.4.5"
 
 [[packages.wheels]]
-name = "charset_normalizer-3.4.4-cp312-cp312-macosx_10_13_universal2.whl"
-url = "https://files.pythonhosted.org/packages/f3/85/1637cd4af66fa687396e757dec650f28025f2a2f5a5531a3208dc0ec43f2/charset_normalizer-3.4.4-cp312-cp312-macosx_10_13_universal2.whl"
+name = "charset_normalizer-3.4.5-cp312-cp312-macosx_10_13_universal2.whl"
+url = "https://files.pythonhosted.org/packages/9c/b6/9ee9c1a608916ca5feae81a344dffbaa53b26b90be58cc2159e3332d44ec/charset_normalizer-3.4.5-cp312-cp312-macosx_10_13_universal2.whl"
 
 [packages.wheels.hashes]
-sha256 = "0a98e6759f854bd25a58a73fa88833fba3b7c491169f86ce1180c948ab3fd394"
+sha256 = "ed97c282ee4f994ef814042423a529df9497e3c666dca19be1d4cd1129dc7ade"
 
 [[packages]]
 name = "cheroot"
@@ -563,14 +563,14 @@ sha256 = "b5aff6f3e818e6bdbbb38e5967520f174b18f539c2b9de867b1e7fde6f8d95a4"
 
 [[packages]]
 name = "markdown2"
-version = "2.5.4"
+version = "2.5.5"
 
 [[packages.wheels]]
-name = "markdown2-2.5.4-py3-none-any.whl"
-url = "https://files.pythonhosted.org/packages/b8/06/2697b5043c3ecb720ce0d243fc7cf5024c0b5b1e450506e9b21939019963/markdown2-2.5.4-py3-none-any.whl"
+name = "markdown2-2.5.5-py3-none-any.whl"
+url = "https://files.pythonhosted.org/packages/43/af/4b3891eb0a49d6cfd5cbf3e9bf514c943afc2b0f13e2c57cc57cd88ecc21/markdown2-2.5.5-py3-none-any.whl"
 
 [packages.wheels.hashes]
-sha256 = "3c4b2934e677be7fec0e6f2de4410e116681f4ad50ec8e5ba7557be506d3f439"
+sha256 = "be798587e09d1f52d2e4d96a649c4b82a778c75f9929aad52a2c95747fa26941"
 
 [[packages]]
 name = "markupsafe"
@@ -607,25 +607,25 @@ sha256 = "2fba2fa8ed8c4b85e227c5dd7dc41c7d658de3b6f247927316175a57349b84d1"
 
 [[packages]]
 name = "narwhals"
-version = "2.16.0"
+version = "2.17.0"
 
 [[packages.wheels]]
-name = "narwhals-2.16.0-py3-none-any.whl"
-url = "https://files.pythonhosted.org/packages/03/cc/7cb74758e6df95e0c4e1253f203b6dd7f348bf2f29cf89e9210a2416d535/narwhals-2.16.0-py3-none-any.whl"
+name = "narwhals-2.17.0-py3-none-any.whl"
+url = "https://files.pythonhosted.org/packages/4b/27/20770bd6bf8fbe1e16f848ba21da9df061f38d2e6483952c29d2bb5d1d8b/narwhals-2.17.0-py3-none-any.whl"
 
 [packages.wheels.hashes]
-sha256 = "846f1fd7093ac69d63526e50732033e86c30ea0026a44d9b23991010c7d1485d"
+sha256 = "2ac5307b7c2b275a7d66eeda906b8605e3d7a760951e188dcfff86e8ebe083dd"
 
 [[packages]]
 name = "nltk"
-version = "3.9.2"
+version = "3.9.3"
 
 [[packages.wheels]]
-name = "nltk-3.9.2-py3-none-any.whl"
-url = "https://files.pythonhosted.org/packages/60/90/81ac364ef94209c100e12579629dc92bf7a709a84af32f8c551b02c07e94/nltk-3.9.2-py3-none-any.whl"
+name = "nltk-3.9.3-py3-none-any.whl"
+url = "https://files.pythonhosted.org/packages/c2/7e/9af5a710a1236e4772de8dfcc6af942a561327bb9f42b5b4a24d0cf100fd/nltk-3.9.3-py3-none-any.whl"
 
 [packages.wheels.hashes]
-sha256 = "1e209d2b3009110635ed9709a67a1a3e33a10f799490fa71cf4bec218c11c88a"
+sha256 = "60b3db6e9995b3dd976b1f0fa7dec22069b2677e759c28eb69b62ddd44870522"
 
 [[packages]]
 name = "numpy"
@@ -673,14 +673,14 @@ sha256 = "3fd2f887589c7aa868e02632612ba39acb0b8948faf5cc58f0850e165bd46f35"
 
 [[packages]]
 name = "peewee"
-version = "4.0.0"
+version = "4.0.1"
 
 [[packages.wheels]]
-name = "peewee-4.0.0-py3-none-any.whl"
-url = "https://files.pythonhosted.org/packages/39/40/89664cce41f4bedab105d705885cbb152d7bd85ce0facbf0ec02e90eb02a/peewee-4.0.0-py3-none-any.whl"
+name = "peewee-4.0.1-py3-none-any.whl"
+url = "https://files.pythonhosted.org/packages/bf/99/0f8d9e46df9812ab31dadb07ba304c3ff6d6076bf19a67f4d046790be2e1/peewee-4.0.1-py3-none-any.whl"
 
 [packages.wheels.hashes]
-sha256 = "6de14ff11ab50c3152dc1d4e12628c1b28c1e03ff4e4213e463429bfcd7340b6"
+sha256 = "10afaa02c9f6d0f2dfe0f5b9007075c985eb141ab740a8831e37be2a61b3595c"
 
 [[packages]]
 name = "pillow"
@@ -695,14 +695,14 @@ sha256 = "adebb5bee0f0af4909c30db0d890c773d1a92ffe83da908e2e9e720f8edf3984"
 
 [[packages]]
 name = "platformdirs"
-version = "4.9.2"
+version = "4.9.4"
 
 [[packages.wheels]]
-name = "platformdirs-4.9.2-py3-none-any.whl"
-url = "https://files.pythonhosted.org/packages/48/31/05e764397056194206169869b50cf2fee4dbbbc71b344705b9c0d878d4d8/platformdirs-4.9.2-py3-none-any.whl"
+name = "platformdirs-4.9.4-py3-none-any.whl"
+url = "https://files.pythonhosted.org/packages/63/d7/97f7e3a6abb67d8080dd406fd4df842c2be0efaf712d1c899c32a075027c/platformdirs-4.9.4-py3-none-any.whl"
 
 [packages.wheels.hashes]
-sha256 = "9170634f126f8efdae22fb58ae8a0eaa86f38365bc57897a6c4f781d1f5875bd"
+sha256 = "68a9a4619a666ea6439f2ff250c12a853cd1cbd5158d258bd824a7df6be2f868"
 
 [[packages]]
 name = "ply"
@@ -816,14 +816,14 @@ sha256 = "c212960ad306f700aa0d01e5d7a325d20548ff97eb9920dcd29513174f0294d3"
 
 [[packages]]
 name = "pytz"
-version = "2025.2"
+version = "2026.1.post1"
 
 [[packages.wheels]]
-name = "pytz-2025.2-py2.py3-none-any.whl"
-url = "https://files.pythonhosted.org/packages/81/c4/34e93fe5f5429d7570ec1fa436f1986fb1f00c3e0f43a589fe2bbcd22c3f/pytz-2025.2-py2.py3-none-any.whl"
+name = "pytz-2026.1.post1-py2.py3-none-any.whl"
+url = "https://files.pythonhosted.org/packages/10/99/781fe0c827be2742bcc775efefccb3b048a3a9c6ce9aec0cbf4a101677e5/pytz-2026.1.post1-py2.py3-none-any.whl"
 
 [packages.wheels.hashes]
-sha256 = "5ddf76296dd8c44c26eb8f4b6f35488f3ccbf6fbbd7adee0b7262d43f0ec2f00"
+sha256 = "f2fd16142fda348286a75e1a524be810bb05d444e5a081f37f7affc635035f7a"
 
 [[packages]]
 name = "pyyaml"
@@ -849,14 +849,14 @@ sha256 = "381329a9f99628c9069361716891d34ad94af76e461dcb0335825aecc7692231"
 
 [[packages]]
 name = "regex"
-version = "2026.2.19"
+version = "2026.2.28"
 
 [[packages.wheels]]
-name = "regex-2026.2.19-cp312-cp312-macosx_11_0_arm64.whl"
-url = "https://files.pythonhosted.org/packages/f9/87/3997fc72dc59233426ef2e18dfdd105bb123812fff740ee9cc348f1a3243/regex-2026.2.19-cp312-cp312-macosx_11_0_arm64.whl"
+name = "regex-2026.2.28-cp312-cp312-macosx_11_0_arm64.whl"
+url = "https://files.pythonhosted.org/packages/9e/06/3ef1ac6910dc3295ebd71b1f9bfa737e82cfead211a18b319d45f85ddd09/regex-2026.2.28-cp312-cp312-macosx_11_0_arm64.whl"
 
 [packages.wheels.hashes]
-sha256 = "db970bcce4d63b37b3f9eb8c893f0db980bbf1d404a1d8d2b17aa8189de92c53"
+sha256 = "9b65d33a17101569f86d9c5966a8b1d7fbf8afdda5a8aa219301b0a80f58cf7d"
 
 [[packages]]
 name = "requests"
@@ -893,14 +893,14 @@ sha256 = "5025ce924beccb28298246e589c691fe1b8c1c96507e6d27d12c5fadd85bfd76"
 
 [[packages]]
 name = "scipy"
-version = "1.17.0"
+version = "1.17.1"
 
 [[packages.wheels]]
-name = "scipy-1.17.0-cp312-cp312-macosx_14_0_arm64.whl"
-url = "https://files.pythonhosted.org/packages/e3/21/f6ec556c1e3b6ec4e088da667d9987bb77cc3ab3026511f427dc8451187d/scipy-1.17.0-cp312-cp312-macosx_14_0_arm64.whl"
+name = "scipy-1.17.1-cp312-cp312-macosx_14_0_arm64.whl"
+url = "https://files.pythonhosted.org/packages/cf/a9/599c28631bad314d219cf9ffd40e985b24d603fc8a2f4ccc5ae8419a535b/scipy-1.17.1-cp312-cp312-macosx_14_0_arm64.whl"
 
 [packages.wheels.hashes]
-sha256 = "f3cd947f20fe17013d401b64e857c6b2da83cae567adbb75b9dcba865abc66d8"
+sha256 = "cc90d2e9c7e5c7f1a482c9875007c095c3194b1cfedca3c2f3291cdc2bc7c086"
 
 [[packages]]
 name = "setuptools"
@@ -1014,14 +1014,14 @@ sha256 = "7e7e4f8770bc444ea4e51b27d3f6dfbda87e369b686421137f323d5b9ad13c25"
 
 [[packages]]
 name = "tabulate"
-version = "0.9.0"
+version = "0.10.0"
 
 [[packages.wheels]]
-name = "tabulate-0.9.0-py3-none-any.whl"
-url = "https://files.pythonhosted.org/packages/40/44/4a5f08c96eb108af5cb50b41f76142f0afa346dfa99d5296fe7202a11854/tabulate-0.9.0-py3-none-any.whl"
+name = "tabulate-0.10.0-py3-none-any.whl"
+url = "https://files.pythonhosted.org/packages/99/55/db07de81b5c630da5cbf5c7df646580ca26dfaefa593667fc6f2fe016d2e/tabulate-0.10.0-py3-none-any.whl"
 
 [packages.wheels.hashes]
-sha256 = "024ca478df22e9340661486f85298cff5f6dcdba14f3813e8830015b9ed1948f"
+sha256 = "f0b0622e567335c8fabaaa659f1b33bcb6ddfe2e496071b743aa113f8774f2d3"
 
 [[packages]]
 name = "tatsu-lts"

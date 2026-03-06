@@ -1,1 +1,1 @@
-beancount-plugin-tax-uk @ git+https://github.com/Evernight/beancount-plugin-tax-uk@e89cd963fc9c47292cb39a7f94e9fe2820f2f238
+beancount-plugin-tax-uk @ git+https://github.com/Evernight/beancount-plugin-tax-uk@0e5490e6378d192799d8212795f943f727f739a5
