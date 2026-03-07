@@ -41,7 +41,7 @@ with the goal to enable **gradual** and **incremental** migration of personal fi
 
 Full guide is located at https://lazy-beancount.xyz/. The approach follows these principles:
 - Some of the values should be tracked precisely (e.g. net worth)
-- Other things are an approximation (e.g. in expenses breakdown, unclassified or some misclassified entires are ok)
+- Other things are an approximation (e.g. in expenses breakdown, unclassified or some misclassified entires are allowed – but discoverable)
 - Data entry should be automated or easy
 - But it should be possible to track things to any level of precision if you choose to
 
@@ -53,8 +53,14 @@ Full guide is located at https://lazy-beancount.xyz/. The approach follows these
 <img src="images/beancount_import_interface.png" width="40%" hspace="10" vspace="10" />
 <img src="images/expenses_heatmap.png" width="40%" hspace="10" vspace="10" />
 <img src="images/demo_expenses.png" width="40%" hspace="10" vspace="10" />
-<img src="images/expenses_detailed.png" width="40%" hspace="10" vspace="10" />
-<img src="images/dashboards_sankey.png" width="40%" hspace="10" vspace="10" />
+<a href="tests/e2e/snapshots.test.ts-snapshots/PNG-Snapshot-Tests-Dark-Theme-Dashboards-Overview-1-chromium-linux.png" title="Overview (dark, e2e)"><img src="tests/e2e/snapshots.test.ts-snapshots/PNG-Snapshot-Tests-Dark-Theme-Dashboards-Overview-1-chromium-linux.png" width="40%" hspace="10" vspace="10" alt="Overview (dark, e2e)" /></a>
+<a href="tests/e2e/snapshots.test.ts-snapshots/PNG-Snapshot-Tests-Dark-Theme-Dashboards-Expenses-Detailed-1-chromium-linux.png" title="Expenses Detailed (dark, e2e)"><img src="tests/e2e/snapshots.test.ts-snapshots/PNG-Snapshot-Tests-Dark-Theme-Dashboards-Expenses-Detailed-1-chromium-linux.png" width="40%" hspace="10" vspace="10" alt="Expenses Detailed (dark, e2e)" /></a>
+<a href="tests/e2e/snapshots.test.ts-snapshots/PNG-Snapshot-Tests-Dark-Theme-Dashboards-Sankey-1-chromium-linux.png" title="Sankey (dark, e2e)"><img src="tests/e2e/snapshots.test.ts-snapshots/PNG-Snapshot-Tests-Dark-Theme-Dashboards-Sankey-1-chromium-linux.png" width="40%" hspace="10" vspace="10" alt="Sankey (dark, e2e)" /></a>
+<a href="tests/e2e/snapshots.test.ts-snapshots/PNG-Snapshot-Tests-Dark-Theme-Dashboards-Net-Worth-1-chromium-linux.png" title="Net Worth (dark, e2e)"><img src="tests/e2e/snapshots.test.ts-snapshots/PNG-Snapshot-Tests-Dark-Theme-Dashboards-Net-Worth-1-chromium-linux.png" width="40%" hspace="10" vspace="10" alt="Net Worth (dark, e2e)" /></a>
+<a href="tests/e2e/snapshots.test.ts-snapshots/PNG-Snapshot-Tests-Dark-Theme-Dashboards-Locations-1-chromium-linux.png" title="Locations (dark, e2e)"><img src="tests/e2e/snapshots.test.ts-snapshots/PNG-Snapshot-Tests-Dark-Theme-Dashboards-Locations-1-chromium-linux.png" width="40%" hspace="10" vspace="10" alt="Locations (dark, e2e)" /></a>
+<a href="tests/e2e/snapshots.test.ts-snapshots/PNG-Snapshot-Tests-Dark-Theme-Extensions-Currency-Tracker-1-chromium-linux.png" title="Currency Tracker (dark, e2e)"><img src="tests/e2e/snapshots.test.ts-snapshots/PNG-Snapshot-Tests-Dark-Theme-Extensions-Currency-Tracker-1-chromium-linux.png" width="40%" hspace="10" vspace="10" alt="Currency Tracker (dark, e2e)" /></a>
+<a href="tests/e2e/snapshots.test.ts-snapshots/PNG-Snapshot-Tests-Dark-Theme-Extensions-Fava-Git-1-chromium-linux.png" title="Fava Git (dark, e2e)"><img src="tests/e2e/snapshots.test.ts-snapshots/PNG-Snapshot-Tests-Dark-Theme-Extensions-Fava-Git-1-chromium-linux.png" width="40%" hspace="10" vspace="10" alt="Fava Git (dark, e2e)" /></a>
+<a href="tests/e2e/snapshots.test.ts-snapshots/PNG-Snapshot-Tests-Dark-Theme-Extensions-Beantab-1-chromium-linux.png" title="Beantab (dark, e2e)"><img src="tests/e2e/snapshots.test.ts-snapshots/PNG-Snapshot-Tests-Dark-Theme-Extensions-Beantab-1-chromium-linux.png" width="40%" hspace="10" vspace="10" alt="Beantab (dark, e2e)" /></a>
 </div>
 
 # ⚙️ Setup

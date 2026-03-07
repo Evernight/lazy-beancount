@@ -1,0 +1,40 @@
+FROM mcr.microsoft.com/playwright:v1.58.0
+
+ENV PATH="/opt/venv/bin:$PATH"
+ENV PYTHONUNBUFFERED=1
+ENV CI=true
+ENV CONTAINER=true
+ENV LAZY_BEANCOUNT_HOST="localhost"
+ENV LAZY_BEANCOUNT_PORT="8777"
+ENV BEANCOUNT_IMPORT_PORT="8101"
+ENV FAVA_PORT="5003"
+ENV FAVA_PORT_INTERNAL="5000"
+ENV PYTHONPATH="/beancount:/beancount/beangulp"
+ENV PATH="/beancount/:$PATH"
+
+RUN adduser --uid 1245 beancount-user \
+    && apt-get update \
+    && apt-get install -y make git dumb-init python3-venv \
+    && apt-get clean \
+    && apt-get autoclean \
+    && apt-get autoremove --purge -y \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY ./requirements.txt /tmp/requirements.txt
+RUN python3 -m venv /opt/venv \
+    && pip3 install --no-cache-dir -r /tmp/requirements.txt
+
+COPY tests/package.json tests/package-lock.json /usr/src/app/tests/
+RUN cd /usr/src/app/tests && npm ci
+
+COPY . /usr/src/app
+COPY src/gen_accounts.py /beancount/gen_accounts.py
+COPY src/streamlit_frontend /beancount/streamlit_frontend
+COPY src/scripts/run_daemons.sh /beancount/run_daemons.sh
+COPY images/logo.png /beancount/streamlit_frontend/static/favicon-32x32.png
+
+WORKDIR /usr/src/app
+USER beancount-user
+
+ENTRYPOINT ["/usr/bin/dumb-init", "--"]
+CMD ["sh", "-c", "cd /usr/src/app/example_data_beantab && /beancount/run_daemons.sh"]

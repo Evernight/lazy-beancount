@@ -1,0 +1,872 @@
+- banner:
+  - img
+  - heading "Beancount›Income Statement" [level=1]:
+    - text: ""
+    - strong: ›Income Statement
+  - combobox "Time"
+  - combobox "Account"
+  - combobox "Filter by tag, payee, ..."
+  - text: 🕒
+  - link "month":
+    - /url: "#time"
+  - text: ·
+  - link "month-1":
+    - /url: "#time"
+  - text: ·
+  - link "quarter":
+    - /url: "#time"
+  - text: ·
+  - link "year":
+    - /url: "#time"
+  - text: ·
+  - link "3Y":
+    - /url: "#time"
+  - text: ·
+  - link "5Y":
+    - /url: "#time"
+  - text: 🎚
+  - link "#recurring":
+    - /url: "#adv"
+  - text: ·
+  - link "-#irregular":
+    - /url: "#adv"
+  - text: ·
+  - link "-Expenses:Taxes":
+    - /url: "#adv"
+  - text: ·
+  - link "-Expenses:Unattributed":
+    - /url: "#adv"
+- complementary:
+  - list:
+    - listitem:
+      - link "🪙 Lazy Beancount":
+        - /url: http://localhost:8777/
+    - listitem:
+      - link "💸 Expenses":
+        - /url: /beancount/extension/FavaDashboards/?dashboard=expenses-detailed&conversion=USD&time=year-2+to+year
+    - listitem:
+      - link "📅 Subscriptions":
+        - /url: /beancount/extension/FavaDashboards/?dashboard=subscriptions&conversion=USD
+    - listitem:
+      - link "🚥 Budgets":
+        - /url: /beancount/account/Expenses/?r=changes&conversion=USD
+    - listitem:
+      - link "📜 M-3 to day":
+        - /url: /beancount/journal/?time=month-3+to+day
+    - listitem:
+      - 'link "📜 #fix"':
+        - /url: /beancount/journal/?filter=%23fix
+    - listitem:
+      - link "📉 Example portfolio":
+        - /url: /beancount/extension/FavaPortfolioReturns/?investments=g_Buy+High+Sell+Low+ETH&path=performance
+    - listitem:
+      - link "🧮 BeanTab Assets":
+        - /url: /beancount/extension/BeanTab/?sortProp=account&sortOrder=asc&accountFilter=%5B%22Assets%3A.*%22%5D&hideAccountsWithNoEntries=true
+    - listitem:
+      - link "🔁 Reset filters":
+        - /url: .?
+  - list:
+    - listitem:
+      - link "Income Statement":
+        - /url: /beancount/income_statement/
+    - listitem:
+      - link "Balance Sheet":
+        - /url: /beancount/balance_sheet/
+    - listitem:
+      - link "Trial Balance":
+        - /url: /beancount/trial_balance/
+    - listitem:
+      - link "Journal":
+        - /url: /beancount/journal/
+    - listitem:
+      - link "Query":
+        - /url: /beancount/query/
+    - listitem:
+      - combobox "Go to account"
+  - list:
+    - listitem:
+      - link "Holdings":
+        - /url: /beancount/holdings/
+    - listitem:
+      - link "Commodities":
+        - /url: /beancount/commodities/
+    - listitem:
+      - link "Documents":
+        - /url: /beancount/documents/
+    - listitem:
+      - link "Events":
+        - /url: /beancount/events/
+    - listitem:
+      - link "Statistics":
+        - /url: /beancount/statistics/
+  - list:
+    - listitem:
+      - link "Editor":
+        - /url: /beancount/editor/
+      - link "+":
+        - /url: "#add-transaction"
+    - listitem:
+      - link "Import":
+        - /url: /beancount/import/
+      - link "⬇":
+        - /url: "#export"
+    - listitem:
+      - link "Options":
+        - /url: /beancount/options/
+    - listitem:
+      - link "Help":
+        - /url: /beancount/help/
+  - list:
+    - listitem:
+      - link "Dashboards":
+        - /url: /beancount/extension/FavaDashboards/
+    - listitem:
+      - link "Currency Tracker":
+        - /url: /beancount/extension/FavaCurrencyTracker/
+    - listitem:
+      - link "Investor":
+        - /url: /beancount/extension/Investor/
+    - listitem:
+      - link "Git":
+        - /url: /beancount/extension/FavaGit/
+    - listitem:
+      - link "Portfolio Returns":
+        - /url: /beancount/extension/FavaPortfolioReturns/
+    - listitem:
+      - link "BeanTab":
+        - /url: /beancount/extension/BeanTab/
+- article:
+  - button "GBP"
+  - button "USD"
+  - text: Stacked Bars Single Bars
+  - combobox: At Cost
+  - combobox: Monthly
+  - button "▼"
+  - img:
+    - text: /Nov \d+ Jan \d+ Mar \d+ May \d+ Jul \d+ Sep \d+ Nov \d+ Jan \d+ Mar \d+ May \d+ Jul \d+ Sep \d+ Nov \d+ Jan \d+ Mar \d+ −[\d,.]+[bkmBKM]+ −[\d,.]+[bkmBKM]+ −[\d,.]+[bkmBKM]+ −\d+ \d+\.\d+ \d+ [\d,.]+[bkmBKM]+ [\d,.]+[bkmBKM]+ [\d,.]+[bkmBKM]+/
+    - link /\d+-\d+/:
+      - /url: http://127.0.0.1:5000/beancount/income_statement/?time=2023-11
+    - link /\d+-\d+/:
+      - /url: http://127.0.0.1:5000/beancount/income_statement/?time=2023-12
+    - link /\d+-\d+/:
+      - /url: http://127.0.0.1:5000/beancount/income_statement/?time=2024-01
+    - link /\d+-\d+/:
+      - /url: http://127.0.0.1:5000/beancount/income_statement/?time=2024-02
+    - link /\d+-\d+/:
+      - /url: http://127.0.0.1:5000/beancount/income_statement/?time=2024-03
+    - link /\d+-\d+/:
+      - /url: http://127.0.0.1:5000/beancount/income_statement/?time=2024-04
+    - link /\d+-\d+/:
+      - /url: http://127.0.0.1:5000/beancount/income_statement/?time=2024-05
+    - link /\d+-\d+/:
+      - /url: http://127.0.0.1:5000/beancount/income_statement/?time=2024-06
+    - link /\d+-\d+/:
+      - /url: http://127.0.0.1:5000/beancount/income_statement/?time=2024-07
+    - link /\d+-\d+/:
+      - /url: http://127.0.0.1:5000/beancount/income_statement/?time=2024-08
+    - link /\d+-\d+/:
+      - /url: http://127.0.0.1:5000/beancount/income_statement/?time=2024-09
+    - link /\d+-\d+/:
+      - /url: http://127.0.0.1:5000/beancount/income_statement/?time=2024-10
+    - link /\d+-\d+/:
+      - /url: http://127.0.0.1:5000/beancount/income_statement/?time=2024-11
+    - link /\d+-\d+/:
+      - /url: http://127.0.0.1:5000/beancount/income_statement/?time=2024-12
+    - link /\d+-\d+/:
+      - /url: http://127.0.0.1:5000/beancount/income_statement/?time=2025-01
+    - link /\d+-\d+/:
+      - /url: http://127.0.0.1:5000/beancount/income_statement/?time=2025-02
+    - link /\d+-\d+/:
+      - /url: http://127.0.0.1:5000/beancount/income_statement/?time=2025-03
+    - link /\d+-\d+/:
+      - /url: http://127.0.0.1:5000/beancount/income_statement/?time=2025-04
+    - link /\d+-\d+/:
+      - /url: http://127.0.0.1:5000/beancount/income_statement/?time=2025-05
+    - link /\d+-\d+/:
+      - /url: http://127.0.0.1:5000/beancount/income_statement/?time=2025-06
+    - link /\d+-\d+/:
+      - /url: http://127.0.0.1:5000/beancount/income_statement/?time=2025-07
+    - link /\d+-\d+/:
+      - /url: http://127.0.0.1:5000/beancount/income_statement/?time=2025-08
+    - link /\d+-\d+/:
+      - /url: http://127.0.0.1:5000/beancount/income_statement/?time=2025-09
+    - link /\d+-\d+/:
+      - /url: http://127.0.0.1:5000/beancount/income_statement/?time=2025-10
+    - link /\d+-\d+/:
+      - /url: http://127.0.0.1:5000/beancount/income_statement/?time=2025-11
+    - link /\d+-\d+/:
+      - /url: http://127.0.0.1:5000/beancount/income_statement/?time=2025-12
+    - link /\d+-\d+/:
+      - /url: http://127.0.0.1:5000/beancount/income_statement/?time=2026-01
+    - link /\d+-\d+/:
+      - /url: http://127.0.0.1:5000/beancount/income_statement/?time=2026-02
+    - link /\d+-\d+/:
+      - /url: http://127.0.0.1:5000/beancount/income_statement/?time=2026-03
+    - link:
+      - /url: /beancount/account/Expenses:Accommodation/
+      - img
+    - link:
+      - /url: /beancount/account/Expenses:Donations/
+      - img
+    - link:
+      - /url: /beancount/account/Expenses:EatingOut/
+      - img
+    - link:
+      - /url: /beancount/account/Expenses:EatingOut:Coffee/
+      - img
+    - link:
+      - /url: /beancount/account/Expenses:Groceries/
+      - img
+    - link:
+      - /url: /beancount/account/Expenses:MyCryptoBroker:Commissions/
+      - img
+    - link:
+      - /url: /beancount/account/Expenses:MyStockBroker:Commissions/
+      - img
+    - link:
+      - /url: /beancount/account/Expenses:Services/
+      - img
+    - link:
+      - /url: /beancount/account/Expenses:Shopping/
+      - img
+    - link:
+      - /url: /beancount/account/Expenses:Travel/
+      - img
+    - link:
+      - /url: /beancount/account/Expenses:Travel:Flights/
+      - img
+    - link:
+      - /url: /beancount/account/Expenses:Unattributed:MyFavouriteBank:Cash/
+      - img
+    - link:
+      - /url: /beancount/account/Expenses:Unattributed:MyLessFavouriteBank:Cash/
+      - img
+    - link:
+      - /url: /beancount/account/Expenses:Unattributed:MyStockBroker:Cash/
+      - img
+    - link:
+      - /url: /beancount/account/Expenses:Unattributed:Physical:Cash/
+      - img
+    - link:
+      - /url: /beancount/account/Expenses:Unattributed:Shared:SomeDude/
+      - img
+    - link:
+      - /url: /beancount/account/Income:MyCryptoBroker:PnL/
+      - img
+    - link:
+      - /url: /beancount/account/Income:MyStockBroker:PnL/
+      - img
+    - link:
+      - /url: /beancount/account/Income:Salary:MyEmployer/
+      - img
+    - link:
+      - /url: /beancount/account/Income:Unattributed:MyFavouriteBank:Cash/
+      - img
+    - link:
+      - /url: /beancount/account/Income:Unattributed:MyLessFavouriteBank:Cash/
+      - img
+    - link:
+      - /url: /beancount/account/Income:Unattributed:Physical:Cash/
+      - img
+    - link:
+      - /url: /beancount/account/Expenses:Accommodation/
+      - img
+    - link:
+      - /url: /beancount/account/Expenses:Donations/
+      - img
+    - link:
+      - /url: /beancount/account/Expenses:EatingOut/
+      - img
+    - link:
+      - /url: /beancount/account/Expenses:EatingOut:Coffee/
+      - img
+    - link:
+      - /url: /beancount/account/Expenses:Groceries/
+      - img
+    - link:
+      - /url: /beancount/account/Expenses:MyCryptoBroker:Commissions/
+      - img
+    - link:
+      - /url: /beancount/account/Expenses:MyStockBroker:Commissions/
+      - img
+    - link:
+      - /url: /beancount/account/Expenses:Services/
+      - img
+    - link:
+      - /url: /beancount/account/Expenses:Shopping/
+      - img
+    - link:
+      - /url: /beancount/account/Expenses:Travel/
+      - img
+    - link:
+      - /url: /beancount/account/Expenses:Travel:Flights/
+      - img
+    - link:
+      - /url: /beancount/account/Expenses:Unattributed:MyFavouriteBank:Cash/
+      - img
+    - link:
+      - /url: /beancount/account/Expenses:Unattributed:MyLessFavouriteBank:Cash/
+      - img
+    - link:
+      - /url: /beancount/account/Expenses:Unattributed:MyStockBroker:Cash/
+      - img
+    - link:
+      - /url: /beancount/account/Expenses:Unattributed:Physical:Cash/
+      - img
+    - link:
+      - /url: /beancount/account/Expenses:Unattributed:Shared:SomeDude/
+      - img
+    - link:
+      - /url: /beancount/account/Income:MyCryptoBroker:PnL/
+      - img
+    - link:
+      - /url: /beancount/account/Income:MyStockBroker:PnL/
+      - img
+    - link:
+      - /url: /beancount/account/Income:Salary:MyEmployer/
+      - img
+    - link:
+      - /url: /beancount/account/Income:Unattributed:MyFavouriteBank:Cash/
+      - img
+    - link:
+      - /url: /beancount/account/Income:Unattributed:MyLessFavouriteBank:Cash/
+      - img
+    - link:
+      - /url: /beancount/account/Income:Unattributed:Physical:Cash/
+      - img
+  - button "Net Profit"
+  - button "Income (Monthly)"
+  - button "Expenses (Monthly)"
+  - button "Income"
+  - button "Expenses"
+  - list:
+    - listitem:
+      - paragraph: EUR GBP USD Other
+    - listitem:
+      - paragraph:
+        - button "▾"
+        - link "Income":
+          - /url: /beancount/account/Income/
+        - text: /−\d+\.\d+ −\d+\.\d+/
+      - list:
+        - listitem:
+          - paragraph:
+            - button "▾"
+            - link "MyAutomaticBroker":
+              - /url: /beancount/account/Income:MyAutomaticBroker/
+          - list:
+            - listitem:
+              - paragraph:
+                - button "▾"
+                - link "Total":
+                  - /url: /beancount/account/Income:MyAutomaticBroker:Total/
+              - list:
+                - listitem:
+                  - paragraph:
+                    - link "PnL":
+                      - /url: /beancount/account/Income:MyAutomaticBroker:Total:PnL/
+        - listitem:
+          - paragraph:
+            - button "▾"
+            - link "MyCryptoBroker":
+              - /url: /beancount/account/Income:MyCryptoBroker/
+            - text: /\d+\.\d+/
+          - list:
+            - listitem:
+              - paragraph:
+                - link "PnL":
+                  - /url: /beancount/account/Income:MyCryptoBroker:PnL/
+                - text: /\d+\.\d+/
+        - listitem:
+          - paragraph:
+            - button "▾"
+            - link "MyStockBroker":
+              - /url: /beancount/account/Income:MyStockBroker/
+            - text: /−\d+\.\d+/
+          - list:
+            - listitem:
+              - paragraph:
+                - link "PnL":
+                  - /url: /beancount/account/Income:MyStockBroker:PnL/
+                - text: /−\d+\.\d+/
+        - listitem:
+          - paragraph:
+            - button "▾"
+            - link "Salary":
+              - /url: /beancount/account/Income:Salary/
+            - text: /−\d+\.\d+/
+          - list:
+            - listitem:
+              - paragraph:
+                - link "MyEmployer":
+                  - /url: /beancount/account/Income:Salary:MyEmployer/
+                - text: /−\d+\.\d+/
+        - listitem:
+          - paragraph:
+            - link "SideHustle":
+              - /url: /beancount/account/Income:SideHustle/
+        - listitem:
+          - paragraph:
+            - button "▾"
+            - link "SomeBroker":
+              - /url: /beancount/account/Income:SomeBroker/
+          - list:
+            - listitem:
+              - paragraph:
+                - button "▾"
+                - link "Total":
+                  - /url: /beancount/account/Income:SomeBroker:Total/
+              - list:
+                - listitem:
+                  - paragraph:
+                    - link "PnL":
+                      - /url: /beancount/account/Income:SomeBroker:Total:PnL/
+        - listitem:
+          - paragraph:
+            - button "▾"
+            - link "Unattributed":
+              - /url: /beancount/account/Income:Unattributed/
+            - text: /\d+\.\d+/
+          - list:
+            - listitem:
+              - paragraph:
+                - button "▾"
+                - link "MyFavouriteBank":
+                  - /url: /beancount/account/Income:Unattributed:MyFavouriteBank/
+                - text: /\d+\.\d+/
+              - list:
+                - listitem:
+                  - paragraph:
+                    - link "Cash":
+                      - /url: /beancount/account/Income:Unattributed:MyFavouriteBank:Cash/
+                    - text: /\d+\.\d+/
+                - listitem:
+                  - paragraph:
+                    - button "▾"
+                    - link "Savings":
+                      - /url: /beancount/account/Income:Unattributed:MyFavouriteBank:Savings/
+                  - list:
+                    - listitem:
+                      - paragraph:
+                        - link "GBP":
+                          - /url: /beancount/account/Income:Unattributed:MyFavouriteBank:Savings:GBP/
+            - listitem:
+              - paragraph:
+                - button "▾"
+                - link "MyLessFavouriteBank":
+                  - /url: /beancount/account/Income:Unattributed:MyLessFavouriteBank/
+                - text: /\d+\.\d+/
+              - list:
+                - listitem:
+                  - paragraph:
+                    - link "Cash":
+                      - /url: /beancount/account/Income:Unattributed:MyLessFavouriteBank:Cash/
+                    - text: /\d+\.\d+/
+            - listitem:
+              - paragraph:
+                - button "▾"
+                - link "MyStockBroker":
+                  - /url: /beancount/account/Income:Unattributed:MyStockBroker/
+              - list:
+                - listitem:
+                  - paragraph:
+                    - link "Cash":
+                      - /url: /beancount/account/Income:Unattributed:MyStockBroker:Cash/
+            - listitem:
+              - paragraph:
+                - button "▾"
+                - link "Physical":
+                  - /url: /beancount/account/Income:Unattributed:Physical/
+                - text: /\d+\.\d+/
+              - list:
+                - listitem:
+                  - paragraph:
+                    - link "Cash":
+                      - /url: /beancount/account/Income:Unattributed:Physical:Cash/
+                    - text: /\d+\.\d+/
+        - listitem:
+          - paragraph:
+            - button "▾"
+            - link "Uncategorized":
+              - /url: /beancount/account/Income:Uncategorized/
+          - list:
+            - listitem:
+              - paragraph:
+                - button "▾"
+                - link "MyFavouriteBank":
+                  - /url: /beancount/account/Income:Uncategorized:MyFavouriteBank/
+              - list:
+                - listitem:
+                  - paragraph:
+                    - link "Cash":
+                      - /url: /beancount/account/Income:Uncategorized:MyFavouriteBank:Cash/
+                - listitem:
+                  - paragraph:
+                    - button "▾"
+                    - link "Savings":
+                      - /url: /beancount/account/Income:Uncategorized:MyFavouriteBank:Savings/
+                  - list:
+                    - listitem:
+                      - paragraph:
+                        - link "GBP":
+                          - /url: /beancount/account/Income:Uncategorized:MyFavouriteBank:Savings:GBP/
+            - listitem:
+              - paragraph:
+                - button "▾"
+                - link "MyLessFavouriteBank":
+                  - /url: /beancount/account/Income:Uncategorized:MyLessFavouriteBank/
+              - list:
+                - listitem:
+                  - paragraph:
+                    - link "Cash":
+                      - /url: /beancount/account/Income:Uncategorized:MyLessFavouriteBank:Cash/
+            - listitem:
+              - paragraph:
+                - button "▾"
+                - link "MyStockBroker":
+                  - /url: /beancount/account/Income:Uncategorized:MyStockBroker/
+              - list:
+                - listitem:
+                  - paragraph:
+                    - link "Cash":
+                      - /url: /beancount/account/Income:Uncategorized:MyStockBroker:Cash/
+            - listitem:
+              - paragraph:
+                - button "▾"
+                - link "Physical":
+                  - /url: /beancount/account/Income:Uncategorized:Physical/
+              - list:
+                - listitem:
+                  - paragraph:
+                    - link "Cash":
+                      - /url: /beancount/account/Income:Uncategorized:Physical:Cash/
+  - list:
+    - listitem:
+      - paragraph: EUR GBP USD Other
+    - listitem:
+      - paragraph:
+        - link "Net Profit":
+          - /url: /beancount/account/Net Profit/
+        - text: /−\d+\.\d+ −\d+\.\d+/
+  - list:
+    - listitem:
+      - paragraph: EUR GBP USD Other
+    - listitem:
+      - paragraph:
+        - button "▾"
+        - link "Expenses":
+          - /url: /beancount/account/Expenses/
+        - text: /\d+\.\d+ −\d+\.\d+/
+      - list:
+        - listitem:
+          - paragraph:
+            - link "Accommodation":
+              - /url: /beancount/account/Expenses:Accommodation/
+            - text: /\d+\.\d+/
+        - listitem:
+          - paragraph:
+            - button "▾"
+            - link "Bills":
+              - /url: /beancount/account/Expenses:Bills/
+          - list:
+            - listitem:
+              - paragraph:
+                - link "Electricity":
+                  - /url: /beancount/account/Expenses:Bills:Electricity/
+            - listitem:
+              - paragraph:
+                - link "Housing":
+                  - /url: /beancount/account/Expenses:Bills:Housing/
+            - listitem:
+              - paragraph:
+                - link "Internet":
+                  - /url: /beancount/account/Expenses:Bills:Internet/
+            - listitem:
+              - paragraph:
+                - link "Phone":
+                  - /url: /beancount/account/Expenses:Bills:Phone/
+        - listitem:
+          - paragraph:
+            - link "Documents":
+              - /url: /beancount/account/Expenses:Documents/
+        - listitem:
+          - paragraph:
+            - link "Donations":
+              - /url: /beancount/account/Expenses:Donations/
+            - text: /\d+\.\d+/
+        - listitem:
+          - paragraph:
+            - button "▾"
+            - link "EatingOut":
+              - /url: /beancount/account/Expenses:EatingOut/
+            - text: /\d+\.\d+/
+          - list:
+            - listitem:
+              - paragraph:
+                - link "Coffee":
+                  - /url: /beancount/account/Expenses:EatingOut:Coffee/
+                - text: /\d+\.\d+/
+            - listitem:
+              - paragraph:
+                - link "Drinks":
+                  - /url: /beancount/account/Expenses:EatingOut:Drinks/
+        - listitem:
+          - paragraph:
+            - link "Education":
+              - /url: /beancount/account/Expenses:Education/
+        - listitem:
+          - paragraph:
+            - link "Entertainment":
+              - /url: /beancount/account/Expenses:Entertainment/
+        - listitem:
+          - paragraph:
+            - link "FIXME":
+              - /url: /beancount/account/Expenses:FIXME/
+        - listitem:
+          - paragraph:
+            - link "Gifts":
+              - /url: /beancount/account/Expenses:Gifts/
+        - listitem:
+          - paragraph:
+            - button "▾"
+            - link "Groceries":
+              - /url: /beancount/account/Expenses:Groceries/
+            - text: /\d+\.\d+/
+          - list:
+            - listitem:
+              - paragraph:
+                - link "Coffee":
+                  - /url: /beancount/account/Expenses:Groceries:Coffee/
+            - listitem:
+              - paragraph:
+                - link "Drinks":
+                  - /url: /beancount/account/Expenses:Groceries:Drinks/
+        - listitem:
+          - paragraph:
+            - link "Health":
+              - /url: /beancount/account/Expenses:Health/
+        - listitem:
+          - paragraph:
+            - link "Hobbies":
+              - /url: /beancount/account/Expenses:Hobbies/
+        - listitem:
+          - paragraph:
+            - button "▾"
+            - link "MyCryptoBroker":
+              - /url: /beancount/account/Expenses:MyCryptoBroker/
+            - text: /\d+\.\d+/
+          - list:
+            - listitem:
+              - paragraph:
+                - link "Commissions":
+                  - /url: /beancount/account/Expenses:MyCryptoBroker:Commissions/
+                - text: /\d+\.\d+/
+        - listitem:
+          - paragraph:
+            - button "▾"
+            - link "MyStockBroker":
+              - /url: /beancount/account/Expenses:MyStockBroker/
+            - text: /\d+\.\d+/
+          - list:
+            - listitem:
+              - paragraph:
+                - link "Commissions":
+                  - /url: /beancount/account/Expenses:MyStockBroker:Commissions/
+                - text: /\d+\.\d+/
+        - listitem:
+          - paragraph:
+            - link "Projects":
+              - /url: /beancount/account/Expenses:Projects/
+        - listitem:
+          - paragraph:
+            - link "Services":
+              - /url: /beancount/account/Expenses:Services/
+            - text: /−\d+\.\d+/
+        - listitem:
+          - paragraph:
+            - link "Shopping":
+              - /url: /beancount/account/Expenses:Shopping/
+            - text: /\d+\.\d+/
+        - listitem:
+          - paragraph:
+            - link "Taxes":
+              - /url: /beancount/account/Expenses:Taxes/
+        - listitem:
+          - paragraph:
+            - link "Tips":
+              - /url: /beancount/account/Expenses:Tips/
+        - listitem:
+          - paragraph:
+            - link "Transport":
+              - /url: /beancount/account/Expenses:Transport/
+        - listitem:
+          - paragraph:
+            - button "▾"
+            - link "Travel":
+              - /url: /beancount/account/Expenses:Travel/
+            - text: /\d+\.\d+/
+          - list:
+            - listitem:
+              - paragraph:
+                - link "Accommodation":
+                  - /url: /beancount/account/Expenses:Travel:Accommodation/
+            - listitem:
+              - paragraph:
+                - link "Flights":
+                  - /url: /beancount/account/Expenses:Travel:Flights/
+                - text: /\d+\.\d+/
+            - listitem:
+              - paragraph:
+                - link "Transport":
+                  - /url: /beancount/account/Expenses:Travel:Transport/
+        - listitem:
+          - paragraph:
+            - button "▾"
+            - link "Unattributed":
+              - /url: /beancount/account/Expenses:Unattributed/
+            - text: /\d+\.\d+ −\d+\.\d+/
+          - list:
+            - listitem:
+              - paragraph:
+                - button "▾"
+                - link "MyFavouriteBank":
+                  - /url: /beancount/account/Expenses:Unattributed:MyFavouriteBank/
+                - text: /\d+\.\d+/
+              - list:
+                - listitem:
+                  - paragraph:
+                    - link "Cash":
+                      - /url: /beancount/account/Expenses:Unattributed:MyFavouriteBank:Cash/
+                    - text: /\d+\.\d+/
+                - listitem:
+                  - paragraph:
+                    - button "▾"
+                    - link "Savings":
+                      - /url: /beancount/account/Expenses:Unattributed:MyFavouriteBank:Savings/
+                  - list:
+                    - listitem:
+                      - paragraph:
+                        - link "GBP":
+                          - /url: /beancount/account/Expenses:Unattributed:MyFavouriteBank:Savings:GBP/
+            - listitem:
+              - paragraph:
+                - button "▾"
+                - link "MyLessFavouriteBank":
+                  - /url: /beancount/account/Expenses:Unattributed:MyLessFavouriteBank/
+                - text: /\d+\.\d+ −\d+\.\d+/
+              - list:
+                - listitem:
+                  - paragraph:
+                    - link "Cash":
+                      - /url: /beancount/account/Expenses:Unattributed:MyLessFavouriteBank:Cash/
+                    - text: /\d+\.\d+ −\d+\.\d+/
+            - listitem:
+              - paragraph:
+                - button "▾"
+                - link "MyStockBroker":
+                  - /url: /beancount/account/Expenses:Unattributed:MyStockBroker/
+                - text: /−\d+\.\d+/
+              - list:
+                - listitem:
+                  - paragraph:
+                    - link "Cash":
+                      - /url: /beancount/account/Expenses:Unattributed:MyStockBroker:Cash/
+                    - text: /−\d+\.\d+/
+            - listitem:
+              - paragraph:
+                - button "▾"
+                - link "Physical":
+                  - /url: /beancount/account/Expenses:Unattributed:Physical/
+                - text: /\d+\.\d+ −\d+\.\d+/
+              - list:
+                - listitem:
+                  - paragraph:
+                    - link "Cash":
+                      - /url: /beancount/account/Expenses:Unattributed:Physical:Cash/
+                    - text: /\d+\.\d+ −\d+\.\d+/
+            - listitem:
+              - paragraph:
+                - button "▾"
+                - link "Shared":
+                  - /url: /beancount/account/Expenses:Unattributed:Shared/
+                - text: /−\d+\.\d+/
+              - list:
+                - listitem:
+                  - paragraph:
+                    - link "SomeDude":
+                      - /url: /beancount/account/Expenses:Unattributed:Shared:SomeDude/
+                    - text: /−\d+\.\d+/
+                - listitem:
+                  - paragraph:
+                    - link "Unspecified":
+                      - /url: /beancount/account/Expenses:Unattributed:Shared:Unspecified/
+        - listitem:
+          - paragraph:
+            - button "▾"
+            - link "Uncategorized":
+              - /url: /beancount/account/Expenses:Uncategorized/
+          - list:
+            - listitem:
+              - paragraph:
+                - button "▾"
+                - link "MyFavouriteBank":
+                  - /url: /beancount/account/Expenses:Uncategorized:MyFavouriteBank/
+              - list:
+                - listitem:
+                  - paragraph:
+                    - link "Cash":
+                      - /url: /beancount/account/Expenses:Uncategorized:MyFavouriteBank:Cash/
+                - listitem:
+                  - paragraph:
+                    - button "▾"
+                    - link "Savings":
+                      - /url: /beancount/account/Expenses:Uncategorized:MyFavouriteBank:Savings/
+                  - list:
+                    - listitem:
+                      - paragraph:
+                        - link "GBP":
+                          - /url: /beancount/account/Expenses:Uncategorized:MyFavouriteBank:Savings:GBP/
+            - listitem:
+              - paragraph:
+                - button "▾"
+                - link "MyLessFavouriteBank":
+                  - /url: /beancount/account/Expenses:Uncategorized:MyLessFavouriteBank/
+              - list:
+                - listitem:
+                  - paragraph:
+                    - link "Cash":
+                      - /url: /beancount/account/Expenses:Uncategorized:MyLessFavouriteBank:Cash/
+            - listitem:
+              - paragraph:
+                - button "▾"
+                - link "MyStockBroker":
+                  - /url: /beancount/account/Expenses:Uncategorized:MyStockBroker/
+              - list:
+                - listitem:
+                  - paragraph:
+                    - link "Cash":
+                      - /url: /beancount/account/Expenses:Uncategorized:MyStockBroker:Cash/
+            - listitem:
+              - paragraph:
+                - button "▾"
+                - link "Physical":
+                  - /url: /beancount/account/Expenses:Uncategorized:Physical/
+              - list:
+                - listitem:
+                  - paragraph:
+                    - link "Cash":
+                      - /url: /beancount/account/Expenses:Uncategorized:Physical:Cash/
+        - listitem:
+          - paragraph:
+            - button "▾"
+            - link "Wellness":
+              - /url: /beancount/account/Expenses:Wellness/
+          - list:
+            - listitem:
+              - paragraph:
+                - link "Expendables":
+                  - /url: /beancount/account/Expenses:Wellness:Expendables/
+        - listitem:
+          - paragraph:
+            - link "Work":
+              - /url: /beancount/account/Expenses:Work/

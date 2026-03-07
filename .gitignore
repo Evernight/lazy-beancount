@@ -1,2 +1,4 @@
 *.DS_Store
 lazy-beancount.log
+
+tests/node_modules

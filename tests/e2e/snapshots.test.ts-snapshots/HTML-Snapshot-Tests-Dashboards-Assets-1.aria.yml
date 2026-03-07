@@ -1,0 +1,186 @@
+- banner:
+  - img
+  - heading "Beancount›Dashboards" [level=1]:
+    - text: ""
+    - strong: ›Dashboards
+  - combobox "Time"
+  - combobox "Account"
+  - combobox "Filter by tag, payee, ..."
+  - text: 🕒
+  - link "month":
+    - /url: "#time"
+  - text: ·
+  - link "month-1":
+    - /url: "#time"
+  - text: ·
+  - link "quarter":
+    - /url: "#time"
+  - text: ·
+  - link "year":
+    - /url: "#time"
+  - text: ·
+  - link "3Y":
+    - /url: "#time"
+  - text: ·
+  - link "5Y":
+    - /url: "#time"
+  - text: 🎚
+  - link "#recurring":
+    - /url: "#adv"
+  - text: ·
+  - link "-#irregular":
+    - /url: "#adv"
+  - text: ·
+  - link "-Expenses:Taxes":
+    - /url: "#adv"
+  - text: ·
+  - link "-Expenses:Unattributed":
+    - /url: "#adv"
+- complementary:
+  - list:
+    - listitem:
+      - link "🪙 Lazy Beancount":
+        - /url: http://localhost:8777/
+    - listitem:
+      - link "💸 Expenses":
+        - /url: /beancount/extension/FavaDashboards/?dashboard=expenses-detailed&conversion=USD&time=year-2+to+year
+    - listitem:
+      - link "📅 Subscriptions":
+        - /url: /beancount/extension/FavaDashboards/?dashboard=subscriptions&conversion=USD
+    - listitem:
+      - link "🚥 Budgets":
+        - /url: /beancount/account/Expenses/?r=changes&conversion=USD
+    - listitem:
+      - link "📜 M-3 to day":
+        - /url: /beancount/journal/?time=month-3+to+day
+    - listitem:
+      - 'link "📜 #fix"':
+        - /url: /beancount/journal/?filter=%23fix
+    - listitem:
+      - link "📉 Example portfolio":
+        - /url: /beancount/extension/FavaPortfolioReturns/?investments=g_Buy+High+Sell+Low+ETH&path=performance
+    - listitem:
+      - link "🧮 BeanTab Assets":
+        - /url: /beancount/extension/BeanTab/?sortProp=account&sortOrder=asc&accountFilter=%5B%22Assets%3A.*%22%5D&hideAccountsWithNoEntries=true
+    - listitem:
+      - link "🔁 Reset filters":
+        - /url: .?
+  - list:
+    - listitem:
+      - link "Income Statement":
+        - /url: /beancount/income_statement/
+    - listitem:
+      - link "Balance Sheet":
+        - /url: /beancount/balance_sheet/
+    - listitem:
+      - link "Trial Balance":
+        - /url: /beancount/trial_balance/
+    - listitem:
+      - link "Journal":
+        - /url: /beancount/journal/
+    - listitem:
+      - link "Query":
+        - /url: /beancount/query/
+    - listitem:
+      - combobox "Go to account"
+  - list:
+    - listitem:
+      - link "Holdings":
+        - /url: /beancount/holdings/
+    - listitem:
+      - link "Commodities":
+        - /url: /beancount/commodities/
+    - listitem:
+      - link "Documents":
+        - /url: /beancount/documents/
+    - listitem:
+      - link "Events":
+        - /url: /beancount/events/
+    - listitem:
+      - link "Statistics":
+        - /url: /beancount/statistics/
+  - list:
+    - listitem:
+      - link "Editor":
+        - /url: /beancount/editor/
+      - link "+":
+        - /url: "#add-transaction"
+    - listitem:
+      - link "Import":
+        - /url: /beancount/import/
+      - link "⬇":
+        - /url: "#export"
+    - listitem:
+      - link "Options":
+        - /url: /beancount/options/
+    - listitem:
+      - link "Help":
+        - /url: /beancount/help/
+  - list:
+    - listitem:
+      - link "Dashboards":
+        - /url: /beancount/extension/FavaDashboards/
+    - listitem:
+      - link "Currency Tracker":
+        - /url: /beancount/extension/FavaCurrencyTracker/
+    - listitem:
+      - link "Investor":
+        - /url: /beancount/extension/Investor/
+    - listitem:
+      - link "Git":
+        - /url: /beancount/extension/FavaGit/
+    - listitem:
+      - link "Portfolio Returns":
+        - /url: /beancount/extension/FavaPortfolioReturns/
+    - listitem:
+      - link "BeanTab":
+        - /url: /beancount/extension/BeanTab/
+- article:
+  - heading "Overview" [level=3]:
+    - link "Overview":
+      - /url: /beancount/extension/FavaDashboards/?dashboard=overview
+  - heading "Assets" [level=3]:
+    - link "Assets":
+      - /url: /beancount/extension/FavaDashboards/?dashboard=assets
+  - heading "Accounts" [level=3]:
+    - link "Accounts":
+      - /url: /beancount/extension/FavaDashboards/?dashboard=accounts
+  - heading "Income and Expenses" [level=3]:
+    - link "Income and Expenses":
+      - /url: /beancount/extension/FavaDashboards/?dashboard=income-and-expenses
+  - heading "Expenses Detailed" [level=3]:
+    - link "Expenses Detailed":
+      - /url: /beancount/extension/FavaDashboards/?dashboard=expenses-detailed
+  - heading "Travelling" [level=3]:
+    - link "Travelling":
+      - /url: /beancount/extension/FavaDashboards/?dashboard=travelling
+  - heading "Subscriptions" [level=3]:
+    - link "Subscriptions":
+      - /url: /beancount/extension/FavaDashboards/?dashboard=subscriptions
+  - heading "Sankey" [level=3]:
+    - link "Sankey":
+      - /url: /beancount/extension/FavaDashboards/?dashboard=sankey
+  - heading "Projection" [level=3]:
+    - link "Projection":
+      - /url: /beancount/extension/FavaDashboards/?dashboard=projection
+  - heading "Tax" [level=3]:
+    - link "Tax":
+      - /url: /beancount/extension/FavaDashboards/?dashboard=tax
+  - text: Currency
+  - combobox "Currency"
+  - button "Open"
+  - heading "Assets 🏦" [level=3]
+  - heading "Net Worth 💰" [level=3]:
+    - link "Net Worth 💰":
+      - /url: http://127.0.0.1:5000/beancount/income_statement/
+  - heading "Portfolio 📈" [level=3]
+  - heading "Portfolio Gains ✨" [level=3]
+  - heading "Asset Classes Year-over-Year 🏦" [level=3]
+  - heading "Asset Classes 🏦" [level=3]
+  - group:
+    - button "All assets" [pressed]
+    - button "Only investments"
+  - heading "Assets Allocation 🏦" [level=3]
+  - group:
+    - button "All assets" [pressed]
+    - button "Only investments"

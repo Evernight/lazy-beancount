@@ -1737,7 +1737,7 @@ export default defineConfig({
       panels: [
         {
           title: "Avg. Income per Month 💰",
-          width: "33%",
+          width: "32%",
           height: "100px",
           link: "../../account/Income/?r=changes",
           kind: "echarts",
@@ -1758,7 +1758,7 @@ export default defineConfig({
         },
         {
           title: "Avg. Expenses per Month 💸",
-          width: "33%",
+          width: "32%",
           height: "100px",
           link: "../../account/Expenses/?r=changes",
           kind: "echarts",
@@ -1779,7 +1779,7 @@ export default defineConfig({
         },
         {
           title: "Avg. Savings per Month ✨",
-          width: "33%",
+          width: "32%",
           height: "100px",
           link: "../../income_statement/",
           kind: "echarts",
@@ -2592,7 +2592,7 @@ export default defineConfig({
       panels: [
         {
           title: "Income 💰",
-          width: "33.3%",
+          width: "32%",
           height: "60px",
           link: "../../account/Income/?r=changes",
           kind: "html",
@@ -2607,7 +2607,7 @@ export default defineConfig({
         },
         {
           title: "Expenses 💸",
-          width: "33.3%",
+          width: "32%",
           height: "60px",
           link: "../../account/Expenses/?r=changes",
           kind: "html",
@@ -2622,7 +2622,7 @@ export default defineConfig({
         },
         {
           title: "Savings ✨",
-          width: "33.3%",
+          width: "32%",
           height: "60px",
           link: "../../income_statement/",
           kind: "html",
