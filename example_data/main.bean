@@ -1,46 +1,25 @@
-* Beancount configuration
-; Note that plugin order is important
-; The comment with explanation will usually be added with explanation where appropriate
+; Lazy Beancount — entrypoint
+;
+; This file configures fava extensions and UI, then includes the user's ledger.
+; To use your own data, mount your ledger directory at ./ledger/ (replacing the
+; example). Your ledger must have a ledger.bean entrypoint.
+;
+; See README.md for details.
 
-; See https://github.com/beancount/beancount/issues/742
-; This is required for the beancount_interpolate and beancount_share plugins
-; to work together with pad directives
-option "plugin_processing_mode" "raw"
-
-* Operating currencies
-** All and default definitions
-; Define all currencies that you want to be able to use as operating currency
-; First of these will be used as the currency for Dashboards
-option "operating_currency" "EUR"
-option "operating_currency" "USD"
-option "operating_currency" "GBP"
-
-** Precision options
-; See https://beancount.github.io/docs/precision_tolerances.html
-; and https://beancount.github.io/docs/rounding_precision_in_beancount.html
-option "inferred_tolerance_default" "*:0.00000001"
-option "inferred_tolerance_default" "USD:0.003"
-option "inferred_tolerance_default" "GBP:0.003"
-
-option "tolerance_multiplier" "1.2"
-
+; NOTE: display_precision MUST be in this top-level file.
+; Beancount v3 crashes when merging display_context from included files.
 option "display_precision" "USD:0.01"
 option "display_precision" "GBP:0.01"
 option "display_precision" "EUR:0.01"
 
-** Other settings
-plugin "beancount.ops.documents"
+; =============================================================================
+; Fava options
+; =============================================================================
 
-; Define folder where the documents are stored
-; option "documents" "documents"
-
-* Fava options
-** Default page
-; Redefine default starting page when you go to the Fava host (localhost by default)
 1970-01-01 custom "fava-option" "default-page" "extension/FavaDashboards/?dashboard=overview"
+1970-01-01 custom "fava-option" "default-file" "ledger/manual_transactions.bean"
 
-** Sidebar links
-; A set of useful shortcut links for the Fava's menu (left side)
+; --- Sidebar links ---
 1970-01-01 custom "fava-sidebar-link" "🪙 Lazy Beancount" "http://localhost:8777/"
 1970-01-01 custom "fava-sidebar-link" "💸 Expenses" "/beancount/extension/FavaDashboards/?dashboard=expenses-detailed&conversion=USD&time=year-2+to+year"
 1970-01-01 custom "fava-sidebar-link" "📅 Subscriptions" "/beancount/extension/FavaDashboards/?dashboard=subscriptions&conversion=USD"
@@ -50,7 +29,7 @@ plugin "beancount.ops.documents"
 1970-01-01 custom "fava-sidebar-link" "📉 Example portfolio" "/beancount/extension/FavaPortfolioReturns/?investments=g_Buy+High+Sell+Low+ETH&path=performance"
 1970-01-01 custom "fava-sidebar-link" "🔁 Reset filters" ".?"
 
-** Filter presets
+; --- Filter presets ---
 1970-01-01 custom "fava-filter-preset" "time" "month" "month"
 1970-01-01 custom "fava-filter-preset" "time" "month-1" "month-1"
 1970-01-01 custom "fava-filter-preset" "time" "day-90 to day" "quarter"
@@ -62,93 +41,38 @@ plugin "beancount.ops.documents"
 1970-01-01 custom "fava-filter-preset" "advanced" "-any(account:'Expenses:Taxes')" "-Expenses:Taxes"
 1970-01-01 custom "fava-filter-preset" "advanced" "-any(account:'Expenses:Unattributed')" "-Expenses:Unattributed"
 
-** Other Fava options
-1970-01-01 custom "fava-option" "default-file" "manual_transactions.bean"
-
 ; You can switch default interface language if needed
 ; 2021-01-01 custom "fava-option" "language" "en"
 
-; I've had this enabled for a while but then found that it's actually not more but
-; less intuitive once you get used to standard Beancount conventions
-; 1970-01-01 custom "fava-option" "invert-income-liabilities-equity" "True"
+; =============================================================================
+; Fava extensions (installed in the Docker image)
+; =============================================================================
 
-** Fava extensions
-; Dashboards are a great feature that may partially work from the start
-; May need some configuration and fine-tuning via dashboards.yaml
 2010-01-01 custom "fava-extension" "fava_dashboards"
-
-; Track and fetch commodities prices
 2010-01-01 custom "fava-extension" "fava_currency_tracker"
-
-; Track portfolios' performance
-2024-01-01 custom "fava-extension" "fava_portfolio_returns" "{
-  'beangrow_config': 'beangrow.config',
-}"
-
-; Investing tools
 2010-01-01 custom "fava-extension" "fava_investor" "{}"
-
-; Git operations for Beancount files
 2010-01-01 custom "fava-extension" "fava_git"
 
-* Includes
-; Lazy Beancount: accounts generated from accounts_config.yml
-include "accounts.gen.bean"
+2024-01-01 custom "fava-extension" "fava_portfolio_returns" "{
+  'beangrow_config': 'ledger/beangrow.config',
+}"
 
-; File where the rest of accounts are defined (manually)
-include "accounts.bean"
-; File where commodities are defined
-include "commodities.bean"
+; =============================================================================
+; Global plugins
+; =============================================================================
 
-; (example/deprecated) Include all files from archive/<year>/<source>.bean
-; include "archive/*/*.bean"
-
-; Lazy Beancount: include generated files from Totals
-include "totals/*.bean"
-
-; Lazy Beancount: include fetched prices
-include "prices/*.bean"
-
-; File to track transactions manually
-include "manual_transactions.bean"
-
-; Budget definitions
-include "budgets.bean"
-
-; Location events for expense timeline charts (Expenses Detailed dashboard)
-include "locations.bean"
-
-; Chart note events for balance charts (Accounts dashboard)
-include "events.bean"
-
-; Import files generated using beancount-import
-include "beancount_import_output/transactions.bean"
-include "beancount_import_output/balance_accounts.bean"
-
-* Plugins
-** Valuation plugin
-; Configure accounts that have opaque changes in value
-plugin "beancount_lazy_plugins.valuation"
-1970-01-01 custom "valuation" "config"
-  account: "Assets:MyAutomaticBroker:Total" 
-  currency: "AUTO_BROKER_USD"
-  pnlAccount: "Assets:MyAutomaticBroker:Total:PnL"
-
-** Autogenerating prices
 ; Generate implicit prices from costs
-; It's better to place it before beancount_generate_base_ccy_prices so that transitive conversions may happen
+; Place before generate_base_ccy_prices so transitive conversions happen
 plugin "beancount.plugins.implicit_prices"
 
 plugin "beancount_lazy_plugins.generate_inverse_prices"
 
-; https://github.com/tarioch/beancounttools/
-; Generate indirect prices for the current main currency
+; Generate indirect prices for operating currencies
 plugin "beancount_lazy_plugins.generate_base_ccy_prices" "EUR"
 plugin "beancount_lazy_plugins.generate_base_ccy_prices" "USD"
 plugin "beancount_lazy_plugins.generate_base_ccy_prices" "GBP"
 
-** Shared expenses
-; Plugin to share expenses
+; Shared expenses
 plugin "beancount_share.share" "{
   'mark_name': 'share',
   'meta_name': 'shared',
@@ -156,7 +80,6 @@ plugin "beancount_share.share" "{
   'account_debtors': 'Liabilities:Shared',
   'account_creditors': 'Liabilities:Shared',
 }"
-
 
 plugin "beancount_reds_plugins.effective_date.effective_date" "{
   'Expenses': {
@@ -167,29 +90,21 @@ plugin "beancount_reds_plugins.effective_date.effective_date" "{
   },
  }"
 
-; Some hacky fix for dashboards to work properly.
-; At least one transaction per month needs to be present to display historical chart
-include "regular_postings_fix.bean"
-
 ; See https://github.com/beancount/beancount/issues/742
-; This is required for the beancount_interpolate and beancount_share plugins
-; to work together with pad directives
+; Required for beancount_interpolate and beancount_share with pad directives
 plugin "beancount.ops.pad"
 plugin "beancount.ops.balance"
 
-; Should be included after beancount.ops.pad
 plugin "beancount_lazy_plugins.group_pad_transactions"
 
-; Comes after almost everything but before the split plugin (it's used in some examples)
-plugin "beancount_lazy_plugins.filter_map"
-include "filter_map.bean"
-
-; Run beancount_interpolate after pad/balance generation as these plugins are mostly
-; used for cleaner graphs but we don't want to alter underlying source of truth
-; data too much.
-; You may choose to disable split plugin in some cases, if you want more precise
-; actual data rather than more convenient view on Expenses
+; Run interpolation last for cleaner graphs
 plugin "beancount_interpolate.recur"
 plugin "beancount_interpolate.split"
 
 plugin "beancount_lazy_plugins.auto_accounts"
+
+; =============================================================================
+; User ledger — replace ledger/ directory with your own data
+; =============================================================================
+
+include "ledger/ledger.bean"

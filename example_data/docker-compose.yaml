@@ -10,6 +10,9 @@ services:
       - "8777:8501"
     volumes:
       - .:/workspace
+      # To use your own ledger instead of the example, uncomment below
+      # and point to the directory containing your ledger.bean:
+      # - /path/to/your/ledger:/workspace/ledger
     environment:
       - FAVA_PORT=5003
       - BEANCOUNT_IMPORT_PORT=8101
