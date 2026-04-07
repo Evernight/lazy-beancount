@@ -1,6 +1,17 @@
 /// <reference types="./fava-dashboards.d.ts" />
 import { BarSeriesOption, ECElementEvent } from "echarts";
-import { Amount, defineConfig, EChartsSpec, Inventory, Ledger, Position, TableSpec, Variable } from "fava-dashboards";
+import {
+  Amount,
+  defineConfig,
+  EChartsPanel,
+  EChartsSpec,
+  Inventory,
+  Ledger,
+  Position,
+  TableSpec,
+  Variable,
+} from "fava-dashboards";
+import React from "react";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
@@ -383,7 +394,7 @@ async function StackedPeriodicBalanceChart(
       },
     },
     legend: {
-      top: "bottom",
+      bottom: 0,
     },
     xAxis: {
       type: "time",
@@ -716,114 +727,114 @@ function StatChart(
   };
 }
 
-async function StackedYearOverYear(
-  ledger: Ledger,
-  dataset: { year: number; account: string; category: string; value: number }[],
-  currency: string,
-  stacked: boolean,
-): Promise<EChartsSpec> {
-  const currencyFormatter = getCurrencyFormatter(currency);
-  const years = iterateYears(ledger.dateFirst, ledger.dateLast);
-  const maxAccounts = 7; // number of accounts to show, sorted by sum
+function YearOverYearPanel(ledger: Ledger, currency: string, initialAccount: string, inflationAdjusted: boolean) {
+  const [accountFilter, setAccountFilter] = React.useState(initialAccount);
+  const [queryResult, setQueryResult] = React.useState<
+    { year: number; account: string; value: Inventory }[] | undefined
+  >(undefined);
+  const [cpiResult, setCpiResult] = React.useState<{ year: number; index: number }[] | undefined>(undefined);
 
-  const categorySums: Record<string, number> = {};
-  const yearlySums: Record<string, number> = {};
-  for (const row of dataset) {
-    categorySums[row.category] = (categorySums[row.category] ?? 0) + row.value;
-    yearlySums[`${row.year}/${row.category}`] = (yearlySums[`${row.year}/${row.category}`] ?? 0) + row.value;
-  }
-  const categories = Object.entries(categorySums)
-    .sort(([, sumA], [, sumB]) => sumB - sumA)
-    .slice(0, maxAccounts)
-    .map(([name]) => name)
-    .reverse();
+  React.useEffect(() => {
+    ledger
+      .query(
+        `SELECT year, root(account, ${accountFilter.split(":").length + 1}) AS account, CONVERT(SUM(position), '${currency}', LAST(date)) AS value
+         WHERE account ~ '^${accountFilter}(:|$)'
+         GROUP BY account, year`,
+      )
+      .then(setQueryResult);
+  }, [ledger, accountFilter, currency]);
 
-  if (!stacked) {
-    return {
-      legend: {
-        top: "bottom",
-      },
-      tooltip: {
-        trigger: "axis",
-        axisPointer: {
-          type: "shadow",
-        },
-        valueFormatter: anyFormatter(currencyFormatter),
-      },
-      xAxis: {
-        axisLabel: {
-          formatter: currencyFormatter,
-        },
-      },
-      yAxis: {
-        data: categories.map((category) => category.split(":").slice(1).join(":")),
-      },
-      grid: {
-        containLabel: true,
-        left: 0,
-      },
-      series: years.map((year) => ({
-        type: "bar",
-        name: year,
-        data: categories.map((category) => yearlySums[`${year}/${category}`] ?? 0),
-        label: {
-          show: true,
-          position: "right",
-          formatter: (params: any) => currencyFormatter(params.value),
-        },
-        emphasis: {
-          focus: "series",
-        },
-      })),
-      onClick: (event) => {
-        const link = "../../account/{account}/?time={time}"
-          .replace("{account}", categories[event.dataIndex])
-          .replace("{time}", event.seriesName ?? "");
-        window.open(ledger.urlFor(link));
-      },
-    };
-  }
-
-  const filteredDataset = dataset
-    .filter((row) => categories.includes(row.category))
-    .sort((a, b) => a.year - b.year || a.account.localeCompare(b.account));
-
-  const series: BarSeriesOption[] = [];
-  for (const row of filteredDataset) {
-    series.push({
-      type: "bar",
-      name: row.account, // name decides the color of the bar
-      stack: String(row.year),
-      data: categories.map((category) => (category == row.category ? row.value : 0)),
-      emphasis: {
-        focus: "series",
-      },
-    });
-  }
-
-  // add labels at end of bar
-  for (const category of categories) {
-    for (const year of years) {
-      series.push({
-        type: "bar",
-        name: "sum",
-        stack: String(year),
-        data: categories.map((c) => (c == category ? 0 : undefined)),
-        label: {
-          show: `${year}/${category}` in yearlySums,
-          position: "right",
-          formatter: () => currencyFormatter(yearlySums[`${year}/${category}`] ?? 0),
-        },
-        tooltip: {
-          show: false,
-        },
-      });
+  React.useEffect(() => {
+    if (!inflationAdjusted || cpiResult !== undefined) {
+      return;
     }
+    ledger
+      .query(
+        `SELECT DISTINCT YEAR(date) as year, amount.number AS index
+         FROM prices
+         WHERE currency = 'CPI'
+         ORDER BY date`,
+      )
+      .then(setCpiResult);
+  }, [ledger, cpiResult, inflationAdjusted]);
+
+  if (queryResult === undefined || (inflationAdjusted && cpiResult === undefined)) {
+    return <span>Loading...</span>;
   }
 
-  return {
+  const currencyFormatter = getCurrencyFormatter(currency);
+  const lastYear = Math.max(...queryResult.map((r) => r.year));
+  const cpiYears = (cpiResult || []).map((c) => c.year);
+  const cpiByYear: Record<number, number> = Object.fromEntries(
+    (cpiResult || []).map(({ year, index }) => [year, index]),
+  );
+  function getInflation(year: number) {
+    const inflation = cpiByYear[year];
+    if (inflation !== undefined) {
+      return inflation;
+    }
+
+    const fallbackYear = [...cpiYears].reverse().find((cpiYear) => cpiYear <= year);
+    if (fallbackYear !== undefined) {
+      return cpiByYear[fallbackYear];
+    }
+
+    throw new Error(
+      `No Consumer Price Index (CPI) found for year ${year}. Please add a price directive '${year}-01-01 price CPI <index> USD' to your ledger.`,
+    );
+  }
+
+  const dataset: Record<number, Record<string, number>> = {}; // ex. {2025: {"_date": 2025, "_sum": 8, "Expenses:Food": 5, "Expenses:Travel": 3}}
+  const accounts = new Set<string>();
+  for (const { year, account, value } of queryResult) {
+    if (!(year in dataset)) {
+      dataset[year] = { _date: year, _sum: 0 };
+    }
+    accounts.add(account);
+
+    let amount = initialAccount === "Income" ? -(value[currency] ?? 0) : (value[currency] ?? 0);
+    if (inflationAdjusted) {
+      const inflation = getInflation(lastYear) / getInflation(year);
+      amount *= inflation;
+    }
+    dataset[year][account] = amount;
+    dataset[year]["_sum"] += amount;
+  }
+
+  const series: BarSeriesOption[] = [...accounts].sort().map((account) => ({
+    type: "bar",
+    name: account,
+    stack: "total",
+    encode: { x: account, y: "_date" },
+    emphasis: {
+      focus: "series",
+    },
+  }));
+
+  // add synthetic series with value=0 and label=sum
+  series.push({
+    type: "bar",
+    stack: "total",
+    data: Object.keys(dataset).map((year) => [0, parseInt(year, 10)]),
+    label: {
+      show: true,
+      position: "right",
+      formatter: ({ value }) => currencyFormatter(dataset[(value as [number, number])[1]]["_sum"]),
+    },
+    tooltip: {
+      show: false,
+    },
+  });
+
+  const option: EChartsSpec = {
+    grid: {
+      top: 0,
+    },
     tooltip: {
       valueFormatter: anyFormatter(currencyFormatter),
+    },
+    legend: {
+      bottom: 0,
     },
     xAxis: {
       axisLabel: {
@@ -831,25 +842,62 @@ async function StackedYearOverYear(
       },
     },
     yAxis: {
-      data: categories.map((category) => category.split(":").slice(1).join(":")),
+      type: "category",
     },
-    grid: {
-      containLabel: true,
-      left: 0,
+    dataset: {
+      source: Object.values(dataset).reverse(),
+      // required because not every row contains all accounts
+      dimensions: ["_date", ...accounts],
     },
     series,
     onClick: (event) => {
-      if (event.seriesIndex === undefined) {
+      // click on total label
+      if (event.data && (event.data as [number, number])[0] === 0) {
         return;
       }
 
-      const serie = series[event.seriesIndex];
-      const link = "../../account/{account}/?time={time}"
-        .replace("{account}", serie.name as string)
-        .replace("{time}", serie.stack as string);
-      window.open(ledger.urlFor(link));
+      const account = event.seriesName as string;
+      if (accountFilter != account) {
+        setAccountFilter(account);
+      } else {
+        const link = "../../account/{account}/?time={time}"
+          .replace("{account}", account)
+          .replace("{time}", String((event.data as { _date: number })["_date"]));
+        window.open(ledger.urlFor(link));
+      }
     },
   };
+
+  const accountParts = accountFilter.split(":");
+  const breadcrumbs = accountParts.map((part, i) => {
+    const account = accountParts.slice(0, i + 1).join(":");
+    const handleClick = (event: any) => {
+      event.preventDefault();
+      setAccountFilter(account);
+    };
+    return (
+      <a key={i} href="#" onClick={handleClick}>
+        {part}
+      </a>
+    );
+  });
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: "10px", height: "100%" }}>
+      <div title="Press on a an account in the chart to zoom in">
+        <strong>Account: </strong>
+        {breadcrumbs.map((breadcrumb, i) => (
+          <React.Fragment key={i}>
+            {i > 0 && <span> &raquo; </span>}
+            {breadcrumb}
+          </React.Fragment>
+        ))}
+      </div>
+      <div style={{ flexGrow: 1 }}>
+        <EChartsPanel spec={option} />
+      </div>
+    </div>
+  );
 }
 
 const currencyVariable: Variable = {
@@ -1116,7 +1164,7 @@ export default defineConfig({
                 valueFormatter: anyFormatter(currencyFormatter),
               },
               legend: {
-                top: "bottom",
+                bottom: 0,
               },
               grid: {
                 left: "5%",
@@ -1156,6 +1204,186 @@ export default defineConfig({
                   window.open(ledger.urlFor(link));
                 }
               },
+            };
+          },
+        },
+        {
+          title: "Monthly Profit and Loss 📅",
+          width: "100%",
+          height: "500px",
+          kind: "table",
+          spec: async ({ ledger, variables }) => {
+            const currencyFormatter = getCurrencyFormatter(variables.currency);
+            const months = iterateMonths(ledger.dateFirst, ledger.dateLast).map((m) => `${m.year}-${m.month}`);
+
+            async function queryByMonth<T extends { year: number; month: number }>(
+              query: string,
+              valueFn: (row: T) => number,
+              fill: "zero" | "cumulative" = "zero",
+            ) {
+              const rows = await ledger.query<T>(query);
+              const byMonth = Object.fromEntries(rows.map((row) => [`${row.year}-${row.month}`, valueFn(row)]));
+
+              let lastValue = 0;
+              return Object.fromEntries(
+                months.map((month) => {
+                  switch (fill) {
+                    case "zero":
+                      return [month, byMonth[month] ?? 0];
+
+                    case "cumulative":
+                      if (month in byMonth) {
+                        lastValue = byMonth[month];
+                      }
+                      return [month, lastValue];
+                  }
+                }),
+              );
+            }
+
+            type Row = { year: number; month: number; value: Inventory };
+            const [income, expenses, assets, liabilities, unrealizedGains] = await Promise.all([
+              queryByMonth<Row>(
+                `SELECT year, month, CONVERT(SUM(position), '${variables.currency}', LAST(date)) AS value
+                 WHERE account ~ '^Income:'
+                 GROUP BY year, month`,
+                (row) => -row.value[variables.currency],
+              ),
+              queryByMonth<Row>(
+                `SELECT year, month, CONVERT(SUM(position), '${variables.currency}', LAST(date)) AS value
+                 WHERE account ~ '^Expenses:'
+                 GROUP BY year, month`,
+                (row) => row.value[variables.currency],
+              ),
+              queryByMonth<Row>(
+                `SELECT year, month,
+                 CONVERT(COST(LAST(balance)), '${variables.currency}', DATE_TRUNC('month', FIRST(date)) + INTERVAL('1 month') - INTERVAL('1 day')) AS value
+                 WHERE account ~ '^Assets:'
+                 GROUP BY year, month`,
+                (row) => row.value[variables.currency],
+                "cumulative",
+              ),
+              queryByMonth<Row>(
+                `SELECT year, month,
+                 CONVERT(COST(LAST(balance)), '${variables.currency}', DATE_TRUNC('month', FIRST(date)) + INTERVAL('1 month') - INTERVAL('1 day')) AS value
+                 WHERE account ~ '^Liabilities:'
+                 GROUP BY year, month`,
+                (row) => -row.value[variables.currency],
+                "cumulative",
+              ),
+              queryByMonth<{
+                year: number;
+                month: number;
+                market_value: Inventory;
+                book_value: Inventory;
+              }>(
+                `SELECT year, month,
+                 CONVERT(LAST(balance),       '${variables.currency}', DATE_TRUNC('month', FIRST(date)) + INTERVAL('1 month') - INTERVAL('1 day')) AS market_value,
+                 CONVERT(COST(LAST(balance)), '${variables.currency}', DATE_TRUNC('month', FIRST(date)) + INTERVAL('1 month') - INTERVAL('1 day')) AS book_value
+                 WHERE account ~ '^(Assets|Liabilities):'
+                 GROUP BY year, month`,
+                (row) => row.market_value[variables.currency] - row.book_value[variables.currency],
+                "cumulative",
+              ),
+            ]);
+
+            return {
+              sx: {
+                "& .net_profit": {
+                  backgroundColor: "#f5f5f5",
+                  fontWeight: "bold",
+                },
+                "& .net_worth": {
+                  backgroundColor: "#f0f0f0",
+                  fontWeight: "bold",
+                },
+                "& .positive": {
+                  color: COLOR_PROFIT,
+                },
+                "& .negative": {
+                  color: COLOR_LOSS,
+                },
+              },
+              disableColumnSorting: true,
+              disableRowSelectionOnClick: true,
+              columns: [
+                { field: "name", minWidth: 180, headerName: "" },
+                ...months.map((month) => ({
+                  field: month,
+                  type: "number" as const,
+                  headerName: `${month.split("-")[0]}-${month.split("-")[1].padStart(2, "0")}`,
+                  valueFormatter: currencyFormatter,
+                })),
+              ],
+              getRowClassName: (params) => params.row.id,
+              getCellClassName: (params) =>
+                ["net_profit", "unrealized_gains"].includes(params.row.id) && params.field !== "name"
+                  ? params.value >= 0
+                    ? "positive"
+                    : "negative"
+                  : "",
+              onCellClick: ({ id, field }) => {
+                if (field === "name") {
+                  return;
+                }
+                const [year, month] = field.split("-");
+                const time = `${year}-${month.padStart(2, "0")}`;
+
+                switch (id) {
+                  case "income":
+                  case "expenses":
+                  case "net_profit":
+                    window.open(ledger.urlFor("../../income_statement/?time={time}".replace("{time}", time)));
+                    break;
+                  case "assets":
+                  case "liabilities":
+                    window.open(ledger.urlFor(`../../balance_sheet/?time=${time}&conversion=at_cost`));
+                    break;
+                  case "unrealized_gains":
+                  case "net_worth":
+                    window.open(ledger.urlFor(`../../balance_sheet/?time=${time}&conversion=at_value`));
+                    break;
+                }
+              },
+              rows: [
+                {
+                  id: "income",
+                  name: "Income",
+                  ...income,
+                },
+                {
+                  id: "expenses",
+                  name: "Expenses",
+                  ...expenses,
+                },
+                {
+                  id: "net_profit",
+                  name: "Net Profit",
+                  ...Object.fromEntries(months.map((month) => [month, income[month] - expenses[month]])),
+                },
+                {
+                  id: "assets",
+                  name: "Assets",
+                  ...assets,
+                },
+                {
+                  id: "liabilities",
+                  name: "Liabilities",
+                  ...liabilities,
+                },
+                {
+                  id: "unrealized_gains",
+                  name: "Unrealized Gains",
+                  ...unrealizedGains,
+                },
+                {
+                  id: "net_worth",
+                  name: "Net Worth",
+                  ...Object.fromEntries(
+                    months.map((month) => [month, assets[month] + unrealizedGains[month] - liabilities[month]]),
+                  ),
+                },
+              ],
             };
           },
         },
@@ -1292,7 +1520,7 @@ export default defineConfig({
                 valueFormatter: anyFormatter(currencyFormatter),
               },
               legend: {
-                top: "bottom",
+                bottom: 0,
               },
               xAxis: {
                 type: "time",
@@ -1430,7 +1658,7 @@ export default defineConfig({
                 },
               },
               legend: {
-                top: "bottom",
+                bottom: 0,
               },
               xAxis: {
                 data: years,
@@ -1737,7 +1965,7 @@ export default defineConfig({
       panels: [
         {
           title: "Avg. Income per Month 💰",
-          width: "33%",
+          width: "33.3%",
           height: "100px",
           link: "../../account/Income/?r=changes",
           kind: "echarts",
@@ -1750,7 +1978,7 @@ export default defineConfig({
             );
             const dataset = result.map((row) => ({
               date: `${row.year}-${row.month}`,
-              value: -row.value[variables.currency],
+              value: -(row.value[variables.currency] ?? 0),
             }));
             const avg = sumValue(dataset) / countMonths(ledger);
             return StatChart(dataset, TREND_POSITIVE, currencyFormatter(avg), COLOR_PROFIT);
@@ -1758,7 +1986,7 @@ export default defineConfig({
         },
         {
           title: "Avg. Expenses per Month 💸",
-          width: "33%",
+          width: "33.3%",
           height: "100px",
           link: "../../account/Expenses/?r=changes",
           kind: "echarts",
@@ -1771,7 +1999,7 @@ export default defineConfig({
             );
             const dataset = result.map((row) => ({
               date: `${row.year}-${row.month}`,
-              value: row.value[variables.currency],
+              value: row.value[variables.currency] ?? 0,
             }));
             const avg = sumValue(dataset) / countMonths(ledger);
             return StatChart(dataset, TREND_NEGATIVE, currencyFormatter(avg), COLOR_LOSS);
@@ -1779,7 +2007,7 @@ export default defineConfig({
         },
         {
           title: "Avg. Savings per Month ✨",
-          width: "33%",
+          width: "33.3%",
           height: "100px",
           link: "../../income_statement/",
           kind: "echarts",
@@ -1797,7 +2025,7 @@ export default defineConfig({
             );
             const incomeDataset = income.map((row) => ({
               date: `${row.year}-${row.month}`,
-              value: -row.value[variables.currency],
+              value: -(row.value[variables.currency] ?? 0),
             }));
             const avgIncome = sumValue(incomeDataset) / countMonths(ledger);
 
@@ -1808,7 +2036,7 @@ export default defineConfig({
             );
             const expensesDataset = expenses.map((row) => ({
               date: `${row.year}-${row.month}`,
-              value: row.value[variables.currency],
+              value: row.value[variables.currency] ?? 0,
             }));
             const avgExpenses = sumValue(expensesDataset) / countMonths(ledger);
 
@@ -1902,7 +2130,7 @@ export default defineConfig({
           height: "400px",
           link: "../../income_statement/",
           kind: "echarts",
-          spec: async ({ ledger, variables }) => {
+          spec: async ({ panel, ledger, variables }) => {
             const currencyFormatter = getCurrencyFormatter(variables.currency);
             const monthFormatter = new Intl.DateTimeFormat(undefined, { month: "short" }).format;
             const years = iterateYears(ledger.dateFirst, ledger.dateLast);
@@ -1917,7 +2145,7 @@ export default defineConfig({
             const monthly: Record<string, number> = {};
             const yearly: Record<number, number> = {};
             for (const row of result) {
-              const savings = -row.value[variables.currency];
+              const savings = -(row.value[variables.currency] ?? 0);
               monthly[`${row.year}-${row.month}`] = savings;
               yearly[row.year] = (yearly[row.year] ?? 0) + savings;
             }
@@ -1932,14 +2160,14 @@ export default defineConfig({
             const max = Math.max(...data.map(([label, val]) => (label.includes("-") ? Math.abs(val) : 0)));
             const maxRounded = Math.round(max * 100) / 100;
 
+            panel.height = `${120 + years.length * 50}px`;
             return {
               tooltip: {
                 position: "top",
                 valueFormatter: anyFormatter(currencyFormatter),
               },
               grid: {
-                top: 30,
-                height: Math.min(50 * years.length, 280),
+                top: 20,
                 bottom: 100, // space for visualMap
               },
               xAxis: {
@@ -2319,7 +2547,7 @@ export default defineConfig({
                 valueFormatter: anyFormatter(currencyFormatter),
               },
               legend: {
-                top: "bottom",
+                bottom: 0,
               },
               xAxis: {
                 type: "time",
@@ -2403,57 +2631,41 @@ export default defineConfig({
         {
           title: "Income Year-Over-Year 💰",
           width: "50%",
-          height: "700px",
           variables: [
             {
-              name: "display",
-              label: "Display",
+              name: "inflation",
               display: "toggle",
-              options: () => ["single", "stacked"],
+              options: () => ["nominal", "inflation adjusted"],
             },
           ],
-          kind: "echarts",
-          spec: async ({ ledger, variables }) => {
-            const result = await ledger.query<{ year: number; account: string; category: string; value: Inventory }>(
-              `SELECT year, account, root(account, 3) AS category, CONVERT(SUM(position), '${variables.currency}', LAST(date)) AS value
-               WHERE account ~ '^Income:'
-               GROUP BY account, category, year`,
+          kind: "react",
+          spec: ({ ledger, variables }) => {
+            return YearOverYearPanel(
+              ledger,
+              variables.currency,
+              "Income",
+              variables.inflation === "inflation adjusted",
             );
-            const dataset = result.map(({ year, account, category, value }) => ({
-              year,
-              account,
-              category,
-              value: -(value[variables.currency] ?? 0),
-            }));
-            return StackedYearOverYear(ledger, dataset, variables.currency, variables.display == "stacked");
           },
         },
         {
           title: "Expenses Year-Over-Year 💸",
           width: "50%",
-          height: "700px",
           variables: [
             {
-              name: "display",
-              label: "Display",
+              name: "inflation",
               display: "toggle",
-              options: () => ["single", "stacked"],
+              options: () => ["nominal", "inflation adjusted"],
             },
           ],
-          kind: "echarts",
-          spec: async ({ ledger, variables }) => {
-            const result = await ledger.query<{ year: number; account: string; category: string; value: Inventory }>(
-              `SELECT year, account, root(account, 2) AS category, CONVERT(SUM(position), '${variables.currency}', LAST(date)) AS value
-               WHERE account ~ '^Expenses:'
-               GROUP BY account, category, year`,
+          kind: "react",
+          spec: ({ ledger, variables }) => {
+            return YearOverYearPanel(
+              ledger,
+              variables.currency,
+              "Expenses",
+              variables.inflation === "inflation adjusted",
             );
-            const dataset = result.map(({ year, account, category, value }) => ({
-              year,
-              account,
-              category,
-              value: value[variables.currency] ?? 0,
-            }));
-            return StackedYearOverYear(ledger, dataset, variables.currency, variables.display == "stacked");
           },
         },
         {
@@ -2751,7 +2963,7 @@ export default defineConfig({
             }
             return {
               tooltip: { valueFormatter: anyFormatter(currencyFormatter) },
-              legend: { top: "bottom" },
+              legend: { bottom: 0 },
               grid: { left: 100 },
               xAxis: { axisLabel: { formatter: currencyFormatter } },
               yAxis: { data: months },
@@ -3127,7 +3339,7 @@ export default defineConfig({
               },
               legend: {
                 data: uniqueLocations,
-                top: "bottom",
+                bottom: 0,
               },
               calendar: calendars,
               series: Object.values(calendarInnerData),
@@ -3214,42 +3426,79 @@ export default defineConfig({
           kind: "echarts",
           spec: async ({ ledger, variables }) => {
             const currencyFormatter = getCurrencyFormatter(variables.currency);
-            const result = await ledger.query<{ year: number; value: Amount }>(
-              `SELECT year, CONVERT(SUM(position), '${variables.currency}', LAST(date)) AS value
+            const result = await ledger.query<{ tags: string[]; value: Amount }>(
+              `SELECT tags, CONVERT(position, '${variables.currency}', date) AS value
                WHERE account ~ '^Expenses:' AND 'travel' IN tags
-               GROUP BY year`,
+               ORDER BY date DESC`,
             );
-            const years = iterateYears(ledger.dateFirst, ledger.dateLast);
-            const amounts: Record<number, number> = {};
-            for (const row of result) {
-              amounts[row.year] = row.value[variables.currency] ?? 0;
+
+            function parseTag(tags: string[]) {
+              for (const tag of tags) {
+                const m = tag.match(/-(\d{4})/);
+                if (m) {
+                  return { tag, year: parseInt(m[1], 10) };
+                }
+              }
+              return { tag: "unknown", year: 0 };
             }
-            const linkTemplate = "../../account/Expenses/?filter=#travel&time={time}";
-            return {
-              grid: {
-                left: "5%",
-                right: "5%",
+
+            const dataset: Record<number, Record<string, number>> = {}; // ex. {2025: {"_date": 2025, "_sum": 8, "trip-chicago-2025": 5, "trip-paris-2025": 3}}
+            const tags: string[] = []; // sorted by the last transaction date of a tag
+            for (const row of result) {
+              const { tag, year } = parseTag(row.tags);
+              if (!(year in dataset)) {
+                dataset[year] = { _date: year, _sum: 0 };
+              }
+              if (!tags.includes(tag)) {
+                tags.push(tag);
+              }
+              dataset[year][tag] = (dataset[year][tag] ?? 0) + row.value.number;
+              dataset[year]["_sum"] += row.value.number;
+            }
+
+            const series: BarSeriesOption[] = [...tags].reverse().map((tag) => ({
+              type: "bar",
+              name: tag,
+              stack: "total",
+              encode: { x: "_date", y: tag },
+              barMaxWidth: 100,
+            }));
+
+            // add synthetic series with value=0 and label=sum
+            series.push({
+              type: "bar",
+              stack: "total",
+              data: Object.keys(dataset).map((year) => [parseInt(year, 10), 0]),
+              label: {
+                show: true,
+                position: "top",
+                formatter: ({ value }) => currencyFormatter(dataset[(value as [number, number])[0]]["_sum"]),
               },
+              tooltip: {
+                show: false,
+              },
+            });
+
+            return {
               tooltip: {
                 valueFormatter: anyFormatter(currencyFormatter),
               },
               xAxis: {
-                data: years,
+                type: "category",
               },
               yAxis: {
                 axisLabel: {
                   formatter: currencyFormatter,
                 },
               },
-              series: [
-                {
-                  type: "line",
-                  smooth: true,
-                  data: years.map((year) => amounts[year] ?? 0),
-                },
-              ],
+              dataset: {
+                source: Object.values(dataset),
+                // required because not every row contains all tags
+                dimensions: ["_date", ...tags],
+              },
+              series,
               onClick: (event) => {
-                const link = linkTemplate.replace("{time}", String(event.name));
+                const link = "../../account/Expenses/?filter=#{tag}".replace("{tag}", event.seriesName as string);
                 window.open(ledger.urlFor(link));
               },
             };
@@ -3258,37 +3507,43 @@ export default defineConfig({
         {
           title: "Destinations ✈️",
           width: "100%",
-          height: "300px",
+          height: "150px",
           link: "../../income_statement/?filter=#travel",
           kind: "echarts",
-          spec: async ({ ledger, variables }) => {
+          spec: async ({ panel, ledger, variables }) => {
             const currencyFormatter = getCurrencyFormatter(variables.currency);
             const result = await ledger.query<{ tags: string[]; value: Amount }>(
               `SELECT tags, CONVERT(position, '${variables.currency}', date) AS value
                WHERE account ~ '^Expenses:' AND 'travel' IN tags
-               ORDER BY date ASC`,
+               ORDER BY date DESC`,
             );
 
-            const travels: string[] = [];
+            const tags: string[] = [];
             const amounts: Record<string, number> = {};
             for (const row of result) {
-              const tag = row.tags.find((t) => t.match(/trip\-/));
-              if (tag) {
-                if (!(tag in amounts)) {
-                  travels.push(tag);
-                  amounts[tag] = 0;
-                }
-                amounts[tag] += row.value.number;
+              const tag = row.tags.find((t) => t.match(/-\d{4}/)) ?? "unknown";
+              if (!(tag in amounts)) {
+                tags.push(tag);
+                amounts[tag] = 0;
               }
+              amounts[tag] += row.value.number;
             }
-            travels.reverse();
+
+            const dataset = tags.map((tag) => ({ tag, value: amounts[tag] }));
+
+            panel.height = `${20 + dataset.length * 30}px`;
             return {
+              dataset: {
+                source: dataset,
+              },
               tooltip: {
                 valueFormatter: anyFormatter(currencyFormatter),
               },
               grid: {
                 containLabel: true,
                 left: 0,
+                top: 10,
+                bottom: 10,
               },
               xAxis: {
                 type: "value",
@@ -3298,21 +3553,20 @@ export default defineConfig({
               },
               yAxis: {
                 type: "category",
-                data: travels,
               },
               series: [
                 {
                   type: "bar",
-                  data: travels.map((travel) => amounts[travel]),
+                  encode: { x: "value", y: "tag" },
                   label: {
                     show: true,
                     position: "right",
-                    formatter: (params: any) => currencyFormatter(params.value),
+                    formatter: (params: any) => currencyFormatter(params.value.value),
                   },
                 },
               ],
               onClick: (event) => {
-                const link = `../../extension/FavaDashboards/?dashboard=travelling&filter=${encodeURIComponent("#" + (event.name as string))}`;
+                const link = "../../account/Expenses/?filter=#{tag}".replace("{tag}", event.name as string);
                 window.open(ledger.urlFor(link));
               },
             };
@@ -3553,7 +3807,7 @@ export default defineConfig({
                 valueFormatter: anyFormatter(currencyFormatter),
               },
               legend: {
-                top: "bottom",
+                bottom: 0,
               },
               xAxis: {
                 type: "time",
