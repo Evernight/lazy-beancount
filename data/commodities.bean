@@ -18,3 +18,10 @@
   asset_class: "crypto"
   asset_allocation_crypto: 100
 
+2020-01-01 commodity CPI
+  name: "Consumer Price Index"
+
+; Source: https://www.minneapolisfed.org/about-us/monetary-policy/inflation-calculator/consumer-price-index-1913-
+2020-01-01 price CPI 258.8 USD
+2021-01-01 price CPI 271.0 USD
+2022-01-01 price CPI 292.7 USD
