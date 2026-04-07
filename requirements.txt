@@ -3,7 +3,7 @@ beancount==3.2.0
 # custom fava wheel prebuilt, changes from upstream fava:
 # * includes filter presets feature: https://github.com/beancount/fava/pull/1994
 # browse full changes history here: https://github.com/beancount/fava/compare/main...Evernight:fava:fava-custom-build
-fava @ https://github.com/Evernight/fava/raw/5eaeb1c627314c67d6620ca61b09fb8be574e8f0/prebuilt_wheels/fava-1.30.11.dev24+g38469e585.tar.gz#sha1=a7f8ec8c8b1fd995c038c734f460320bd319e64f
+fava @ https://github.com/Evernight/fava/raw/ee5aa0889bdde24204be2279ab14d50df71494c3/prebuilt_wheels/fava-1.30.13.dev23+gb4ccd7002.tar.gz#sha1=f0536af3cf303b0a753ec5d82cb546a38325ff83
 
 # not on pypi, using fixed commit
 beanprice @ git+https://github.com/beancount/beanprice.git@3cd060713d753b414ed042586d9980cdd0cb0832
@@ -28,8 +28,8 @@ streamlit-echarts==0.4.0
 
 # Fava extensions
 fava-investor==1.0.1
-fava-dashboards @ git+https://github.com/andreasgerstmayr/fava-dashboards.git@88da44615106696d68a9f4a1bec923fb1c660c34
-fava-portfolio-returns @ git+https://github.com/andreasgerstmayr/fava-portfolio-returns.git@5ecc3607069df644b150e6e287731d039eb13b9e
+fava-dashboards @ git+https://github.com/andreasgerstmayr/fava-dashboards.git@ebbfdb620b5f65986563f3fc50d4280d410b05de
+fava-portfolio-returns @ git+https://github.com/andreasgerstmayr/fava-portfolio-returns.git@a655bf9c50d83173559065a84ee3f6d020ef633e
 fava-currency-tracker @ git+https://github.com/Evernight/fava-currency-tracker.git@f5d2ff52de4bcdad88f1d83a57f86d7d1a9e04ca
 fava-git @ git+https://github.com/Evernight/fava-git.git@18a9b6e64b636bfa8673eee808892da01adf661b
 beantab @ git+https://github.com/Evernight/beantab.git@16ef914333e3339cd1115f95be8dd7028ac09031
