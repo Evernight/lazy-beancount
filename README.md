@@ -81,6 +81,61 @@ On Mac you can also remove ```user``` parameter from ```docker-compose.yaml``` a
 
 Update image to the latest version from time to time using ```docker compose pull```
 
+## 📂 Using your own ledger
+
+The `example_data/` directory separates the **entrypoint** (`main.bean`) from the **ledger data** (`ledger/`). This makes it easy to use Lazy Beancount with an existing beancount ledger — just mount your directory over `ledger/`:
+
+```
+example_data/
+  main.bean              # Entrypoint: fava config, extensions, plugins
+  dashboards.tsx         # Dashboard definitions
+  docker-compose.yaml
+  ledger/                # ← mount your own data here
+    ledger.bean          # Your ledger entrypoint (options, includes)
+    accounts.bean
+    commodities.bean
+    ...
+```
+
+### Step 1: Create a `ledger.bean` entrypoint
+
+Your ledger directory needs a `ledger.bean` file that `main.bean` includes. This file should contain your beancount options, account/commodity includes, and transaction includes. For example:
+
+```beancount
+option "operating_currency" "USD"
+option "booking_method" "STRICT"
+
+include "commodities.beancount"
+include "accounts.beancount"
+include "journals/*.beancount"
+```
+
+### Step 2: Mount via docker-compose
+
+Edit `docker-compose.yaml` and add a volume mount that overlays `ledger/` with your data:
+
+```yaml
+volumes:
+  - .:/workspace
+  - /path/to/your/ledger:/workspace/ledger
+```
+
+### Step 3: Configure extensions
+
+If you use `fava-portfolio-returns`, place your `beangrow.config` (or `.pbtxt`) inside your ledger directory and update the path in `main.bean`:
+
+```beancount
+2024-01-01 custom "fava-extension" "fava_portfolio_returns" "{
+  'beangrow_config': 'ledger/beangrow.config',
+}"
+```
+
+### Notes
+
+- **`display_precision`** must stay in `main.bean` (the top-level file), not in your `ledger.bean`. This is due to a beancount v3 bug where merging display context from included files crashes. All other `option` directives work fine in included files.
+- Beancount options (`operating_currency`, `booking_method`, `inferred_tolerance_default`, etc.), `plugin` directives, and `custom` directives all work correctly from included files.
+- The example `ledger/` directory is fully self-contained — you can delete it entirely and replace it with your own.
+
 ## 🐳 Docker
 
 You can pull image from the public repository:

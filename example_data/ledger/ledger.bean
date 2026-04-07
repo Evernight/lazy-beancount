@@ -1,0 +1,56 @@
+; Example Ledger — data, accounts, and ledger-specific options.
+; This file is included by ../main.bean (the Lazy Beancount entrypoint).
+; Replace this entire ledger/ directory with your own data.
+
+; --- Beancount options (ledger-specific) ---
+option "plugin_processing_mode" "raw"
+
+option "operating_currency" "EUR"
+option "operating_currency" "USD"
+option "operating_currency" "GBP"
+
+option "inferred_tolerance_default" "*:0.00000001"
+option "inferred_tolerance_default" "USD:0.003"
+option "inferred_tolerance_default" "GBP:0.003"
+option "tolerance_multiplier" "1.2"
+
+; NOTE: display_precision must be in the top-level main.bean, not here.
+; Beancount v3 crashes when merging display_context from included files.
+; See: https://github.com/beancount/beancount/issues/808
+
+plugin "beancount.ops.documents"
+
+; --- Accounts ---
+include "accounts.gen.bean"
+include "accounts.bean"
+include "commodities.bean"
+
+; --- Totals and prices ---
+include "totals/*.bean"
+include "prices/*.bean"
+
+; --- Transactions ---
+include "manual_transactions.bean"
+include "beancount_import_output/transactions.bean"
+include "beancount_import_output/balance_accounts.bean"
+
+; --- Budgets, events, locations ---
+include "budgets.bean"
+include "locations.bean"
+include "events.bean"
+
+; --- Plugins that depend on ledger data ---
+
+; Valuation plugin for opaque-value accounts
+plugin "beancount_lazy_plugins.valuation"
+1970-01-01 custom "valuation" "config"
+  account: "Assets:MyAutomaticBroker:Total"
+  currency: "AUTO_BROKER_USD"
+  pnlAccount: "Assets:MyAutomaticBroker:Total:PnL"
+
+; Filter map (account renaming rules)
+plugin "beancount_lazy_plugins.filter_map"
+include "filter_map.bean"
+
+; Hacky fix: at least one transaction per month for dashboard charts
+include "regular_postings_fix.bean"
