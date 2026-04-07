@@ -383,7 +383,7 @@ async function StackedPeriodicBalanceChart(
       },
     },
     legend: {
-      top: "bottom",
+      bottom: 0,
     },
     xAxis: {
       type: "time",
@@ -741,7 +741,7 @@ async function StackedYearOverYear(
   if (!stacked) {
     return {
       legend: {
-        top: "bottom",
+        bottom: 0,
       },
       tooltip: {
         trigger: "axis",
@@ -1116,7 +1116,7 @@ export default defineConfig({
                 valueFormatter: anyFormatter(currencyFormatter),
               },
               legend: {
-                top: "bottom",
+                bottom: 0,
               },
               grid: {
                 left: "5%",
@@ -1472,7 +1472,7 @@ export default defineConfig({
                 valueFormatter: anyFormatter(currencyFormatter),
               },
               legend: {
-                top: "bottom",
+                bottom: 0,
               },
               xAxis: {
                 type: "time",
@@ -1610,7 +1610,7 @@ export default defineConfig({
                 },
               },
               legend: {
-                top: "bottom",
+                bottom: 0,
               },
               xAxis: {
                 data: years,
@@ -2499,7 +2499,7 @@ export default defineConfig({
                 valueFormatter: anyFormatter(currencyFormatter),
               },
               legend: {
-                top: "bottom",
+                bottom: 0,
               },
               xAxis: {
                 type: "time",
@@ -2931,7 +2931,7 @@ export default defineConfig({
             }
             return {
               tooltip: { valueFormatter: anyFormatter(currencyFormatter) },
-              legend: { top: "bottom" },
+              legend: { bottom: 0 },
               grid: { left: 100 },
               xAxis: { axisLabel: { formatter: currencyFormatter } },
               yAxis: { data: months },
@@ -3307,7 +3307,7 @@ export default defineConfig({
               },
               legend: {
                 data: uniqueLocations,
-                top: "bottom",
+                bottom: 0,
               },
               calendar: calendars,
               series: Object.values(calendarInnerData),
@@ -3394,42 +3394,79 @@ export default defineConfig({
           kind: "echarts",
           spec: async ({ ledger, variables }) => {
             const currencyFormatter = getCurrencyFormatter(variables.currency);
-            const result = await ledger.query<{ year: number; value: Amount }>(
-              `SELECT year, CONVERT(SUM(position), '${variables.currency}', LAST(date)) AS value
+            const result = await ledger.query<{ tags: string[]; value: Amount }>(
+              `SELECT tags, CONVERT(position, '${variables.currency}', date) AS value
                WHERE account ~ '^Expenses:' AND 'travel' IN tags
-               GROUP BY year`,
+               ORDER BY date DESC`,
             );
-            const years = iterateYears(ledger.dateFirst, ledger.dateLast);
-            const amounts: Record<number, number> = {};
-            for (const row of result) {
-              amounts[row.year] = row.value[variables.currency] ?? 0;
+
+            function parseTag(tags: string[]) {
+              for (const tag of tags) {
+                const m = tag.match(/-(\d{4})/);
+                if (m) {
+                  return { tag, year: parseInt(m[1], 10) };
+                }
+              }
+              return { tag: "unknown", year: 0 };
             }
-            const linkTemplate = "../../account/Expenses/?filter=#travel&time={time}";
-            return {
-              grid: {
-                left: "5%",
-                right: "5%",
+
+            const dataset: Record<number, Record<string, number>> = {}; // ex. {2025: {"_date": 2025, "_sum": 8, "trip-chicago-2025": 5, "trip-paris-2025": 3}}
+            const tags: string[] = []; // sorted by the last transaction date of a tag
+            for (const row of result) {
+              const { tag, year } = parseTag(row.tags);
+              if (!(year in dataset)) {
+                dataset[year] = { _date: year, _sum: 0 };
+              }
+              if (!tags.includes(tag)) {
+                tags.push(tag);
+              }
+              dataset[year][tag] = (dataset[year][tag] ?? 0) + row.value.number;
+              dataset[year]["_sum"] += row.value.number;
+            }
+
+            const series: BarSeriesOption[] = [...tags].reverse().map((tag) => ({
+              type: "bar",
+              name: tag,
+              stack: "total",
+              encode: { x: "_date", y: tag },
+              barMaxWidth: 100,
+            }));
+
+            // add synthetic series with value=0 and label=sum
+            series.push({
+              type: "bar",
+              stack: "total",
+              data: Object.keys(dataset).map((year) => [parseInt(year, 10), 0]),
+              label: {
+                show: true,
+                position: "top",
+                formatter: ({ value }) => currencyFormatter(dataset[(value as [number, number])[0]]["_sum"]),
               },
+              tooltip: {
+                show: false,
+              },
+            });
+
+            return {
               tooltip: {
                 valueFormatter: anyFormatter(currencyFormatter),
               },
               xAxis: {
-                data: years,
+                type: "category",
               },
               yAxis: {
                 axisLabel: {
                   formatter: currencyFormatter,
                 },
               },
-              series: [
-                {
-                  type: "line",
-                  smooth: true,
-                  data: years.map((year) => amounts[year] ?? 0),
-                },
-              ],
+              dataset: {
+                source: Object.values(dataset),
+                // required because not every row contains all tags
+                dimensions: ["_date", ...tags],
+              },
+              series,
               onClick: (event) => {
-                const link = linkTemplate.replace("{time}", String(event.name));
+                const link = "../../account/Expenses/?filter=#{tag}".replace("{tag}", event.seriesName as string);
                 window.open(ledger.urlFor(link));
               },
             };
@@ -3438,37 +3475,43 @@ export default defineConfig({
         {
           title: "Destinations ✈️",
           width: "100%",
-          height: "300px",
+          height: "150px",
           link: "../../income_statement/?filter=#travel",
           kind: "echarts",
-          spec: async ({ ledger, variables }) => {
+          spec: async ({ panel, ledger, variables }) => {
             const currencyFormatter = getCurrencyFormatter(variables.currency);
             const result = await ledger.query<{ tags: string[]; value: Amount }>(
               `SELECT tags, CONVERT(position, '${variables.currency}', date) AS value
                WHERE account ~ '^Expenses:' AND 'travel' IN tags
-               ORDER BY date ASC`,
+               ORDER BY date DESC`,
             );
 
-            const travels: string[] = [];
+            const tags: string[] = [];
             const amounts: Record<string, number> = {};
             for (const row of result) {
-              const tag = row.tags.find((t) => t.match(/trip\-/));
-              if (tag) {
-                if (!(tag in amounts)) {
-                  travels.push(tag);
-                  amounts[tag] = 0;
-                }
-                amounts[tag] += row.value.number;
+              const tag = row.tags.find((t) => t.match(/-\d{4}/)) ?? "unknown";
+              if (!(tag in amounts)) {
+                tags.push(tag);
+                amounts[tag] = 0;
               }
+              amounts[tag] += row.value.number;
             }
-            travels.reverse();
+
+            const dataset = tags.map((tag) => ({ tag, value: amounts[tag] }));
+
+            panel.height = `${20 + dataset.length * 30}px`;
             return {
+              dataset: {
+                source: dataset,
+              },
               tooltip: {
                 valueFormatter: anyFormatter(currencyFormatter),
               },
               grid: {
                 containLabel: true,
                 left: 0,
+                top: 10,
+                bottom: 10,
               },
               xAxis: {
                 type: "value",
@@ -3478,21 +3521,20 @@ export default defineConfig({
               },
               yAxis: {
                 type: "category",
-                data: travels,
               },
               series: [
                 {
                   type: "bar",
-                  data: travels.map((travel) => amounts[travel]),
+                  encode: { x: "value", y: "tag" },
                   label: {
                     show: true,
                     position: "right",
-                    formatter: (params: any) => currencyFormatter(params.value),
+                    formatter: (params: any) => currencyFormatter(params.value.value),
                   },
                 },
               ],
               onClick: (event) => {
-                const link = `../../extension/FavaDashboards/?dashboard=travelling&filter=${encodeURIComponent("#" + (event.name as string))}`;
+                const link = "../../account/Expenses/?filter=#{tag}".replace("{tag}", event.name as string);
                 window.open(ledger.urlFor(link));
               },
             };
@@ -3733,7 +3775,7 @@ export default defineConfig({
                 valueFormatter: anyFormatter(currencyFormatter),
               },
               legend: {
-                top: "bottom",
+                bottom: 0,
               },
               xAxis: {
                 type: "time",
