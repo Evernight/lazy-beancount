@@ -2915,7 +2915,7 @@ export default defineConfig({
                 const pathParts = event.treePathInfo
                   .map((i: any) => i.name)
                   .filter((name: string) => name !== "(Other)");
-                const account = "Expenses:" + pathParts.join(":");
+                const account = "Expenses:" + pathParts.slice(1).join(":");
                 const link = "../../account/{account}/?interval=day".replace("{account}", account);
                 window.open(ledger.urlFor(link));
               },
