@@ -5,7 +5,7 @@
     - strong: ›Dashboards
   - combobox "Time"
   - combobox "Account"
-  - combobox "Filter by tag, payee, ..."
+  - combobox "Filter by tag, payee, …"
   - text: 🕒
   - link "month":
     - /url: "#time"
@@ -178,3 +178,123 @@
   - heading "Income/Expenses 💸" [level=3]:
     - link "Income/Expenses 💸":
       - /url: http://127.0.0.1:5000/beancount/income_statement/
+  - heading "Monthly Profit and Loss 📅" [level=3]
+  - grid:
+    - row /\d+-\d+ \d+-\d+ \d+-\d+ \d+-\d+ \d+-\d+ \d+-\d+ \d+-\d+ \d+-\d+ \d+-\d+ \d+-\d+ \d+-\d+ \d+-\d+/:
+      - columnheader
+      - columnheader /\d+-\d+/
+      - columnheader /\d+-\d+/
+      - columnheader /\d+-\d+/
+      - columnheader /\d+-\d+/
+      - columnheader /\d+-\d+/
+      - columnheader /\d+-\d+/
+      - columnheader /\d+-\d+/
+      - columnheader /\d+-\d+/
+      - columnheader /\d+-\d+/
+      - columnheader /\d+-\d+/
+      - columnheader /\d+-\d+/
+      - columnheader /\d+-\d+/
+    - rowgroup:
+      - row /Income €0 €0 €\d+,\d+ €\d+,\d+ €\d+,\d+ €\d+,\d+ €\d+ €\d+,\d+ €0 -€\d+ €0 €0/:
+        - gridcell "Income"
+        - gridcell "€0"
+        - gridcell "€0"
+        - gridcell /€\d+,\d+/
+        - gridcell /€\d+,\d+/
+        - gridcell /€\d+,\d+/
+        - gridcell /€\d+,\d+/
+        - gridcell /€\d+/
+        - gridcell /€\d+,\d+/
+        - gridcell "€0"
+        - gridcell /-€\d+/
+        - gridcell "€0"
+        - gridcell "€0"
+      - row /Expenses €0 €0 €\d+,\d+ €\d+,\d+ €\d+,\d+ €\d+,\d+ -€\d+,\d+ €\d+ -€5 €3 -€5 -€5/:
+        - gridcell "Expenses"
+        - gridcell "€0"
+        - gridcell "€0"
+        - gridcell /€\d+,\d+/
+        - gridcell /€\d+,\d+/
+        - gridcell /€\d+,\d+/
+        - gridcell /€\d+,\d+/
+        - gridcell /-€\d+,\d+/
+        - gridcell /€\d+/
+        - gridcell "-€5"
+        - gridcell "€3"
+        - gridcell "-€5"
+        - gridcell "-€5"
+      - row /Net Profit €0 €0 €\d+ -€\d+ -€\d+ -€\d+ €\d+,\d+ €\d+,\d+ €5 -€\d+ €5 €5/:
+        - gridcell "Net Profit"
+        - gridcell "€0"
+        - gridcell "€0"
+        - gridcell /€\d+/
+        - gridcell /-€\d+/
+        - gridcell /-€\d+/
+        - gridcell /-€\d+/
+        - gridcell /€\d+,\d+/
+        - gridcell /€\d+,\d+/
+        - gridcell "€5"
+        - gridcell /-€\d+/
+        - gridcell "€5"
+        - gridcell "€5"
+      - row /Assets €NaN €NaN €\d+,\d+ €\d+,\d+ €\d+,\d+ €\d+,\d+ €\d+,\d+ €\d+,\d+ €\d+,\d+ €\d+,\d+ €\d+,\d+ €\d+,\d+/:
+        - gridcell "Assets"
+        - gridcell "€NaN"
+        - gridcell "€NaN"
+        - gridcell /€\d+,\d+/
+        - gridcell /€\d+,\d+/
+        - gridcell /€\d+,\d+/
+        - gridcell /€\d+,\d+/
+        - gridcell /€\d+,\d+/
+        - gridcell /€\d+,\d+/
+        - gridcell /€\d+,\d+/
+        - gridcell /€\d+,\d+/
+        - gridcell /€\d+,\d+/
+        - gridcell /€\d+,\d+/
+      - row /Liabilities €0 €0 -€\d+ -€\d+ -€\d+ -€\d+ -€\d+ -€\d+ -€\d+ -€\d+ -€\d+ -€\d+/:
+        - gridcell "Liabilities"
+        - gridcell "€0"
+        - gridcell "€0"
+        - gridcell /-€\d+/
+        - gridcell /-€\d+/
+        - gridcell /-€\d+/
+        - gridcell /-€\d+/
+        - gridcell /-€\d+/
+        - gridcell /-€\d+/
+        - gridcell /-€\d+/
+        - gridcell /-€\d+/
+        - gridcell /-€\d+/
+        - gridcell /-€\d+/
+      - row /Unrealized Gains €NaN €NaN €\d+ €\d+ €\d+ €\d+ €\d+ €\d+ €\d+ €\d+ €\d+ €\d+/:
+        - gridcell "Unrealized Gains"
+        - gridcell "€NaN"
+        - gridcell "€NaN"
+        - gridcell /€\d+/
+        - gridcell /€\d+/
+        - gridcell /€\d+/
+        - gridcell /€\d+/
+        - gridcell /€\d+/
+        - gridcell /€\d+/
+        - gridcell /€\d+/
+        - gridcell /€\d+/
+        - gridcell /€\d+/
+        - gridcell /€\d+/
+      - row /Net Worth €NaN €NaN €\d+,\d+ €\d+,\d+ €\d+,\d+ €\d+,\d+ €\d+,\d+ €\d+,\d+ €\d+,\d+ €\d+,\d+ €\d+,\d+ €\d+,\d+/:
+        - gridcell "Net Worth"
+        - gridcell "€NaN"
+        - gridcell "€NaN"
+        - gridcell /€\d+,\d+/
+        - gridcell /€\d+,\d+/
+        - gridcell /€\d+,\d+/
+        - gridcell /€\d+,\d+/
+        - gridcell /€\d+,\d+/
+        - gridcell /€\d+,\d+/
+        - gridcell /€\d+,\d+/
+        - gridcell /€\d+,\d+/
+        - gridcell /€\d+,\d+/
+        - gridcell /€\d+,\d+/
+  - paragraph: "Rows per page:"
+  - 'combobox /Rows per page: \d+/'
+  - paragraph: 1–7 of 7
+  - button "Go to previous page" [disabled]
+  - button "Go to next page" [disabled]

@@ -5,7 +5,7 @@
     - strong: ›BeanTab
   - combobox "Time"
   - combobox "Account"
-  - combobox "Filter by tag, payee, ..."
+  - combobox "Filter by tag, payee, …"
   - text: 🕒
   - link "month":
     - /url: "#time"
@@ -189,11 +189,11 @@
     - columnheader /\d+-\d+-\d+/
     - columnheader /\d+-\d+-\d+ ↔ \d+-\d+-\d+/:
       - link /\d+-\d+-\d+ ↔ \d+-\d+-\d+/:
-        - /url: http://127.0.0.1:5000/beancount/extension/FavaDashboards/?dashboard=expenses-detailed&time=2024-05-04+to+2026-04-07
+        - /url: http://127.0.0.1:5000/beancount/extension/FavaDashboards/?dashboard=expenses-detailed&time=2024-05-04+to+2026-04-08
     - columnheader /\d+-\d+-\d+/
     - columnheader /\d+-\d+-\d+ ↔ \d+-\d+-\d+/:
       - link /\d+-\d+-\d+ ↔ \d+-\d+-\d+/:
-        - /url: http://127.0.0.1:5000/beancount/extension/FavaDashboards/?dashboard=expenses-detailed&time=2026-04-08+to+2026-04-08
+        - /url: http://127.0.0.1:5000/beancount/extension/FavaDashboards/?dashboard=expenses-detailed&time=2026-04-09+to+2026-04-09
     - columnheader /\d+-\d+-\d+/
     - row /\d+,\d+\.\d+ 3 \d+,\d+\.\d+ \d+,\d+\.\d+/:
       - gridcell /\d+,\d+\.\d+/

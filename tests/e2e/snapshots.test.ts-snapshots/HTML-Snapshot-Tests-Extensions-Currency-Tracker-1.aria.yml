@@ -5,7 +5,7 @@
     - strong: ›Currency Tracker
   - combobox "Time"
   - combobox "Account"
-  - combobox "Filter by tag, payee, ..."
+  - combobox "Filter by tag, payee, …"
   - text: 🕒
   - link "month":
     - /url: "#time"

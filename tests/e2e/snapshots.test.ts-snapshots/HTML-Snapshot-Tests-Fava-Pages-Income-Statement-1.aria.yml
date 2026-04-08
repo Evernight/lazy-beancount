@@ -5,7 +5,7 @@
     - strong: ›Income Statement
   - combobox "Time"
   - combobox "Account"
-  - combobox "Filter by tag, payee, ..."
+  - combobox "Filter by tag, payee, …"
   - text: 🕒
   - link "month":
     - /url: "#time"
@@ -202,6 +202,8 @@
       - /url: http://127.0.0.1:5000/beancount/income_statement/?time=2026-02
     - link /\d+-\d+/:
       - /url: http://127.0.0.1:5000/beancount/income_statement/?time=2026-03
+    - link /\d+-\d+/:
+      - /url: http://127.0.0.1:5000/beancount/income_statement/?time=2026-04
     - link:
       - /url: /beancount/account/Expenses:Accommodation/
       - img

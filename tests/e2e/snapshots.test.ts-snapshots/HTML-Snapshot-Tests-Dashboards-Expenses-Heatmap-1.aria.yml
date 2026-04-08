@@ -5,7 +5,7 @@
     - strong: ›Dashboards
   - combobox "Time"
   - combobox "Account"
-  - combobox "Filter by tag, payee, ..."
+  - combobox "Filter by tag, payee, …"
   - text: 🕒
   - link "month":
     - /url: "#time"
@@ -279,11 +279,11 @@
         - gridcell /\(Padding inserted for Balance of \d+\.\d+ GBP for difference -\d+\.\d+ GBP\)/
         - gridcell
         - gridcell /€\d+/
-      - row /\d+-\d+-\d+ Expenses:Travel:Flights Some transaction for Expenses:Travel:Flights travel,trip-island-vacation €\d+/:
+      - row /\d+-\d+-\d+ Expenses:Travel:Flights Some transaction for Expenses:Travel:Flights trip-island-vacation,travel €\d+/:
         - gridcell /\d+-\d+-\d+/
         - gridcell "Expenses:Travel:Flights"
         - gridcell "Some transaction for Expenses:Travel:Flights"
-        - gridcell "travel,trip-island-vacation"
+        - gridcell "trip-island-vacation,travel"
         - gridcell /€\d+/
       - row /\d+-\d+-\d+ Expenses:Travel:Flights Some transaction for Expenses:Travel:Flights €\d+/:
         - gridcell /\d+-\d+-\d+/
@@ -291,16 +291,16 @@
         - gridcell "Some transaction for Expenses:Travel:Flights"
         - gridcell
         - gridcell /€\d+/
-      - row /\d+-\d+-\d+ Expenses:Unattributed:Physical:Cash Padding \(group of 2\) €\d+/:
-        - gridcell /\d+-\d+-\d+/
-        - gridcell "Expenses:Unattributed:Physical:Cash"
-        - gridcell "Padding (group of 2)"
-        - gridcell
-        - gridcell /€\d+/
       - row /\d+-\d+-\d+ Expenses:Travel Some transaction for Expenses:Travel €\d+/:
         - gridcell /\d+-\d+-\d+/
         - gridcell "Expenses:Travel"
         - gridcell "Some transaction for Expenses:Travel"
+        - gridcell
+        - gridcell /€\d+/
+      - row /\d+-\d+-\d+ Expenses:Unattributed:Physical:Cash Padding \(group of 2\) €\d+/:
+        - gridcell /\d+-\d+-\d+/
+        - gridcell "Expenses:Unattributed:Physical:Cash"
+        - gridcell "Padding (group of 2)"
         - gridcell
         - gridcell /€\d+/
       - row /\d+-\d+-\d+ Expenses:Travel:Flights Some transaction for Expenses:Travel:Flights €\d+/:
@@ -413,66 +413,66 @@
         - gridcell "Padding (group of 2)"
         - gridcell
         - gridcell /-€\d+/
-      - row /\d+-\d+-\d+ Expenses:Services Subscription for SomeService paid in a year-instalment \(split 2\/\d+\) splitted,recurring,subscription-year -€5/:
+      - row /\d+-\d+-\d+ Expenses:Services Subscription for SomeService paid in a year-instalment \(split 2\/\d+\) recurring,splitted,subscription-year -€6/:
         - gridcell /\d+-\d+-\d+/
         - gridcell "Expenses:Services"
         - gridcell /Subscription for SomeService paid in a year-instalment \(split 2\/\d+\)/
-        - gridcell "splitted,recurring,subscription-year"
-        - gridcell "-€5"
-      - row /\d+-\d+-\d+ Expenses:Services Subscription for SomeService paid in a year-instalment \(split 5\/\d+\) splitted,recurring,subscription-year -€5/:
+        - gridcell "recurring,splitted,subscription-year"
+        - gridcell "-€6"
+      - row /\d+-\d+-\d+ Expenses:Services Subscription for SomeService paid in a year-instalment \(split 5\/\d+\) recurring,splitted,subscription-year -€6/:
         - gridcell /\d+-\d+-\d+/
         - gridcell "Expenses:Services"
         - gridcell /Subscription for SomeService paid in a year-instalment \(split 5\/\d+\)/
-        - gridcell "splitted,recurring,subscription-year"
-        - gridcell "-€5"
-      - row /\d+-\d+-\d+ Expenses:Services Subscription for SomeService paid in a year-instalment \(split 8\/\d+\) splitted,recurring,subscription-year -€5/:
+        - gridcell "recurring,splitted,subscription-year"
+        - gridcell "-€6"
+      - row /\d+-\d+-\d+ Expenses:Services Subscription for SomeService paid in a year-instalment \(split 8\/\d+\) recurring,splitted,subscription-year -€6/:
         - gridcell /\d+-\d+-\d+/
         - gridcell "Expenses:Services"
         - gridcell /Subscription for SomeService paid in a year-instalment \(split 8\/\d+\)/
-        - gridcell "splitted,recurring,subscription-year"
-        - gridcell "-€5"
-      - row /\d+-\d+-\d+ Expenses:Services Subscription for SomeService paid in a year-instalment \(split \d+\/\d+\) splitted,recurring,subscription-year -€5/:
+        - gridcell "recurring,splitted,subscription-year"
+        - gridcell "-€6"
+      - row /\d+-\d+-\d+ Expenses:Services Subscription for SomeService paid in a year-instalment \(split \d+\/\d+\) recurring,splitted,subscription-year -€6/:
         - gridcell /\d+-\d+-\d+/
         - gridcell "Expenses:Services"
         - gridcell /Subscription for SomeService paid in a year-instalment \(split \d+\/\d+\)/
-        - gridcell "splitted,recurring,subscription-year"
-        - gridcell "-€5"
-      - row /\d+-\d+-\d+ Expenses:Services Subscription for SomeService paid in a year-instalment \(split 1\/\d+\) splitted,recurring,subscription-year -€5/:
+        - gridcell "recurring,splitted,subscription-year"
+        - gridcell "-€6"
+      - row /\d+-\d+-\d+ Expenses:Services Subscription for SomeService paid in a year-instalment \(split 1\/\d+\) recurring,splitted,subscription-year -€6/:
         - gridcell /\d+-\d+-\d+/
         - gridcell "Expenses:Services"
         - gridcell /Subscription for SomeService paid in a year-instalment \(split 1\/\d+\)/
-        - gridcell "splitted,recurring,subscription-year"
-        - gridcell "-€5"
-      - row /\d+-\d+-\d+ Expenses:Services Subscription for SomeService paid in a year-instalment \(split 3\/\d+\) splitted,recurring,subscription-year -€5/:
+        - gridcell "recurring,splitted,subscription-year"
+        - gridcell "-€6"
+      - row /\d+-\d+-\d+ Expenses:Services Subscription for SomeService paid in a year-instalment \(split 3\/\d+\) recurring,splitted,subscription-year -€6/:
         - gridcell /\d+-\d+-\d+/
         - gridcell "Expenses:Services"
         - gridcell /Subscription for SomeService paid in a year-instalment \(split 3\/\d+\)/
-        - gridcell "splitted,recurring,subscription-year"
-        - gridcell "-€5"
-      - row /\d+-\d+-\d+ Expenses:Services Subscription for SomeService paid in a year-instalment \(split 4\/\d+\) splitted,recurring,subscription-year -€5/:
+        - gridcell "recurring,splitted,subscription-year"
+        - gridcell "-€6"
+      - row /\d+-\d+-\d+ Expenses:Services Subscription for SomeService paid in a year-instalment \(split 4\/\d+\) recurring,splitted,subscription-year -€6/:
         - gridcell /\d+-\d+-\d+/
         - gridcell "Expenses:Services"
         - gridcell /Subscription for SomeService paid in a year-instalment \(split 4\/\d+\)/
-        - gridcell "splitted,recurring,subscription-year"
-        - gridcell "-€5"
-      - row /\d+-\d+-\d+ Expenses:Services Subscription for SomeService paid in a year-instalment \(split 6\/\d+\) splitted,recurring,subscription-year -€5/:
+        - gridcell "recurring,splitted,subscription-year"
+        - gridcell "-€6"
+      - row /\d+-\d+-\d+ Expenses:Services Subscription for SomeService paid in a year-instalment \(split 6\/\d+\) recurring,splitted,subscription-year -€6/:
         - gridcell /\d+-\d+-\d+/
         - gridcell "Expenses:Services"
         - gridcell /Subscription for SomeService paid in a year-instalment \(split 6\/\d+\)/
-        - gridcell "splitted,recurring,subscription-year"
-        - gridcell "-€5"
-      - row /\d+-\d+-\d+ Expenses:Services Subscription for SomeService paid in a year-instalment \(split 7\/\d+\) splitted,recurring,subscription-year -€5/:
+        - gridcell "recurring,splitted,subscription-year"
+        - gridcell "-€6"
+      - row /\d+-\d+-\d+ Expenses:Services Subscription for SomeService paid in a year-instalment \(split 7\/\d+\) recurring,splitted,subscription-year -€6/:
         - gridcell /\d+-\d+-\d+/
         - gridcell "Expenses:Services"
         - gridcell /Subscription for SomeService paid in a year-instalment \(split 7\/\d+\)/
-        - gridcell "splitted,recurring,subscription-year"
-        - gridcell "-€5"
-      - row /\d+-\d+-\d+ Expenses:Services Subscription for SomeService paid in a year-instalment \(split 9\/\d+\) splitted,recurring,subscription-year -€5/:
+        - gridcell "recurring,splitted,subscription-year"
+        - gridcell "-€6"
+      - row /\d+-\d+-\d+ Expenses:Services Subscription for SomeService paid in a year-instalment \(split 9\/\d+\) recurring,splitted,subscription-year -€6/:
         - gridcell /\d+-\d+-\d+/
         - gridcell "Expenses:Services"
         - gridcell /Subscription for SomeService paid in a year-instalment \(split 9\/\d+\)/
-        - gridcell "splitted,recurring,subscription-year"
-        - gridcell "-€5"
+        - gridcell "recurring,splitted,subscription-year"
+        - gridcell "-€6"
   - paragraph: "Rows per page:"
   - 'combobox /Rows per page: \d+/'
   - paragraph: /1–\d+ of \d+/

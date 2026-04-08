@@ -5,7 +5,7 @@
     - strong: ›Dashboards
   - combobox "Time"
   - combobox "Account"
-  - combobox "Filter by tag, payee, ..."
+  - combobox "Filter by tag, payee, …"
   - text: 🕒
   - link "month":
     - /url: "#time"
@@ -199,11 +199,150 @@
       - /url: http://127.0.0.1:5000/beancount/account/Expenses:EatingOut/
   - heading "Income Year-Over-Year 💰" [level=3]
   - group:
-    - button "single" [pressed]
-    - button "stacked"
+    - button "nominal" [pressed]
+    - button "inflation adjusted"
+  - strong: "Account:"
+  - link "Income":
+    - /url: "#"
   - heading "Expenses Year-Over-Year 💸" [level=3]
   - group:
-    - button "single" [pressed]
-    - button "stacked"
+    - button "nominal" [pressed]
+    - button "inflation adjusted"
+  - strong: "Account:"
+  - link "Expenses":
+    - /url: "#"
   - heading "Expenses Over Time 🌊" [level=3]
   - heading "Top biggest expenses" [level=3]
+  - grid:
+    - row "date account narration tags value":
+      - columnheader "date"
+      - columnheader "account"
+      - columnheader "narration"
+      - columnheader "tags"
+      - columnheader "value"
+    - rowgroup:
+      - row /\d+-\d+-\d+ Expenses:Unattributed:MyFavouriteBank:Cash \(Padding inserted for Balance of \d+\.\d+ GBP for difference -\d+\.\d+ GBP\) €\d+,\d+/:
+        - gridcell /\d+-\d+-\d+/
+        - gridcell "Expenses:Unattributed:MyFavouriteBank:Cash"
+        - gridcell /\(Padding inserted for Balance of \d+\.\d+ GBP for difference -\d+\.\d+ GBP\)/
+        - gridcell
+        - gridcell /€\d+,\d+/
+      - row /\d+-\d+-\d+ Expenses:Unattributed:MyFavouriteBank:Cash \(Padding inserted for Balance of \d+\.\d+ GBP for difference -\d+\.\d+ GBP\) €\d+,\d+/:
+        - gridcell /\d+-\d+-\d+/
+        - gridcell "Expenses:Unattributed:MyFavouriteBank:Cash"
+        - gridcell /\(Padding inserted for Balance of \d+\.\d+ GBP for difference -\d+\.\d+ GBP\)/
+        - gridcell
+        - gridcell /€\d+,\d+/
+      - row /\d+-\d+-\d+ Expenses:Unattributed:MyFavouriteBank:Cash \(Padding inserted for Balance of \d+\.\d+ GBP for difference -\d+\.\d+ GBP\) €\d+,\d+/:
+        - gridcell /\d+-\d+-\d+/
+        - gridcell "Expenses:Unattributed:MyFavouriteBank:Cash"
+        - gridcell /\(Padding inserted for Balance of \d+\.\d+ GBP for difference -\d+\.\d+ GBP\)/
+        - gridcell
+        - gridcell /€\d+,\d+/
+      - row /\d+-\d+-\d+ Expenses:Accommodation Monthly rent recurring €\d+/:
+        - gridcell /\d+-\d+-\d+/
+        - gridcell "Expenses:Accommodation"
+        - gridcell "Monthly rent"
+        - gridcell "recurring"
+        - gridcell /€\d+/
+      - row /\d+-\d+-\d+ Expenses:Accommodation Monthly rent recurring €\d+/:
+        - gridcell /\d+-\d+-\d+/
+        - gridcell "Expenses:Accommodation"
+        - gridcell "Monthly rent"
+        - gridcell "recurring"
+        - gridcell /€\d+/
+      - row /\d+-\d+-\d+ Expenses:Accommodation Monthly rent recurring €\d+/:
+        - gridcell /\d+-\d+-\d+/
+        - gridcell "Expenses:Accommodation"
+        - gridcell "Monthly rent"
+        - gridcell "recurring"
+        - gridcell /€\d+/
+      - row /\d+-\d+-\d+ Expenses:Accommodation Monthly rent recurring €\d+/:
+        - gridcell /\d+-\d+-\d+/
+        - gridcell "Expenses:Accommodation"
+        - gridcell "Monthly rent"
+        - gridcell "recurring"
+        - gridcell /€\d+/
+      - row /\d+-\d+-\d+ Expenses:Accommodation Monthly rent recurring €\d+/:
+        - gridcell /\d+-\d+-\d+/
+        - gridcell "Expenses:Accommodation"
+        - gridcell "Monthly rent"
+        - gridcell "recurring"
+        - gridcell /€\d+/
+      - row /\d+-\d+-\d+ Expenses:Accommodation Monthly rent recurring €\d+/:
+        - gridcell /\d+-\d+-\d+/
+        - gridcell "Expenses:Accommodation"
+        - gridcell "Monthly rent"
+        - gridcell "recurring"
+        - gridcell /€\d+/
+      - row /\d+-\d+-\d+ Expenses:Unattributed:MyFavouriteBank:Cash \(Padding inserted for Balance of \d+\.\d+ GBP for difference -\d+\.\d+ GBP\) €\d+/:
+        - gridcell /\d+-\d+-\d+/
+        - gridcell "Expenses:Unattributed:MyFavouriteBank:Cash"
+        - gridcell /\(Padding inserted for Balance of \d+\.\d+ GBP for difference -\d+\.\d+ GBP\)/
+        - gridcell
+        - gridcell /€\d+/
+      - row /\d+-\d+-\d+ Expenses:Travel:Flights Some transaction for Expenses:Travel:Flights trip-island-vacation,travel €\d+/:
+        - gridcell /\d+-\d+-\d+/
+        - gridcell "Expenses:Travel:Flights"
+        - gridcell "Some transaction for Expenses:Travel:Flights"
+        - gridcell "trip-island-vacation,travel"
+        - gridcell /€\d+/
+      - row /\d+-\d+-\d+ Expenses:Travel:Flights Some transaction for Expenses:Travel:Flights €\d+/:
+        - gridcell /\d+-\d+-\d+/
+        - gridcell "Expenses:Travel:Flights"
+        - gridcell "Some transaction for Expenses:Travel:Flights"
+        - gridcell
+        - gridcell /€\d+/
+      - row /\d+-\d+-\d+ Expenses:Travel Some transaction for Expenses:Travel €\d+/:
+        - gridcell /\d+-\d+-\d+/
+        - gridcell "Expenses:Travel"
+        - gridcell "Some transaction for Expenses:Travel"
+        - gridcell
+        - gridcell /€\d+/
+      - row /\d+-\d+-\d+ Expenses:Unattributed:Physical:Cash Padding \(group of 2\) €\d+/:
+        - gridcell /\d+-\d+-\d+/
+        - gridcell "Expenses:Unattributed:Physical:Cash"
+        - gridcell "Padding (group of 2)"
+        - gridcell
+        - gridcell /€\d+/
+      - row /\d+-\d+-\d+ Expenses:Travel:Flights Some transaction for Expenses:Travel:Flights €\d+/:
+        - gridcell /\d+-\d+-\d+/
+        - gridcell "Expenses:Travel:Flights"
+        - gridcell "Some transaction for Expenses:Travel:Flights"
+        - gridcell
+        - gridcell /€\d+/
+      - row /\d+-\d+-\d+ Expenses:Travel Some transaction for Expenses:Travel €\d+/:
+        - gridcell /\d+-\d+-\d+/
+        - gridcell "Expenses:Travel"
+        - gridcell "Some transaction for Expenses:Travel"
+        - gridcell
+        - gridcell /€\d+/
+      - row /\d+-\d+-\d+ Expenses:Donations Some transaction for Expenses:Donations €\d+/:
+        - gridcell /\d+-\d+-\d+/
+        - gridcell "Expenses:Donations"
+        - gridcell "Some transaction for Expenses:Donations"
+        - gridcell
+        - gridcell /€\d+/
+      - row /\d+-\d+-\d+ Expenses:Donations Some transaction for Expenses:Donations €\d+/:
+        - gridcell /\d+-\d+-\d+/
+        - gridcell "Expenses:Donations"
+        - gridcell "Some transaction for Expenses:Donations"
+        - gridcell
+        - gridcell /€\d+/
+      - row /\d+-\d+-\d+ Expenses:Shopping Some transaction for Expenses:Shopping irregular €\d+/:
+        - gridcell /\d+-\d+-\d+/
+        - gridcell "Expenses:Shopping"
+        - gridcell "Some transaction for Expenses:Shopping"
+        - gridcell "irregular"
+        - gridcell /€\d+/
+      - row /\d+-\d+-\d+ Expenses:Unattributed:MyLessFavouriteBank:Cash \(Padding inserted for Balance of \d+\.\d+ GBP for difference -\d+\.\d+ GBP\) €\d+/:
+        - gridcell /\d+-\d+-\d+/
+        - gridcell "Expenses:Unattributed:MyLessFavouriteBank:Cash"
+        - gridcell /\(Padding inserted for Balance of \d+\.\d+ GBP for difference -\d+\.\d+ GBP\)/
+        - gridcell
+        - gridcell /€\d+/
+  - paragraph: "Rows per page:"
+  - 'combobox /Rows per page: \d+/'
+  - paragraph: /1–\d+ of \d+/
+  - button "Go to previous page" [disabled]
+  - button "Go to next page"

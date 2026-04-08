@@ -64,10 +64,11 @@ const dashboardPages: DashboardPageSpec[] = [
   {
     name: "Expenses Heatmap",
     url: `${DASHBOARDS_URL}?dashboard=expenses-detailed`,
-    locator: (page) =>
-      page
+    setup: async (page) => {
+      await page
         .getByRole("heading", { name: "Expenses Calendar Heatmap" })
-        .locator("../..")  // h3 -> Stack -> Card
+        .scrollIntoViewIfNeeded();
+    },
   },
   { 
     name: "Locations", url: `${DASHBOARDS_URL}?dashboard=travelling`,
