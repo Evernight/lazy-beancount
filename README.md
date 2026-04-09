@@ -10,8 +10,9 @@
   </p>
 </div>
 
-Lazy Beancount is [Beancount](https://github.com/beancount/beancount) accounting system packaged in Docker with batteries included:
+![lazy-beancount](images/demo_dashboard_0_3_5.png)
 
+Lazy Beancount is [Beancount](https://github.com/beancount/beancount) accounting system packaged in Docker with batteries included:
 - [Fava](https://github.com/beancount/fava) with [fava-dashboards](https://github.com/andreasgerstmayr/fava-dashboards)
   - and [filter presets](https://github.com/beancount/fava/pull/1994) feature
 - [Beancount-import](https://github.com/jbms/beancount-import) for automatic transaction categorisation and review UI:
@@ -37,13 +38,11 @@ Lazy Beancount is [Beancount](https://github.com/beancount/beancount) accounting
 
 with the goal to enable **gradual** and **incremental** migration of personal finances into Beancount.
 
-![lazy-beancount](images/demo_dashboard_0_3_5.png)
-
 Full guide is located at https://lazy-beancount.xyz/. The approach follows these principles:
 - Some of the values should be tracked precisely (e.g. net worth)
 - Other things are an approximation (e.g. in expenses breakdown, unclassified or some misclassified entires are allowed – but discoverable)
 - Data entry should be automated or easy
-- But it should be possible to track things to any level of precision if you choose to
+- It should be possible to track things to any level of precision that you choose
 
 # Screenshots
 <div align="center">
