@@ -1,5 +1,7 @@
 import { defineConfig, devices } from "@playwright/test";
 
+export const VIEWPORT_WIDTH = 1440;
+
 export default defineConfig({
   testDir: "./e2e",
   fullyParallel: true,
@@ -14,7 +16,7 @@ export default defineConfig({
       name: "chromium",
       use: {
         ...devices["Desktop Chrome"],
-        viewport: { width: 1366, height: 800 },
+        viewport: { width: VIEWPORT_WIDTH, height: 900 },
       },
     },
   ],

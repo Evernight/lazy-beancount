@@ -1,13 +1,12 @@
 import { expect, Locator, Page, test } from "@playwright/test";
 
+import { VIEWPORT_WIDTH } from "../playwright.config";
+
 // Playwright test runner provides `process.env`, but this folder doesn't have Node typings.
 declare const process: any;
 
 const BASE_URL = "http://127.0.0.1:5000";
 const FAVA_URL = `${BASE_URL}/beancount`;
-
-/** Keep in sync with `tests/playwright.config.ts` viewport width */
-const VIEWPORT_WIDTH = 1366;
 
 // Fava native pages
 const favaPages = [
@@ -107,6 +106,7 @@ const extensionPages: ExtensionPageSpec[] = [
   },
   { name: "Fava Git", url: `${FAVA_URL}/extension/FavaGit/` },
   { name: "Beantab", url: `${FAVA_URL}/extension/BeanTab/?accountFilter=%5B%22Assets%3A.*%22%5D&groupByAccount=false&hideAccountsWithNoEntries=true` },
+  { name: "Beantab with deltas", url: `${FAVA_URL}/extension/BeanTab/?accountFilter=%5B%22Assets%3A.*%22%5D&groupByAccount=false&hideAccountsWithNoEntries=true&showDeltas=true` },
 ];
 
 async function expectScreenshot(

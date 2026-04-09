@@ -186,70 +186,139 @@
         - button "Assets:Physical:Cash"
       - gridcell "~"
       - gridcell "$ USD"
+    - columnheader /\d+-\d+-\d+ ↔ \d+-\d+-\d+/:
+      - link /\d+-\d+-\d+ ↔ \d+-\d+-\d+/:
+        - /url: http://127.0.0.1:5000/beancount/extension/FavaDashboards/?dashboard=expenses-detailed&time=2024-04-04+to+2024-05-03
     - columnheader /\d+-\d+-\d+/
+    - columnheader /\d+-\d+-\d+ ↔ \d+-\d+-\d+/:
+      - link /\d+-\d+-\d+ ↔ \d+-\d+-\d+/:
+        - /url: http://127.0.0.1:5000/beancount/extension/FavaDashboards/?dashboard=expenses-detailed&time=2024-05-04+to+2026-04-09
     - columnheader /\d+-\d+-\d+/
+    - columnheader /\d+-\d+-\d+ ↔ \d+-\d+-\d+/:
+      - link /\d+-\d+-\d+ ↔ \d+-\d+-\d+/:
+        - /url: http://127.0.0.1:5000/beancount/extension/FavaDashboards/?dashboard=expenses-detailed&time=2026-04-10+to+2026-04-10
     - columnheader /\d+-\d+-\d+/
-    - columnheader /\d+-\d+-\d+/
-    - columnheader /\d+-\d+-\d+/
-    - columnheader /\d+-\d+-\d+/
-    - columnheader /\d+-\d+-\d+/
-    - row /\d+,\d+\.\d+ ! \d+,\d+\.\d+ ! \d+,\d+\.\d+ ! \d+,\d+\.\d+ ! \d+,\d+\.\d+ \d+,\d+\.\d+ \d+,\d+\.\d+/:
-      - gridcell /\d+,\d+\.\d+ !/
-      - gridcell /\d+,\d+\.\d+ !/
-      - gridcell /\d+,\d+\.\d+ !/
-      - gridcell /\d+,\d+\.\d+ !/
+    - row /4 \d+,\d+\.\d+ 3 \d+,\d+\.\d+ \d+,\d+\.\d+/:
+      - gridcell "4":
+        - group:
+          - button /-\d+/
+        - button
+        - text: ""
+        - group:
+          - button
+          - button /\d+/
+          - button /\d+/
       - gridcell /\d+,\d+\.\d+/
+      - gridcell "3":
+        - group:
+          - button /-\d+/
+          - button /-\d+/
+        - button
+        - text: ""
+        - group:
+          - button /\d+/
+          - button /\d+/
       - gridcell /\d+,\d+\.\d+/
+      - gridcell
       - gridcell /\d+,\d+\.\d+/
-    - row /\d+\.\d+ ! \d+\.\d+ ! \d+\.\d+ ! \d+\.\d+ ! \d+\.\d+ \d+\.\d+ \d+\.\d+/:
-      - gridcell /\d+\.\d+ !/
-      - gridcell /\d+\.\d+ !/
-      - gridcell /\d+\.\d+ !/
-      - gridcell /\d+\.\d+ !/
+    - row /1 \d+\.\d+ \d+\.\d+ \d+\.\d+/:
+      - gridcell "1":
+        - button
+        - text: ""
+        - group:
+          - button /\d+/
       - gridcell /\d+\.\d+/
+      - gridcell
       - gridcell /\d+\.\d+/
+      - gridcell
       - gridcell /\d+\.\d+/
-    - row /\d+,\d+\.\d+ ! \d+,\d+\.\d+ ! \d+,\d+\.\d+ ! \d+,\d+\.\d+ ! \d+,\d+\.\d+ \d+,\d+\.\d+ \d+,\d+\.\d+/:
-      - gridcell /\d+,\d+\.\d+ !/
-      - gridcell /\d+,\d+\.\d+ !/
-      - gridcell /\d+,\d+\.\d+ !/
-      - gridcell /\d+,\d+\.\d+ !/
+    - row /2 \d+,\d+\.\d+ 1 \d+,\d+\.\d+ \d+,\d+\.\d+/:
+      - gridcell "2":
+        - group:
+          - button /-\d+/
+        - button
+        - text: ""
+        - group:
+          - button /\d+/
+          - button
       - gridcell /\d+,\d+\.\d+/
+      - gridcell "1":
+        - group:
+          - button /-\d+/
+          - button
+        - button
+        - text: ""
+        - group:
+          - button "3"
       - gridcell /\d+,\d+\.\d+/
+      - gridcell
       - gridcell /\d+,\d+\.\d+/
-    - row /\d+\.\d+ \d+\.\d+ \d+\.\d+ \d+\.\d+ \d+\.\d+ \(\d+\.\d+\) \(\d+\.\d+\)/:
+    - row /3 \d+\.\d+ 8 \(\d+\.\d+\) \(\d+\.\d+\)/:
+      - gridcell "3":
+        - group:
+          - button /-\d+/
+        - button
+        - text: ""
+        - group:
+          - button /\d+/
       - gridcell /\d+\.\d+/
-      - gridcell /\d+\.\d+/
-      - gridcell /\d+\.\d+/
-      - gridcell /\d+\.\d+/
-      - gridcell /\d+\.\d+/
+      - gridcell "8":
+        - button
+        - text: ""
+        - group:
+          - button /\d+/
       - gridcell /\(\d+\.\d+\)/
+      - gridcell
       - gridcell /\(\d+\.\d+\)/
-    - row /\d+\.\d+ \d+\.\d+ \d+\.\d+ \d+\.\d+ \d+\.\d+ \d+\.\d+ \d+\.\d+/:
+    - row /2 \d+\.\d+ \d+\.\d+ \d+\.\d+/:
+      - gridcell "2":
+        - group:
+          - button /-\d+/
+        - button
+        - text: ""
+        - group:
+          - button /\d+/
       - gridcell /\d+\.\d+/
+      - gridcell
       - gridcell /\d+\.\d+/
+      - gridcell
       - gridcell /\d+\.\d+/
-      - gridcell /\d+\.\d+/
-      - gridcell /\d+\.\d+/
-      - gridcell /\d+\.\d+/
-      - gridcell /\d+\.\d+/
-    - row /\d+,\d+\.\d+ \d+,\d+\.\d+ \d+,\d+\.\d+ \d+,\d+\.\d+ \d+,\d+\.\d+ · ·/:
+    - row /\d+,\d+\.\d+ · ·/:
+      - gridcell
       - gridcell /\d+,\d+\.\d+/
-      - gridcell /\d+,\d+\.\d+/
-      - gridcell /\d+,\d+\.\d+/
-      - gridcell /\d+,\d+\.\d+/
-      - gridcell /\d+,\d+\.\d+/
+      - gridcell
       - gridcell "·"
+      - gridcell
       - gridcell "·"
-    - row /\d+\.\d+ ! \d+\.\d+ ! \d+\.\d+ ! \d+\.\d+ ! \d+\.\d+ \d+\.\d+ \d+\.\d+/:
-      - gridcell /\d+\.\d+ !/
-      - gridcell /\d+\.\d+ !/
-      - gridcell /\d+\.\d+ !/
-      - gridcell /\d+\.\d+ !/
+    - row /3 \d+\.\d+ 1 \d+\.\d+ \d+\.\d+/:
+      - gridcell "3":
+        - group:
+          - button /-\d+/
+        - button
+        - text: ""
+        - group:
+          - button /\d+/
       - gridcell /\d+\.\d+/
+      - gridcell "1":
+        - button
+        - text: ""
+        - group:
+          - button /\d+/
       - gridcell /\d+\.\d+/
+      - gridcell
       - gridcell /\d+\.\d+/
-  - button "Show deltas"
+  - button "Hide deltas"
+  - group:
+    - button "Assets (Transfers In)"
+    - button "Liabilities (Transfers In)"
+    - button "Expenses (Negative)"
+    - button "Income": Income -
+    - button "Padding (Negative)"
+    - button "Assets (Transfers Out)"
+    - button "Liabilities (Transfers Out)"
+    - button "Expenses"
+    - button "Income (Positive)"
+    - button "Padding (Positive)"
   - text: 4 accounts hidden
   - button "Revert" [disabled]
   - text: "0"
