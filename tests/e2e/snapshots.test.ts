@@ -33,6 +33,7 @@ const dashboardPages: DashboardPageSpec[] = [
   {
     name: "Overview",
     url: `${DASHBOARDS_URL}`,
+    clip: { x: 0, y: 0, width: VIEWPORT_WIDTH, height: 1024 },
     setup: async (page) => {
       await page.getByPlaceholder("Time").fill("2024-01 to 2024-06");
       await page.getByPlaceholder("Time").press("Enter");
@@ -96,6 +97,7 @@ const extensionPages: ExtensionPageSpec[] = [
   {
     name: "Currency Tracker",
     url: `${FAVA_URL}/extension/FavaCurrencyTracker/`,
+    clip: { x: 0, y: 0, width: VIEWPORT_WIDTH, height: 1024 },
     setup: async (page) => {
       await page.getByRole("combobox", { name: "Currency" }).pressSequentially("USD");
       await page.getByRole("option", { name: "USD", exact: true }).click();
