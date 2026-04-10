@@ -8,6 +8,7 @@ services:
       - "5003:5000"
       - "8101:8101"
       - "8777:8501"
+      - "8310:8310"
     volumes:
       - .:/workspace
     environment:
@@ -15,4 +16,5 @@ services:
       - BEANCOUNT_IMPORT_PORT=8101
       - LAZY_BEANCOUNT_HOST=localhost
       - LAZY_BEANCOUNT_PORT=8777
+      - BEANHUB_FORMS_PORT=8310
       - MPLCONFIGDIR=/tmp/matplotlib-temp
