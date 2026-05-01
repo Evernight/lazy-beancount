@@ -6,6 +6,7 @@
 ; This is required for the beancount_interpolate and beancount_share plugins
 ; to work together with pad directives
 option "plugin_processing_mode" "raw"
+option "booking_method" "FIFO"
 
 * Operating currencies
 ** All and default definitions
@@ -90,6 +91,9 @@ plugin "beancount.ops.documents"
 
 ; Git operations for Beancount files
 2010-01-01 custom "fava-extension" "fava_git"
+
+; Lazy Beancount plugin manager and account visibility
+2010-01-01 custom "fava-extension" "fava_lazy_beancount"
 
 * Includes
 ; Lazy Beancount: accounts generated from accounts_config.yml
