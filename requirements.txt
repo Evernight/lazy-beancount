@@ -1,4 +1,4 @@
-beancount==3.2.0
+beancount==3.2.2
 
 # custom fava wheel prebuilt, changes from upstream fava:
 # * includes filter presets feature: https://github.com/beancount/fava/pull/1994
@@ -21,18 +21,19 @@ setuptools<81
 setuptools_scm>=5.0.2
 
 # streamlit/frontend
-streamlit==1.52.2
+streamlit==1.57.0
 streamlit_option_menu==0.3.13
 streamlit_ace==0.1.1
 streamlit-echarts==0.4.0
 
 # Fava extensions
 fava-investor==1.0.1
-fava-dashboards @ git+https://github.com/andreasgerstmayr/fava-dashboards.git@dc34c3f91f57bc373e3add76f32067a24990da44
+fava-dashboards @ git+https://github.com/andreasgerstmayr/fava-dashboards.git@269e69d60e98214d181c2d3744c745128082ea31
 fava-portfolio-returns @ git+https://github.com/andreasgerstmayr/fava-portfolio-returns.git@a655bf9c50d83173559065a84ee3f6d020ef633e
 fava-currency-tracker @ git+https://github.com/Evernight/fava-currency-tracker.git@1f33d85ae654bfd6f6b57f2b272c09d9e295fbdf
 fava-git @ git+https://github.com/Evernight/fava-git.git@18a9b6e64b636bfa8673eee808892da01adf661b
 beantab @ git+https://github.com/Evernight/beantab.git@873af4f678c87e3f33553bfedf06b0ef1d1d0ec5
+fava-lazy-beancount @ git+https://github.com/Evernight/fava-lazy-beancount.git@c1bdeacba5aa8aa578e38260764649a94fadbae5
 
 # Beancount plugins
 beancount_share @ git+https://github.com/Akuukis/beancount_share.git@4101c45e16948c0683520cebcf88afe4862224c4
