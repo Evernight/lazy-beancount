@@ -10,7 +10,6 @@ from datetime import datetime, timedelta
 from decimal import Decimal
 
 import streamlit as st
-import streamlit.components.v1 as components
 import yaml
 from beancount import loader
 from beancount_importers import beancount_import_run
@@ -67,7 +66,7 @@ def trigger_fava_reload():
 
 
 def fava_page():
-    components.iframe(f"http://{hostname}:{fava_port}", height=640)
+    st.iframe(f"http://{hostname}:{fava_port}", height=640)
     st.page_link(
         f"http://{hostname}:{fava_port}",
         label="open in new tab",
@@ -422,7 +421,7 @@ def import_page():
         orientation="horizontal",
     )
     if selected_import_page == "Review data":
-        components.iframe(f"http://{hostname}:{beancount_import_port}", height=540)
+        st.iframe(f"http://{hostname}:{beancount_import_port}", height=540)
         st.page_link(
             f"http://{hostname}:{beancount_import_port}",
             label="open in new tab",
