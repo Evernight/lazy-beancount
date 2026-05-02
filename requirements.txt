@@ -1,4 +1,4 @@
-beancount==3.2.2
+beancount==3.2.0
 
 # custom fava wheel prebuilt, changes from upstream fava:
 # * includes filter presets feature: https://github.com/beancount/fava/pull/1994
@@ -42,5 +42,5 @@ beancount-reds-plugins @ git+https://github.com/redstreet/beancount_reds_plugins
 autobean @ git+https://github.com/SEIAROTg/autobean@b14d040eaa75a55731ef650e76425d7d356ec2b9
 
 # Plugins without PyPI releases
-beancount-lazy-plugins @ git+https://github.com/Evernight/beancount-lazy-plugins@1a685eddbd5e15e420fdf93604506eed6ca94c45
+beancount-lazy-plugins @ git+https://github.com/Evernight/beancount-lazy-plugins@28e1dd1eb54038eb9e610036cc96a510f81bbde1
 beancount-importers @ git+https://github.com/Evernight/beancount-importers@06fcd1200d3825eb7a0669f35bd313b2efcaf8cd
