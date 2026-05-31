@@ -33,7 +33,7 @@ fava-portfolio-returns @ git+https://github.com/andreasgerstmayr/fava-portfolio-
 fava-currency-tracker @ git+https://github.com/Evernight/fava-currency-tracker.git@1f33d85ae654bfd6f6b57f2b272c09d9e295fbdf
 fava-git @ git+https://github.com/Evernight/fava-git.git@18a9b6e64b636bfa8673eee808892da01adf661b
 beantab @ git+https://github.com/Evernight/beantab.git@2dd12b16aa672959c53a639a91f7497548e8d1b4
-fava-lazy-beancount @ git+https://github.com/Evernight/fava-lazy-beancount.git@c1bdeacba5aa8aa578e38260764649a94fadbae5
+fava-lazy-beancount @ git+https://github.com/Evernight/fava-lazy-beancount.git@ee51fb066b06a612c3226d4a35b142e3981c15af
 
 # Beancount plugins
 beancount_share @ git+https://github.com/Akuukis/beancount_share.git@4101c45e16948c0683520cebcf88afe4862224c4
