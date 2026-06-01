@@ -98,7 +98,7 @@ To start, run:
 
     ./lazy_beancount.sh example_data
 
-Use ```./lazy_beancount.sh data``` when you want to start adding your own data under the ```data``` directory.
+Use ```./lazy_beancount.sh data_beantab``` when you want to start adding your own data under the ```data_beantab``` directory (```data``` will be deprecated/replaced in the future).
 
 Commands are available in the container as: 
 

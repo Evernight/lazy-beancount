@@ -1,0 +1,5 @@
+; Location events for expense timeline charts.
+; Enable "Location areas" in the Account Expenses Timeline panel (Expenses Detailed dashboard)
+; to see colored background regions between location changes.
+;
+; Add events: YYYY-MM-DD event "location" "place name"

@@ -1,0 +1,2 @@
+; Placeholder so `include "balances/*.bean"` in main.bean loads before BeanTab writes
+; balance assertion files (balances-YYYY-MM-DD.bean). Safe to delete once those exist.

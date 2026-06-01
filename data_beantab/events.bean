@@ -1,0 +1,5 @@
+; Chart note events for balance charts.
+; Enable "Events" in the Accounts dashboard to see vertical marker lines
+; on Net Worth and Cash charts.
+;
+; Add events: YYYY-MM-DD event "chart_note" "description"

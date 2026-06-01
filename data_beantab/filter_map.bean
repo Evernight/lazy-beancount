@@ -1,0 +1,19 @@
+; Regular, irregular, etc
+2021-01-01 custom "filter-map" "apply"
+    account: "Expenses:Shopping"
+    addTags: "irregular"
+
+2021-01-01 custom "filter-map" "apply"
+    account: "Expenses:Bills"
+    addTags: "recurring"
+
+; subscription-year
+2021-01-01 custom "filter-map" "apply"
+    filter: "#subscription-year"
+    addTags: "recurring"
+    addMeta: "{'split': '12 months / month'}"
+    
+; mark specific recurring transactions
+2021-01-01 custom "filter-map" "apply"
+    filter: "narration:'Monthly rent'"
+    addTags: "recurring"

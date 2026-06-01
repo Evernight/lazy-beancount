@@ -13,6 +13,7 @@ if [ "$RUNTIME" != "docker" ] && [ "$RUNTIME" != "podman" ]; then
     echo "Examples:"
     echo "  $0                    # Use data directory with docker"
     echo "  $0 example_data       # Use example_data directory with docker"
+    echo "  $0 data_beantab       # Use data_beantab directory (BeanTab template) with docker"
     echo "  $0 data podman        # Use data directory with podman"
     echo "  $0 example_data podman # Use example_data directory with podman"
     exit 1

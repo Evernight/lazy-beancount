@@ -1,0 +1,3 @@
+; Placeholder so `include "totals/*.bean"` in main.bean loads before Lazy Beancount
+; generates real files here (initial.gen.bean, update-*.gen.bean). Safe to delete once
+; those exist.
