@@ -1,6 +1,6 @@
 FROM python:3.12-slim AS base
 
-COPY --from=ghcr.io/astral-sh/uv:0.11.17 /uv /uvx /bin/
+COPY --from=docker.io/astral/uv:0.11.17-python3.12-trixie /uv /uvx /bin/
 
 ENV PATH="/opt/venv/bin:$PATH"
 ENV PYTHONUNBUFFERED=1
