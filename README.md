@@ -15,24 +15,21 @@
 Lazy Beancount is [Beancount](https://github.com/beancount/beancount) accounting system packaged in Docker with batteries included:
 - [Fava](https://github.com/beancount/fava) with [fava-dashboards](https://github.com/andreasgerstmayr/fava-dashboards)
   - and [filter presets](https://github.com/beancount/fava/pull/1994) feature
+- Multiple [currencies](https://lazy-beancount.xyz/docs/stage1_totals/currencies/) and auto-conversions between them. Currency rates and commodity prices fetching via [fava-currency-tracker](https://github.com/Evernight/fava-currency-tracker)
+- Balance management via [BeanTab](https://github.com/Evernight/beantab) spreadsheet-like interface
+- Other pre-installed plugins: 
+  - collections:
+    - [beancount-lazy-plugins](https://github.com/Evernight/beancount-lazy-plugins) ([valuation](https://github.com/Evernight/beancount-lazy-plugins?tab=readme-ov-file#valuation), [filter_map](https://github.com/Evernight/beancount-lazy-plugins?tab=readme-ov-file#filter_map), [balance_extended](https://github.com/Evernight/beancount-lazy-plugins?tab=readme-ov-file#balance_extended), [currency_convert](https://github.com/Evernight/beancount-lazy-plugins?tab=readme-ov-file#currency_convert), and more)
+    - [beancount_reds_plugins](https://github.com/redstreet/beancount_reds_plugins/tree/main/beancount_reds_plugins) ([rename_accounts](https://github.com/redstreet/beancount_reds_plugins/tree/main/beancount_reds_plugins/rename_accounts), [effective_date](https://github.com/redstreet/beancount_reds_plugins/tree/main/beancount_reds_plugins/effective_date), [zerosum](https://github.com/redstreet/beancount_reds_plugins/tree/main/beancount_reds_plugins/zerosum), and more),
+    - [autobean](https://github.com/SEIAROTg/autobean/tree/master/autobean/) ([stock_split](https://github.com/SEIAROTg/autobean/tree/master/autobean/stock_split), [share](https://github.com/SEIAROTg/autobean/tree/master/autobean/share), and more)
+  - large plugins: [fava-dashboards](https://github.com/andreasgerstmayr/fava-dashboards), [fava-portfolio-returns](https://github.com/andreasgerstmayr/fava-portfolio-returns), [fava_investor](https://github.com/redstreet/fava_investor)
+  - smaller ones: [beancount_share](https://github.com/Akuukis/beancount_share), [beancount_interpolate](https://github.com/Akuukis/beancount_interpolate), [generate_base_ccy_prices](https://github.com/tarioch/beancounttools/blob/master/src/tariochbctools/plugins/generate_base_ccy_prices.py), [fava-git](https://github.com/Evernight/fava-git), [fava-lazy-beancount](https://github.com/Evernight/fava-lazy-beancount)
 - [Beancount-import](https://github.com/jbms/beancount-import) for automatic transaction categorisation and review UI:
   - Importers set up to work out of the box:
     - Wise, Monzo, Revolut, IBKR ([Evernight/beancount-importers](https://github.com/Evernight/beancount-importers), [uabean](https://github.com/OSadovy/uabean/))
     - more importers can be integrated/enabled on request
   - configuration for multiple accounts via [YAML config file](https://lazy-beancount.xyz/docs/stage2_expenses/automated_import/#lazy-beancount-ui)
   - UI for statement file upload
-- Additional web interfaces ([Streamlit](https://github.com/streamlit/streamlit)-based) for:
-  - regularly providing [total values](https://lazy-beancount.xyz/docs/stage1_totals/motivation/) of the accounts for automatic balancing (to be replaced by [beantab](https://github.com/Evernight/beantab))
-  - [fetching](https://lazy-beancount.xyz/docs/stage1_totals/currencies/#conversion-rates) currency rates / commodity prices (to be replaced by [fava-currency-tracker](https://github.com/Evernight/fava-currency-tracker))
-- Pre-installed plugins: 
-  - collections:
-    - [beancount-lazy-plugins](https://github.com/Evernight/beancount-lazy-plugins) ([valuation](https://github.com/Evernight/beancount-lazy-plugins?tab=readme-ov-file#valuation), [filter_map](https://github.com/Evernight/beancount-lazy-plugins?tab=readme-ov-file#filter_map), [balance_extended](https://github.com/Evernight/beancount-lazy-plugins?tab=readme-ov-file#balance_extended), [currency_convert](https://github.com/Evernight/beancount-lazy-plugins?tab=readme-ov-file#currency_convert), and more)
-    - [beancount_reds_plugins](https://github.com/redstreet/beancount_reds_plugins/tree/main/beancount_reds_plugins) ([rename_accounts](https://github.com/redstreet/beancount_reds_plugins/tree/main/beancount_reds_plugins/rename_accounts), [effective_date](https://github.com/redstreet/beancount_reds_plugins/tree/main/beancount_reds_plugins/effective_date), [zerosum](https://github.com/redstreet/beancount_reds_plugins/tree/main/beancount_reds_plugins/zerosum), and more),
-    - [autobean](https://github.com/SEIAROTg/autobean/tree/master/autobean/) ([stock_split](https://github.com/SEIAROTg/autobean/tree/master/autobean/stock_split), [share](https://github.com/SEIAROTg/autobean/tree/master/autobean/share), and more)
-  - large plugins: [fava-dashboards](https://github.com/andreasgerstmayr/fava-dashboards), [fava-portfolio-returns](https://github.com/andreasgerstmayr/fava-portfolio-returns), [fava_investor](https://github.com/redstreet/fava_investor)
-  - smaller ones: [beancount_share](https://github.com/Akuukis/beancount_share), [beancount_interpolate](https://github.com/Akuukis/beancount_interpolate), [generate_base_ccy_prices](https://github.com/tarioch/beancounttools/blob/master/src/tariochbctools/plugins/generate_base_ccy_prices.py)
-- [Configuration generator](https://lazy-beancount.xyz/docs/stage1_totals/using_ui/#defining-accounts) allows to define any number of accounts (cash, investments, savings, crypto, any other assets)
-- Multiple [currencies](https://lazy-beancount.xyz/docs/stage1_totals/currencies/) and auto-conversions between them
 - Extensive configuration example with comments, including common useful shortcuts and [solutions to common problems](https://lazy-beancount.xyz/docs/stage4_improvements/overview/) 
 - All tested together (manually) in a coherent setup
 
