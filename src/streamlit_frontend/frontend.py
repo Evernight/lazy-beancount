@@ -447,11 +447,13 @@ def import_page():
 
         for config in importers_config["all"]["data_sources"]:
             with columns[col_ind].container(border=True):
+                round_key = "upload_round_" + config["directory"]
                 uploaded_file = st.file_uploader(
                     f"{config.get('emoji', '📄')} **{config['account']}**\n\n"
                     + f"{type_marker[config.get('type', '?')]} 💱 **{config.get('currency', '?')}**\n\n"
                     + f"{config['directory']}",
                     help=config.get("description"),
+                    key=f"upload_{config['directory']}_{st.session_state.get(round_key, 0)}",
                 )
                 if uploaded_file is not None:
                     bytes_data = uploaded_file.getvalue()
@@ -469,6 +471,7 @@ def import_page():
                         os.path.join(config["directory"], available_file_name), "wb"
                     ) as f:
                         f.write(bytes_data)
+                    st.session_state[round_key] = st.session_state.get(round_key, 0) + 1
 
                     @st.dialog("File uploaded")
                     def file_uploaded():
